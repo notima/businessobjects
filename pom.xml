@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.notima.generic</groupId>
 	<artifactId>businessobjects</artifactId>
-	<version>0.1.14-SNAPSHOT</version>
+	<version>0.1.14</version>
 	<name>Generic Business Objects</name>
 
 	<description>Generic business objects and methods to be used as a common format
@@ -14,6 +14,10 @@
 			<id>ossrh</id>
 			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</snapshotRepository>
+		<repository>
+    		<id>ossrh</id>
+    		<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+  		</repository>
 	</distributionManagement>
 
 	<properties>
