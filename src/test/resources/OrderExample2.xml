@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<order>
+    <billBpartner>
+        <addressOfficial>
+            <city>Staden</city>
+            <co>Företaget AB</co>
+            <countryCode>SE</countryCode>
+            <customerReference>Kontaktpersonen</customerReference>
+            <email>epost@void.nu</email>
+            <locationId>0</locationId>
+            <postal>69133</postal>
+            <street>Gatan över vägen 3</street>
+        </addressOfficial>
+        <company>false</company>
+        <emailInvoice>false</emailInvoice>
+        <name>Kontaktpersonen</name>
+        <taxId>yymmddnnnn</taxId>
+        <bPartnerId>0</bPartnerId>
+    </billBpartner>
+    <billLocation>
+        <city>Staden</city>
+        <co>Företaget AB</co>
+        <countryCode>SE</countryCode>
+        <customerReference>Kontaktpersonen</customerReference>
+        <email>epost@void.nu</email>
+        <locationId>0</locationId>
+        <postal>69133</postal>
+        <street>Gatan över vägen 3</street>
+    </billLocation>
+    <billPerson>
+        <email>epost@void.nu</email>
+        <name></name>
+        <personId>0</personId>
+        <phone>0763403866</phone>
+    </billPerson>
+    <bpartner>
+        <addressOfficial>
+            <city>Staden</city>
+            <co>Företaget AB</co>
+            <countryCode>SE</countryCode>
+            <customerReference>Kontaktpersonen</customerReference>
+            <email>epost@void.nu</email>
+            <locationId>0</locationId>
+            <postal>69133</postal>
+            <street>Gatan över vägen 3</street>
+        </addressOfficial>
+        <company>false</company>
+        <emailInvoice>false</emailInvoice>
+        <name>Kontaktpersonen</name>
+        <taxId>yymmddnnnn</taxId>
+        <bPartnerId>0</bPartnerId>
+    </bpartner>
+    <currency>SEK</currency>
+    <dateDelivered>2018-11-26T10:19:39+01:00</dateDelivered>
+    <dateOrdered>2018-11-26T10:19:39+01:00</dateOrdered>
+    <documentDate>2018-11-26T10:19:39+01:00</documentDate>
+    <documentKey>86547</documentKey>
+    <grandTotal>868.2</grandTotal>
+    <lines>
+        <key>13208k</key>
+        <lineNet>71.43</lineNet>
+        <lineNo>1</lineNo>
+        <name>Extra Pale Malt</name>
+        <priceActual>20.0</priceActual>
+        <priceNormal>20.0</priceNormal>
+        <pricesIncludeVAT>true</pricesIncludeVAT>
+        <productKey>13208k</productKey>
+        <qtyDelivered>4.0</qtyDelivered>
+        <qtyEntered>4.0</qtyEntered>
+        <taxAmount>8.57</taxAmount>
+        <taxPercent>12.0</taxPercent>
+    </lines>
+    <lines>
+        <key>13650k</key>
+        <lineNet>23.21</lineNet>
+        <lineNo>2</lineNo>
+        <name>Crystal 150 | Light Crystal</name>
+        <priceActual>26.0</priceActual>
+        <priceNormal>26.0</priceNormal>
+        <pricesIncludeVAT>true</pricesIncludeVAT>
+        <productKey>13650k</productKey>
+        <qtyDelivered>1.0</qtyDelivered>
+        <qtyEntered>1.0</qtyEntered>
+        <taxAmount>2.79</taxAmount>
+        <taxPercent>12.0</taxPercent>
+    </lines>
+    <lines>
+        <key>30400</key>
+        <lineNet>129.46</lineNet>
+        <lineNo>3</lineNo>
+        <name>Safale US-05</name>
+        <priceActual>29.0</priceActual>
+        <priceNormal>29.0</priceNormal>
+        <pricesIncludeVAT>true</pricesIncludeVAT>
+        <productKey>30400</productKey>
+        <qtyDelivered>5.0</qtyDelivered>
+        <qtyEntered>5.0</qtyEntered>
+        <taxAmount>15.54</taxAmount>
+        <taxPercent>12.0</taxPercent>
+    </lines>
+    <lines>
+        <key>15895</key>
+        <lineNet>25.89</lineNet>
+        <lineNo>4</lineNo>
+        <name>Rice Hulls</name>
+        <priceActual>29.0</priceActual>
+        <priceNormal>29.0</priceNormal>
+        <pricesIncludeVAT>true</pricesIncludeVAT>
+        <productKey>15895</productKey>
+        <qtyDelivered>1.0</qtyDelivered>
+        <qtyEntered>1.0</qtyEntered>
+        <taxAmount>3.11</taxAmount>
+        <taxPercent>12.0</taxPercent>
+    </lines>
+    <lines>
+        <key>314000</key>
+        <lineNet>77.68</lineNet>
+        <lineNo>5</lineNo>
+        <name>Clarity Ferm</name>
+        <priceActual>29.0</priceActual>
+        <priceNormal>29.0</priceNormal>
+        <pricesIncludeVAT>true</pricesIncludeVAT>
+        <productKey>314000</productKey>
+        <qtyDelivered>3.0</qtyDelivered>
+        <qtyEntered>3.0</qtyEntered>
+        <taxAmount>9.32</taxAmount>
+        <taxPercent>12.0</taxPercent>
+    </lines>
+    <lines>
+        <key>13305k</key>
+        <lineNet>17.86</lineNet>
+        <lineNo>6</lineNo>
+        <name>Wheat Malt | Crisp</name>
+        <priceActual>20.0</priceActual>
+        <priceNormal>20.0</priceNormal>
+        <pricesIncludeVAT>true</pricesIncludeVAT>
+        <productKey>13305k</productKey>
+        <qtyDelivered>1.0</qtyDelivered>
+        <qtyEntered>1.0</qtyEntered>
+        <taxAmount>2.14</taxAmount>
+        <taxPercent>12.0</taxPercent>
+    </lines>
+    <lines>
+        <key>13100k</key>
+        <lineNet>187.5</lineNet>
+        <lineNo>7</lineNo>
+        <name>Maris Otter Ale Malt</name>
+        <priceActual>21.0</priceActual>
+        <priceNormal>21.0</priceNormal>
+        <pricesIncludeVAT>true</pricesIncludeVAT>
+        <productKey>13100k</productKey>
+        <qtyDelivered>10.0</qtyDelivered>
+        <qtyEntered>10.0</qtyEntered>
+        <taxAmount>22.5</taxAmount>
+        <taxPercent>12.0</taxPercent>
+    </lines>
+    <lines>
+        <key>31715</key>
+        <lineNet>79.46</lineNet>
+        <lineNo>8</lineNo>
+        <name>Champagne WLP715</name>
+        <priceActual>89.0</priceActual>
+        <priceNormal>89.0</priceNormal>
+        <pricesIncludeVAT>true</pricesIncludeVAT>
+        <productKey>31715</productKey>
+        <qtyDelivered>1.0</qtyDelivered>
+        <qtyEntered>1.0</qtyEntered>
+        <taxAmount>9.54</taxAmount>
+        <taxPercent>12.0</taxPercent>
+    </lines>
+    <lines>
+        <key>shipping</key>
+        <lineNet>150.89</lineNet>
+        <lineNo>9</lineNo>
+        <name>Business parcel  (Vikt: 19.79kg)</name>
+        <priceActual>169.0</priceActual>
+        <priceNormal>169.0</priceNormal>
+        <pricesIncludeVAT>true</pricesIncludeVAT>
+        <productKey>shipping</productKey>
+        <qtyDelivered>1.0</qtyDelivered>
+        <qtyEntered>1.0</qtyEntered>
+        <taxAmount>18.11</taxAmount>
+        <taxPercent>12.0</taxPercent>
+    </lines>
+    <lines>
+        <key>ompack1</key>
+        <lineNet>53.57</lineNet>
+        <lineNo>10</lineNo>
+        <name>Ompackning Lösviktsvaror exkl moms</name>
+        <priceActual>60.0</priceActual>
+        <priceNormal>60.0</priceNormal>
+        <pricesIncludeVAT>true</pricesIncludeVAT>
+        <productKey>ompack1</productKey>
+        <qtyDelivered>1.0</qtyDelivered>
+        <qtyEntered>1.0</qtyEntered>
+        <taxAmount>6.43</taxAmount>
+        <taxPercent>12.0</taxPercent>
+    </lines>
+    <lines>
+        <key>humlepack2</key>
+        <lineNet>0.0</lineNet>
+        <lineNo>11</lineNo>
+        <name>Ompackning Humle exkl moms</name>
+        <priceActual>0.0</priceActual>
+        <priceNormal>0.0</priceNormal>
+        <pricesIncludeVAT>true</pricesIncludeVAT>
+        <productKey>humlepack2</productKey>
+        <qtyDelivered>1.0</qtyDelivered>
+        <qtyEntered>1.0</qtyEntered>
+        <taxAmount>0.0</taxAmount>
+        <taxPercent>12.0</taxPercent>
+    </lines>
+    <lines>
+        <lineNet>-46.8</lineNet>
+        <lineNo>12</lineNo>
+        <name>Du utnyttjar (4,680 )</name>
+        <priceActual>-46.8</priceActual>
+        <priceNormal>-46.8</priceNormal>
+        <pricesIncludeVAT>true</pricesIncludeVAT>
+        <qtyDelivered>1.0</qtyDelivered>
+        <qtyEntered>1.0</qtyEntered>
+        <taxAmount>0.0</taxAmount>
+        <taxPercent>0.0</taxPercent>
+    </lines>
+    <orderKey>86547</orderKey>
+    <paymentRule>Card</paymentRule>
+    <salesOrder>false</salesOrder>
+    <shipLocation>
+        <city>Staden</city>
+        <co>Företaget AB</co>
+        <countryCode>SE</countryCode>
+        <customerReference>Kontaktpersonen</customerReference>
+        <email>epost@void.nu</email>
+        <locationId>0</locationId>
+        <postal>69133</postal>
+        <street>Gatan över vägen 3</street>
+    </shipLocation>
+    <vatTotal>98.05</vatTotal>
+</order>
