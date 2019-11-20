@@ -1,0 +1,85 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.notima.generic</groupId>
+	<artifactId>businessobjects</artifactId>
+	<version>0.1.14-SNAPSHOT</version>
+	<name>Generic Business Objects</name>
+	
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+	
+	<dependencies>
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>javax.persistence-api</artifactId>
+			<version>2.2</version>
+		</dependency>
+		
+		<dependency>
+	  		<groupId>org.notima.bg</groupId>
+	  		<artifactId>bankgiro-api</artifactId>
+	  		<version>1.3.6</version>
+  		</dependency>
+  		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+  		
+	</dependencies>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<!-- mvn assembly:single -->
+	  			<plugin>
+			      <artifactId>maven-assembly-plugin</artifactId>
+			      <configuration>
+			        <descriptorRefs>
+			          <descriptorRef>jar-with-dependencies</descriptorRef>
+			        </descriptorRefs>
+			      </configuration>
+			    </plugin>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.3.2</version>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>2.10.1</version>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<description>0.0.4 - Added ProductCategory
+0.0.5 - Attribute value is an object.
+0.0.6 - More attributes (weight etc)
+0.0.7 - Add warehouse info
+0.0.8 - KeyValue can contain object or string.
+0.0.9 - Add payment info to invoice.
+0.1.0 - Added custom object
+0.1.1 - Added price list reference.
+0.1.2 - Added deliveryRule and Shipper to order.
+0.1.3 - Added TimeRecord
+0.1.4 - Added Fields for Netset
+0.1.5 - Added more fields to BusinessPartner.
+0.1.6 - Possibility to lookup native invoice.
+0.1.7 - Added payments and writeoffs.
+0.1.8 - Parameterize BusinessObjectFactory. Add org.notima.factoring.
+0.1.9 - Lookup ProductCategory
+0.1.10 - Lookup PriceListForProduct
+0.1.11 - Don't set billBPartner when converting invoice.
+0.1.12 Add interest calculator
+0.1.13 Add taxIdFormatter</description>
+</project>
