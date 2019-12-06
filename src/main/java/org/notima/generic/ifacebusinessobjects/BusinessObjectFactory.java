@@ -15,10 +15,39 @@ import org.notima.generic.businessobjects.Tax;
 
 public interface BusinessObjectFactory<C,I,O,P,B> {
 
+	/**
+	 * Lookup business partner (vendor / customer) using supplied key
+	 * 
+	 * @param key
+	 * @return	A business partner
+	 * @throws Exception	If something goes wrong.
+	 */
 	public BusinessPartner<B> lookupBusinessPartner(String key) throws Exception;
 	
+	/**
+	 * Lookup all business partners
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
 	public List<BusinessPartner<B>> lookupAllBusinessPartners() throws Exception;	
 	
+	/**
+	 * Returns information about this legal entity. This means not the customers or 
+	 * the vendors, but this legal entity.
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public BusinessPartner<?> lookupThisCompanyInformation() throws Exception;
+	
+	/**
+	 * Lookup a specified dunning run.
+	 * 
+	 * @param key			Dunning run identifier
+	 * @return				A dunning run.
+	 * @throws Exception	If something goes wrong
+	 */
 	public DunningRun<?,?> lookupDunningRun(String key) throws Exception;
 
 	/**
