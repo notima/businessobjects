@@ -18,8 +18,8 @@ public interface BusinessObjectFactory<C,I,O,P,B> {
 	/**
 	 * Lookup business partner (vendor / customer) using supplied key
 	 * 
-	 * @param key
-	 * @return	A business partner
+	 * @param key			The business partner key used in the system
+	 * @return				A business partner
 	 * @throws Exception	If something goes wrong.
 	 */
 	public BusinessPartner<B> lookupBusinessPartner(String key) throws Exception;
@@ -27,10 +27,21 @@ public interface BusinessObjectFactory<C,I,O,P,B> {
 	/**
 	 * Lookup all business partners
 	 * 
-	 * @return
+	 * @return		A list of all business partners
 	 * @throws Exception
 	 */
 	public List<BusinessPartner<B>> lookupAllBusinessPartners() throws Exception;	
+
+	/**
+	 * Looks up business partners
+	 * 
+	 * @param maxCount		The maximum number of business partners to return.
+	 * @param customers		If true, include customers
+	 * @param suppliers		If true, include suppliers.
+	 * @return				A list of business partners
+	 * @throws Exception
+	 */
+	public List<BusinessPartner<B>> lookupBusinessPartners(int maxCount, boolean customers, boolean suppliers) throws Exception;
 	
 	/**
 	 * Returns information about this legal entity. This means not the customers or 

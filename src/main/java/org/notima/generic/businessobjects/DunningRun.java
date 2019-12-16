@@ -15,14 +15,14 @@ public class DunningRun <B,I> {
 	private String letterNoPrefix;
 	private String ocrNoPrefix;
 
-	private Collection<DunningEntry<B,I>> entries = new ArrayList<DunningEntry<B,I>>();
+	private Collection<DunningEntry<?,?>> entries = new ArrayList<DunningEntry<?,?>>();
 	
 
 	public DunningRun(){
 		
 	};
 	
-	public void addDunningEntry(DunningEntry<B,I> de) {
+	public void addDunningEntry(DunningEntry<?,?> de) {
 		if (de.getLineNo()==0) {
 			de.setLineNo(nextLineNo);
 			nextLineNo+=lineNoIncrement;
@@ -31,7 +31,7 @@ public class DunningRun <B,I> {
 		entries.add(de);
 	}
 	
-	private void setPrefixValues(DunningEntry<B,I> de, String lp, String op){
+	private void setPrefixValues(DunningEntry<?,?> de, String lp, String op){
 		if(op != null){
 			de.setOcrNoPrefix(op);
 			de.calculateOcrNo();
@@ -42,11 +42,11 @@ public class DunningRun <B,I> {
 		}
 	}
 	
-	public Collection<DunningEntry<B,I>> getEntries() {
+	public Collection<DunningEntry<?,?>> getEntries() {
 		return entries;
 	}
 
-	public void setEntries(Collection<DunningEntry<B,I>> entries) {
+	public void setEntries(Collection<DunningEntry<?,?>> entries) {
 		this.entries = entries;
 	}
 	
@@ -56,7 +56,7 @@ public class DunningRun <B,I> {
 
 	public void setLetterNoPrefix(String letterNoPrefix) {
 		this.letterNoPrefix = letterNoPrefix;
-		for(DunningEntry<B,I> de : entries){
+		for(DunningEntry<?,?> de : entries){
 			setPrefixValues(de, letterNoPrefix, null);
 		}
 	}
@@ -67,7 +67,7 @@ public class DunningRun <B,I> {
 
 	public void setOcrNoPrefix(String ocrNoPrefix) {
 		this.ocrNoPrefix = ocrNoPrefix;
-		for(DunningEntry<B,I> de : entries){
+		for(DunningEntry<?,?> de : entries){
 			setPrefixValues(de, null, ocrNoPrefix);
 		}
 	}

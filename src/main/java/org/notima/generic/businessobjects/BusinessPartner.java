@@ -34,6 +34,9 @@ public class BusinessPartner<B> {
 	private Location	addressShipping;
 	private List<Person>	contacts;
 	private List<KeyValue>	attributes;
+	private Boolean		isCustomer;
+	private Boolean		isVendor;
+	
 	private transient B nativeBusinessPartner;
 	
 	public int getbPartnerId() {
@@ -217,6 +220,23 @@ public class BusinessPartner<B> {
 		result.append("}");
 		return result.toString();
 	}
+
+	public Boolean getIsCustomer() {
+		return isCustomer;
+	}
+
+	public void setIsCustomer(Boolean isCustomer) {
+		this.isCustomer = isCustomer;
+	}
+
+	public Boolean getIsVendor() {
+		return isVendor;
+	}
+
+	public void setIsVendor(Boolean isVendor) {
+		this.isVendor = isVendor;
+	}
+	
 	
 	
 }
