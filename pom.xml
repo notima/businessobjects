@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.notima.generic</groupId>
 	<artifactId>businessobjects</artifactId>
-	<version>0.1.15-SNAPSHOT</version>
+	<version>0.1.15</version>
 	<name>Generic Business Objects</name>
 
 	<description>Generic business objects and methods to be used as a common format
