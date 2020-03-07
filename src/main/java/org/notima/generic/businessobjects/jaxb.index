@@ -20,3 +20,5 @@ PriceListLine
 DunningRun
 InvoiceList
 Payment
+AccountStatementLines
+AccountStatementLine
