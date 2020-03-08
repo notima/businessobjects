@@ -1,6 +1,6 @@
 package org.notima.generic.businessobjects.test;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 
 import javax.xml.bind.JAXB;
 
@@ -11,16 +11,9 @@ public class TestCreateAccountStatementLines {
 
 	@Test
 	public void testCreateAccountStatementLines() {
-		
-		Calendar cal = Calendar.getInstance();
-		
-		cal.set(Calendar.YEAR, 2018);
-		cal.set(Calendar.MONTH, Calendar.JANUARY);
-		cal.set(Calendar.DAY_OF_MONTH,1);
-		java.util.Date from = cal.getTime();
-		cal.set(Calendar.MONTH, Calendar.DECEMBER);
-		cal.set(Calendar.DAY_OF_MONTH, 31);
-		java.util.Date until = cal.getTime();
+
+		LocalDate from = java.time.LocalDate.of(2018, 1, 1);
+		LocalDate until = LocalDate.of(2018, 12, 31);
 		
 		AccountStatementLines lines = new AccountStatementLines();
 		lines.setStartDate(from);

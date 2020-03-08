@@ -1,6 +1,11 @@
 package org.notima.generic.businessobjects;
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import io.github.threetenjaxb.core.LocalDateXmlAdapter;
 
 /**
  * Represents an account statement line
@@ -12,7 +17,7 @@ import javax.persistence.Entity;
 public class AccountStatementLine {
 
 	private int		lineNumber;
-	private java.util.Date	accountDate;
+	private LocalDate	accountDate;
 	private String	thisAccountNo;
 	private String	otherAccountNo;
 	private String	description;
@@ -26,11 +31,13 @@ public class AccountStatementLine {
 	public void setLineNumber(int lineNumber) {
 		this.lineNumber = lineNumber;
 	}
-	public java.util.Date getAccountDate() {
+	
+	@XmlJavaTypeAdapter(LocalDateXmlAdapter.class)
+	public LocalDate getAccountDate() {
 		return accountDate;
 	}
-	public void setAccountDate(java.util.Date accountDate) {
-		this.accountDate = accountDate;
+	public void setAccountDate(LocalDate from) {
+		this.accountDate = from;
 	}
 	public String getThisAccountNo() {
 		return thisAccountNo;

@@ -1,12 +1,15 @@
 package org.notima.generic.businessobjects;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import io.github.threetenjaxb.core.LocalDateXmlAdapter;
 
 /**
  * A collection of account statement lines
@@ -20,25 +23,32 @@ public class AccountStatementLines {
 
 	private List<AccountStatementLine> accountStatementLine = new ArrayList<AccountStatementLine>();
 
-	private java.util.Date startDate;
-	private java.util.Date endDate;
+	private java.time.LocalDate startDate;
+	private java.time.LocalDate endDate;
 	
 	private double		   startBalance;
 	private double		   endBalance;
 	
-	public java.util.Date getStartDate() {
+	
+	public void sortStatementLinesByDate() {
+		
+	}
+	
+	public java.time.LocalDate getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(java.util.Date startDate) {
+	@XmlJavaTypeAdapter(LocalDateXmlAdapter.class)
+	public void setStartDate(java.time.LocalDate startDate) {
 		this.startDate = startDate;
 	}
 
-	public java.util.Date getEndDate() {
+	public java.time.LocalDate getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(java.util.Date endDate) {
+	@XmlJavaTypeAdapter(LocalDateXmlAdapter.class)
+	public void setEndDate(java.time.LocalDate endDate) {
 		this.endDate = endDate;
 	}
 
@@ -60,12 +70,12 @@ public class AccountStatementLines {
 
 	/**
 	 * Adds a transaction line with only date and amount
-	 * @param acctDate		the transaction date
+	 * @param from		the transaction date
 	 * @param amount		the amount
 	 */
-	public void addTransaction(Date acctDate, double amount) {
+	public void addTransaction(LocalDate from, double amount) {
 		AccountStatementLine line = new AccountStatementLine();
-		line.setAccountDate(acctDate);
+		line.setAccountDate(from);
 		line.setTrxAmount(amount);
 		accountStatementLine.add(line);
 	}
