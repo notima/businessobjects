@@ -49,7 +49,6 @@
 
 	</dependencies>
 	
-	
 	<build>
 	
 		<resources>
@@ -60,6 +59,17 @@
 				</includes>
 			</resource>
 		</resources>
+	
+       <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.karaf.tooling</groupId>
+                    <artifactId>karaf-maven-plugin</artifactId>
+                    <version>4.2.0</version>
+                    <extensions>true</extensions>
+                </plugin>
+            </plugins>
+        </pluginManagement>	
 	
 		<plugins>
 
@@ -83,8 +93,16 @@
 						<Export-Package>org.notima.factoring,
 										org.notima.generic.businessobjects,
 										org.notima.generic.businessobjects.util,
-										org.notima.generic.ifacebusinessobjects
+										org.notima.generic.ifacebusinessobjects,
+										io.github.threetenjaxb.core
 						</Export-Package>
+						<Import-Package>
+							!com.sun.activation.registries,
+							!org.glassfish.hk2.osgiresourcelocator,
+							!org.notima.generic.businessobjects.util
+						</Import-Package>
+						<Embed-Dependency>*;scope=compile|runtime;artifactId=!slf4j-api|slf4j-log4j12|log4j|javax.persistence-api|bankgiro-api</Embed-Dependency>
+						<Embed-Transitive>true</Embed-Transitive>						
 					</instructions>
 				</configuration>
 			</plugin>
