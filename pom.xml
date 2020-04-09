@@ -97,6 +97,7 @@
 										io.github.threetenjaxb.core
 						</Export-Package>
 						<Import-Package>
+							javax.xml.bind.annotation;version="[2.2,3)",
 							!com.sun.activation.registries,
 							!org.glassfish.hk2.osgiresourcelocator,
 							!org.notima.generic.businessobjects.util

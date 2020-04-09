@@ -38,6 +38,14 @@ public class TaxSummary {
 		this.taxAmount = taxAmount;
 	}
 
+	public TaxSummary add(double taxBase, double taxAmount) {
+		this.taxBase += taxBase;
+		this.taxAmount += taxAmount;
+		return this;
+	}
 	
+	public boolean isEmpty() {
+		return taxBase==0 && taxAmount==0;
+	}
 	
 }

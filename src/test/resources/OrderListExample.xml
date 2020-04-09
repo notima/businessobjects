@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<orderList xmlns="https://github.com/notima/businessobjects">
+    <order>
+        <bpartner>
+            <addressOfficial>
+                <city>Stockholm</city>
+            </addressOfficial>
+            <company>false</company>
+            <emailInvoice>false</emailInvoice>
+            <isCustomer>true</isCustomer>
+            <name>Kund Kundsson</name>
+            <bPartnerId>0</bPartnerId>
+        </bpartner>
+        <currency>SEK</currency>
+        <dateOrdered>2020-02-24T12:36:00.910+01:00</dateOrdered>
+        <documentDate>2020-02-24T12:36:00.910+01:00</documentDate>
+        <documentKey>78207</documentKey>
+        <grandTotal>13495.0</grandTotal>
+        <lines>
+            <key>SSK60IMB8</key>
+            <lineNet>10796.0</lineNet>
+            <lineNo>1</lineNo>
+            <name>SMEG - SSK60IMB8</name>
+            <priceActual>13495.0</priceActual>
+            <priceNormal>13495.0</priceNormal>
+            <pricesIncludeVAT>true</pricesIncludeVAT>
+            <productKey>SSK60IMB8</productKey>
+            <qtyDelivered>0.0</qtyDelivered>
+            <qtyEntered>1.0</qtyEntered>
+            <taxAmount>2699.0</taxAmount>
+            <taxPercent>25.0</taxPercent>
+        </lines>
+        <lines>
+            <key>shipping</key>
+            <lineNet>0.0</lineNet>
+            <lineNo>2</lineNo>
+            <name>Bring: Fri hemleverans vardag</name>
+            <priceActual>0.0</priceActual>
+            <priceNormal>0.0</priceNormal>
+            <pricesIncludeVAT>true</pricesIncludeVAT>
+            <productKey>shipping</productKey>
+            <qtyDelivered>0.0</qtyDelivered>
+            <qtyEntered>1.0</qtyEntered>
+            <taxAmount>0.0</taxAmount>
+            <taxPercent>0.0</taxPercent>
+        </lines>
+        <orderKey>78207</orderKey>
+        <salesOrder>true</salesOrder>
+        <vatTotal>2699.0</vatTotal>
+    </order>
+</orderList>

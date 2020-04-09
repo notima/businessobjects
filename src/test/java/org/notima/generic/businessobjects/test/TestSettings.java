@@ -9,7 +9,8 @@ public class TestSettings {
 	public static final String[] ORDER_EXAMPLE_XMLS = 
 			new String[] {
 				"OrderExample.xml",
-				"OrderExample2.xml"};
+				"OrderExample2.xml",
+				"OrderListExample.xml"};
 	
 	public static File getOrderExampleFile(int idx) throws FileNotFoundException {
 		
