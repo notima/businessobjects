@@ -110,7 +110,13 @@ public class BasicBusinessObjectConverter<O,I> implements BusinessObjectConverte
 	}
 
 	@Override
-	public Invoice<I> fromNativeInvoice(Object src) throws Exception {
+	public O toNativeOrder(Order<?> src) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public Invoice<I> fromNativeInvoice(I src) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

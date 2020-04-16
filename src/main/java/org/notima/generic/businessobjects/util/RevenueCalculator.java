@@ -4,6 +4,9 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.notima.generic.businessobjects.BasicBusinessObjectConverter;
+import org.notima.generic.businessobjects.Invoice;
+import org.notima.generic.businessobjects.InvoiceLine;
+import org.notima.generic.businessobjects.InvoiceList;
 import org.notima.generic.businessobjects.Order;
 import org.notima.generic.businessobjects.OrderLine;
 import org.notima.generic.businessobjects.OrderList;
@@ -18,11 +21,18 @@ import org.notima.generic.ifacebusinessobjects.OrderInvoiceLine;
 public class RevenueCalculator {
 
 	private OrderList	orderList;
+	private InvoiceList invoiceList;
 	private String		currency;
 	private Map<String,TaxSummary>	revenueMap;
+	@SuppressWarnings("rawtypes")
+	private BasicBusinessObjectConverter	bbof = new BasicBusinessObjectConverter();
 	
 	public RevenueCalculator(OrderList ol) {
 		orderList = ol;
+	}
+	
+	public RevenueCalculator(InvoiceList il) {
+		invoiceList = il;
 	}
 	
 	public Map<String, TaxSummary> getRevenueMap() {
@@ -33,28 +43,61 @@ public class RevenueCalculator {
 		
 		revenueMap = new TreeMap<String, TaxSummary>();
 		
-		if (orderList==null || orderList.getOrderList()==null) return;
+		if (orderList!=null && orderList.getOrderList()!=null) {
 		
-		OrderLine oline;
-		for (Order<?> o : orderList.getOrderList()) {
-			
-			if (o.getOrderInvoiceLines()==null)
-				continue;
-			
-			if (currency==null) {
-				currency = o.getCurrency();
-			} else {
-				if (o.getCurrency()!=null && !currency.equals(o.getCurrency())) {
-					throw new Exception("Multicurrency revenue maps are not yet supported.");
+			OrderLine oline;
+			for (Order<?> o : orderList.getOrderList()) {
+				
+				if (o.getOrderInvoiceLines()==null)
+					continue;
+				
+				if (currency==null) {
+					currency = o.getCurrency();
+				} else {
+					if (o.getCurrency()!=null && !currency.equals(o.getCurrency())) {
+						throw new Exception("Multicurrency revenue maps are not yet supported.");
+					}
 				}
-			}
-			
-			for (OrderInvoiceLine oiline : o.getOrderInvoiceLines()) {
-				oline = (OrderLine)oiline;
-				addOrderLine(oline);
+				for (OrderInvoiceLine oiline : o.getOrderInvoiceLines()) {
+					oline = (OrderLine)oiline;
+					addOrderLine(oline);
+				}
+				
 			}
 			
 		}
+
+		if (invoiceList!=null && invoiceList.getInvoiceList()!=null) {
+			
+			OrderLine oline;
+			for (Invoice<?> o : invoiceList.getInvoiceList()) {
+				
+				if (o.getOrderInvoiceLines()==null)
+					continue;
+				
+				if (currency==null) {
+					currency = o.getCurrency();
+				} else {
+					if (o.getCurrency()!=null && !currency.equals(o.getCurrency())) {
+						throw new Exception("Multicurrency revenue maps are not yet supported.");
+					}
+				}
+				
+				for (OrderInvoiceLine oiline : o.getOrderInvoiceLines()) {
+					if (oiline instanceof InvoiceLine) {
+						oline = bbof.toOrderLine((InvoiceLine)oiline);
+					} else {
+						oline = (OrderLine)oiline;
+					}
+					
+					addOrderLine(oline);
+				}
+				
+			}
+			
+		}
+		
+		
 		
 	}
 

@@ -27,6 +27,14 @@ public interface BusinessObjectConverter<O,I> {
 	 * @param src
 	 * @return
 	 */
-	public Invoice<I> fromNativeInvoice(Object src) throws Exception;
+	public Invoice<I> fromNativeInvoice(I src) throws Exception;
+	
+	/**
+	 * Converts a native invoice to business object invoice
+	 * 
+	 * @param src
+	 * @return
+	 */
+	public O toNativeOrder(Order<?> src) throws Exception;
 	
 }
