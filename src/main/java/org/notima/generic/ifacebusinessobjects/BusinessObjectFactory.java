@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.notima.generic.businessobjects.BusinessPartner;
+import org.notima.generic.businessobjects.BusinessPartnerList;
 import org.notima.generic.businessobjects.DunningRun;
 import org.notima.generic.businessobjects.Invoice;
 import org.notima.generic.businessobjects.Order;
@@ -15,6 +16,22 @@ import org.notima.generic.businessobjects.Tax;
 
 public interface BusinessObjectFactory<C,I,O,P,B> {
 
+	/**
+	 * 
+	 * @return	The system name of this adapter.
+	 */
+	public String getSystemName();
+	
+	/**
+	 * List tenants for this business object factory.
+	 * 
+	 * A tenant is the "owner" of an ERP. The one to which all customer / invoices etc
+	 * belongs to.
+	 * 
+	 * @return A business partner list
+	 */
+	public BusinessPartnerList<B> listTenants();
+	
 	/**
 	 * Returns given setting.
 	 * 
