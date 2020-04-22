@@ -13,6 +13,7 @@ import org.notima.generic.businessobjects.PriceList;
 import org.notima.generic.businessobjects.Product;
 import org.notima.generic.businessobjects.ProductCategory;
 import org.notima.generic.businessobjects.Tax;
+import org.notima.generic.businessobjects.exception.NoSuchTenantException;
 
 public interface BusinessObjectFactory<C,I,O,P,B> {
 
@@ -31,6 +32,19 @@ public interface BusinessObjectFactory<C,I,O,P,B> {
 	 * @return A business partner list
 	 */
 	public BusinessPartnerList<B> listTenants();
+	
+	/**
+	 * Sets current tenant
+	 * @param orgNo
+	 * @param countryCode
+	 */
+	public void setTenant(String orgNo, String countryCode) throws NoSuchTenantException;
+	
+	/**
+	 * 
+	 * @return	The orgno of current tenant
+	 */
+	public String getTenantOrgNo();
 	
 	/**
 	 * Returns given setting.

@@ -36,6 +36,7 @@ public class BusinessPartner<B> {
 	private List<KeyValue>	attributes;
 	private Boolean		isCustomer;
 	private Boolean		isVendor;
+	private String	countryCode;
 	
 	private transient B nativeBusinessPartner;
 	
@@ -235,6 +236,18 @@ public class BusinessPartner<B> {
 
 	public void setIsVendor(Boolean isVendor) {
 		this.isVendor = isVendor;
+	}
+
+	/**
+	 * The country code where this business partner is registered.
+	 * @return	The country code where this business partner is registered.
+	 */
+	public String getCountryCode() {
+		return countryCode;
+	}
+
+	public void setCountryCode(String countryCode) {
+		this.countryCode = countryCode;
 	}
 	
 	
