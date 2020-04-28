@@ -47,5 +47,39 @@ public class TaxSummary {
 	public boolean isEmpty() {
 		return taxBase==0 && taxAmount==0;
 	}
+
+	/**
+	 * 
+	 * @return	The total inc tax.
+	 */
+	public double calculateTotal() {
+		return taxBase + taxAmount;
+	}
+	
+	/**
+	 * Calculates tax amount and tax base from the total amount and tax rate.
+	 * 
+	 * @param incTax		The total amount (taxbase + taxAmount).
+	 * @param taxRate		The rate added on tax base.
+	 */
+	public void calculateValuesFrom(double incTax, double taxRate) {
+		rate = taxRate;
+		double baseMultiplier = 1 / (1+taxRate);
+		taxBase = incTax * baseMultiplier;
+		taxAmount = taxBase * taxRate;
+	}
+	
+	
+	/**
+	 * Clone a tax summary object
+	 */
+	public TaxSummary clone() {
+		TaxSummary ts = new TaxSummary();
+		ts.setKey(key);
+		ts.setRate(rate);
+		ts.setTaxAmount(taxAmount);
+		ts.setTaxBase(taxBase);
+		return ts;
+	}
 	
 }

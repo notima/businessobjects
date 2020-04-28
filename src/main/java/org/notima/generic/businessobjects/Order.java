@@ -1,6 +1,8 @@
 package org.notima.generic.businessobjects;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -430,9 +432,88 @@ public class Order<O> implements OrderInvoice {
 	}
 	
 	/**
+	 * Suggests a tax distribution of the given amount. Lowest tax rate first.
+	 * 
+	 * @param amountIncTax
+	 * @return	A list of taxes suggested. The total amounts to amountIncTax.
+	 */
+	public List<TaxSummary> calculateSuggestedTaxDistribution(double amountIncTax) {
+
+		Map<String, TaxSummary> taxes = calculateTaxSummary(); 		
+		
+		List<TaxSummary> result = new ArrayList<TaxSummary>();
+		TaxSummary ts = null;
+		TaxSummary src = null;
+		if (taxes==null || taxes.size()==0) {
+			ts = new TaxSummary();
+			ts.setTaxBase(amountIncTax);
+			ts.setTaxAmount(0);
+			ts.setKey("?");
+			ts.setRate(0);
+			result.add(ts);
+			return result;
+		}
+		
+		if (taxes.size()==1) {
+			src = taxes.get(taxes.keySet().iterator().next());
+			ts = new TaxSummary();
+			ts.setKey(src.getKey());
+			ts.calculateValuesFrom(amountIncTax, src.getRate());
+			result.add(ts);
+			return result;
+		}
+
+		// Sort tax summary according to VAT rate, lowest first.
+		List<TaxSummary> taxesArray = new ArrayList<TaxSummary>();
+		taxesArray.addAll(taxes.values());
+		
+		Comparator<TaxSummary> sorter = new Comparator<TaxSummary>() {
+			@Override
+			public int compare(TaxSummary o1, TaxSummary o2) {
+				if (o1.getRate()==o2.getRate()) return 0;
+				return (o1.getRate()>o2.getRate()) ? -1 : 1;
+			}
+		};
+
+		TaxSummary[] sorted = new TaxSummary[taxesArray.size()];
+		Arrays.sort(taxesArray.toArray(sorted), sorter);
+		
+		double totalAdded = 0;
+		
+		int i=0;
+		while (totalAdded < amountIncTax && i<sorted.length) {
+			src = sorted[i++];
+			if (totalAdded + src.calculateTotal() <= amountIncTax) {
+				result.add(src.clone());
+				totalAdded += src.calculateTotal();
+			} else {
+				ts = new TaxSummary();
+				ts.calculateValuesFrom(src.calculateTotal() - totalAdded, src.getRate());
+				result.add(ts);
+				totalAdded += ts.calculateTotal();
+				break;
+			}
+		}
+
+		// If we still haven't filled up the amount
+		if (totalAdded < amountIncTax) {
+			ts = new TaxSummary();
+			ts.setTaxBase(amountIncTax - totalAdded);
+			ts.setTaxAmount(0);
+			ts.setKey("?");
+			ts.setRate(0);
+			result.add(ts);
+		}
+		
+		return result;
+		
+	}
+	
+	
+	/**
 	 * Calculates and returns tax summary for order
 	 * 
-	 * @return
+	 * @return A tax summary for this order
 	 */
 	public Map<String,TaxSummary> calculateTaxSummary() {
 
