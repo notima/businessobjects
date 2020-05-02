@@ -1,6 +1,7 @@
 package org.notima.generic.businessobjects;
 
 import java.util.Map;
+import java.util.Properties;
 import java.util.TreeMap;
 
 import org.notima.generic.ifacebusinessobjects.BusinessObjectFactory;
@@ -33,6 +34,20 @@ import org.notima.generic.ifacebusinessobjects.BusinessObjectFactory;
 public abstract class BasicBusinessObjectFactory<C,I,O,P,B> implements BusinessObjectFactory<C,I,O,P,B> {
 
 	protected Map<String,String> settingsMap;
+	
+	/**
+	 * Adds a tenant to given business object factory.
+	 * Override this method to add real tenants to a business object factory.
+	 *  
+	 * @param orgNo				The orgNo
+	 * @param countryCode		Country Code
+	 * @param props				Properties used for initialization.
+	 * @return
+	 */
+	public BusinessPartner<B> addTenant(String orgNo, String countryCode, Properties props) {
+		return null;
+	}
+	
 	
 	/**
 	 * Returns given setting.

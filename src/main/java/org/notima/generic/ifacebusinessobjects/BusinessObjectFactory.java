@@ -2,6 +2,7 @@ package org.notima.generic.ifacebusinessobjects;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import org.notima.generic.businessobjects.BusinessPartner;
 import org.notima.generic.businessobjects.BusinessPartnerList;
@@ -39,6 +40,16 @@ public interface BusinessObjectFactory<C,I,O,P,B> {
 	 * @param countryCode
 	 */
 	public void setTenant(String orgNo, String countryCode) throws NoSuchTenantException;
+
+	/**
+	 * Adds a tenant to given business object factory.
+	 *  
+	 * @param orgNo				The orgNo
+	 * @param countryCode		Country Code
+	 * @param props				Properties used for initialization.
+	 * @return
+	 */
+	public BusinessPartner<B> addTenant(String orgNo, String countryCode, Properties props);
 	
 	/**
 	 * 
