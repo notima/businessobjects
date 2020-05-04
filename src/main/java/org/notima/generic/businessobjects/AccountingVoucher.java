@@ -1,7 +1,9 @@
 package org.notima.generic.businessobjects;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -70,6 +72,49 @@ public class AccountingVoucher {
 		this.voucherSeries = voucherSeries;
 	}
 
+	public void addVoucherLine(AccountingVoucherLine vl) {
+
+		if (lines==null) {
+			lines = new ArrayList<AccountingVoucherLine>();
+		}
+		lines.add(vl);
+		
+	}
+	
+	public void addVoucherLine(BigDecimal amount, String acctNo) {
+
+		if (lines==null) {
+			lines = new ArrayList<AccountingVoucherLine>();
+		}
+
+		AccountingVoucherLine vl = new AccountingVoucherLine();
+		if (amount.signum()>0)
+			vl.setDebitAmount(amount);
+		else
+			vl.setCreditAmount(amount.negate());
+		vl.setAcctNo(acctNo);
+		
+		lines.add(vl);
+		
+	}
+	
+	public void addVoucherLines(BigDecimal amount, String debetAcct, String creditAcct) {
+
+		if (lines==null) {
+			lines = new ArrayList<AccountingVoucherLine>();
+		}
+		
+		AccountingVoucherLine vl = new AccountingVoucherLine();
+		vl.setDebitAmount(amount);
+		vl.setAcctNo(debetAcct);
+		lines.add(vl);
+		vl = new AccountingVoucherLine();
+		vl.setCreditAmount(amount);
+		vl.setAcctNo(creditAcct);
+		lines.add(vl);
+		
+	}
+	
 	public List<AccountingVoucherLine> getLines() {
 		return lines;
 	}
