@@ -239,18 +239,17 @@ public class BasicBusinessObjectConverter<O,I> implements BusinessObjectConverte
 		
 	}
 	
-	
 	/**
-	 * Creates a credit order on given amount (what is credited is not specified).
+	 * Creates an order on given amount from a given source order.
 	 * 
-	 * If a line is found that matches the amount to be credited, that line is credited.
-	 * If no line is found, a non specified credit line is created.
+	 * If a line is found that matches the amount of the order, that line is copied.
+	 * If no line is found, a non specified line is created.
 	 * 
 	 * @param	src		The source order. This is not changed.
-	 * @param   amount	Amount to be credited. The amount should be a positive number.
+	 * @param   amount	The total amount of the order.
 	 */
-	public Order<O> createCreditOrderFromAmount(Order<O> src, double amount) {
-
+	public Order<O> createOrderFromAmount(Order<O> src, double amount) {
+		
 		Order<O> dst = copyOrder(src);
 		
 		OrderLine singleLine = null;
@@ -274,7 +273,7 @@ public class BasicBusinessObjectConverter<O,I> implements BusinessObjectConverte
 		} else {
 			// We need to create arbitrary credit line(s)
 			
-			double amountRemainingToCredit = amount;
+			double amountRemaining = amount;
 			
 			// Check how taxes are distributed.
 			Map<String, TaxSummary> taxes = (Map<String, TaxSummary>)dst.calculateTaxSummary();
@@ -310,15 +309,15 @@ public class BasicBusinessObjectConverter<O,I> implements BusinessObjectConverte
 			// Create lines crediting on tax rate
 			for (Double rate : rateList) {
 
-				if (amountRemainingToCredit <= 0)
+				if (amountRemaining <= 0)
 					break;
 				
 				tsl = taxMap.get(rate);
 				double amountToCredit = 0.0;
 				for (TaxSummary t : tsl) {
 					
-					if (amountRemainingToCredit <= (t.getTaxBase() + t.getTaxAmount())) {
-						amountToCredit = amountRemainingToCredit;
+					if (amountRemaining <= (t.getTaxBase() + t.getTaxAmount())) {
+						amountToCredit = amountRemaining;
 					} else {
 						amountToCredit = t.getTaxBase() + t.getTaxAmount();
 					}
@@ -330,12 +329,12 @@ public class BasicBusinessObjectConverter<O,I> implements BusinessObjectConverte
 					singleLine.setTaxPercent(t.getRate());
 					singleLine.calculateLineTotalIncTax(DEFAULT_ROUNDING_DECIMALS);
 					// TODO: Internationalization
-					singleLine.setDescription("Kreditering");
+					singleLine.setDescription("Unspecified line");
 					newList.add(singleLine);
 
-					amountRemainingToCredit -= amountToCredit;
+					amountRemaining -= amountToCredit;
 					
-					if (amountRemainingToCredit <= 0)
+					if (amountRemaining <= 0)
 						break;
 				}
 				
@@ -345,10 +344,27 @@ public class BasicBusinessObjectConverter<O,I> implements BusinessObjectConverte
 
 		dst.setLines(newList);
 		dst.calculateGrandTotal();
-		negateOrder(dst);
-		
 		
 		return dst;
+		
+	}
+	
+	/**
+	 * Creates a credit order on given amount (what is credited is not specified).
+	 * 
+	 * If a line is found that matches the amount to be credited, that line is credited.
+	 * If no line is found, a non specified credit line is created.
+	 * 
+	 * @param	src		The source order. This is not changed.
+	 * @param   amount	Amount to be credited. The amount should be a positive number.
+	 */
+	public Order<O> createCreditOrderFromAmount(Order<O> src, double amount) {
+
+		Order<O> dst = createOrderFromAmount(src, amount);
+		dst = negateOrder(dst);
+		
+		return dst;
+		
 	}
 	
 

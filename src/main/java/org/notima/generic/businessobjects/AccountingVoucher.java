@@ -19,6 +19,8 @@ public class AccountingVoucher {
 	private String			regBy;
 	private String			voucherNo;
 	private String			voucherSeries;
+	private BigDecimal		totalCredit;
+	private	BigDecimal		totalDebet;
 	
 	private List<AccountingVoucherLine> lines;
 
@@ -78,6 +80,63 @@ public class AccountingVoucher {
 			lines = new ArrayList<AccountingVoucherLine>();
 		}
 		lines.add(vl);
+		
+	}
+	
+	public BigDecimal getTotalCredit() {
+		
+		totalCredit = BigDecimal.ZERO;
+		
+		if (lines==null)
+			return totalCredit;
+
+		for (AccountingVoucherLine l : lines) {
+			totalCredit = totalCredit.add(l.getCreditAmount());
+		}
+
+		return totalCredit;
+	}
+	
+	public BigDecimal getTotalDebet() {
+		
+		totalDebet = BigDecimal.ZERO;
+		
+		if (lines==null)
+			return totalDebet;
+		
+		for (AccountingVoucherLine l : lines) {
+			totalDebet = totalDebet.add(l.getDebitAmount());
+		}
+		
+		return totalDebet;
+		
+	}
+
+	public BigDecimal getBalance() {
+		// Calculate total credit and debet
+		getTotalDebet();
+		getTotalCredit();
+		BigDecimal balance = totalDebet.subtract(totalCredit);
+		return balance;
+	}
+	
+	/**
+	 * Balance voucher with final line
+	 * 
+	 * @param acctType
+	 * @return	If the account is already balanced, null is returned.
+	 */
+	public AccountingVoucherLine balanceWithLine(String acctType) {
+
+		BigDecimal balance = getBalance();
+		
+		if (balance.signum()==0) {
+			return null;
+		}
+
+		AccountingVoucherLine result = new AccountingVoucherLine(balance.negate(), acctType);
+		addVoucherLine(result);
+		return result;
 		
 	}
 	
