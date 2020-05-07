@@ -83,6 +83,50 @@ public class AccountingVoucher {
 		
 	}
 	
+	/**
+	 * Remaps all occurances of fromAcct with toAcct
+	 * 
+	 * @param fromAcct		The account to remap from (can be null).
+	 * @param toAcct		The account to remap to (can be null)
+	 */
+	public void remapAccount(String fromAcct, String toAcct) {
+		
+		if (lines==null) return;
+		
+		for (AccountingVoucherLine l : lines) {
+			if (fromAcct==null) {
+				if (l.getAcctNo()==null) {
+					l.setAcctNo(toAcct);
+				}
+			} else if (fromAcct.equals(l.getAcctNo())) {
+				l.setAcctNo(toAcct);
+			}
+		}
+		
+	}
+	
+	/**
+	 * Remaps all occurances of accountType with to toAcct
+	 * 
+	 * @param accountType
+	 * @param toAcct
+	 */
+	public void remapAccountType(String accountType, String toAcct) {
+
+		if (lines==null) return;
+		
+		for (AccountingVoucherLine l : lines) {
+			if (accountType==null) {
+				if (l.getAcctType()==null) {
+					l.setAcctNo(toAcct);
+				}
+			} else if (accountType.equals(l.getAcctType())) {
+				l.setAcctNo(toAcct);
+			}
+		}
+		
+	}
+	
 	public BigDecimal getTotalCredit() {
 		
 		totalCredit = BigDecimal.ZERO;
