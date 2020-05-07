@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import org.notima.generic.businessobjects.AccountingVoucher;
 import org.notima.generic.businessobjects.BusinessPartner;
 import org.notima.generic.businessobjects.BusinessPartnerList;
 import org.notima.generic.businessobjects.DunningRun;
@@ -191,6 +192,15 @@ public interface BusinessObjectFactory<C,I,O,P,B> {
 	
 	public List<FactoringReservation> lookupFactoringReservationForInvoice(String invoiceKey) throws Exception;
 
+	/**
+	 * Write accounting vouchers to underlaying system
+	 * 
+	 * @param vouchers		The vouchers to be written.
+	 * @return				The vouchers written.
+	 * @throws Exception	If something goes wrong.
+	 */
+	public List<AccountingVoucher> writeVouchers(List<AccountingVoucher> vouchers) throws Exception;
+	
 	/**
 	 * Persists a business object
 	 * 

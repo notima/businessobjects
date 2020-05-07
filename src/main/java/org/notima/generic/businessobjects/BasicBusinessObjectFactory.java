@@ -1,5 +1,6 @@
 package org.notima.generic.businessobjects;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
@@ -105,6 +106,12 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B> implements BusinessO
 			settingsMap.put(s, settings.get(s));
 		}
 		
+	}
+
+	@Override
+	public List<AccountingVoucher> writeVouchers(List<AccountingVoucher> vouchers) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
