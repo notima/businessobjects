@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
 
+import org.notima.generic.businessobjects.exception.NoSuchTenantException;
 import org.notima.generic.ifacebusinessobjects.BusinessObjectFactory;
 
 /*
@@ -36,20 +37,58 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B> implements BusinessO
 
 	protected Map<String,String> settingsMap;
 	
+	protected Map<String, BusinessPartner<B>> tenantMap = new TreeMap<String,BusinessPartner<B>>();
+	
+	protected BusinessPartner<B> currentTenant = null;
+	
 	/**
 	 * Adds a tenant to given business object factory.
 	 * Override this method to add real tenants to a business object factory.
 	 *  
 	 * @param orgNo				The orgNo
 	 * @param countryCode		Country Code
+	 * @param name				Tenant name
 	 * @param props				Properties used for initialization.
 	 * @return
 	 */
-	public BusinessPartner<B> addTenant(String orgNo, String countryCode, Properties props) {
-		return null;
+	public BusinessPartner<B> addTenant(String orgNo, String countryCode, String name, Properties props) {
+	
+		BusinessPartner<B> tenant = tenantMap.get(orgNo);
+		if (tenant==null) {
+			tenant = new BusinessPartner<B>();
+			tenantMap.put(orgNo, tenant);
+		}
+		tenant.setTaxId(orgNo);
+		tenant.setCountryCode(countryCode);
+		tenant.setName(name);
+		
+		if (currentTenant==null) {
+			currentTenant = tenant;
+		}
+		
+		return tenant;
+		
 	}
 	
-	
+	@Override
+	public void setTenant(String orgNo, String countryCode) throws NoSuchTenantException {
+
+		BusinessPartner<B> tenant = tenantMap.get(orgNo);
+		if (tenant==null) {
+			throw new NoSuchTenantException(orgNo);
+		} else if (countryCode!=null && tenant.getCountryCode()!=null && !countryCode.equals(tenant.getCountryCode())){
+			throw new NoSuchTenantException("Tenant has different countrycode: " + tenant.getCountryCode() + " : " + orgNo);
+		}
+		currentTenant = tenant;
+		
+	}
+
+	@Override
+	public BusinessPartner<B> getCurrentTenant() {
+		return currentTenant;
+	}
+
+
 	/**
 	 * Returns given setting.
 	 * 

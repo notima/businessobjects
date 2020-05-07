@@ -47,16 +47,17 @@ public interface BusinessObjectFactory<C,I,O,P,B> {
 	 *  
 	 * @param orgNo				The orgNo
 	 * @param countryCode		Country Code
+	 * @param name				The name of the tenant.
 	 * @param props				Properties used for initialization.
-	 * @return
+	 * @return		A business partner representing the tenant.
 	 */
-	public BusinessPartner<B> addTenant(String orgNo, String countryCode, Properties props);
+	public BusinessPartner<B> addTenant(String orgNo, String countryCode, String name, Properties props);
 	
 	/**
 	 * 
-	 * @return	The orgno of current tenant
+	 * @return	The current tenant.
 	 */
-	public String getTenantOrgNo();
+	public BusinessPartner<B> getCurrentTenant();
 	
 	/**
 	 * Returns given setting.
