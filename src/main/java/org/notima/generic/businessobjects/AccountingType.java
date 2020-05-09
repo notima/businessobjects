@@ -13,6 +13,8 @@ public class AccountingType {
 	public static final String	LIQUID_ASSET_AR ="liquid-asset-ar";
 	public static final String	LIQUID_ASSET_CASH = "liquid-asset-cash";
 	public static final String	UNKNOWN_BALANCE_TRX = "unknown-balance-trx";
+	public static final String	INTEREST_INCOME = "interest-income";
+	public static final String	INTEREST_EXPENSE = "interest-expense";
 	public static final String	ROUNDING = "rounding";
 	
 }

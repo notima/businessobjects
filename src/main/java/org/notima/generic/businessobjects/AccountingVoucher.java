@@ -1,6 +1,7 @@
 package org.notima.generic.businessobjects;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -21,6 +22,8 @@ public class AccountingVoucher {
 	private String			voucherSeries;
 	private BigDecimal		totalCredit;
 	private	BigDecimal		totalDebet;
+	
+	private Integer			precision;
 	
 	private List<AccountingVoucherLine> lines;
 
@@ -161,6 +164,9 @@ public class AccountingVoucher {
 		getTotalDebet();
 		getTotalCredit();
 		BigDecimal balance = totalDebet.subtract(totalCredit);
+		
+		balance = roundToPrecision(balance);
+		
 		return balance;
 	}
 	
@@ -186,6 +192,8 @@ public class AccountingVoucher {
 	
 	public void addVoucherLine(BigDecimal amount, String acctNo) {
 
+		amount = roundToPrecision(amount);		
+		
 		if (lines==null) {
 			lines = new ArrayList<AccountingVoucherLine>();
 		}
@@ -203,6 +211,8 @@ public class AccountingVoucher {
 	
 	public void addVoucherLines(BigDecimal amount, String debetAcct, String creditAcct) {
 
+		amount = roundToPrecision(amount);
+		
 		if (lines==null) {
 			lines = new ArrayList<AccountingVoucherLine>();
 		}
@@ -225,7 +235,34 @@ public class AccountingVoucher {
 	public void setLines(List<AccountingVoucherLine> lines) {
 		this.lines = lines;
 	}
+
+	/**
+	 * Sets rounding precision for this voucher. If null, no rounding is used.
+	 * 
+	 * The number is the number of digits after the decimal separator.
+	 * 
+	 * @return
+	 */
+	public Integer getPrecision() {
+		return precision;
+	}
+
+	public void setPrecision(Integer precision) {
+		this.precision = precision;
+	}
 	
-	
+	/**
+	 * If precision is set, this big decimal is rounded to precision.
+	 * 
+	 * @param bd
+	 * @return		The rounded value.
+	 */
+	private BigDecimal roundToPrecision(BigDecimal bd) {
+		if (precision!=null) {
+			BigInteger bi = bd.movePointRight(precision).toBigInteger();
+			bd = new BigDecimal(bi).movePointLeft(precision);
+		}
+		return bd;
+	}
 	
 }
