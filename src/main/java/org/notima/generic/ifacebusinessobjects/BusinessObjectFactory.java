@@ -203,6 +203,14 @@ public interface BusinessObjectFactory<C,I,O,P,B> {
 	public List<AccountingVoucher> writeVouchers(List<AccountingVoucher> vouchers) throws Exception;
 	
 	/**
+	 * Attach file to voucher in underlaying system.
+	 * 
+	 * @param 	voucher 	The voucher to attach to. Normally it should already exist in the target system.
+	 * @param 	fileName 	The filename of the file to attach.
+	 */
+	public String attachFileToVoucher(AccountingVoucher voucher, String fileName) throws Exception;
+	
+	/**
 	 * Persists a business object
 	 * 
 	 * @param o

@@ -152,5 +152,11 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B> implements BusinessO
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public String attachFileToVoucher(AccountingVoucher voucher, String fileName) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
