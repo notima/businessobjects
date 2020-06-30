@@ -107,6 +107,47 @@ public class AccountingVoucher {
 		}
 		
 	}
+
+	/**
+	 * 
+	 * 
+	 * @param acctType		The account type to look for
+	 * @return				True if exists
+	 */
+	public boolean hasVoucherLinesWithType(String acctType) {
+		
+		if (lines==null) return false;
+		
+		boolean result = false;
+		
+		for (AccountingVoucherLine l : lines) {
+			if (l.getAcctType()!=null && l.getAcctType().equalsIgnoreCase(acctType)) {
+				return true;
+			}
+		}
+		
+		return result;
+		
+	}
+	
+	/**
+	 * 
+	 * @return	True if all voucher lines has an account no
+	 */
+	public boolean allVoucherLinesHasAccountNo() {
+		
+		if (lines==null) return false;
+		
+		boolean result = true;
+		for (AccountingVoucherLine l : lines) {
+			if (l.getAcctNo()==null || l.getAcctNo().trim().length()==0) {
+				result = false;
+				break;
+			}
+		}
+		
+		return result;
+	}
 	
 	/**
 	 * Remaps all occurances of accountType with to toAcct
