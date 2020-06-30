@@ -433,6 +433,7 @@ public class Order<O> implements OrderInvoice {
 	
 	/**
 	 * Suggests a tax distribution of the given amount. Lowest tax rate first.
+	 * TODO - This must be more tested when there are multiple tax rates.
 	 * 
 	 * @param amountIncTax
 	 * @return	A list of taxes suggested. The total amounts to amountIncTax.
@@ -542,7 +543,17 @@ public class Order<O> implements OrderInvoice {
 			
 		}
 		
-		return result;
+		// Remove any zero summaries
+		Map<String, TaxSummary> withoutZeroes = new TreeMap<String,TaxSummary>();
+		
+		for (TaxSummary tts : result.values()) {
+			if (tts.getTaxAmount()==0 && tts.getTaxBase()==0) {
+				continue;
+			}
+			withoutZeroes.put(tts.getKey(), tts);
+		}
+		
+		return withoutZeroes;
 		
 	}
 	
