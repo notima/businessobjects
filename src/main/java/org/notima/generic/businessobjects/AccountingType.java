@@ -3,6 +3,7 @@ package org.notima.generic.businessobjects;
 public class AccountingType {
 
 	public static final String 	REVENUE = "revenue";
+	public static final String	REVENUE_UNCLEAR = "revenue-unclear";
 	public static final String	COGS = "cogs";
 	public static final String	OTHER_EXPENSES = "other-exp";
 	public static final String 	LIABILITY_VENDOR = "liability-vendor";
