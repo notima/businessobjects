@@ -26,7 +26,7 @@ public class TestCreditOrderAmount {
 
 	@SuppressWarnings({"rawtypes","unchecked"})
 	@Test
-	public void test() {
+	public void test() throws Exception {
 		
 		Order order = JAXB.unmarshal(orderExampleFile, Order.class);
 

@@ -248,7 +248,7 @@ public class BasicBusinessObjectConverter<O,I> implements BusinessObjectConverte
 	 * @param	src		The source order. This is not changed.
 	 * @param   amount	The total amount of the order.
 	 */
-	public Order<O> createOrderFromAmount(Order<O> src, double amount) {
+	public Order<O> createOrderFromAmount(Order<O> src, double amount) throws Exception {
 		
 		Order<O> dst = copyOrder(src);
 		
@@ -340,6 +340,26 @@ public class BasicBusinessObjectConverter<O,I> implements BusinessObjectConverte
 				
 			}
 			
+			// If we've gone through the rates and there's still amount to credit, we credit more than what
+			// was originally on the order.
+			if (amountRemaining >0) {
+				if (rateList.size()>1) {
+					throw new Exception("Can't credit more than order value because tax rates are ambiguos");
+				}
+				// Add a line with remaining amount
+				singleLine = new OrderLine();
+				singleLine.setQtyEntered(1);
+				singleLine.setPricesIncludeVAT(true);
+				singleLine.setPriceActual(amountRemaining);
+				// If there are no tax rates, set tax rate to 0 otherwise the only tax rate.
+				singleLine.setTaxPercent(rateList.isEmpty() ? 0.0 : rateList.get(0));
+				singleLine.calculateLineTotalIncTax(DEFAULT_ROUNDING_DECIMALS);
+				// TODO: Internationalization
+				singleLine.setDescription("Unspecified line");
+				newList.add(singleLine);
+
+			}
+			
 		}
 
 		dst.setLines(newList);
@@ -358,7 +378,7 @@ public class BasicBusinessObjectConverter<O,I> implements BusinessObjectConverte
 	 * @param	src		The source order. This is not changed.
 	 * @param   amount	Amount to be credited. The amount should be a positive number.
 	 */
-	public Order<O> createCreditOrderFromAmount(Order<O> src, double amount) {
+	public Order<O> createCreditOrderFromAmount(Order<O> src, double amount) throws Exception {
 
 		Order<O> dst = createOrderFromAmount(src, amount);
 		dst = negateOrder(dst);
