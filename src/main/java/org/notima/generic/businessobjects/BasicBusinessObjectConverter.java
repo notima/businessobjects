@@ -388,7 +388,7 @@ public class BasicBusinessObjectConverter<O,I> implements BusinessObjectConverte
 	}
 
 	@Override
-	public I toCanonicalInvoice(Invoice<I> src) throws Exception {
+	public I toNativeInvoice(Invoice<I> src) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
