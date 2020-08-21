@@ -30,6 +30,11 @@ public interface BusinessObjectConverter<O,I> {
 	public Invoice<I> fromNativeInvoice(I src) throws Exception;
 	
 	/**
+	 * Converts an invoice to native invoice
+	 */
+	public I toCanonicalInvoice(Invoice<I> src) throws Exception;
+	
+	/**
 	 * Converts a native invoice to business object invoice
 	 * 
 	 * @param src

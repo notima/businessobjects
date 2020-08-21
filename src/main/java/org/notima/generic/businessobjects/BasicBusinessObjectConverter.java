@@ -386,6 +386,12 @@ public class BasicBusinessObjectConverter<O,I> implements BusinessObjectConverte
 		return dst;
 		
 	}
+
+	@Override
+	public I toCanonicalInvoice(Invoice<I> src) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }
