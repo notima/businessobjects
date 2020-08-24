@@ -392,6 +392,23 @@ public class BasicBusinessObjectConverter<O,I> implements BusinessObjectConverte
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public String getSystemName() {
+		return null;
+	}
+	
+	/**
+	 * Converts the native invoice to a string representation.
+	 * 
+	 * @param src
+	 * @return
+	 * @throws Exception
+	 */
+	public String nativeInvoiceToString(I src) throws Exception {
+		return src.toString();
+	}
+	
 	
 
 }

@@ -41,5 +41,16 @@ public interface BusinessObjectConverter<O,I> {
 	 * @return
 	 */
 	public O toNativeOrder(Order<?> src) throws Exception;
+
+	/**
+	 * Converts the native invoice to a string representation.
+	 * 
+	 * @param src
+	 * @return
+	 * @throws Exception
+	 */
+	public String nativeInvoiceToString(I src) throws Exception;
+	
+	public String getSystemName();
 	
 }
