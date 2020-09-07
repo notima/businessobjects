@@ -22,9 +22,9 @@ public class BasicBusinessObjectConverter<O,I> implements BusinessObjectConverte
 	 * @param src
 	 * @return
 	 */
-	public Order<O> copyOrder(Order<O> src) {
+	public Order<?> copyOrder(Order<?> src) {
 
-		Order<O> dst = new Order<O>();
+		Order<?> dst = new Order<Object>();
 		dst.setBillBpartner(src.getBillBpartner());
 		dst.setBillLocation(src.getBillLocation());
 		dst.setBillPerson(src.getBillPerson());
@@ -215,17 +215,17 @@ public class BasicBusinessObjectConverter<O,I> implements BusinessObjectConverte
 	/**
 	 * Negates the order.
 	 * 
-	 * @param src
+	 * @param i
 	 * @return
 	 */
-	public Order<O> negateOrder(Order<O> src) {
+	public Order<?> negateOrder(Order<?> i) {
 		
 		// Negate qty on order lines and recalculate grand total
 		
-		if (src==null) return null;
-		if (src.getOrderInvoiceLines()==null) return src;
+		if (i==null) return null;
+		if (i.getOrderInvoiceLines()==null) return i;
 		
-		for (OrderLine ol : (List<OrderLine>)src.getLines()) {
+		for (OrderLine ol : (List<OrderLine>)i.getLines()) {
 			if (ol.getQtyEntered()!=0)
 				ol.setQtyEntered(-ol.getQtyEntered());
 			if (ol.getQtyDelivered()!=0)
@@ -233,9 +233,9 @@ public class BasicBusinessObjectConverter<O,I> implements BusinessObjectConverte
 			ol.calculateLineTotalIncTax(DEFAULT_ROUNDING_DECIMALS);
 		}
 		
-		src.calculateGrandTotal();
+		i.calculateGrandTotal();
 		
-		return src;
+		return i;
 		
 	}
 	
@@ -248,9 +248,9 @@ public class BasicBusinessObjectConverter<O,I> implements BusinessObjectConverte
 	 * @param	src		The source order. This is not changed.
 	 * @param   amount	The total amount of the order.
 	 */
-	public Order<O> createOrderFromAmount(Order<O> src, double amount) throws Exception {
+	public Order<?> createOrderFromAmount(Order<?> src, double amount) throws Exception {
 		
-		Order<O> dst = copyOrder(src);
+		Order<?> dst = copyOrder(src);
 		
 		OrderLine singleLine = null;
 		
@@ -378,9 +378,9 @@ public class BasicBusinessObjectConverter<O,I> implements BusinessObjectConverte
 	 * @param	src		The source order. This is not changed.
 	 * @param   amount	Amount to be credited. The amount should be a positive number.
 	 */
-	public Order<O> createCreditOrderFromAmount(Order<O> src, double amount) throws Exception {
+	public Order<?> createCreditOrderFromAmount(Order<?> src, double amount) throws Exception {
 
-		Order<O> dst = createOrderFromAmount(src, amount);
+		Order<?> dst = createOrderFromAmount(src, amount);
 		dst = negateOrder(dst);
 		
 		return dst;
