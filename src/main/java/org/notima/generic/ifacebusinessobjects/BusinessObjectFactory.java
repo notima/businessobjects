@@ -54,6 +54,16 @@ public interface BusinessObjectFactory<C,I,O,P,B> {
 	public BusinessPartner<B> addTenant(String orgNo, String countryCode, String name, Properties props);
 	
 	/**
+	 * Removes a tenant from a given business object factory.
+	 * 
+	 * @param orgNo				The orgNo
+	 * @param countryCode		The country code
+	 * @return	True if the tenant was removed. False if the tenant didn't exist.
+	 * @throws Exception if something goes wrong.
+	 */
+	public boolean removeTenant(String orgNo, String countryCode) throws Exception ;
+	
+	/**
 	 * 
 	 * @return	The current tenant.
 	 */

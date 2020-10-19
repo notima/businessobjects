@@ -70,6 +70,24 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B> implements BusinessO
 		
 	}
 	
+	/**
+	 * Removes a tenant from a given business object factory.
+	 * 
+	 * @param orgNo				The orgNo
+	 * @param countryCode		The country code
+	 * @return	True if the tenant was removed. False if the tenant didn't exist.
+	 * @throws Exception if something goes wrong.
+	 */
+	public boolean removeTenant(String orgNo, String countryCode) throws Exception {
+
+		BusinessPartner<B> tenant = tenantMap.get(orgNo);
+		if (tenant==null) return false;
+		
+		tenantMap.remove(orgNo);
+		return true;
+	}
+	
+	
 	@Override
 	public void setTenant(String orgNo, String countryCode) throws NoSuchTenantException {
 
