@@ -20,6 +20,8 @@ public class AccountingVoucher {
 	private String			regBy;
 	private String			voucherNo;
 	private String			voucherSeries;
+	private String			costCenter;
+	private String			projectCode;
 	private BigDecimal		totalCredit;
 	private	BigDecimal		totalDebet;
 	
@@ -75,6 +77,22 @@ public class AccountingVoucher {
 
 	public void setVoucherSeries(String voucherSeries) {
 		this.voucherSeries = voucherSeries;
+	}
+	
+	public String getCostCenter() {
+		return costCenter;
+	}
+
+	public void setCostCenter(String costCenter) {
+		this.costCenter = costCenter;
+	}
+
+	public String getProjectCode() {
+		return projectCode;
+	}
+
+	public void setProjectCode(String projectCode) {
+		this.projectCode = projectCode;
 	}
 
 	public void addVoucherLine(AccountingVoucherLine vl) {

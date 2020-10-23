@@ -11,6 +11,8 @@ public class AccountingVoucherLine {
 	private BigDecimal	debitAmount = BigDecimal.ZERO;
 	private String	acctType;
 	private String	taxKey;
+	private String			costCenter;
+	private String			projectCode;
 	private Boolean	isService;
 	
 	public AccountingVoucherLine() {}
@@ -86,8 +88,22 @@ public class AccountingVoucherLine {
 	public void setIsService(Boolean isService) {
 		this.isService = isService;
 	}
-	
-	
+
+	public String getCostCenter() {
+		return costCenter;
+	}
+
+	public void setCostCenter(String costCenter) {
+		this.costCenter = costCenter;
+	}
+
+	public String getProjectCode() {
+		return projectCode;
+	}
+
+	public void setProjectCode(String projectCode) {
+		this.projectCode = projectCode;
+	}
 	
 	
 }
