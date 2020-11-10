@@ -100,6 +100,10 @@ public class AccountingVoucher {
 		if (lines==null) {
 			lines = new ArrayList<AccountingVoucherLine>();
 		}
+		if (precision!=null) {
+			vl.setCreditAmount(roundToPrecision(vl.getCreditAmount()));
+			vl.setDebitAmount(roundToPrecision(vl.getDebitAmount()));
+		}
 		lines.add(vl);
 		
 	}
@@ -245,6 +249,8 @@ public class AccountingVoucher {
 
 		AccountingVoucherLine result = new AccountingVoucherLine(balance.negate(), acctType);
 		addVoucherLine(result);
+		// Re-balance total credit and debit
+		getBalance();
 		return result;
 		
 	}
@@ -305,8 +311,10 @@ public class AccountingVoucher {
 		List<AccountingVoucherLine> purgeThese = new ArrayList<AccountingVoucherLine>();
 		
 		for (AccountingVoucherLine avl : lines) {
-			if (roundToPrecision(avl.getCreditAmount()).signum()==0 &&
-					roundToPrecision(avl.getDebitAmount()).signum()==0) {
+			avl.setCreditAmount(roundToPrecision(avl.getCreditAmount()));
+			avl.setDebitAmount(roundToPrecision(avl.getDebitAmount()));
+			if (avl.getCreditAmount().signum()==0 &&
+					avl.getDebitAmount().signum()==0) {
 				purgeThese.add(avl);
 			}
 		}
