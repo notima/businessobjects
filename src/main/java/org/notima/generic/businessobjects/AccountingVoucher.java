@@ -25,7 +25,7 @@ public class AccountingVoucher {
 	private BigDecimal		totalCredit;
 	private	BigDecimal		totalDebet;
 	
-	private Integer			precision;
+	private Integer			precision = 2;
 	
 	private List<AccountingVoucherLine> lines;
 
@@ -295,6 +295,32 @@ public class AccountingVoucher {
 		this.lines = lines;
 	}
 
+	/**
+	 * Purges this voucher from lines with amounts that are zero when rounded with precision.
+	 */
+	public void purge() {
+		
+		if (lines==null) return;
+		
+		List<AccountingVoucherLine> purgeThese = new ArrayList<AccountingVoucherLine>();
+		
+		for (AccountingVoucherLine avl : lines) {
+			if (roundToPrecision(avl.getCreditAmount()).signum()==0 &&
+					roundToPrecision(avl.getDebitAmount()).signum()==0) {
+				purgeThese.add(avl);
+			}
+		}
+		
+		if (purgeThese.size()>0) {
+			for (AccountingVoucherLine avl : purgeThese) {
+				lines.remove(avl);
+			}
+		}
+		
+		balanceWithLine(AccountingType.ROUNDING);
+		
+	}
+	
 	/**
 	 * Sets rounding precision for this voucher. If null, no rounding is used.
 	 * 
