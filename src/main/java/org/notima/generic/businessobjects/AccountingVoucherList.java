@@ -3,10 +3,8 @@ package org.notima.generic.businessobjects;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@Entity
 @XmlRootElement(name = "AccountingVoucherList")
 public class AccountingVoucherList {
 	

@@ -2,7 +2,6 @@ package org.notima.generic.businessobjects;
 
 import java.time.LocalDate;
 
-import javax.persistence.Entity;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import io.github.threetenjaxb.core.LocalDateXmlAdapter;
@@ -13,7 +12,6 @@ import io.github.threetenjaxb.core.LocalDateXmlAdapter;
  * @author Daniel Tamm
  *
  */
-@Entity
 public class AccountStatementLine {
 
 	private int		lineNumber;

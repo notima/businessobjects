@@ -3,8 +3,6 @@ package org.notima.generic.businessobjects;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -16,14 +14,11 @@ import javax.xml.bind.annotation.XmlType;
  * @author Daniel Tamm
  *
  */
-@Entity
 @XmlType(name="ProductInfo")
 @XmlRootElement(name = "ProductInfo")
 public class ProductInfo {
 
-	@ManyToOne
 	private	Product<?>				product;
-	@ManyToOne
 	private BusinessPartner<?>		vendor;
 	private double				price;
 	private String				currency;

@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -20,6 +22,11 @@ import org.notima.generic.ifacebusinessobjects.IProductCategory;
 @XmlRootElement(name = "ProductCategory")
 public class ProductCategory implements Serializable, IProductCategory {
 
+	
+	@Id
+	@GeneratedValue
+	private Integer		id;
+	
 	/**
 	 * 
 	 */
@@ -34,6 +41,14 @@ public class ProductCategory implements Serializable, IProductCategory {
 	
 	protected List<Translation> translations;
 	protected List<KeyValue>	attributes;
+	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getKey() {
 		return key;

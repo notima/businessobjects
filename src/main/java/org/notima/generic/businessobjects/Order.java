@@ -26,6 +26,10 @@ import org.notima.generic.ifacebusinessobjects.OrderInvoiceLine;
 @XmlRootElement(name = "order")
 public class Order<O> implements OrderInvoice {
 
+	@Id
+	@GeneratedValue
+	private Integer id;
+	
 	private String orderKey;
 	private String paymentTermKey;
 	private String paymentRule;
@@ -50,8 +54,6 @@ public class Order<O> implements OrderInvoice {
 	private Date	 dateOrdered;
 	private Date	 datePromised;
 	private Date	 dateDelivered;
-	@Id
-	@GeneratedValue
 	private String	warehouseId;
 	private String 	currency;
 	private String	ourCustomerNo;

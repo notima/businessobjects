@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -17,7 +16,6 @@ import io.github.threetenjaxb.core.LocalDateXmlAdapter;
  * @author Daniel Tamm
  *
  */
-@Entity
 @XmlRootElement(name = "AccountStatementLines")
 public class AccountStatementLines {
 

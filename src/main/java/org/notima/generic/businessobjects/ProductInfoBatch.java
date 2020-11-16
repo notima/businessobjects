@@ -2,15 +2,11 @@ package org.notima.generic.businessobjects;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@Entity
 @XmlRootElement(name = "ProductInfoBatch")
 public class ProductInfoBatch {
 
-	@OneToMany
 	private List<ProductInfo>	productInfo;
 	// Business partner for this whole batch
 	private BusinessPartner<?>		businessPartner;

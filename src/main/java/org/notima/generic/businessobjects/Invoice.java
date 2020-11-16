@@ -22,6 +22,10 @@ import org.notima.generic.ifacebusinessobjects.OrderInvoiceLine;
 @Entity
 @XmlRootElement(name = "invoice")
 public class Invoice<I> implements OrderInvoice {
+
+	@Id
+	@GeneratedValue
+	private Integer	id;
 	
 	private double	lineNet;
 	private int		lineNo;
@@ -67,8 +71,6 @@ public class Invoice<I> implements OrderInvoice {
 	@ManyToOne
 	private FactoringReservation factoringReservation;
 	private String	warehouseId;
-	@Id
-	@GeneratedValue
 	private String	pricelistId;
 	@ManyToOne
 	private Person  ourReference;
@@ -82,6 +84,14 @@ public class Invoice<I> implements OrderInvoice {
 	
 	private transient I nativeInvoice;
 	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public double round(double roundMe) {
 		double multiplicator = Math.pow(10, (double)roundingDecimals);
 		double result = Math.round(roundMe*multiplicator) / multiplicator;

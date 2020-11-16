@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.notima.generic.ifacebusinessobjects.IProduct;
@@ -11,11 +13,17 @@ import org.notima.generic.ifacebusinessobjects.IProduct;
 @Entity
 @XmlRootElement(name = "Product")
 public class Product<P> implements Serializable, IProduct {
-
+	
+	@Id
+	@GeneratedValue
+	private Integer		id;
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -1831457768717483184L;
+	
+	
 	protected String key;
 	protected String keyReference;
 	protected String name;
@@ -39,6 +47,13 @@ public class Product<P> implements Serializable, IProduct {
 	protected List<Translation> translations;
 	protected List<KeyValue>	attributes;
 	protected transient P nativeProduct;
+
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	
 	public String getKey() {
 		return key;

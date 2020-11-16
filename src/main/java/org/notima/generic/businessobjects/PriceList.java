@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -14,6 +16,10 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 @XmlSeeAlso(PriceListLine.class)
 public class PriceList {
 
+	@Id
+	@GeneratedValue
+	private Integer		id;
+	
 	@ManyToOne
 	private BusinessPartner<?>		seller;
 	@ManyToOne
@@ -26,6 +32,12 @@ public class PriceList {
 	private String 				pricelistReference;
 	private int					pricePrecision;
 	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public BusinessPartner<?> getSeller() {
 		return seller;
 	}

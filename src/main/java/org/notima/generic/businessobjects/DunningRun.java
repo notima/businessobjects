@@ -3,10 +3,8 @@ package org.notima.generic.businessobjects;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@Entity
 @XmlRootElement(name = "DunningRun")
 public class DunningRun <B,I> {
 	private int nextLineNo = 10;

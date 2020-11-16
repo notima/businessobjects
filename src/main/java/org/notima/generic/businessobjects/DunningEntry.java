@@ -4,11 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.persistence.Entity;
-
 import org.notima.bg.BgUtil;
 
-@Entity
 public class DunningEntry<B,I> {
 	private int	lineNo;
 

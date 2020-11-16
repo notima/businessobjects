@@ -10,7 +10,6 @@ import javax.persistence.Entity;
  * @author daniel
  *
  */
-@Entity
 public class Translation implements Serializable {
 
 	/**
