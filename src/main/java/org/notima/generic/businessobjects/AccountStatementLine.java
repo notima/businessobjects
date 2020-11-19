@@ -18,6 +18,8 @@ public class AccountStatementLine {
 	private LocalDate	accountDate;
 	private String	thisAccountNo;
 	private String	otherAccountNo;
+	private String	voucherNo;
+	private String	voucherSeries;
 	private String	description;
 	private double	trxAmount;
 	private double	balanceAmount;
@@ -48,6 +50,18 @@ public class AccountStatementLine {
 	}
 	public void setOtherAccountNo(String otherAccountNo) {
 		this.otherAccountNo = otherAccountNo;
+	}
+	public String getVoucherNo() {
+		return voucherNo;
+	}
+	public void setVoucherNo(String voucherNo) {
+		this.voucherNo = voucherNo;
+	}
+	public String getVoucherSeries() {
+		return voucherSeries;
+	}
+	public void setVoucherSeries(String voucherSeries) {
+		this.voucherSeries = voucherSeries;
 	}
 	public String getDescription() {
 		return description;
