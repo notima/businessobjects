@@ -28,6 +28,7 @@ public interface AccountingReportProvider {
 	 * @param accountNo		The actual account number
 	 * @param fromDate		From date
 	 * @param untilDate		Until date
+	 * @param orderByAmount	Order by amount (after date)
 	 * @return				Account statement lines if any.
 	 * @throws		Exception if anything goes wrong.
 	 */
@@ -35,6 +36,7 @@ public interface AccountingReportProvider {
 			BusinessPartner<?> bp, 
 			String accountNo, 
 			LocalDate fromDate, 
-			LocalDate untilDate) throws Exception;
+			LocalDate untilDate,
+			boolean orderByAmount) throws Exception;
 	
 }
