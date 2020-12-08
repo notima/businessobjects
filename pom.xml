@@ -124,8 +124,8 @@
 				<configuration>
 					<serverId>ossrh</serverId>
 					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-					<autoReleaseAfterClose>false</autoReleaseAfterClose>
-					<stagingProgressTimeoutMinutes>10</stagingProgressTimeoutMinutes>
+					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+					<stagingProgressTimeoutMinutes>25</stagingProgressTimeoutMinutes>
 					<keepStagingRepositoryOnCloseRuleFailure>true</keepStagingRepositoryOnCloseRuleFailure>
 					<keepStagingRepositoryOnFailure>true</keepStagingRepositoryOnFailure>
 				</configuration>
@@ -166,7 +166,7 @@
 				<executions>
 					<execution>
 						<id>sign-artifacts</id>
-						<phase>deploy</phase>
+						<phase>verify</phase>
 						<goals>
 							<goal>sign</goal>
 						</goals>
