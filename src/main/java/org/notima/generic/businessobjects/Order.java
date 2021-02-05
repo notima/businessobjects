@@ -545,14 +545,20 @@ public class Order<O> implements OrderInvoice {
 			
 		}
 		
-		// Remove any zero summaries
+		// Remove any zero summaries if there are more than one tax key
 		Map<String, TaxSummary> withoutZeroes = new TreeMap<String,TaxSummary>();
+		
+		if (result.size()<2) return result;
 		
 		for (TaxSummary tts : result.values()) {
 			if (tts.getTaxAmount()==0 && tts.getTaxBase()==0) {
 				continue;
 			}
 			withoutZeroes.put(tts.getKey(), tts);
+		}
+		if (withoutZeroes.size()==0 && result.size()>0) {
+			// All are zeroes, return all
+			return result;
 		}
 		
 		return withoutZeroes;
