@@ -337,6 +337,40 @@ public class Order<O> implements OrderInvoice {
 		this.attributes = attributes;
 	}
 	
+	
+	/**
+	 * This method replaces the oldTaxKey and recalculates the tax lines 
+	 * and the total tax of this order.
+	 * 
+	 * @param oldTaxKey			The old tax key to replace
+	 * @param newTaxKey			The new tax key
+	 * @param newTaxPercent		The new tax percentage.
+	 * @param precision			Rounding precision when recalculating tax.
+	 */
+	public void replaceTaxKey(String oldTaxKey, String newTaxKey, double newTaxPercent, int precision) {
+		
+		if (getLines()==null) return;
+
+		double lineTotal;
+		
+		for (OrderLine ol : lines) {
+			
+			if ((ol.getTaxKey()==null && oldTaxKey==null) || 
+					(ol.getTaxKey()!=null && ol.getTaxKey().equals(oldTaxKey)) ) {
+				
+				lineTotal = ol.calculateLineTotalIncTax(precision);
+				ol.setTaxKey(newTaxKey);
+				ol.setTaxPercent(newTaxPercent);
+				ol.calculatePriceActualFromLineTotalIncTax(lineTotal, precision);
+				
+			}
+			
+		}
+		
+		calculateGrandTotal();
+		
+	}
+	
 	/**
 	 * Calculates tax percent by using grand total and vat amount. Distributes tax on tax lines
 	 */
@@ -411,7 +445,7 @@ public class Order<O> implements OrderInvoice {
 
 	/**
 	 * Calculates grand total by adding the line total of all lines.
-	 * Sets the grandTotal attribute.
+	 * Sets the grandTotal, vatTotal and netTotal attributes.
 	 * @return
 	 */
 	public double calculateGrandTotal() {

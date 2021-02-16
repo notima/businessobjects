@@ -133,6 +133,31 @@ public class OrderLine implements OrderInvoiceLine {
 		return taxPercent;
 	}
 
+
+	/**
+	 * Calculates price actual from total line amount, qtyEntered, pricesIncludeVAT and taxPercent.
+	 * 
+	 * @param lineTotal				The total to use.
+	 * @param roundingDecimals		Rounding precision.
+	 * @return		The price actual.
+	 */
+	public double calculatePriceActualFromLineTotalIncTax(double lineTotal, int roundingDecimals) {
+
+		// Can't recalculate if qty entered = 0.
+		if (qtyEntered==0) return priceActual;
+		
+		double lineNet;
+		
+		if (pricesIncludeVAT) {
+			priceActual = InvoiceLine.round(lineTotal / qtyEntered, roundingDecimals);
+		} else {
+			lineNet = InvoiceLine.round(lineTotal / ( 1+(taxPercent/100.0)), roundingDecimals);
+			priceActual = InvoiceLine.round(lineNet / qtyEntered, roundingDecimals);
+		}
+		
+		return priceActual;
+		
+	}
 	
 	public double calculateLineTotalIncTax(int roundingDecimals) {
 		double lineTotal;
