@@ -1,5 +1,11 @@
 package org.notima.generic.businessobjects;
 
+/**
+ * Constants to classify different kinds of accounts.
+ * 
+ * @author Daniel Tamm
+ *
+ */
 public class AccountingType {
 
 	public static final String 	REVENUE = "revenue";

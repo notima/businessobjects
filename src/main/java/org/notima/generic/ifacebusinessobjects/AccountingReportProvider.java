@@ -14,6 +14,15 @@ import org.notima.generic.businessobjects.BusinessPartner;
 public interface AccountingReportProvider {
 
 	/**
+	 * Returns the account class of the given account number (found in the source system).
+	 * 
+	 * @param accountNo			The account number
+	 * @return					The account class
+	 * @see org.notima.generic.businessobjects.AccountClass
+	 */
+	public String getAccountClass(String accountNo);
+	
+	/**
 	 * Return true if this provider has accounting report for this business partner.
 	 * 	
 	 * @param bp		The business partner
