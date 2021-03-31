@@ -1,5 +1,7 @@
 package org.notima.generic.businessobjects;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,6 +20,43 @@ public class ProfitLossLine {
 	
 	private List<ProfitLossColumn>	columns;
 
+	/**
+	 * Adds a given amount to this line for the given period.
+	 * 
+	 * @param amount
+	 * @param period
+	 */
+	public void addAmountForPeriod(BigDecimal amount, AccountingPeriod period) {
+
+		if (columns==null)
+			columns = new ArrayList<ProfitLossColumn>();
+		
+		ProfitLossColumn plc = getColumnForPeriod(period);
+		if (plc==null) {
+			plc = new ProfitLossColumn();
+			plc.setAmount(amount);
+			plc.setPeriod(period);
+			columns.add(plc);
+		} else {
+			plc.setAmount(plc.getAmount().add(amount));
+		}
+		
+	}
+	
+	public ProfitLossColumn getColumnForPeriod(AccountingPeriod period) {
+		
+		if (columns==null) return null;
+		
+		
+		for (ProfitLossColumn plc : columns) {
+			if (plc.getPeriod().equals(period)) {
+				return plc;
+			}
+		}
+		
+		return null;
+	}
+	
 	public String getAccountNo() {
 		return accountNo;
 	}

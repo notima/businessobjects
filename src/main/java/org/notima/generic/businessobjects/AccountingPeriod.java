@@ -28,6 +28,20 @@ public class AccountingPeriod {
 		this.periodEnd = periodEnd;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof AccountingPeriod))
+			return false;
+
+		AccountingPeriod that = (AccountingPeriod)obj;
+
+		if (that.getPeriodStart().equals(this.getPeriodStart()) && that.getPeriodEnd().equals(this.getPeriodEnd())) {
+			return true;
+		}
+		
+		return false;
+	}
+
 	
 	
 }

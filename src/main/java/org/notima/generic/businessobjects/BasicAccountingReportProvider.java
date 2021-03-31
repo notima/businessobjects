@@ -17,8 +17,17 @@ public class BasicAccountingReportProvider implements AccountingReportProvider {
 		return null;
 	}
 	
+	/**
+	 * Returns a P/L report
+	 * 
+	 * @param bp			For the business partner.
+	 * @param period				From date
+	 * @param comparisonPeriod		Until date
+	 * @return				A PL report.
+	 * @throws Exception	If something goes wrong
+	 */
 	@Override
-	public ProfitLossReport getProfitLossReport(BusinessPartner<?> bp, LocalDate fromDate, LocalDate untilDate)
+	public ProfitLossReport getProfitLossReport(BusinessPartner<?> bp, AccountingPeriod period, AccountingPeriod comparisonPeriod)
 			throws Exception {
 		return null;
 	}

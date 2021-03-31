@@ -3,6 +3,7 @@ package org.notima.generic.ifacebusinessobjects;
 import java.time.LocalDate;
 
 import org.notima.generic.businessobjects.AccountStatementLines;
+import org.notima.generic.businessobjects.AccountingPeriod;
 import org.notima.generic.businessobjects.BusinessPartner;
 import org.notima.generic.businessobjects.ProfitLossReport;
 
@@ -35,12 +36,12 @@ public interface AccountingReportProvider {
 	 * Returns a P/L report
 	 * 
 	 * @param bp			For the business partner.
-	 * @param fromDate		From date
-	 * @param untilDate		Until date
+	 * @param period				From date
+	 * @param comparisonPeriod		Until date
 	 * @return				A PL report.
 	 * @throws Exception	If something goes wrong
 	 */
-	public ProfitLossReport getProfitLossReport(BusinessPartner<?> bp, LocalDate fromDate, LocalDate untilDate) throws Exception;
+	public ProfitLossReport getProfitLossReport(BusinessPartner<?> bp, AccountingPeriod period, AccountingPeriod comparisonPeriod) throws Exception;
 	
 	/**
 	 * Get account statement lines for given account number.
