@@ -8,17 +8,21 @@ public class BasicAccountingReportProvider implements AccountingReportProvider {
 
 	@Override
 	public boolean hasAccountingFor(BusinessPartner<?> bp) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public AccountStatementLines getAccountStatementLines(BusinessPartner<?> bp, String accountNo, LocalDate fromDate,
 			LocalDate untilDate, boolean orderByAmount) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
+	@Override
+	public ProfitLossReport getProfitLossReport(BusinessPartner<?> bp, LocalDate fromDate, LocalDate untilDate)
+			throws Exception {
+		return null;
+	}
+
 	/**
 	 * Gets the account class for a given account
 	 * 

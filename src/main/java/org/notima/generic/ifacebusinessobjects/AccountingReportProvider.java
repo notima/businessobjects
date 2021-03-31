@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import org.notima.generic.businessobjects.AccountStatementLines;
 import org.notima.generic.businessobjects.BusinessPartner;
+import org.notima.generic.businessobjects.ProfitLossReport;
 
 /**
  * Provides accounting report information.
@@ -29,6 +30,17 @@ public interface AccountingReportProvider {
 	 * @return			True if accounting exist.
 	 */
 	public boolean hasAccountingFor(BusinessPartner<?> bp);
+
+	/**
+	 * Returns a P/L report
+	 * 
+	 * @param bp			For the business partner.
+	 * @param fromDate		From date
+	 * @param untilDate		Until date
+	 * @return				A PL report.
+	 * @throws Exception	If something goes wrong
+	 */
+	public ProfitLossReport getProfitLossReport(BusinessPartner<?> bp, LocalDate fromDate, LocalDate untilDate) throws Exception;
 	
 	/**
 	 * Get account statement lines for given account number.
