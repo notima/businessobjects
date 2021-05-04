@@ -104,13 +104,15 @@
 										io.github.threetenjaxb.core
 						</Export-Package>
 						<Import-Package>
+							javax.xml.bind;version="[2.2,3)",
 							javax.xml.bind.annotation;version="[2.2,3)",
+							javax.xml.bind.annotation.adapters;version="[2.2,3)",
 							!org.notima.generic.businessobjects*,
 							!org.glassfish.hk2.osgiresourcelocator,
 							!com.sun.activation.registries,
 							*
 						</Import-Package>
-						<Embed-Dependency>*;scope=compile|runtime;artifactId=!slf4j-api|slf4j-log4j12|log4j|javax.persistence-api|bankgiro-api</Embed-Dependency>
+						<Embed-Dependency>*;scope=compile|runtime;artifactId=!jakarta.xml.bind-api|slf4j-api|slf4j-log4j12|log4j|javax.persistence-api|bankgiro-api</Embed-Dependency>
 						<Embed-Transitive>true</Embed-Transitive>						
 					</instructions>
 				</configuration>
