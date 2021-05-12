@@ -1,6 +1,7 @@
 package org.notima.generic.businessobjects;
 
 import java.time.LocalDate;
+import java.util.Properties;
 
 import org.notima.generic.ifacebusinessobjects.AccountingReportProvider;
 
@@ -23,15 +24,18 @@ public class BasicAccountingReportProvider implements AccountingReportProvider {
 	 * @param bp			For the business partner.
 	 * @param period				From date
 	 * @param comparisonPeriod		Until date
+	 * @param props					Properties to customize the report.
 	 * @return				A PL report.
 	 * @throws Exception	If something goes wrong
 	 */
 	@Override
-	public ProfitLossReport getProfitLossReport(BusinessPartner<?> bp, AccountingPeriod period, AccountingPeriod comparisonPeriod)
+	public ProfitLossReport getProfitLossReport(BusinessPartner<?> bp, AccountingPeriod period, AccountingPeriod comparisonPeriod, Properties props)
 			throws Exception {
 		return null;
 	}
 
+	
+	
 	/**
 	 * Gets the account class for a given account
 	 * 
@@ -121,6 +125,15 @@ public class BasicAccountingReportProvider implements AccountingReportProvider {
 		
 		return AccountClass.UNKNOWN_CLASS;
 		
+	}
+
+
+	@Override
+	public BalanceSheetReport getBalanceSheet(BusinessPartner<?> bp, AccountingPeriod period,
+			AccountingPeriod comparisonPeriod, Properties props)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

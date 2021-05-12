@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import org.notima.generic.businessobjects.AccountStatementLines;
 import org.notima.generic.businessobjects.AccountingPeriod;
+import org.notima.generic.businessobjects.BalanceSheetReport;
 import org.notima.generic.businessobjects.BusinessPartner;
 import org.notima.generic.businessobjects.ProfitLossReport;
 
@@ -38,10 +39,26 @@ public interface AccountingReportProvider {
 	 * @param bp			For the business partner.
 	 * @param period				From date
 	 * @param comparisonPeriod		Until date
+	 * @param props			Properties to customize the report.
 	 * @return				A PL report.
 	 * @throws Exception	If something goes wrong
 	 */
-	public ProfitLossReport getProfitLossReport(BusinessPartner<?> bp, AccountingPeriod period, AccountingPeriod comparisonPeriod) throws Exception;
+	public ProfitLossReport getProfitLossReport(BusinessPartner<?> bp, AccountingPeriod period, AccountingPeriod comparisonPeriod, java.util.Properties props) throws Exception;
+	
+
+	/**
+	 * Returns a balance sheet
+	 * 
+	 * @param bp			For the business partner.
+	 * @param period				From date
+	 * @param comparisonPeriod		Until date
+	 * @param props			Properties to customize the report. 
+	 * @return				A PL report.
+	 * @throws Exception	If something goes wrong
+	 */
+	public BalanceSheetReport getBalanceSheet(BusinessPartner<?> bp, AccountingPeriod period, AccountingPeriod comparisonPeriod, java.util.Properties props) throws Exception;
+	
+	
 	
 	/**
 	 * Get account statement lines for given account number.
