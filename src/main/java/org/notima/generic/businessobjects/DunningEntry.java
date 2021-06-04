@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.notima.bg.BgUtil;
+import org.notima.util.NotimaUtil;
 
 public class DunningEntry<B,I> {
 	private int	lineNo;
@@ -85,7 +85,7 @@ public class DunningEntry<B,I> {
 			else{
 				ocr = ocrNoPrefix + letterNo;
 			}
-			ocrNo = BgUtil.toOCRNumberWithLengthCheck(ocr);
+			ocrNo = NotimaUtil.toOCRNumberWithLengthCheck(ocr);
 		}
 	}
 	

@@ -8,11 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.notima.bg.BgUtil;
 import org.notima.generic.businessobjects.util.InvalidTaxIdFormatException;
 import org.notima.generic.businessobjects.util.TaxIdFormatter;
 import org.notima.generic.businessobjects.util.TaxIdStructure;
 import org.notima.generic.businessobjects.util.UnknownTaxIdFormatException;
+import org.notima.util.NotimaUtil;
 
 @Entity
 @XmlRootElement(name = "BusinessPartner")
@@ -82,7 +82,7 @@ public class BusinessPartner<B> {
 		
 		String countryCode = addressOfficial!=null ? addressOfficial.getCountryCode() : null;
 		
-    	taxId = BgUtil.removeBlanks(taxId);
+    	taxId = NotimaUtil.removeBlanks(taxId);
 		
 		// Check tax id
 		String origFormat = TaxIdFormatter.determineFormat(countryCode, taxId);
