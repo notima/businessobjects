@@ -75,6 +75,7 @@ public class Order<O> implements OrderInvoice {
 	public String toString() {
 		StringBuffer buf = new StringBuffer();
 		buf.append("[orderKey=>"+orderKey + "]," + "[BpIdentityNo=>" + (bpartner!=null ? bpartner.getIdentityNo() : "") + "]");
+		buf.append("[grandTotal=>"+grandTotal + (currency!=null?(" " + currency):"") + "]");
 		for (OrderLine line : lines) {
 			if (buf.length()>0)
 				buf.append("\r\n");
