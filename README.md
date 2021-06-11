@@ -8,12 +8,12 @@ Releases are found in Maven-Central repository and can easliy be used by adding 
     <dependency>
         <groupId>org.notima.generic</groupId>
         <artifactId>businessobjects</artifactId>
-        <version>0.1.18</version>
+        <version>0.1.19</version>
     </dependency>
 
 Or in karaf
 
 	install -s mvn:javax.persistence/javax.persistence-api/2.2
-	install -s mvn:org.notima.bg/bankgiro-api
+	install -s mvn:org.notima.bg/bankgiro-api/1.3.7
 	install -s mvn:org.notima.generic/businessobjects
 	
