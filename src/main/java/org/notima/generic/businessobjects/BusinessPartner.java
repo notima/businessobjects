@@ -8,11 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.notima.generic.businessobjects.util.InvalidTaxIdFormatException;
-import org.notima.generic.businessobjects.util.TaxIdFormatter;
-import org.notima.generic.businessobjects.util.TaxIdStructure;
-import org.notima.generic.businessobjects.util.UnknownTaxIdFormatException;
+import org.notima.util.InvalidTaxIdFormatException;
 import org.notima.util.NotimaUtil;
+import org.notima.util.TaxIdFormatter;
+import org.notima.util.TaxIdStructure;
+import org.notima.util.UnknownTaxIdFormatException;
 
 @Entity
 @XmlRootElement(name = "BusinessPartner")
