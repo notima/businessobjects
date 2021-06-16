@@ -14,9 +14,13 @@ import java.util.Date;
  * @author Lokesh Gupta
  * @author Daniel Tamm
  *
+ *
+ *
  */
 public class LocalDateUtils {
  
+	// TODO: Remove this is a coming version and point dependencies to NotimaUtils.
+	
     public static Date asDate(LocalDate localDate) {
     	if (localDate==null) return null;
         return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());

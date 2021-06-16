@@ -4,6 +4,7 @@ import java.io.File;
 
 public class FileUtils {
 
+	// TODO: Remove in a coming version and point dependencies to NotimaUtils.
 
 	/**
 	 * Remove unwanted characters from filename
