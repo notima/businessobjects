@@ -35,6 +35,16 @@ public class AccountingVoucherLine {
 		this.acctType = acctType;
 		
 	}
+
+	/**
+	 * Reverse the amounts
+	 */
+	public void reverse() {
+		BigDecimal oldDebitAmount = BigDecimal.valueOf(debitAmount.doubleValue());
+		debitAmount = creditAmount;
+		creditAmount = oldDebitAmount;
+		
+	}
 	
 	public String getAcctNo() {
 		return acctNo;

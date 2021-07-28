@@ -301,6 +301,22 @@ public class AccountingVoucher {
 		this.lines = lines;
 	}
 
+	public void reverseWithComment(String comment) {
+		
+		if (description!=null && description.trim().length()>0) {
+			description += " : " + comment;
+		} else {
+			description = comment;
+		}
+		
+		if (lines==null) return;
+		
+		for (AccountingVoucherLine avl : lines) {
+			avl.reverse();
+		}
+		
+	}
+	
 	/**
 	 * Purges this voucher from lines with amounts that are zero when rounded with precision.
 	 */
