@@ -606,7 +606,7 @@ public class Order<O> implements OrderInvoice {
 	}
 	
 	public boolean hasValidBusinessPartner() {
-		return bpartner!=null && bpartner.hasName();
+		return bpartner!=null && (bpartner.hasName() || bpartner.hasTaxId());
 	}
 	
 	public boolean hasOrderLines() {

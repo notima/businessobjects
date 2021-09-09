@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<order xmlns="https://github.com/notima/businessobjects">
+    <billBpartner>
+        <addressOfficial>
+            <city>Staden</city>
+            <countryCode>SE</countryCode>
+            <customerReference>Person Per</customerReference>
+            <email>perperson@void.org</email>
+            <locationId>0</locationId>
+            <postal>76018</postal>
+            <street>Gatan NN</street>
+        </addressOfficial>
+        <company>false</company>
+        <emailInvoice>false</emailInvoice>
+        <taxId>yymmddnnnn</taxId>
+        <bPartnerId>0</bPartnerId>
+    </billBpartner>
+    <billLocation>
+        <city>Staden</city>
+        <countryCode>SE</countryCode>
+        <customerReference>Person Per</customerReference>
+        <email>perperson@void.org</email>
+        <locationId>0</locationId>
+        <postal>76018</postal>
+        <street>Gatan NN</street>
+    </billLocation>
+    <billPerson>
+        <email>perperson@void.org</email>
+        <personId>0</personId>
+        <phone>0735400491</phone>
+    </billPerson>
+    <bpartner>
+        <addressOfficial>
+            <city>Staden</city>
+            <countryCode>SE</countryCode>
+            <customerReference>Person Per</customerReference>
+            <email>perperson@void.org</email>
+            <locationId>0</locationId>
+            <postal>76018</postal>
+            <street>Gatan NN</street>
+        </addressOfficial>
+        <company>false</company>
+        <emailInvoice>false</emailInvoice>
+        <taxId>yymmddnnnn</taxId>
+        <bPartnerId>0</bPartnerId>
+    </bpartner>
+    <currency>SEK</currency>
+    <dateDelivered>2018-11-27T15:13:24+01:00</dateDelivered>
+    <dateOrdered>2018-11-27T15:13:24+01:00</dateOrdered>
+    <documentDate>2018-11-27T15:13:24+01:00</documentDate>
+    <documentKey>86667</documentKey>
+    <grandTotal>145.0</grandTotal>
+    <lines>
+        <key>40515Tryck</key>
+        <lineNet>116.0</lineNet>
+        <lineNo>1</lineNo>
+        <name>Eget Tryck | 80st - 26mm |</name>
+        <priceActual>145.0</priceActual>
+        <priceNormal>145.0</priceNormal>
+        <pricesIncludeVAT>true</pricesIncludeVAT>
+        <productKey>40515Tryck</productKey>
+        <qtyDelivered>1.0</qtyDelivered>
+        <qtyEntered>1.0</qtyEntered>
+        <taxAmount>29.0</taxAmount>
+        <taxPercent>25.0</taxPercent>
+    </lines>
+    <lines>
+        <key>shipping</key>
+        <lineNet>34.82</lineNet>
+        <lineNo>2</lineNo>
+        <name>Pickup Parcel  (Vikt: 0.30kg)</name>
+        <priceActual>39.0</priceActual>
+        <priceNormal>39.0</priceNormal>
+        <pricesIncludeVAT>true</pricesIncludeVAT>
+        <productKey>shipping</productKey>
+        <qtyDelivered>1.0</qtyDelivered>
+        <qtyEntered>1.0</qtyEntered>
+        <taxAmount>4.18</taxAmount>
+        <taxPercent>12.0</taxPercent>
+    </lines>
+    <lines>
+        <lineNet>-39.0</lineNet>
+        <lineNo>3</lineNo>
+        <name>Innestående medel</name>
+        <priceActual>-39.0</priceActual>
+        <priceNormal>-39.0</priceNormal>
+        <pricesIncludeVAT>true</pricesIncludeVAT>
+        <qtyDelivered>1.0</qtyDelivered>
+        <qtyEntered>1.0</qtyEntered>
+        <taxAmount>0.0</taxAmount>
+        <taxPercent>0.0</taxPercent>
+    </lines>
+    <lines>
+        <key>ompack1</key>
+        <lineNet>0.0</lineNet>
+        <lineNo>4</lineNo>
+        <name>Ompackning Lösviktsvaror exkl moms</name>
+        <priceActual>0.0</priceActual>
+        <priceNormal>0.0</priceNormal>
+        <pricesIncludeVAT>true</pricesIncludeVAT>
+        <productKey>ompack1</productKey>
+        <qtyDelivered>1.0</qtyDelivered>
+        <qtyEntered>1.0</qtyEntered>
+        <taxAmount>0.0</taxAmount>
+        <taxPercent>12.0</taxPercent>
+    </lines>
+    <lines>
+        <key>humlepack2</key>
+        <lineNet>0.0</lineNet>
+        <lineNo>5</lineNo>
+        <name>Ompackning Humle exkl moms</name>
+        <priceActual>0.0</priceActual>
+        <priceNormal>0.0</priceNormal>
+        <pricesIncludeVAT>true</pricesIncludeVAT>
+        <productKey>humlepack2</productKey>
+        <qtyDelivered>1.0</qtyDelivered>
+        <qtyEntered>1.0</qtyEntered>
+        <taxAmount>0.0</taxAmount>
+        <taxPercent>12.0</taxPercent>
+    </lines>
+    <orderKey>86667</orderKey>
+    <paymentRule>Card</paymentRule>
+    <salesOrder>false</salesOrder>
+    <shipLocation>
+        <city>Staden</city>
+        <countryCode>SE</countryCode>
+        <customerReference>Person Per</customerReference>
+        <email>perperson@void.org</email>
+        <locationId>0</locationId>
+        <postal>76018</postal>
+        <street>Gatan NN</street>
+    </shipLocation>
+    <vatTotal>33.18</vatTotal>
+</order>

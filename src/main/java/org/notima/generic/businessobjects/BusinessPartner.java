@@ -255,6 +255,10 @@ public class BusinessPartner<B> {
 		return (name!=null && name.trim().length()>0);
 	}
 	
+	public boolean hasTaxId() {
+		return (taxId!=null && taxId.trim().length()>0);
+	}
+	
 	public boolean hasContacts() {
 		if (contacts==null) return false;
 		for (Person person : contacts) {

@@ -16,7 +16,9 @@ public class TestSettings {
 			new String[] {
 				"OrderExample.xml",
 				"OrderExample2.xml",
-				"OrderListExample.xml"};
+				"OrderListExample.xml",
+				"ValidOrderWithoutName.xml"
+				};
 	
 	public static final String[] BP_EXAMPLE_XMLS = 
 			new String[] {
