@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.notima.util.InvalidTaxIdFormatException;
 import org.notima.util.NotimaUtil;
@@ -250,6 +251,22 @@ public class BusinessPartner<B> {
 		this.countryCode = countryCode;
 	}
 	
+	public boolean hasName() {
+		return (name!=null && name.trim().length()>0);
+	}
 	
+	public boolean hasContacts() {
+		if (contacts==null) return false;
+		for (Person person : contacts) {
+			if (person.hasName())
+				return true;
+		}
+		return false;
+	}
+	
+	@XmlTransient
+	public boolean isAnonymous() {
+		return !hasName() && !hasContacts();
+	}
 	
 }

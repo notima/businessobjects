@@ -600,4 +600,18 @@ public class Order<O> implements OrderInvoice {
 		
 	}
 	
+	@XmlTransient
+	public boolean isValidOrder() {
+		return hasValidBusinessPartner() && hasOrderLines();
+	}
+	
+	public boolean hasValidBusinessPartner() {
+		return bpartner!=null && bpartner.hasName();
+	}
+	
+	public boolean hasOrderLines() {
+		return lines!=null && lines.size()>0;
+	}
+	
+	
 }

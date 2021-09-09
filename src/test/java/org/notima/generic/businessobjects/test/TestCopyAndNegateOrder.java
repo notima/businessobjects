@@ -13,11 +13,12 @@ import org.notima.generic.businessobjects.Order;
 
 public class TestCopyAndNegateOrder {
 
-	private File orderExampleFile;
+	private Order<?> orderExample;
 	
 	@Before
 	public void setUp() throws Exception {
-		orderExampleFile = TestSettings.getOrderExampleFile(0);
+		TestSettings testSettings = new TestSettings();
+		orderExample = testSettings.getOrderExample(0);
 	}
 
 	@After
@@ -28,11 +29,9 @@ public class TestCopyAndNegateOrder {
 	@Test
 	public void test() {
 		
-		Order<?> order = JAXB.unmarshal(orderExampleFile, Order.class);
-
 		BasicBusinessObjectConverter bbc = new BasicBusinessObjectConverter();
 		
-		Order<?> copy = bbc.copyOrder(order);
+		Order<?> copy = bbc.copyOrder(orderExample);
 		
 		bbc.negateOrder(copy);
 		

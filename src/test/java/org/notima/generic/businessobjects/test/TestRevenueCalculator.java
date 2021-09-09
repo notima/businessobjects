@@ -1,10 +1,6 @@
 package org.notima.generic.businessobjects.test;
 
-import java.io.File;
 import java.util.Map;
-
-import javax.xml.bind.JAXB;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,11 +10,12 @@ import org.notima.generic.businessobjects.util.RevenueCalculator;
 
 public class TestRevenueCalculator {
 
-	private File orderExampleFile;
+	private OrderList orderList;
 	
 	@Before
 	public void setUp() throws Exception {
-		orderExampleFile = TestSettings.getOrderExampleFile(2);
+		TestSettings testSettings = new TestSettings();
+		orderList = testSettings.getOrderListExample(2);
 	}
 
 	@After
@@ -28,8 +25,6 @@ public class TestRevenueCalculator {
 	@Test
 	public void test() {
 		
-		OrderList orderList = JAXB.unmarshal(orderExampleFile, OrderList.class);
-
 		RevenueCalculator rc = new RevenueCalculator(orderList);
 		try {
 			rc.updateReveueMap();

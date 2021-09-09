@@ -1,6 +1,5 @@
 package org.notima.generic.businessobjects.test;
 
-import java.io.File;
 import java.io.PrintWriter;
 
 import javax.xml.bind.JAXB;
@@ -13,11 +12,12 @@ import org.notima.generic.businessobjects.Order;
 
 public class TestCreditOrderAmount {
 
-	private File orderExampleFile;
+	private Order<?> order;
 	
 	@Before
 	public void setUp() throws Exception {
-		orderExampleFile = TestSettings.getOrderExampleFile(1);
+		TestSettings testSettings = new TestSettings();
+		order = testSettings.getOrderExample(1);
 	}
 
 	@After
@@ -27,8 +27,6 @@ public class TestCreditOrderAmount {
 	@SuppressWarnings({"rawtypes","unchecked"})
 	@Test
 	public void test() throws Exception {
-		
-		Order order = JAXB.unmarshal(orderExampleFile, Order.class);
 
 		BasicBusinessObjectConverter bbc = new BasicBusinessObjectConverter();
 		

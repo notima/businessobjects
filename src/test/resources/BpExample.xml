@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<BusinessPartner xmlns="https://github.com/notima/businessobjects">
+    <addressOfficial>
+        <city>Staden</city>
+        <countryCode>SE</countryCode>
+        <customerReference>Person Per</customerReference>
+        <email>perperson@void.org</email>
+        <locationId>0</locationId>
+        <postal>76018</postal>
+        <street>Gatan NN</street>
+    </addressOfficial>
+    <company>false</company>
+    <emailInvoice>false</emailInvoice>
+    <name>Person Per</name>
+    <taxId>yymmddnnnn</taxId>
+    <bPartnerId>0</bPartnerId>
+</BusinessPartner>

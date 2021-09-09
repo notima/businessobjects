@@ -82,6 +82,11 @@ public class Person {
 		}
 	}
 
+	public boolean hasName() {
+		String tempName = getName(); 
+		return tempName!=null && tempName.trim().length()>0;
+	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
