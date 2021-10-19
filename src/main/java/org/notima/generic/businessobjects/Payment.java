@@ -1,5 +1,7 @@
 package org.notima.generic.businessobjects;
 
+import java.beans.Transient;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "payment")
@@ -11,6 +13,7 @@ public class Payment<P> {
 	private String	orderNo;
 	private String	clientOrderNo;
 	private String	invoiceNo;
+	private String	matchedInvoiceNo;
 	private boolean	customerPayment;
 	private Double	amount;
 	private String	accountNo;
@@ -19,6 +22,7 @@ public class Payment<P> {
 	private Double	acctAmount;
 	private String	acctCurrency;
 	private Location	location;
+	private TransactionReference	transactionReference;
 	private transient P nativePayment;
 	
 	private PaymentWriteOffs paymentWriteOffs;
@@ -35,6 +39,12 @@ public class Payment<P> {
 	public void setBusinessPartner(BusinessPartner<?> businessPartner) {
 		this.businessPartner = businessPartner;
 	}
+	
+	@Transient
+	public String getPayerName() {
+		return businessPartner!=null ? businessPartner.getName() : "";
+	}
+	
 	public String getCurrency() {
 		return currency;
 	}
@@ -58,6 +68,19 @@ public class Payment<P> {
 	}
 	public void setInvoiceNo(String invoiceNo) {
 		this.invoiceNo = invoiceNo;
+	}
+	/**
+	 * The matched invoice number must be an existing invoice number is a real system.
+	 * 
+	 * The plain InvoiceNo field is what the sender wrote as reference and might not match.
+	 * 
+	 * @return		The matched invoice no (if any).
+	 */
+	public String getMatchedInvoiceNo() {
+		return matchedInvoiceNo;
+	}
+	public void setMatchedInvoiceNo(String matchedInvoiceNo) {
+		this.matchedInvoiceNo = matchedInvoiceNo;
 	}
 	public boolean isCustomerPayment() {
 		return customerPayment;
@@ -113,6 +136,13 @@ public class Payment<P> {
 	}
 	public void setPaymentWriteOffs(PaymentWriteOffs paymentWriteOffs) {
 		this.paymentWriteOffs = paymentWriteOffs;
+	}
+	
+	public TransactionReference getTransactionReference() {
+		return transactionReference;
+	}
+	public void setTransactionReference(TransactionReference transactionReference) {
+		this.transactionReference = transactionReference;
 	}
 	public P getNativePayment() {
 		return nativePayment;

@@ -1,5 +1,6 @@
 package org.notima.generic.businessobjects;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,6 +15,7 @@ public class PaymentBatch {
 	private BankAccountDetail		bankAccount;
 	private List<Payment<?>> 		payments;
 	private String					source;
+	private List<PayoutLine>		payoutLines;
 	
 	public BankAccountDetail getBankAccount() {
 		return bankAccount;
@@ -33,7 +35,14 @@ public class PaymentBatch {
 	public void setSource(String source) {
 		this.source = source;
 	}
+	public List<PayoutLine> retrievePayoutLines() {
+		return payoutLines;
+	}
 	
-	
+	public void addPayment(Payment<?> payment) {
+		if (payments==null)
+			payments = new ArrayList<Payment<?>>();
+		payments.add(payment);
+	}
 	
 }

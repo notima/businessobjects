@@ -30,7 +30,7 @@ public interface PaymentBatchProcessor {
 	public static String PROP_DEBUG_ORGNO = "debugOrgNo";
 	
 	/**
-	 * Goes through a PaymentBatch and sets PaymentReportDetail.REF_CLIENT_INVOICE_NO to an existing 
+	 * Goes through a PaymentBatch and sets the MatchedInvoiceNo to an existing 
 	 * destination system invoice if a match is found.
 	 * 
 	 * @param 	report		The report to be processed / matched.
@@ -40,10 +40,10 @@ public interface PaymentBatchProcessor {
 	public PaymentBatch lookupInvoiceReferences(PaymentBatch report) throws Exception;	
 	
 	/**
-	 * Processes a svea webpay payment report.
+	 * Processes a payment batch
 	 * Creates payments and vouchers unless dry run is enabled in the provisioning details. 
 	 * 
-	 * @param 		report	The report to be processed / matched.
+	 * @param 		report	The batch to be processed / matched.
 	 * @param		props	Additional properties to control the payment processing
 	 * @return		A result structure describing the success / stats / failure of the processing.
 	 * @throws Exception 
