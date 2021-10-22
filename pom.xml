@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.notima.generic</groupId>
 	<artifactId>businessobjects</artifactId>
-	<version>0.1.20-SNAPSHOT</version>
+	<version>0.1.20</version>
 	<packaging>bundle</packaging>
 	<name>Notima Generic Business Objects</name>
 
@@ -28,16 +28,16 @@
 			<version>2.2</version>
 		</dependency>
 
-		<dependency>
+ 		<dependency>
 			<groupId>io.github.threeten-jaxb</groupId>
 			<artifactId>threeten-jaxb-core</artifactId>
 			<version>1.2</version>
-		</dependency>
+		</dependency> 
 
 		<dependency>
 			<groupId>org.notima</groupId>
 			<artifactId>notima-util</artifactId>
-			<version>0.0.2-SNAPSHOT</version>
+			<version>0.0.2</version>
 		</dependency>
 
 		<dependency>
