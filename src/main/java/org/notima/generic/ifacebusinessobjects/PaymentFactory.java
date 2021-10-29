@@ -1,7 +1,5 @@
 package org.notima.generic.ifacebusinessobjects;
 
-import java.io.File;
-
 import org.notima.generic.businessobjects.PaymentBatch;
 
 /**
@@ -13,11 +11,14 @@ import org.notima.generic.businessobjects.PaymentBatch;
 public interface PaymentFactory {
 
 	/**
-	 * Reads a payment file from file. The file format is determined by the implementation.
+	 * Reads payments from a source. The source format is determined by the implementation.
 	 * 
-	 * @param 		file		A valid file.
+	 * @param 		source			 
 	 * @return		A payment batch
 	 */
-	public PaymentBatch readPaymentBatchFromFile(File file) throws Exception;
+	public PaymentBatch readPaymentBatchFromSource(String source) throws Exception;
+	
+	public String getSystemName();
+	
 	
 }
