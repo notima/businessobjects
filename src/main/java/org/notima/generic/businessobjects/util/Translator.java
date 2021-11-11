@@ -62,7 +62,11 @@ public class Translator {
 		ResourceBundle b = bundles.get(lang);
 		if (b==null) {
 			if (defaultBundle!=null) {
-				return defaultBundle.getString(label);
+				try {
+					return defaultBundle.getString(label);
+				} catch (MissingResourceException mre) {
+					return label;
+				}
 			} else {
 				return label;
 			}
