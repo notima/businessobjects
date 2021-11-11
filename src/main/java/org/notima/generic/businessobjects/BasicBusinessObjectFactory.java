@@ -1,5 +1,6 @@
 package org.notima.generic.businessobjects;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -40,6 +41,31 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B> implements BusinessO
 	protected Map<String, BusinessPartner<B>> tenantMap = new TreeMap<String,BusinessPartner<B>>();
 	
 	protected BusinessPartner<B> currentTenant = null;
+	
+	@Override
+	public List<Invoice<I>> lookupInvoiceWithReference(TransactionReference reference) throws Exception {
+
+		List<Invoice<I>> invoices = new ArrayList<Invoice<I>>();
+		if (reference==null) return invoices;
+		Invoice<I> invoice = lookupInvoice(reference.getInvoiceNo());
+		if (invoice!=null)
+			invoices.add(invoice);
+		return invoices;
+		
+	}
+	
+	
+	/**
+	 * Some systems can't lookup quickly on all fields. To flush the cache that might be present, call this
+	 * method.
+	 * 
+	 * @throws Exception
+	 */
+	@Override
+	public void flushInvoiceCache() throws Exception {
+		
+	}
+	
 	
 	/**
 	 * Adds a tenant to given business object factory.
