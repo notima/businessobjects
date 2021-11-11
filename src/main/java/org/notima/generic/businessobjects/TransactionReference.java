@@ -13,8 +13,10 @@ public class TransactionReference extends AttributeObject {
 	private String	transactionId;
 	private String	customerNo;
 	private String	project;
-	private String	paymentGroup;
-	private String	paymentType;
+	private String	transactionGroup;
+	private String	transactionType;
+	private String	customReference;
+	private String	customReferenceName;
 	
 	public String getInvoiceNo() {
 		return invoiceNo;
@@ -70,19 +72,30 @@ public class TransactionReference extends AttributeObject {
 	public void setProject(String project) {
 		this.project = project;
 	}
-	public String getPaymentGroup() {
-		return paymentGroup;
+	public String getTransactionGroup() {
+		return transactionGroup;
 	}
-	public void setPaymentGroup(String paymentGroup) {
-		this.paymentGroup = paymentGroup;
+	public void setTransactionGroup(String transactionGroup) {
+		this.transactionGroup = transactionGroup;
 	}
-	public String getPaymentType() {
-		return paymentType;
+	public String getTransactionType() {
+		return transactionType;
 	}
-	public void setPaymentType(String paymentType) {
-		this.paymentType = paymentType;
+	public void setTransactionType(String transactionType) {
+		this.transactionType = transactionType;
 	}
-
+	public String getCustomReference() {
+		return customReference;
+	}
+	public void setCustomReference(String customReference) {
+		this.customReference = customReference;
+	}
+	public String getCustomReferenceName() {
+		return customReferenceName;
+	}
+	public void setCustomReferenceName(String customReferenceName) {
+		this.customReferenceName = customReferenceName;
+	}
 	
 	
 }

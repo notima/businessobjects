@@ -15,6 +15,7 @@ import org.notima.generic.businessobjects.PriceList;
 import org.notima.generic.businessobjects.Product;
 import org.notima.generic.businessobjects.ProductCategory;
 import org.notima.generic.businessobjects.Tax;
+import org.notima.generic.businessobjects.TransactionReference;
 import org.notima.generic.businessobjects.exception.NoSuchTenantException;
 
 public interface BusinessObjectFactory<C,I,O,P,B> {
@@ -169,6 +170,23 @@ public interface BusinessObjectFactory<C,I,O,P,B> {
 	public O persistNativeOrder(O order) throws Exception;
 	
 	public Invoice<I> lookupInvoice(String key) throws Exception;
+
+	/**
+	 * Looks up invoices with a given reference
+	 * 
+	 * @param reference			A transaction reference
+	 * @return	A list of invoices matchning the reference.
+	 * @see #flushInvoiceCache()
+	 */
+	public List<Invoice<I>> lookupInvoiceWithReference(TransactionReference reference) throws Exception;
+
+	/**
+	 * Some systems can't lookup quickly on all fields. To flush the cache that might be present, call this
+	 * method.
+	 * 
+	 * @throws Exception
+	 */
+	public void flushInvoiceCache() throws Exception;
 	
 	public Order<O> lookupOrder(String key) throws Exception;
 	
