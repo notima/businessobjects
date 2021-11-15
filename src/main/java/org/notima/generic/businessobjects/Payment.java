@@ -7,6 +7,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "payment")
 public class Payment<P> {
 
+	public static enum PaymentType {
+		RECEIVABLE,
+		PAYABLE
+	};
+	
 	private String	businessPartnerKey;
 	private BusinessPartner<?>	businessPartner;
 	private String	currency;

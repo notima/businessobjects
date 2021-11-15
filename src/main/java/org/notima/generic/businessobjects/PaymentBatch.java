@@ -11,9 +11,10 @@ import java.util.List;
  *
  */
 public class PaymentBatch {
-
+	
 	private BankAccountDetail		bankAccount;
 	private List<Payment<?>> 		payments;
+	private Payment.PaymentType		paymenType;				
 	private String					source;
 	private List<PayoutLine>		payoutLines;
 	
@@ -35,6 +36,14 @@ public class PaymentBatch {
 	public void setSource(String source) {
 		this.source = source;
 	}
+	
+	public Payment.PaymentType getPaymenType() {
+		return paymenType;
+	}
+	public void setPaymenType(Payment.PaymentType paymenType) {
+		this.paymenType = paymenType;
+	}
+	
 	public List<PayoutLine> retrievePayoutLines() {
 		return payoutLines;
 	}
@@ -44,5 +53,18 @@ public class PaymentBatch {
 			payments = new ArrayList<Payment<?>>();
 		payments.add(payment);
 	}
+	
+	public boolean hasPayments() {
+		return payments!=null && payments.size()>0;
+	}
+	
+	public boolean hasPayouts() {
+		return payoutLines!=null && payoutLines.size()>0;
+	}
+	
+	public boolean isEmpty() {
+		return (!hasPayments() && !hasPayouts());
+	}
+	
 	
 }
