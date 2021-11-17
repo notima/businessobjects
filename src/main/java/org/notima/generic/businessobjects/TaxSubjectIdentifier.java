@@ -11,8 +11,20 @@ package org.notima.generic.businessobjects;
  */
 public class TaxSubjectIdentifier {
 
+	public static TaxSubjectIdentifier getUndefinedIdentifier() {
+		TaxSubjectIdentifier identifier = new TaxSubjectIdentifier();
+		return identifier;
+	}
+	
 	private String	taxId;
 	private String	countryCode;
+	
+	public TaxSubjectIdentifier() {};
+	
+	public TaxSubjectIdentifier(String taxId, String countryCode) {
+		this.taxId = taxId;
+		this.countryCode = countryCode;
+	}
 	
 	public String getTaxId() {
 		return taxId;
@@ -26,6 +38,18 @@ public class TaxSubjectIdentifier {
 	}
 	public void setCountryCode(String countryCode) {
 		this.countryCode = countryCode;
+	}
+	
+	public boolean hasTaxId() {
+		return taxId!=null && taxId.trim().length()>0;
+	}
+	
+	public boolean hasCountryCode() {
+		return countryCode!=null && countryCode.trim().length()>0;
+	}
+	
+	public boolean isUndefined() {
+		return (!hasTaxId());
 	}
 	
 }

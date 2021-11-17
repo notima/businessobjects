@@ -12,12 +12,25 @@ import java.util.List;
  */
 public class PaymentBatch {
 	
+	private TaxSubjectIdentifier	batchOwner;
 	private BankAccountDetail		bankAccount;
 	private List<Payment<?>> 		payments;
 	private Payment.PaymentType		paymenType;				
 	private String					source;
 	private List<PayoutLine>		payoutLines;
 	
+	
+	/**
+	 * The Batch Owner is the tax subject that this file belongs to.
+	 * 
+	 * @return		The batch owner.
+	 */
+	public TaxSubjectIdentifier getBatchOwner() {
+		return batchOwner;
+	}
+	public void setBatchOwner(TaxSubjectIdentifier batchOwner) {
+		this.batchOwner = batchOwner;
+	}
 	public BankAccountDetail getBankAccount() {
 		return bankAccount;
 	}
