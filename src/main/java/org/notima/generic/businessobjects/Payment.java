@@ -45,6 +45,14 @@ public class Payment<P> {
 		this.businessPartner = businessPartner;
 	}
 	
+	public Payment<P> addPaymentWriteOff(PaymentWriteOff pwo) {
+		if (paymentWriteOffs==null) {
+			paymentWriteOffs = new PaymentWriteOffs();
+		}
+		paymentWriteOffs.add(pwo);
+		return this;
+	}
+	
 	@Transient
 	public String getPayerName() {
 		return businessPartner!=null ? businessPartner.getName() : "";

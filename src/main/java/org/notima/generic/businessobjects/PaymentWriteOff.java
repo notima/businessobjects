@@ -7,6 +7,14 @@ public class PaymentWriteOff {
 	private String	comment;
 	private Double	amount;
 	
+	public PaymentWriteOff() {};
+	
+	public PaymentWriteOff(Double amount, String accountNo, String comment) {
+		this.amount = amount;
+		this.accountNo = accountNo;
+		this.comment = comment;
+	}
+	
 	public String getAccountNo() {
 		return accountNo;
 	}
