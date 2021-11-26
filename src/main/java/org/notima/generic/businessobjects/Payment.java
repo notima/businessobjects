@@ -189,6 +189,17 @@ public class Payment<P> {
 		this.nativePayment = nativePayment;
 	}
 	
+	public void calculateAmountDeductingWriteOffsFromOriginalAmount() {
+		if (originalAmount==null) {
+			originalAmount = new Double(amount);
+		}
+		if (paymentWriteOffs!=null && paymentWriteOffs.getPaymentWriteOff()!=null) {
+			for (PaymentWriteOff pwo : paymentWriteOffs.getPaymentWriteOff()) {
+				amount += pwo.getAmount();
+			}
+		}
+	}
+	
 	public String toString() {
 		StringBuffer result = new StringBuffer();
 		if (amount!=null) {
