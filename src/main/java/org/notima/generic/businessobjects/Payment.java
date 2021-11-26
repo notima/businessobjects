@@ -21,6 +21,7 @@ public class Payment<P> {
 	private String	matchedInvoiceNo;
 	private boolean	customerPayment;
 	private Double	amount;
+	private Double  originalAmount;
 	private String	accountNo;
 	private String	comment;
 	private java.util.Date paymentDate;
@@ -101,12 +102,36 @@ public class Payment<P> {
 	public void setCustomerPayment(boolean customerPayment) {
 		this.customerPayment = customerPayment;
 	}
+
+	/**
+	 * Original amount is the transaction amount without any fees deducted. Original amount
+	 * might not be the amount that actually lands on the bank account.
+	 * If original amount is not set, the amount (from getAmount) is returned.
+	 * 
+	 * @return		The original amount.
+	 */
+	public Double getOriginalAmount() {
+		if (originalAmount==null && amount!=null) return amount;
+		return originalAmount;
+	}
+	public void setOriginalAmount(Double originalAmount) {
+		this.originalAmount = originalAmount;
+	}
+
+	/**
+	 * Amount is the amount that actually lands / withdraws from the bank account.
+	 * The amount is not set, the originalAmount (from getOriginalAmount) is returned. 
+	 * 
+	 * @return
+	 */
 	public Double getAmount() {
+		if (amount==null && originalAmount!=null) return originalAmount;
 		return amount;
 	}
 	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
+	
 	public String getAccountNo() {
 		return accountNo;
 	}
