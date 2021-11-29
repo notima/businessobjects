@@ -28,6 +28,8 @@ public class Payment<P> {
 	private Double	acctAmount;
 	private String	acctCurrency;
 	private Location	location;
+	private String	destinationSystemReference;
+	private String	destinationSystemReferenceField;
 	private TransactionReference	transactionReference;
 	private transient P nativePayment;
 	
@@ -189,6 +191,18 @@ public class Payment<P> {
 		this.nativePayment = nativePayment;
 	}
 	
+	public String getDestinationSystemReference() {
+		return destinationSystemReference;
+	}
+	public void setDestinationSystemReference(String destinationSystemReference) {
+		this.destinationSystemReference = destinationSystemReference;
+	}
+	public String getDestinationSystemReferenceField() {
+		return destinationSystemReferenceField;
+	}
+	public void setDestinationSystemReferenceField(String destinationSystemReferenceField) {
+		this.destinationSystemReferenceField = destinationSystemReferenceField;
+	}
 	public void calculateAmountDeductingWriteOffsFromOriginalAmount() {
 		if (originalAmount==null) {
 			originalAmount = new Double(amount);
