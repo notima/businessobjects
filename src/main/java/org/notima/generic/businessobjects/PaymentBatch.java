@@ -3,6 +3,9 @@ package org.notima.generic.businessobjects;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.notima.generic.businessobjects.exception.CurrencyMismatchException;
+import org.notima.generic.businessobjects.exception.DateMismatchException;
+
 /**
  * 
  * Class to represent a payment batch.
@@ -57,7 +60,23 @@ public class PaymentBatch {
 		this.paymenType = paymenType;
 	}
 	
-	public List<PayoutLine> retrievePayoutLines() {
+	public List<PayoutLine> retrievePayoutLines() throws DateMismatchException, CurrencyMismatchException {
+		
+		List<PayoutLine> result = new ArrayList<PayoutLine>();
+		PayoutLine pl = new PayoutLine();
+		result.add(pl);
+		
+		// Make sure we have payments to process
+		if (hasPayments()) {
+			for (Payment<?> p : payments) {
+				
+				pl.addPayment(p);
+				
+			}
+		}
+		
+		payoutLines = result;
+		
 		return payoutLines;
 	}
 	

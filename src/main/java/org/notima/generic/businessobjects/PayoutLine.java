@@ -2,6 +2,10 @@ package org.notima.generic.businessobjects;
 
 import java.time.LocalDate;
 
+import org.notima.generic.businessobjects.exception.CurrencyMismatchException;
+import org.notima.generic.businessobjects.exception.DateMismatchException;
+import org.notima.util.LocalDateUtils;
+
 /**
  * This line describes a payout and if applicable associated accounting accounts and amounts.
  * 
@@ -14,15 +18,15 @@ public class PayoutLine {
 	private String	paymentTypeReference;
 	private LocalDate	acctDate;
 	
-	private int		trxCount;
-	private Double	paidByCustomer;
-	private Double	feeAmount;
-	private Double	taxAmount;
+	private int		trxCount = 0;
+	private Double	paidByCustomer = new Double(0);
+	private Double	feeAmount = new Double(0);
+	private Double	taxAmount = new Double(0);
 	private String	taxKey;
 	private Double	taxRate;
-	private Double	paidOut;
-	private Double	openingBalance;
-	private Double	endingBalance;
+	private Double	paidOut = new Double(0);
+	private Double	openingBalance = new Double(0);
+	private Double	endingBalance = new Double(0);
 
 	private String	taxAcctNo;
 	private String	feeAcctNo;
@@ -34,6 +38,66 @@ public class PayoutLine {
 	private boolean	includedInOtherPayout = false;
 	
 	private String	description;
+	
+	/**
+	 * Adds the payout of this payment to the total of this payoutLine.
+	 * 
+	 * @param payment
+	 * @return
+	 */
+	public PayoutLine addPayment(Payment<?> payment) throws DateMismatchException, CurrencyMismatchException {
+		
+		alignPaymentAndPayoutDate(payment);
+		alignCurrency(payment);
+		
+		double paid = payment.getAmount();
+		double originalAmt = payment.getOriginalAmount(); 
+		double fee = originalAmt - paid;
+		// TODO: Include a VAT amount detector
+		
+		paidByCustomer += originalAmt;
+		feeAmount += fee;
+		paidOut += paid;
+		
+		trxCount ++;
+		
+		return this;
+		
+	}
+	
+	private void alignPaymentAndPayoutDate(Payment<?> payment) throws DateMismatchException {
+		
+		if (payment.getPaymentDate()!=null) {
+			LocalDate paymentDate = LocalDateUtils.asLocalDate(payment.getPaymentDate()); 
+			if (acctDate==null) {
+				acctDate = LocalDateUtils.asLocalDate(payment.getPaymentDate());
+			} else {
+				// Compare
+				if (! paymentDate.isEqual(acctDate)) {
+					throw new DateMismatchException(acctDate, paymentDate);
+				}
+			}
+		}
+		
+	}
+	
+	private void alignCurrency(Payment<?> payment) throws CurrencyMismatchException {
+		
+		if (payment.getCurrency()!=null) {
+			
+			if (currency==null) {
+				currency = payment.getCurrency();
+			} else {
+				// Compare
+				if (!currency.equalsIgnoreCase(payment.getCurrency())) {
+					throw new CurrencyMismatchException(currency, payment.getCurrency());
+				}
+			}
+			
+		}
+		
+	}
+	
 	
 	public String getPaymentType() {
 		return paymentType;
