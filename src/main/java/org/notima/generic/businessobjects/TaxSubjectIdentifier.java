@@ -9,7 +9,7 @@ package org.notima.generic.businessobjects;
  * @author Daniel Tamm
  *
  */
-public class TaxSubjectIdentifier {
+public class TaxSubjectIdentifier implements Comparable<TaxSubjectIdentifier> {
 
 	public static TaxSubjectIdentifier getUndefinedIdentifier() {
 		TaxSubjectIdentifier identifier = new TaxSubjectIdentifier();
@@ -50,6 +50,46 @@ public class TaxSubjectIdentifier {
 	
 	public boolean isUndefined() {
 		return (!hasTaxId());
+	}
+
+	
+	public boolean isEqual(TaxSubjectIdentifier o) {
+		if (o==null) return false;
+		return o.compareTo(this) == 0;
+	}
+	
+	@Override
+	public int compareTo(TaxSubjectIdentifier o) {
+		boolean sameCountry = 
+				(!o.hasCountryCode() && !this.hasCountryCode()) ||
+				(o.hasCountryCode() && o.getCountryCode().equalsIgnoreCase(this.getCountryCode()));
+
+		if (sameCountry && o.hasTaxId() && o.getTaxId().equalsIgnoreCase(this.getTaxId())) {
+			return 0;
+		}
+
+		if (sameCountry && !this.hasTaxId() && !o.hasTaxId()) {
+			return 0;
+		}
+		
+		if (this.hasTaxId() && !o.hasTaxId()) {
+			return -1;
+		}
+		if (o.hasTaxId() && !this.hasTaxId()) {
+			return 1;
+		}
+		if (sameCountry) {
+			return this.getTaxId().compareTo(o.getTaxId());
+		} else {
+			if (this.hasCountryCode() && !o.hasCountryCode()) {
+				return -1;
+			}
+			if (o.hasCountryCode() && !this.hasCountryCode()) {
+				return 1;
+			}
+			return this.getCountryCode().compareTo(o.getCountryCode());
+		}
+
 	}
 	
 }
