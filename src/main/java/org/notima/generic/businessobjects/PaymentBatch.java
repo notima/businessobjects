@@ -1,6 +1,8 @@
 package org.notima.generic.businessobjects;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.notima.generic.businessobjects.exception.CurrencyMismatchException;
@@ -58,6 +60,11 @@ public class PaymentBatch {
 	}
 	public void setPaymenType(Payment.PaymentType paymenType) {
 		this.paymenType = paymenType;
+	}
+	
+	public Date getFirstPaymentDate() {
+		if (!hasPayments()) return null;
+		return payments.get(0).getPaymentDate();
 	}
 	
 	public List<PayoutLine> retrievePayoutLines() throws DateMismatchException, CurrencyMismatchException {

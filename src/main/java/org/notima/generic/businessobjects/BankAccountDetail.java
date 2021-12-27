@@ -18,6 +18,15 @@ public class BankAccountDetail {
 	
 	private String	bankName;
 
+	// General Ledger Account that's used to reconcile payments for this bank account 
+	private String	generalLedgerReconciliationAccount;
+	// General Ledger Account that this bank account is linked to.
+	private String	generalLedgerBankAccount;
+	// General Ledger in transit account
+	private String	generalLedgerInTransitAccount;
+	// General ledger fee account (for banking fees etc)
+	private String	generalLedgerFeeAccount;
+
 	public String getAccountNo() {
 		return accountNo;
 	}
@@ -64,6 +73,49 @@ public class BankAccountDetail {
 
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
+	}
+
+	public String getGeneralLedgerAccountToUseForPayments() {
+		
+		if (generalLedgerReconciliationAccount!=null && generalLedgerReconciliationAccount.trim().length()>0) {
+			return generalLedgerReconciliationAccount;
+		}
+		
+		// If no reconciliation account is defined, use the bank account
+		return generalLedgerBankAccount;
+		
+	}
+	
+	public String getGeneralLedgerInTransitAccount() {
+		return generalLedgerInTransitAccount;
+	}
+
+	public void setGeneralLedgerInTransitAccount(String generalLedgerInTransitAccount) {
+		this.generalLedgerInTransitAccount = generalLedgerInTransitAccount;
+	}
+
+	public String getGeneralLedgerReconciliationAccount() {
+		return generalLedgerReconciliationAccount;
+	}
+
+	public void setGeneralLedgerReconciliationAccount(String generalLedgerReconciliationAccount) {
+		this.generalLedgerReconciliationAccount = generalLedgerReconciliationAccount;
+	}
+
+	public String getGeneralLedgerBankAccount() {
+		return generalLedgerBankAccount;
+	}
+
+	public void setGeneralLedgerBankAccount(String generalLedgerBankAccount) {
+		this.generalLedgerBankAccount = generalLedgerBankAccount;
+	}
+
+	public String getGeneralLedgerFeeAccount() {
+		return generalLedgerFeeAccount;
+	}
+
+	public void setGeneralLedgerFeeAccount(String generalLedgerFeeAccount) {
+		this.generalLedgerFeeAccount = generalLedgerFeeAccount;
 	}
 	
 	

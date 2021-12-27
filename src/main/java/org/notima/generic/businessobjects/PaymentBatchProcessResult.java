@@ -27,6 +27,28 @@ public class PaymentBatchProcessResult {
 		return processedWithoutErrors;
 	}
 
+	public void addPaymentProcessResult(PaymentProcessResult prp) {
+		if (prp==null) return;
+		if (prp.getResultCode().equals(PaymentProcessResult.ResultCode.OK)) {
+			matchedPaymentsCount++;
+		}
+		if (!prp.getResultCode().equals(PaymentProcessResult.ResultCode.NOT_PROCESSED)) {
+			processedPaymentsCount++;
+		}
+		if (prp.getResultCode().equals(PaymentProcessResult.ResultCode.FAILED)) {
+			processedWithoutErrors = false;
+		}
+		
+		if (prp.getResultCode().equals(PaymentProcessResult.ResultCode.OK_WITH_RETRY_RECORDS)) {
+			processedWithoutErrors = false;
+		}
+		
+		if (prp.getResultCode().equals(PaymentProcessResult.ResultCode.OK_WITH_WARNING)) {
+			processedWithoutWarnings = false;
+		}
+		
+	}
+	
 	public void setProcessedWithoutErrors(boolean processedWithoutErrors) {
 		this.processedWithoutErrors = processedWithoutErrors;
 	}

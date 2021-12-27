@@ -6,8 +6,6 @@ import org.notima.generic.ifacebusinessobjects.PaymentBatchProcessor;
 
 public abstract class BasicPaymentBatchProcessor implements PaymentBatchProcessor {
 	
-	protected PaymentBatchProcessOptions	options;
-	
 	protected PrintStream outStream;
 	
 	@Override
