@@ -56,6 +56,10 @@ public class Payment<P> {
 		return this;
 	}
 	
+	public boolean hasPaymentWriteOffs() {
+		return paymentWriteOffs!=null && paymentWriteOffs.getPaymentWriteOff()!=null && paymentWriteOffs.getPaymentWriteOff().size()>0;
+	}
+	
 	public void addToAmountAndOriginalAmount(double add) {
 		if (amount==null) amount = new Double(0);
 		if (originalAmount==null) originalAmount = new Double(0);
