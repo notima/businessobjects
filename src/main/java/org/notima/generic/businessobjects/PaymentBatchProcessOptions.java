@@ -10,6 +10,8 @@ public class PaymentBatchProcessOptions {
 	private boolean onlyTrxNumber;
 	// Only account fees should be accounted (nothing else)
 	private boolean accountFeesOnly;
+	// Account fees on each payment if possible. If false (default), fees are lumped together
+	private boolean feesPerPayment = false;
 	// Only payout should be accounted (nothing else)
 	private boolean	accountPayoutOnly;
 	// The file should be kept after processing (not moved)
@@ -89,6 +91,14 @@ public class PaymentBatchProcessOptions {
 	public void setDebugOrgNo(TaxSubjectIdentifier debugOrgNo) {
 		this.debugOrgNo = debugOrgNo;
 	}
+	
+	public boolean isFeesPerPayment() {
+		return feesPerPayment;
+	}
+	public void setFeesPerPayment(boolean feesPerPayment) {
+		this.feesPerPayment = feesPerPayment;
+	}
+	
 	
 	
 	

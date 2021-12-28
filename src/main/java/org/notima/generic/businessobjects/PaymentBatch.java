@@ -1,6 +1,5 @@
 package org.notima.generic.businessobjects;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,7 +19,7 @@ public class PaymentBatch {
 	private TaxSubjectIdentifier	batchOwner;
 	private BankAccountDetail		bankAccount;
 	private List<Payment<?>> 		payments;
-	private Payment.PaymentType		paymenType;				
+	private Payment.PaymentType		paymentType;				
 	private String					source;
 	private List<PayoutLine>		payoutLines;
 	
@@ -55,11 +54,11 @@ public class PaymentBatch {
 		this.source = source;
 	}
 	
-	public Payment.PaymentType getPaymenType() {
-		return paymenType;
+	public Payment.PaymentType getPaymentType() {
+		return paymentType;
 	}
-	public void setPaymenType(Payment.PaymentType paymenType) {
-		this.paymenType = paymenType;
+	public void setPaymentType(Payment.PaymentType paymenType) {
+		this.paymentType = paymenType;
 	}
 	
 	public Date getFirstPaymentDate() {
