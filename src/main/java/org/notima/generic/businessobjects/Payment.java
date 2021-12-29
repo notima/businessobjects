@@ -220,7 +220,7 @@ public class Payment<P> {
 		}
 		if (paymentWriteOffs!=null && paymentWriteOffs.getPaymentWriteOff()!=null) {
 			for (PaymentWriteOff pwo : paymentWriteOffs.getPaymentWriteOff()) {
-				amount += pwo.getAmount();
+				amount -= pwo.getAmount();
 			}
 		}
 	}
