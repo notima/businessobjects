@@ -70,6 +70,7 @@ public class PaymentBatch {
 		
 		List<PayoutLine> result = new ArrayList<PayoutLine>();
 		PayoutLine pl = new PayoutLine();
+		pl.setDescription(source);
 		result.add(pl);
 		
 		// Make sure we have payments to process
@@ -82,6 +83,8 @@ public class PaymentBatch {
 		}
 		
 		payoutLines = result;
+		
+		
 		
 		return payoutLines;
 	}

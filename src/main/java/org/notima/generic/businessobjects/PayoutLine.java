@@ -34,6 +34,7 @@ public class PayoutLine {
 	private String	paidOutAcctNo;
 	
 	private String	currency;
+	private double	currencyRateToAccountingCurrency;
 	
 	private boolean	includedInOtherPayout = false;
 	
@@ -215,5 +216,15 @@ public class PayoutLine {
 	public void setCurrency(String currency) {
 		this.currency = currency;
 	}
+
+	public double getCurrencyRateToAccountingCurrency() {
+		return currencyRateToAccountingCurrency;
+	}
+
+	public void setCurrencyRateToAccountingCurrency(double currencyRateToAccountingCurrency) {
+		this.currencyRateToAccountingCurrency = currencyRateToAccountingCurrency;
+	}
+	
+	
 	
 }

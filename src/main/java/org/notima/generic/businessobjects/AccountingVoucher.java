@@ -29,6 +29,41 @@ public class AccountingVoucher {
 	
 	private List<AccountingVoucherLine> lines;
 
+	/**
+	 * Creates an accounting voucher from a payout line
+	 * 
+	 * @param pl
+	 * @return		An accounting voucher
+	 */
+	public static AccountingVoucher buildVoucherFromPayoutLine(PayoutLine pl) {
+		
+		AccountingVoucher voucher = new AccountingVoucher();
+		voucher.setAcctDate(pl.getAcctDate());
+		voucher.setDescription(pl.getDescription());
+		
+		AccountingVoucherLine vl;
+		
+		if (pl.getFeeAmount()!=0) {
+			vl = new AccountingVoucherLine(BigDecimal.valueOf(pl.getFeeAmount()), AccountingType.OTHER_EXPENSES_SALES);
+			voucher.addVoucherLine(vl);
+		}
+
+		if (pl.getTaxAmount()!=0) {
+			vl = new AccountingVoucherLine(BigDecimal.valueOf(pl.getTaxAmount()), AccountingType.CLAIM_VAT);
+			voucher.addVoucherLine(vl);
+		}
+		
+		if (pl.getPaidOut()!=0) {
+			vl = new AccountingVoucherLine(BigDecimal.valueOf(pl.getPaidOut()), AccountingType.LIQUID_ASSET_CASH);
+			voucher.addVoucherLine(vl);
+		}
+		
+		voucher.balanceWithLine(AccountingType.LIQUID_ASSET_AR);
+		
+		return voucher;
+		
+	}
+	
 	@XmlJavaTypeAdapter(LocalDateXmlAdapter.class)	
 	public LocalDate getAcctDate() {
 		return acctDate;
