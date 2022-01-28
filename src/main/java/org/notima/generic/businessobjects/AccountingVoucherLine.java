@@ -80,6 +80,17 @@ public class AccountingVoucherLine {
 	public BigDecimal getBalance() {
 		return debitAmount.subtract(creditAmount);
 	}
+	
+	public void setBalance(BigDecimal balance) {
+		if (balance.signum()>0) {
+			debitAmount = balance;
+			creditAmount = BigDecimal.ZERO;
+		} else {
+			creditAmount = balance.negate();
+			debitAmount = BigDecimal.ZERO;
+		}
+	}
+	
 	public String getAcctType() {
 		return acctType;
 	}
