@@ -613,5 +613,14 @@ public class Order<O> implements OrderInvoice {
 		return lines!=null && lines.size()>0;
 	}
 	
+	public boolean hasStatus(String status) {
+		if (this.status==null && status==null)
+			return true;
+		
+		if (this.status==null) return false;
+		
+		return this.status.equals(status);
+	}
+	
 	
 }
