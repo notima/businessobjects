@@ -22,6 +22,7 @@ public class PaymentBatch {
 	private Payment.PaymentType		paymentType;				
 	private String					source;
 	private List<PayoutLine>		payoutLines;
+	private String					voucherSeries;
 	
 	private String generalLedgerUnknownTrxAccount;
 	
@@ -114,6 +115,14 @@ public class PaymentBatch {
 	public void setGeneralLedgerUnknownTrxAccount(String generalLedgerUnknownTrxAccount) {
 		this.generalLedgerUnknownTrxAccount = generalLedgerUnknownTrxAccount;
 	}
+	
+	public String getVoucherSeries() {
+		return voucherSeries;
+	}
+	public void setVoucherSeries(String voucherSeries) {
+		this.voucherSeries = voucherSeries;
+	}
+	
 	
 	
 }
