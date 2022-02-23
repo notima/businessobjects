@@ -6,12 +6,19 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import io.github.threetenjaxb.core.LocalDateTimeXmlAdapter;
 import io.github.threetenjaxb.core.LocalDateXmlAdapter;
 
+/**
+ * A general accounting voucher.
+ * 
+ * @author daniel
+ *
+ */
 public class AccountingVoucher {
 
 	private LocalDate		acctDate;
@@ -185,6 +192,47 @@ public class AccountingVoucher {
 		
 		return result;
 		
+	}
+	
+	/**
+	 * Merges all fromTypes into the toType. The description is taken from the.
+	 * 
+	 * @param 	fromTypes			The types to merge from.
+	 * @param 	toType				The type to merge to.
+	 * @param	lineDescription		A description on the new merged line.
+	 * @return
+	 */
+	public int mergeAccountTypesToAccountType(Set<String> fromTypes, String toType, String lineDescription) {
+		int linesMerged = 0;
+		
+		if (lines==null || fromTypes==null || toType==null) return linesMerged;
+		
+		BigDecimal mergeBalance = new BigDecimal(0);
+		
+		List<AccountingVoucherLine> linesToMerge = new ArrayList<AccountingVoucherLine>();
+		for (AccountingVoucherLine line : lines) {
+			if (fromTypes.contains(line.getAcctType())) {
+				linesToMerge.add(line);
+				mergeBalance = mergeBalance.add(line.getBalance());
+			}
+		}
+
+		// Remove the lines that have been merged
+		for (AccountingVoucherLine rmLine : linesToMerge) {
+			lines.remove(rmLine);
+		}
+
+		// Add the merged line (unless the merged lines cancel eachother out).
+		if (mergeBalance.signum()!=0) {
+			// Create a merge row
+			AccountingVoucherLine mergedRow = new AccountingVoucherLine();
+			mergedRow.setAcctType(toType);
+			mergedRow.setDescription(lineDescription);
+			mergedRow.setBalance(mergeBalance);
+			lines.add(mergedRow);
+		}
+		
+		return linesMerged;
 	}
 	
 	/**
