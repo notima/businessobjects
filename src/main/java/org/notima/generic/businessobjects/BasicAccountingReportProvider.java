@@ -128,6 +128,22 @@ public class BasicAccountingReportProvider implements AccountingReportProvider {
 	}
 
 
+	/**
+	 * Returns a specific accounting voucher
+	 * 
+	 * @param bp			For the business partner
+	 * @param period		In which accounting period the voucher is found.
+	 * @param series		The series
+	 * @param voucherNo		The voucher number (can be non-numerical)
+	 * @return				A voucher if found.
+	 * @throws Exception	If something goes wrong.
+	 */
+	@Override
+	public AccountingVoucher  getAccountingVoucher(BusinessPartner<?> bp, AccountingPeriod period, String series, String voucherNo) throws Exception {
+		return null;
+	}
+	
+	
 	@Override
 	public BalanceSheetReport getBalanceSheet(BusinessPartner<?> bp, AccountingPeriod period,
 			AccountingPeriod comparisonPeriod, Properties props)

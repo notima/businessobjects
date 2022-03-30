@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import org.notima.generic.businessobjects.AccountStatementLines;
 import org.notima.generic.businessobjects.AccountingPeriod;
+import org.notima.generic.businessobjects.AccountingVoucher;
 import org.notima.generic.businessobjects.BalanceSheetReport;
 import org.notima.generic.businessobjects.BusinessPartner;
 import org.notima.generic.businessobjects.ProfitLossReport;
@@ -58,7 +59,17 @@ public interface AccountingReportProvider {
 	 */
 	public BalanceSheetReport getBalanceSheet(BusinessPartner<?> bp, AccountingPeriod period, AccountingPeriod comparisonPeriod, java.util.Properties props) throws Exception;
 	
-	
+	/**
+	 * Returns a specific accounting voucher
+	 * 
+	 * @param bp			For the business partner
+	 * @param period		In which accounting period the voucher is found.
+	 * @param series		The series
+	 * @param voucherNo		The voucher number (can be non-numerical)
+	 * @return				A voucher if found.
+	 * @throws Exception	If something goes wrong.
+	 */
+	public AccountingVoucher  getAccountingVoucher(BusinessPartner<?> bp, AccountingPeriod period, String series, String voucherNo) throws Exception;
 	
 	/**
 	 * Get account statement lines for given account number.
