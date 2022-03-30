@@ -31,6 +31,7 @@ public class AccountingVoucher {
 	private String			projectCode;
 	private BigDecimal		totalCredit;
 	private	BigDecimal		totalDebet;
+	private String			comments;
 	
 	private Integer			precision = 2;
 	
@@ -456,5 +457,15 @@ public class AccountingVoucher {
 		}
 		return bd;
 	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
+	
 	
 }

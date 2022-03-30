@@ -14,6 +14,7 @@ public class AccountingVoucherLine {
 	private String			costCenter;
 	private String			projectCode;
 	private Boolean	isService;
+	private Boolean deleted = Boolean.FALSE;
 	
 	public AccountingVoucherLine() {}
 	
@@ -125,6 +126,16 @@ public class AccountingVoucherLine {
 	public void setProjectCode(String projectCode) {
 		this.projectCode = projectCode;
 	}
+
+	public Boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
+	
+	
 	
 	
 }
