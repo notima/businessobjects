@@ -1,6 +1,7 @@
 package org.notima.generic.businessobjects;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Properties;
 
 import org.notima.generic.ifacebusinessobjects.AccountingReportProvider;
@@ -152,6 +153,11 @@ public class BasicAccountingReportProvider implements AccountingReportProvider {
 		return null;
 	}
 
+	
+	@Override
+	public List<AccountingVoucher> getAccountingVoucherList(BusinessPartner<?> bp, AccountingPeriod ap, String series) throws Exception {
+		return null;
+	}
 	
 	
 }

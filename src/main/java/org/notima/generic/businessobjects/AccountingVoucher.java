@@ -1,5 +1,6 @@
 package org.notima.generic.businessobjects;
 
+import java.beans.Transient;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -98,6 +99,10 @@ public class AccountingVoucher {
 		this.description = description;
 	}
 
+	public AccountingVoucherIdentification createIdentification() {
+		return new AccountingVoucherIdentification(voucherSeries, voucherNo);
+	}
+	
 	public String getRegBy() {
 		return regBy;
 	}

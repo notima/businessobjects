@@ -1,6 +1,7 @@
 package org.notima.generic.ifacebusinessobjects;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.notima.generic.businessobjects.AccountStatementLines;
 import org.notima.generic.businessobjects.AccountingPeriod;
@@ -88,5 +89,16 @@ public interface AccountingReportProvider {
 			LocalDate fromDate, 
 			LocalDate untilDate,
 			boolean orderByAmount) throws Exception;
+
+	/**
+	 * Returns a list of accounting vouchers
+	 * 
+	 * @param bp			For the business partner
+	 * @param period		In which accounting period the vouchers are to be found.
+	 * @param series		The series
+	 * @return				A list of vouchers
+	 * @throws Exception	If something goes wrong.
+	 */
+	public List<AccountingVoucher> getAccountingVoucherList(BusinessPartner<?> bp, AccountingPeriod period, String series) throws Exception;
 	
 }
