@@ -30,6 +30,7 @@ public class Order<O> implements OrderInvoice {
 	@GeneratedValue
 	private Integer id;
 	
+	private String documentKey;
 	private String orderKey;
 	private String paymentTermKey;
 	private String paymentRule;
@@ -196,7 +197,7 @@ public class Order<O> implements OrderInvoice {
 
 	@Override
 	public String getDocumentKey() {
-		return getOrderKey();
+		return documentKey;
 	}
 
 	@Override
@@ -215,8 +216,7 @@ public class Order<O> implements OrderInvoice {
 	
 	@Override
 	public void setDocumentKey(String key) {
-		setOrderKey(key);
-		
+		documentKey = key;
 	}
 
 	@Override
