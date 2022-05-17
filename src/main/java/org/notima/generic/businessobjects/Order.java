@@ -455,10 +455,12 @@ public class Order<O> implements OrderInvoice {
 		vatTotal = 0.0;
 		netTotal = 0.0;
 		
-		for (OrderLine line : lines) {
-			total += line.calculateLineTotalIncTax(roundingDecimals);
-			vatTotal += line.getTaxAmount();
-			netTotal += line.getLineNet();
+		if (lines!=null) {
+			for (OrderLine line : lines) {
+				total += line.calculateLineTotalIncTax(roundingDecimals);
+				vatTotal += line.getTaxAmount();
+				netTotal += line.getLineNet();
+			}
 		}
 		
 		total = InvoiceLine.round(total, roundingDecimals);
