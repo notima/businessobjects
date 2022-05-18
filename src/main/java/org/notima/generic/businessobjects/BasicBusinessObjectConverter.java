@@ -344,7 +344,7 @@ public class BasicBusinessObjectConverter<O,I> implements BusinessObjectConverte
 			// was originally on the order.
 			if (amountRemaining >0) {
 				if (rateList.size()>1) {
-					throw new Exception("Can't credit more than order value because tax rates are ambiguos");
+					throw new Exception("Can't credit more than order value because tax rates are ambigous");
 				}
 				// Add a line with remaining amount
 				singleLine = new OrderLine();

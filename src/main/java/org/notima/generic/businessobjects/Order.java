@@ -563,6 +563,10 @@ public class Order<O> implements OrderInvoice {
 		TaxSummary ts;
 		
 		for (OrderLine il : (List<OrderLine>)getLines()) {
+			if (il.calculateLineTotalIncTax(roundingDecimals)==0) {
+				// Don't consider lines amounting to zero.
+				continue;
+			}
 			taxKey = il.getTaxKey();
 			if (taxKey==null) {
 				taxKey = new Double(il.getTaxPercent()).toString();
