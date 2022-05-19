@@ -60,6 +60,7 @@ public class Order<O> implements OrderInvoice {
 	private String	ourCustomerNo;
 	private String	externalReference1;
 	private String	externalReference2;
+	private String	yourOrderNumber;
 	private boolean	salesOrder;
 	private int	   roundingDecimals = 2;
 	private String	deliveryRule;
@@ -606,6 +607,14 @@ public class Order<O> implements OrderInvoice {
 		
 	}
 	
+	public String getYourOrderNumber() {
+		return yourOrderNumber;
+	}
+
+	public void setYourOrderNumber(String yourOrderNumber) {
+		this.yourOrderNumber = yourOrderNumber;
+	}
+
 	@XmlTransient
 	public boolean isValidOrder() {
 		return hasValidBusinessPartner() && hasOrderLines();
