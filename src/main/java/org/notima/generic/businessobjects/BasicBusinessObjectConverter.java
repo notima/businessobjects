@@ -69,6 +69,7 @@ public class BasicBusinessObjectConverter<O,I> implements BusinessObjectConverte
 		dst.setExternalReference2(src.getExternalReference2());
 		dst.setPaymentRule(src.getPaymentRule());
 		dst.setPaymentTermKey(src.getPaymentTermKey());
+		dst.setPoDocumentNo(src.getYourOrderNumber());
 		
 		// Copy lines
 		List<InvoiceLine> ilines = new ArrayList<InvoiceLine>();
