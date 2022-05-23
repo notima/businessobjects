@@ -74,6 +74,28 @@ public class Order<O> implements OrderInvoice {
 	
 	private transient O nativeOrder;
 	
+	/**
+	 * Short summary of order
+	 * 
+	 * @return
+	 */
+	public String printOrderInfo() {
+		StringBuffer buf = new StringBuffer();
+		if (getDocumentKey()!=null) {
+			buf.append(getDocumentKey());
+		} else if (getOrderKey()!=null) {
+			buf.append(getOrderKey());
+		}
+		if (getBusinessPartner()!=null && getBusinessPartner().getName()!=null) {
+			if (buf.length()>0) buf.append(" ");
+			buf.append(getBusinessPartner().getName());
+		}
+		if (buf.length()>0) buf.append(" ");
+		buf.append(" with total " + getGrandTotal());
+		return buf.toString();
+	}
+	
+	
 	public String toString() {
 		StringBuffer buf = new StringBuffer();
 		buf.append("[orderKey=>"+orderKey + "]," + "[BpIdentityNo=>" + (bpartner!=null ? bpartner.getIdentityNo() : "") + "]");
