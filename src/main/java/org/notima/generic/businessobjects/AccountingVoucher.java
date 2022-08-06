@@ -261,6 +261,29 @@ public class AccountingVoucher {
 	}
 	
 	/**
+	 * Remaps all occurrances of accountType and taxKey to toAcct
+	 * 
+	 * @param accountType
+	 * @param taxKey			Must not be null
+	 * @param toAcct
+	 */
+	public void remapAccountTypeAndTaxKey(String accountType, String taxKey, String toAcct) {
+
+		if (lines==null) return;
+		
+		for (AccountingVoucherLine l : lines) {
+			if (accountType==null) {
+				if (l.getAcctType()==null && taxKey.equals(l.getTaxKey())) {
+					l.setAcctNo(toAcct);
+				}
+			} else if (accountType.equals(l.getAcctType()) && taxKey.equals(l.getTaxKey())) {
+				l.setAcctNo(toAcct);
+			}
+		}
+		
+	}
+	
+	/**
 	 * Remaps all occurances of accountType with to toAcct
 	 * 
 	 * @param accountType
