@@ -1,5 +1,6 @@
 package org.notima.generic.businessobjects;
 
+import java.beans.Transient;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -17,7 +18,6 @@ import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import org.notima.generic.businessobjects.TaxSummary;
 import org.notima.generic.ifacebusinessobjects.FactoringReservation;
 import org.notima.generic.ifacebusinessobjects.OrderInvoice;
 import org.notima.generic.ifacebusinessobjects.OrderInvoiceLine;
@@ -70,7 +70,8 @@ public class Order<O> implements OrderInvoice {
 	private List<KeyValue> attributes = new ArrayList<KeyValue>();
 	@ManyToOne
 	private FactoringReservation factoringReservation;	
-	private String	status;
+	private OrderStatus	status;
+	private String statusComment;
 	
 	private transient O nativeOrder;
 	
@@ -452,12 +453,19 @@ public class Order<O> implements OrderInvoice {
 	}
 
 	public String getStatus() {
-		return status;
+		if (status==null) return null;
+		return status.toString();
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(String statusString) {
+		this.status = OrderStatus.valueOf(statusString);
+	}
+
+	@Transient
+	public void setStatusEnum(OrderStatus status) {
 		this.status = status;
 	}
+	
 
 	public O getNativeOrder() {
 		return nativeOrder;
@@ -656,8 +664,19 @@ public class Order<O> implements OrderInvoice {
 		
 		if (this.status==null) return false;
 		
-		return this.status.equals(status);
+		return this.status.toString().equals(status);
 	}
+
+
+	public String getStatusComment() {
+		return statusComment;
+	}
+
+
+	public void setStatusComment(String statusComment) {
+		this.statusComment = statusComment;
+	}
+	
 	
 	
 }
