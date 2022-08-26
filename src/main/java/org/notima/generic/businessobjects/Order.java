@@ -113,6 +113,10 @@ public class Order<O> implements OrderInvoice {
 		lines.add(line);
 	}
 	
+	public void addAttribute(String attributeName, Object value) {
+		attributes.add(new KeyValue(attributeName, value));
+	}
+	
 	public String getPaymentTermKey() {
 		return paymentTermKey;
 	}
@@ -358,6 +362,27 @@ public class Order<O> implements OrderInvoice {
 		return attributes;
 	}
 
+	public List<KeyValue> getAttributesWithKey(String key) {
+		List<KeyValue> result = new ArrayList<KeyValue>();
+		if (key==null) return result;
+		for (KeyValue attr : attributes) {
+			if (key.equals(attr.getKey())) {
+				result.add(attr);
+			}
+		}
+		return result;
+	}
+	
+	public Object getFirstAttributeWithKey(String key) {
+		if (key==null) return null;
+		for (KeyValue attr : attributes) {
+			if (key.equals(attr.getKey())) {
+				return attr.getObject();
+			}
+		}
+		return null;
+	}
+	
 	public void setAttributes(List<KeyValue> attributes) {
 		this.attributes = attributes;
 	}
@@ -676,7 +701,23 @@ public class Order<O> implements OrderInvoice {
 	public void setStatusComment(String statusComment) {
 		this.statusComment = statusComment;
 	}
-	
-	
+
+	/**
+	 * Appends to status comment if there's already an existing comment. A semicolon is prepended if there's an existing comment.
+	 * Sets status comment if no one exists.
+	 * @param comment
+	 */
+	public void appendStatusComment(String comment) {
+		if (statusComment==null) {
+			statusComment = comment;
+			return;
+		}
+		if (statusComment.trim().length()>0) {
+			statusComment += "; " + comment; 
+		} else {
+			statusComment = comment;
+		}
+		
+	}
 	
 }
