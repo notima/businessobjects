@@ -1,5 +1,7 @@
 package org.notima.generic.businessobjects;
 
+import java.util.List;
+
 /**
  * Record used to summarize tax
  * 
@@ -12,6 +14,26 @@ public class TaxSummary {
 	private double	rate;
 	private double	taxBase;
 	private double	taxAmount;
+	
+	/**
+	 * Checks if a list of tax summary contains a specific tax key.
+	 * 
+	 * @param keySearch			The key to search for.
+	 * @param list				The list to search
+	 * @return	true if the list contains the key.
+	 */
+	public static boolean containsKey(String keySearch, List<TaxSummary> list) {
+		if (list==null || list.size()==0)
+			return false;
+		for (TaxSummary s : list) {
+			if (keySearch==null && s.getKey()==null)
+				return true;
+			if (keySearch.equals(s.key)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	public String getKey() {
 		return key;

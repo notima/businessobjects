@@ -544,7 +544,7 @@ public class Order<O> implements OrderInvoice {
 			ts = new TaxSummary();
 			ts.setTaxBase(amountIncTax);
 			ts.setTaxAmount(0);
-			ts.setKey("?");
+			ts.setKey(Tax.TAX_KEY_UNKNOWN);
 			ts.setRate(0);
 			result.add(ts);
 			return result;
@@ -596,7 +596,7 @@ public class Order<O> implements OrderInvoice {
 			ts = new TaxSummary();
 			ts.setTaxBase(amountIncTax - totalAdded);
 			ts.setTaxAmount(0);
-			ts.setKey("?");
+			ts.setKey(Tax.TAX_KEY_UNKNOWN);
 			ts.setRate(0);
 			result.add(ts);
 		}
