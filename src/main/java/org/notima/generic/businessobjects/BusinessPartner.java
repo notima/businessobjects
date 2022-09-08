@@ -61,8 +61,28 @@ public class BusinessPartner<B> {
 		this.isCompany = isCompany;
 	}
 
+	/**
+	 * If name is null, the address record is tried.
+	 * 
+	 * @return
+	 */
 	public String getName() {
-		return name;
+		if (name!=null)
+			return name;
+		else {
+			if (addressOfficial!=null) {
+				String altName = addressOfficial.getName();
+				if (altName==null) {
+					altName = addressOfficial.getCustomerReference();
+				}
+				if (altName==null) {
+					altName = addressOfficial.getEmail();
+				}
+				if (altName!=null)
+					return altName;
+			}
+		}
+		return null;
 	}
 
 	public void setName(String name) {
