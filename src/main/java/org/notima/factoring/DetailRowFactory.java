@@ -16,14 +16,14 @@ import org.notima.generic.ifacebusinessobjects.OrderInvoiceLine;
  * @author Daniel Tamm
  *
  */
-public class DetailRowFactory<C,I,O,P,B> {
+public class DetailRowFactory<C,I,O,P,B,T> {
 
-	private BusinessObjectFactory<C,I,O,P,B> m_oFactory;
+	private BusinessObjectFactory<C,I,O,P,B,T> m_oFactory;
 	
 	// TODO: Make the rounding charge configurable
 	public final static int ROUNDING_CHARGE_ID=1000001; 
 
-	public DetailRowFactory(BusinessObjectFactory<C,I,O,P,B> oFactory) {
+	public DetailRowFactory(BusinessObjectFactory<C,I,O,P,B,T> oFactory) {
 		
 		m_oFactory = oFactory;
 		

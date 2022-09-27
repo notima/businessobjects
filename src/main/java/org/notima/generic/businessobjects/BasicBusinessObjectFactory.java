@@ -34,13 +34,13 @@ import org.notima.generic.ifacebusinessobjects.BusinessObjectFactory;
  * @param <O>
  *
  */
-public abstract class BasicBusinessObjectFactory<C,I,O,P,B> implements BusinessObjectFactory<C,I,O,P,B> {
+public abstract class BasicBusinessObjectFactory<C,I,O,P,B,T> implements BusinessObjectFactory<C,I,O,P,B,T> {
 
 	protected Map<String,String> settingsMap;
 	
-	protected Map<String, BusinessPartner<B>> tenantMap = new TreeMap<String,BusinessPartner<B>>();
+	protected Map<String, BusinessPartner<T>> tenantMap = new TreeMap<String,BusinessPartner<T>>();
 	
-	protected BusinessPartner<B> currentTenant = null;
+	protected BusinessPartner<T> currentTenant = null;
 	
 	@Override
 	public List<Invoice<I>> lookupInvoiceWithReference(TransactionReference reference) throws Exception {
@@ -77,11 +77,11 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B> implements BusinessO
 	 * @param props				Properties used for initialization.
 	 * @return
 	 */
-	public BusinessPartner<B> addTenant(String orgNo, String countryCode, String name, Properties props) {
+	public BusinessPartner<T> addTenant(String orgNo, String countryCode, String name, Properties props) {
 	
-		BusinessPartner<B> tenant = tenantMap.get(orgNo);
+		BusinessPartner<T> tenant = tenantMap.get(orgNo);
 		if (tenant==null) {
-			tenant = new BusinessPartner<B>();
+			tenant = new BusinessPartner<T>();
 			tenantMap.put(orgNo, tenant);
 		}
 		tenant.setTaxId(orgNo);
@@ -106,7 +106,7 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B> implements BusinessO
 	 */
 	public boolean removeTenant(String orgNo, String countryCode) throws Exception {
 
-		BusinessPartner<B> tenant = tenantMap.get(orgNo);
+		BusinessPartner<T> tenant = tenantMap.get(orgNo);
 		if (tenant==null) return false;
 		
 		tenantMap.remove(orgNo);
@@ -117,7 +117,7 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B> implements BusinessO
 	@Override
 	public void setTenant(String orgNo, String countryCode) throws NoSuchTenantException {
 
-		BusinessPartner<B> tenant = tenantMap.get(orgNo);
+		BusinessPartner<T> tenant = tenantMap.get(orgNo);
 		if (tenant==null) {
 			throw new NoSuchTenantException(orgNo);
 		} else if (countryCode!=null && tenant.getCountryCode()!=null && !countryCode.equals(tenant.getCountryCode())){
@@ -128,7 +128,7 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B> implements BusinessO
 	}
 
 	@Override
-	public BusinessPartner<B> getCurrentTenant() {
+	public BusinessPartner<T> getCurrentTenant() {
 		return currentTenant;
 	}
 

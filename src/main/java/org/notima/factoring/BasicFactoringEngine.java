@@ -19,15 +19,15 @@ import org.notima.generic.ifacebusinessobjects.FactoringReservation;
  * @param <C>
  *
  */
-public class BasicFactoringEngine<C,I,O,P,B> implements FactoringEngine {
+public class BasicFactoringEngine<C,I,O,P,B,T> implements FactoringEngine {
 
 	private Properties m_factoringProperties;
-	private DetailRowFactory<?, ?, ?, ?, ?> rowFactory;
+	private DetailRowFactory<?, ?, ?, ?, ?, ?> rowFactory;
 	public static final int ROUNDING_DECIMALS = 2;
 	
 
-	public BasicFactoringEngine(BusinessObjectFactory<C,I,O,P,B> oFactory) {
-		rowFactory = new DetailRowFactory<C,I,O,P,B>(oFactory);
+	public BasicFactoringEngine(BusinessObjectFactory<C,I,O,P,B,T> oFactory) {
+		rowFactory = new DetailRowFactory<C,I,O,P,B,T>(oFactory);
 	}
 	
 	

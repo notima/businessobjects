@@ -18,7 +18,7 @@ import org.notima.generic.businessobjects.Tax;
 import org.notima.generic.businessobjects.TransactionReference;
 import org.notima.generic.businessobjects.exception.NoSuchTenantException;
 
-public interface BusinessObjectFactory<C,I,O,P,B> {
+public interface BusinessObjectFactory<C,I,O,P,B,T> {
 
 	/**
 	 * 
@@ -34,7 +34,7 @@ public interface BusinessObjectFactory<C,I,O,P,B> {
 	 * 
 	 * @return A business partner list
 	 */
-	public BusinessPartnerList<B> listTenants();
+	public BusinessPartnerList<T> listTenants();
 	
 	/**
 	 * Sets current tenant
@@ -52,7 +52,7 @@ public interface BusinessObjectFactory<C,I,O,P,B> {
 	 * @param props				Properties used for initialization.
 	 * @return		A business partner representing the tenant.
 	 */
-	public BusinessPartner<B> addTenant(String orgNo, String countryCode, String name, Properties props);
+	public BusinessPartner<T> addTenant(String orgNo, String countryCode, String name, Properties props);
 	
 	/**
 	 * Removes a tenant from a given business object factory.
@@ -68,7 +68,7 @@ public interface BusinessObjectFactory<C,I,O,P,B> {
 	 * 
 	 * @return	The current tenant.
 	 */
-	public BusinessPartner<B> getCurrentTenant();
+	public BusinessPartner<T> getCurrentTenant();
 	
 	/**
 	 * Returns given setting.
@@ -128,7 +128,7 @@ public interface BusinessObjectFactory<C,I,O,P,B> {
 	 * @return
 	 * @throws Exception
 	 */
-	public BusinessPartner<?> lookupThisCompanyInformation() throws Exception;
+	public BusinessPartner<T> lookupThisCompanyInformation() throws Exception;
 	
 	/**
 	 * Lookup a specified dunning run.
