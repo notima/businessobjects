@@ -14,6 +14,8 @@ public class PaymentProcessResult {
 	
 	private StringBuffer	textResult;
 
+	private Exception		exception;
+	
 	public PaymentProcessResult() {};
 	
 	public PaymentProcessResult(ResultCode code) {
@@ -35,7 +37,19 @@ public class PaymentProcessResult {
 	public void setTextResult(StringBuffer textResult) {
 		this.textResult = textResult;
 	}
+
+	public void setTextResultFromException() {
+		if (exception!=null) {
+			textResult = new StringBuffer(exception.getMessage());
+		}
+	}
 	
-	
+	public Exception getException() {
+		return exception;
+	}
+
+	public void setException(Exception exception) {
+		this.exception = exception;
+	}
 	
 }
