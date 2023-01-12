@@ -81,6 +81,7 @@ public class Invoice<I> implements OrderInvoice {
 	private Map<String,BankAccountDetail>	bankAccountDetails = new TreeMap<String, BankAccountDetail>();
 	
 	private String	ocr;
+	private boolean showPricesIncludingVAT = false;
 	
 	private transient I nativeInvoice;
 	
@@ -98,6 +99,14 @@ public class Invoice<I> implements OrderInvoice {
 		return result;
 	}
 	
+	public boolean isShowPricesIncludingVAT() {
+		return showPricesIncludingVAT;
+	}
+
+	public void setShowPricesIncludingVAT(boolean showPricesIncludingVAT) {
+		this.showPricesIncludingVAT = showPricesIncludingVAT;
+	}
+
 	public double getLineNet() {
 		return round(lineNet);
 	}
