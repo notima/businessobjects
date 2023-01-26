@@ -33,6 +33,8 @@ public class AccountingVoucher {
 	private BigDecimal		totalCredit;
 	private	BigDecimal		totalDebet;
 	private String			comments;
+	private String			sourceCurrency;
+	private String			accountingCurrency;
 	
 	private Integer			precision = 2;
 	
@@ -494,6 +496,46 @@ public class AccountingVoucher {
 		this.comments = comments;
 	}
 
+	/**
+	 * 
+	 * @return		True if processing this voucher needs currency conversion (ie source and accounting currency differs)
+	 * 
+	 */
+	@Transient
+	public boolean needsCurrencyConversion() {
+		if (sourceCurrency==null || accountingCurrency==null) return false;
+		if (sourceCurrency.toLowerCase().equals(accountingCurrency.toLowerCase())) return false;
+		return true;
+	}
+	
+	/**
+	 * The currency that amounts are specified in
+	 * 
+	 * @return
+	 */
+	public String getSourceCurrency() {
+		return sourceCurrency;
+	}
+
+	public void setSourceCurrency(String sourceCurrency) {
+		this.sourceCurrency = sourceCurrency;
+	}
+
+	/**
+	 * The currency that are used in the general ledger (accounting currency)
+	 * 
+	 * @return
+	 */
+	public String getAccountingCurrency() {
+		return accountingCurrency;
+	}
+
+	public void setAccountingCurrency(String accountingCurrency) {
+		this.accountingCurrency = accountingCurrency;
+	}
+
+	
+	
 	
 	
 }
