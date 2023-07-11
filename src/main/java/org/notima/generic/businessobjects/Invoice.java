@@ -78,6 +78,8 @@ public class Invoice<I> implements OrderInvoice {
 	private List<KeyValue> attributes = new ArrayList<KeyValue>();
 	private String status;
 	
+	private String comment;
+	
 	private Map<String,BankAccountDetail>	bankAccountDetails = new TreeMap<String, BankAccountDetail>();
 	
 	private String	ocr;
@@ -459,7 +461,7 @@ public class Invoice<I> implements OrderInvoice {
 	public List<KeyValue> getAttributes() {
 		return attributes;
 	}
-
+	
 	public void setAttributes(List<KeyValue> attributes) {
 		this.attributes = attributes;
 	}
@@ -517,6 +519,12 @@ public class Invoice<I> implements OrderInvoice {
 		this.nativeInvoice = src;
 	}
 
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 	
+	public String getComment() {
+		return comment;
+	}
 	
 }
