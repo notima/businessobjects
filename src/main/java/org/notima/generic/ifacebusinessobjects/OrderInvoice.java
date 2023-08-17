@@ -49,6 +49,27 @@ public interface OrderInvoice {
 	public boolean isInvoice();
 	
 	public boolean isOrder();
+
+	/**
+	 * Validator to use to validate the order / invoiec.
+	 * 
+	 * @param validator
+	 */
+	public void setOrderInvoiceLineValidator(OrderInvoiceLineValidator validator);
+	
+	/**
+	 * 
+	 * @return The validator.
+	 */
+	public OrderInvoiceLineValidator getOrderInvoiceLineValidator();
+	
+	/**
+	 * Method meant to return any lines that doesn't pass validation.
+	 * 
+	 * @return	All invalid lines. Empty list if no invalid lines are found.
+	 * @see #setOrderInvoiceLineValidator(OrderInvoiceLineValidator)
+	 */
+	public List<OrderInvoiceLine> getInvalidLines(); 
 	
 	public List<OrderInvoiceLine> getOrderInvoiceLines();
 	

@@ -18,6 +18,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import org.notima.generic.ifacebusinessobjects.FactoringReservation;
 import org.notima.generic.ifacebusinessobjects.OrderInvoice;
 import org.notima.generic.ifacebusinessobjects.OrderInvoiceLine;
+import org.notima.generic.ifacebusinessobjects.OrderInvoiceLineValidator;
 
 @Entity
 @XmlRootElement(name = "invoice")
@@ -86,6 +87,8 @@ public class Invoice<I> implements OrderInvoice {
 	private boolean showPricesIncludingVAT = false;
 	
 	private transient I nativeInvoice;
+	
+	private transient OrderInvoiceLineValidator	lineValidator;
 	
 	public Integer getId() {
 		return id;
@@ -525,6 +528,32 @@ public class Invoice<I> implements OrderInvoice {
 	
 	public String getComment() {
 		return comment;
+	}
+
+	@Override
+	public void setOrderInvoiceLineValidator(OrderInvoiceLineValidator validator) {
+		lineValidator = validator;		
+	}
+
+	@Override
+	public List<OrderInvoiceLine> getInvalidLines() {
+		List<OrderInvoiceLine> invalidLines = new ArrayList<OrderInvoiceLine>();
+		if (lineValidator==null || lines==null)
+			return invalidLines;
+
+		for (InvoiceLine il : lines) {
+			lineValidator.setLineToValidate(il);
+			if (!lineValidator.isLineValid()) {
+				invalidLines.add(il);
+			}
+		}
+		
+		return invalidLines;
+	}
+	
+	@Override
+	public OrderInvoiceLineValidator getOrderInvoiceLineValidator() {
+		return lineValidator;
 	}
 	
 }
