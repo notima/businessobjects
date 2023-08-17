@@ -675,7 +675,7 @@ public class Order<O> implements OrderInvoice {
 
 	@XmlTransient
 	public boolean isValidOrder() {
-		return hasValidBusinessPartner() && hasOrderLines();
+		return hasValidBusinessPartner() && hasOrderLines() && getInvalidLines().isEmpty();
 	}
 	
 	public boolean hasValidBusinessPartner() {
