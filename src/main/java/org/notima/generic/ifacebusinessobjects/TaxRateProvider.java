@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.notima.generic.businessobjects.Tax;
+import org.notima.generic.businessobjects.TaxSubjectIdentifier;
+import org.notima.generic.businessobjects.exception.NoSuchTenantException;
 
 /**
  * Interface to get valid tax rates. 
@@ -13,8 +15,10 @@ import org.notima.generic.businessobjects.Tax;
  */
 public interface TaxRateProvider {
 
-	public List<Tax> getValidTaxRates(String taxCountry, LocalDate taxDate);
+	public String getSystemName();
 	
-	public List<Tax> getValidTaxRates(String taxCountry, String tradingCountry, LocalDate taxDate);
+	public List<Tax> getValidTaxRates(TaxSubjectIdentifier tsi, LocalDate taxDate) throws NoSuchTenantException;
+	
+	public List<Tax> getValidTaxRates(TaxSubjectIdentifier tsi, String tradingCountry, LocalDate taxDate) throws NoSuchTenantException;
 	
 }
