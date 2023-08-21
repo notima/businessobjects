@@ -536,6 +536,7 @@ public class Invoice<I> implements OrderInvoice {
 	}
 
 	@Override
+	@XmlTransient
 	public List<OrderInvoiceLine> getInvalidLines() {
 		List<OrderInvoiceLine> invalidLines = new ArrayList<OrderInvoiceLine>();
 		if (lineValidator==null || lines==null)
@@ -552,6 +553,7 @@ public class Invoice<I> implements OrderInvoice {
 	}
 	
 	@Override
+	@XmlTransient
 	public OrderInvoiceLineValidator getOrderInvoiceLineValidator() {
 		return lineValidator;
 	}
