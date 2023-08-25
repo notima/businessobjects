@@ -5,6 +5,7 @@ import java.util.List;
 import org.notima.generic.businessobjects.BusinessPartner;
 import org.notima.generic.businessobjects.Location;
 import org.notima.generic.businessobjects.Person;
+import org.notima.generic.businessobjects.TaxSubjectIdentifier;
 
 public interface OrderInvoice {
 
@@ -21,6 +22,20 @@ public interface OrderInvoice {
 	public Location getShipLocation();
 	
 	public BusinessPartner<?> getBillBpartner();
+	
+	/**
+	 * Return the document recipient from a tax / legal perspective.
+	 * 
+	 * @return
+	 */
+	public TaxSubjectIdentifier getDocumentRecipient();
+	
+	/**
+	 * Return the document owner from a tax / legal perspective.
+	 * 
+	 * @return
+	 */
+	public TaxSubjectIdentifier getDocumentOwner();
 	
 	public java.util.Date getDocumentDate();
 	

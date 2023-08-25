@@ -753,5 +753,22 @@ public class Order<O> implements OrderInvoice {
 	public OrderInvoiceLineValidator getOrderInvoiceLineValidator() {
 		return lineValidator;
 	}
+
+
+	@Override
+	@XmlTransient
+	public TaxSubjectIdentifier getDocumentRecipient() {
+		return new TaxSubjectIdentifier(getBillBpartner());
+	}
+
+
+	@Override
+	@XmlTransient
+	public TaxSubjectIdentifier getDocumentOwner() {
+		if (sender!=null && sender.hasTaxId()) {
+			return new TaxSubjectIdentifier(sender);
+		}
+		return null;
+	}
 	
 }

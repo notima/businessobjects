@@ -47,6 +47,16 @@ public class TaxSubjectIdentifier implements Comparable<TaxSubjectIdentifier> {
 		this.countryCode = countryCode;
 	}
 	
+	public TaxSubjectIdentifier(BusinessPartner<?> bp) {
+		if (bp!=null) {
+			if (bp.hasTaxId()) {
+				taxId = bp.getTaxId();
+			}
+			countryCode = bp.getCountryCode();
+			legalName = bp.getName();
+		}
+	}
+	
 	public String getTaxId() {
 		return taxId;
 	}
