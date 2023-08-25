@@ -532,7 +532,10 @@ public class Invoice<I> implements OrderInvoice {
 
 	@Override
 	public void setOrderInvoiceLineValidator(OrderInvoiceLineValidator validator) {
-		lineValidator = validator;		
+		lineValidator = validator;	
+		if (lineValidator!=null) {
+			lineValidator.setOrderInvoice(this);
+		}
 	}
 
 	@Override

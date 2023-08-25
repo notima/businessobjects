@@ -8,6 +8,19 @@ package org.notima.generic.ifacebusinessobjects;
  */
 public interface OrderInvoiceLineValidator {
 
+	/**
+	 * Call this method to set the order to perform validation on
+	 * 
+	 * @param oi
+	 */
+	public void setOrderInvoice(OrderInvoice oi);
+	
+	/**
+	 * Call this method to set the order line to perform validation on.
+	 * This method may use the OrderInvoice.
+	 * 
+	 * @param line
+	 */
 	public void setLineToValidate(OrderInvoiceLine line);
 	
 	public boolean isLineValid();
