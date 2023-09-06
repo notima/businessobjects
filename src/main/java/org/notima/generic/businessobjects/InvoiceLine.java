@@ -133,6 +133,19 @@ public class InvoiceLine implements OrderInvoiceLine {
 		UOM = uOM;
 	}
 	
+	/**
+	 * Calculates line totals using actual price, qty and tax percent.
+	 * 
+	 * If tax is included in the price the calculation assumes the price is
+	 * including tax.
+	 * 
+	 * If tax is not included, the tax is added to the actual price / total.
+	 *  
+	 * @param roundingDecimals
+	 * @see #setTaxIncludedInPrice(boolean)
+	 * 
+	 * @return		The line total including tax.
+	 */
 	public double calculateLineTotalIncTax(int roundingDecimals) {
 		double lineTotal;
 		if (taxIncludedInPrice) {
