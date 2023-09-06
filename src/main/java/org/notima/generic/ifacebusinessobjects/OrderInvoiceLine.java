@@ -18,7 +18,11 @@ public interface OrderInvoiceLine {
 	 */
 	public Double getPriceActual();
 	
+	public void setPriceActual(Double price);
+	
 	public String getTaxKey();
+	
+	public void setTaxKey(String taxKey);
 	
 	public String getProductKey();
 	
@@ -30,6 +34,8 @@ public interface OrderInvoiceLine {
 	 */
 	public double getTaxPercent();
 	
+	public void setTaxPercent(double taxRate);
+	
 	public String getUOM();
 	
 	public boolean isPricesIncludeVAT();
@@ -38,5 +44,7 @@ public interface OrderInvoiceLine {
 	 * Price without discounts (per unit)
 	 */
 	public Double getPriceNormal();
+	
+	public double calculateLineTotalIncTax(int roundingDecimals);	
 	
 }
