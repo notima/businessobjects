@@ -3,6 +3,7 @@ package org.notima.generic.ifacebusinessobjects;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Date;
 
 import org.notima.generic.businessobjects.AccountingVoucher;
 import org.notima.generic.businessobjects.BusinessPartner;
@@ -134,10 +135,11 @@ public interface BusinessObjectFactory<C,I,O,P,B,T> {
 	 * Lookup a specified dunning run.
 	 * 
 	 * @param key			Dunning run identifier
+	 * @param dueDateUntil  Include up to this due date.
 	 * @return				A dunning run.
 	 * @throws Exception	If something goes wrong
 	 */
-	public DunningRun<?,?> lookupDunningRun(String key) throws Exception;
+	public DunningRun<?,?> lookupDunningRun(String key, Date dueDateUntil) throws Exception;
 
 	/**
 	 * Returns native client

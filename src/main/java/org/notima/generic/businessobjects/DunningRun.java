@@ -48,6 +48,20 @@ public class DunningRun <B,I> {
 		this.entries = entries;
 	}
 	
+	public DunningEntry<?,?> getFirstEntryForDebtor(BusinessPartner<?> debtor) {
+		
+		if (entries==null) return null;
+		if (debtor.getIdentityNo()==null) return null;
+		
+		for (DunningEntry<?,?> entry : entries) {
+			if (entry.getDebtor()!=null && entry.getDebtor().getIdentityNo()!=null && entry.getDebtor().getIdentityNo().equals(debtor.getIdentityNo())) {
+				return entry;
+			}
+		}
+		return null;
+		
+	}
+	
 	public String getLetterNoPrefix() {
 		return letterNoPrefix;
 	}
