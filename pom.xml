@@ -19,6 +19,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<notima-util.version>0.0.5-SNAPSHOT</notima-util.version>
 	</properties>
 
 	<dependencies>
@@ -37,7 +38,7 @@
 		<dependency>
 			<groupId>org.notima</groupId>
 			<artifactId>notima-util</artifactId>
-			<version>0.0.4</version>
+			<version>${notima-util.version}</version>
 		</dependency>
 
 		<dependency>
