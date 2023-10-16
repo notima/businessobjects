@@ -172,7 +172,7 @@
 					<execution>
 						<id>sign-artifacts</id>
 						<!-- verify if it should be signed, deploy when snapshot -->
-						<phase>verify</phase>
+						<phase>deploy</phase>
 						<goals>
 							<goal>sign</goal>
 						</goals>
