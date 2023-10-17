@@ -37,4 +37,12 @@ public class InvoiceOperationResult {
 		this.createCount = createCount;
 	}
 	
+	public void incrementUpdated() {
+		updateCount++;
+	}
+	
+	public void incrementCreated() {
+		createCount++;
+	}
+	
 }
