@@ -1,6 +1,7 @@
 package org.notima.generic.businessobjects;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -193,6 +194,13 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B,T> implements Busines
 
 	@Override
 	public List<AccountingVoucher> writeVouchers(List<AccountingVoucher> vouchers) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public InvoiceOperationResult writeInvoices(List<Invoice<?>> canonicalInvoices, Date invoiceDate, Date dueDate,
+			boolean createBp, int createLimit, boolean updateExisting) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
