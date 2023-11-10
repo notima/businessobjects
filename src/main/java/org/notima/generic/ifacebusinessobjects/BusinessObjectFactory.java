@@ -236,8 +236,8 @@ public interface BusinessObjectFactory<C,I,O,P,B,T> {
 	/**
 	 * Reads invoices from underlaying system.
 	 * 
-	 * @param invoiceDate				The invoice date for the invoices.
-	 * @param dueDate					The due date for the invoices.
+	 * @param fromDate					Invoice date from this date.
+	 * @param untilDate					Invoice date until this date.
 	 * @param readLimit					Max number of invoices to read (handy for testing).
 	 * @return							
 	 * @throws Exception
