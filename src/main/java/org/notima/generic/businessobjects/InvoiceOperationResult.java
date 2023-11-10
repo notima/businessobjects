@@ -13,6 +13,8 @@ public class InvoiceOperationResult {
 	private int		updateCount = 0;
 	private int		createCount = 0;
 	
+	private InvoiceList		affectedInvoices;
+	
 	public boolean isSuccessful() {
 		return successful;
 	}
@@ -44,5 +46,14 @@ public class InvoiceOperationResult {
 	public void incrementCreated() {
 		createCount++;
 	}
+
+	public InvoiceList getAffectedInvoices() {
+		return affectedInvoices;
+	}
+
+	public void setAffectedInvoices(InvoiceList affectedInvoices) {
+		this.affectedInvoices = affectedInvoices;
+	}
+	
 	
 }

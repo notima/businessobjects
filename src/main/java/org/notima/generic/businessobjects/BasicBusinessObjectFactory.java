@@ -204,6 +204,13 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B,T> implements Busines
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public InvoiceOperationResult readInvoices(Date fromDate, Date untilDate, int readLimit) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 	@Override
 	public String attachFileToVoucher(AccountingVoucher voucher, String fileName) throws Exception {

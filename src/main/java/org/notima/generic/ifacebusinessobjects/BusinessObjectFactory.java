@@ -232,6 +232,22 @@ public interface BusinessObjectFactory<C,I,O,P,B,T> {
 	 * @throws Exception	If something goes wrong.
 	 */
 	public List<AccountingVoucher> writeVouchers(List<AccountingVoucher> vouchers) throws Exception;
+
+	/**
+	 * Reads invoices from underlaying system.
+	 * 
+	 * @param invoiceDate				The invoice date for the invoices.
+	 * @param dueDate					The due date for the invoices.
+	 * @param readLimit					Max number of invoices to read (handy for testing).
+	 * @return							
+	 * @throws Exception
+	 */
+	public InvoiceOperationResult readInvoices(
+			java.util.Date fromDate,
+			java.util.Date untilDate,
+			int readLimit
+			) throws Exception;
+
 	
 	/**
 	 * Write invoices to underlaying system.
