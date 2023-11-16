@@ -8,6 +8,7 @@ public class SetSpecificPriceInvoiceLineValidator implements OrderInvoiceLineVal
 
 	private double thePricePerUnit;
 	private OrderInvoiceLine il;
+	private OrderInvoice oi;
 	
 	public SetSpecificPriceInvoiceLineValidator(double thePricePerUnit) {
 		this.thePricePerUnit = thePricePerUnit;
@@ -15,6 +16,7 @@ public class SetSpecificPriceInvoiceLineValidator implements OrderInvoiceLineVal
 	
 	@Override
 	public void setOrderInvoice(OrderInvoice oi) {
+		this.oi = oi;
 	}
 
 	@Override
@@ -25,6 +27,8 @@ public class SetSpecificPriceInvoiceLineValidator implements OrderInvoiceLineVal
 	@Override
 	public boolean isLineValid() {
 		il.setPriceActual(thePricePerUnit);
+		// TODO: Adjust rounding.
+		il.calculateLineTotalIncTax(2);
 		return true;
 	}
 

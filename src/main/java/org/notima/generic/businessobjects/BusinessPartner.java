@@ -271,22 +271,18 @@ public class BusinessPartner<B> {
 		this.countryCode = countryCode;
 	}
 	
-	@XmlTransient
 	public boolean hasName() {
 		return (name!=null && name.trim().length()>0);
 	}
 	
-	@XmlTransient	
 	public boolean hasIdentityNo() {
 		return (identityNo!=null && identityNo.trim().length()>0);
 	}
 	
-	@XmlTransient
 	public boolean hasTaxId() {
 		return (taxId!=null && taxId.trim().length()>0);
 	}
 	
-	@XmlTransient
 	public boolean hasContacts() {
 		if (contacts==null) return false;
 		for (Person person : contacts) {
@@ -296,7 +292,6 @@ public class BusinessPartner<B> {
 		return false;
 	}
 	
-	@XmlTransient
 	public boolean hasLocations() {
 		return (getAddressOfficial()!=null || getAddressShipping()!=null);
 	}
