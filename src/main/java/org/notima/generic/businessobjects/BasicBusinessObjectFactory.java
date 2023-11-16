@@ -133,6 +133,15 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B,T> implements Busines
 		return currentTenant;
 	}
 
+	public void refreshTenantMap() {
+		tenantMap.clear();
+		BusinessPartnerList<T> tenants = this.listTenants();
+		for (BusinessPartner<T> bp : tenants.getBusinessPartner()) {
+			tenantMap.put(bp.getTaxId(), bp);
+		}
+		
+	}
+	
 
 	/**
 	 * Returns given setting.

@@ -42,6 +42,10 @@ public class TaxSubjectIdentifier implements Comparable<TaxSubjectIdentifier> {
 	
 	public TaxSubjectIdentifier() {};
 	
+	public TaxSubjectIdentifier(String taxId) {
+		this.taxId = taxId;
+	}
+	
 	public TaxSubjectIdentifier(String taxId, String countryCode) {
 		this.taxId = taxId;
 		this.countryCode = countryCode;
