@@ -200,6 +200,11 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B,T> implements Busines
 		}
 		
 	}
+	
+	@Override
+	public List<BusinessPartner<B>> lookupAllActiveCustomers() throws Exception {
+		return lookupAllBusinessPartners();
+	}
 
 	@Override
 	public List<AccountingVoucher> writeVouchers(List<AccountingVoucher> vouchers) throws Exception {

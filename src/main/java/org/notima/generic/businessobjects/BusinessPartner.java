@@ -38,6 +38,7 @@ public class BusinessPartner<B> {
 	private Boolean		isCustomer;
 	private Boolean		isVendor;
 	private String	countryCode;
+	private Boolean	active;	
 	
 	private transient B nativeBusinessPartner;
 	
@@ -299,6 +300,19 @@ public class BusinessPartner<B> {
 	@XmlTransient
 	public boolean isAnonymous() {
 		return !hasName() && !hasContacts();
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+	
+	@XmlTransient
+	public boolean isActive() {
+		return (active==null || active.booleanValue());
 	}
 	
 }

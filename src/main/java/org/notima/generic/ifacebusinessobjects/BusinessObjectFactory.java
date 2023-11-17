@@ -113,6 +113,14 @@ public interface BusinessObjectFactory<C,I,O,P,B,T> {
 	public List<BusinessPartner<B>> lookupAllBusinessPartners() throws Exception;	
 
 	/**
+	 * Lookup all business partners that are considered customers and active.
+	 * 	
+	 * @return
+	 * @throws Exception
+	 */
+	public List<BusinessPartner<B>> lookupAllActiveCustomers() throws Exception;
+	
+	/**
 	 * Looks up business partners
 	 * 
 	 * @param maxCount		The maximum number of business partners to return.
