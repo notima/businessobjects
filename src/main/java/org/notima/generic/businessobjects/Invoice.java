@@ -64,6 +64,9 @@ public class Invoice<I> implements OrderInvoice {
 	private String currency;
 	private String ourCustomerNo;
 	private String poDocumentNo;
+	private String buyerReference;
+	private String accountingCost;
+	private String contractDocumentReference;
 	private String	externalReference1;
 	private String	externalReference2;
 	private int	   roundingDecimals = 2;
@@ -528,6 +531,30 @@ public class Invoice<I> implements OrderInvoice {
 	
 	public String getComment() {
 		return comment;
+	}
+	
+	public String getBuyerReference() {
+		return buyerReference;
+	}
+
+	public void setBuyerReference(String buyerReference) {
+		this.buyerReference = buyerReference;
+	}
+
+	public String getAccountingCost() {
+		return accountingCost;
+	}
+
+	public void setAccountingCost(String accountingCost) {
+		this.accountingCost = accountingCost;
+	}
+
+	public String getContractDocumentReference() {
+		return contractDocumentReference;
+	}
+
+	public void setContractDocumentReference(String contractDocumentReference) {
+		this.contractDocumentReference = contractDocumentReference;
 	}
 
 	@Override
