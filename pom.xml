@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.notima.generic</groupId>
 	<artifactId>businessobjects</artifactId>
-	<version>0.1.23-SNAPSHOT</version>
+	<version>0.1.23</version>
 	<packaging>bundle</packaging>
 	<name>Notima Generic Business Objects</name>
 
@@ -19,7 +19,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<notima-util.version>0.0.5-SNAPSHOT</notima-util.version>
+		<notima-util.version>0.0.5</notima-util.version>
 	</properties>
 
 	<dependencies>
@@ -127,9 +127,7 @@
 				<configuration>
 					<serverId>ossrh</serverId>
 					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-					<!-- 
 					<autoReleaseAfterClose>true</autoReleaseAfterClose>
-					 -->
 					<stagingProgressTimeoutMinutes>25</stagingProgressTimeoutMinutes>
 					<keepStagingRepositoryOnCloseRuleFailure>true</keepStagingRepositoryOnCloseRuleFailure>
 					<keepStagingRepositoryOnFailure>true</keepStagingRepositoryOnFailure>
@@ -172,7 +170,7 @@
 					<execution>
 						<id>sign-artifacts</id>
 						<!-- verify if it should be signed, deploy when snapshot -->
-						<phase>deploy</phase>
+						<phase>verify</phase>
 						<goals>
 							<goal>sign</goal>
 						</goals>
