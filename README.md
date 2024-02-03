@@ -8,7 +8,7 @@ Releases are found in Maven-Central repository and can easliy be used by adding 
     <dependency>
         <groupId>org.notima.generic</groupId>
         <artifactId>businessobjects</artifactId>
-        <version>0.1.22</version>
+        <version>0.1.23</version>
     </dependency>
 
 Or in karaf
