@@ -25,6 +25,8 @@ public class Payment<P> {
 	private String	accountNo;
 	private String	comment;
 	private java.util.Date paymentDate;
+	private boolean	paymentRequest;
+	private PaymentInterval paymentInterval;
 	private Double	acctAmount;
 	private String	acctCurrency;
 	private Location	location;
@@ -163,6 +165,36 @@ public class Payment<P> {
 	}
 	public void setPaymentDate(java.util.Date paymentDate) {
 		this.paymentDate = paymentDate;
+	}
+
+	/**
+	 * A payment request indicates that this payment has not yet happened.
+	 * 
+	 * A vendor payment request is normally an instruction to the bank to
+	 * pay a specific payment at a specific date.
+	 * 
+	 * A customer payment request is normally some kind of automatic customer
+	 * payment that the customer have approved beforehand.
+	 * 
+	 * @return	True if this is a payment request.
+	 */
+	public boolean isPaymentRequest() {
+		return paymentRequest;
+	}
+	public void setPaymentRequest(boolean paymentRequest) {
+		this.paymentRequest = paymentRequest;
+	}
+	
+	/**
+	 * Some systems can schedule recurring payments at regular intervals.
+	 * 
+	 * @return
+	 */
+	public PaymentInterval getPaymentInterval() {
+		return paymentInterval;
+	}
+	public void setPaymentInterval(PaymentInterval paymentInterval) {
+		this.paymentInterval = paymentInterval;
 	}
 	public Double getAcctAmount() {
 		return acctAmount;
