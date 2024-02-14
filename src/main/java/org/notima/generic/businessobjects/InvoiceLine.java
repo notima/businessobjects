@@ -243,7 +243,10 @@ public class InvoiceLine implements OrderInvoiceLine {
 	public boolean isPricesIncludeVAT() {
 		return isTaxIncludedInPrice();
 	}
-
 	
+	@Override
+	public void setPricesIncludeVAT(boolean include) {
+		taxIncludedInPrice = include;
+	}
 	
 }

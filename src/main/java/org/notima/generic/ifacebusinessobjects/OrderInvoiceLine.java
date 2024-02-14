@@ -40,6 +40,8 @@ public interface OrderInvoiceLine {
 	
 	public boolean isPricesIncludeVAT();
 	
+	public void setPricesIncludeVAT(boolean include);
+	
 	/**
 	 * Price without discounts (per unit)
 	 */
