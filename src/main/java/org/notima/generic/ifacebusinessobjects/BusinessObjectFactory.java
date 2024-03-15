@@ -69,8 +69,7 @@ public interface BusinessObjectFactory<C,I,O,P,B,T> {
 	/**
 	 * If this flag is true, the adapter will try to enrich data as much as possible.
 	 * 
-	 * @param flag
-	 * @return
+	 * @param flag	The flag.
 	 */
 	public void setEnrichDataByDefault(boolean flag);
 	
