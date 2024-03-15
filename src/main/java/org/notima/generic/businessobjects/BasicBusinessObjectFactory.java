@@ -43,6 +43,8 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B,T> implements Busines
 	
 	protected BusinessPartner<T> currentTenant = null;
 	
+	protected boolean enrichDataByDefault = false;
+	
 	@Override
 	public List<Invoice<I>> lookupInvoiceWithReference(TransactionReference reference) throws Exception {
 
@@ -67,7 +69,15 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B,T> implements Busines
 		
 	}
 	
-	
+	public boolean isEnrichDataByDefault() {
+		return enrichDataByDefault;
+	}
+
+	public void setEnrichDataByDefault(boolean enrichDataByDefault) {
+		this.enrichDataByDefault = enrichDataByDefault;
+	}
+
+
 	/**
 	 * Adds a tenant to given business object factory.
 	 * Override this method to add real tenants to a business object factory.

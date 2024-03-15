@@ -67,6 +67,20 @@ public interface BusinessObjectFactory<C,I,O,P,B,T> {
 	public boolean removeTenant(String orgNo, String countryCode) throws Exception ;
 	
 	/**
+	 * If this flag is true, the adapter will try to enrich data as much as possible.
+	 * 
+	 * @param flag
+	 * @return
+	 */
+	public void setEnrichDataByDefault(boolean flag);
+	
+	/**
+	 * 
+	 * @return	True if enrich data by default is enabled.
+	 */
+	public boolean isEnrichDataByDefault();
+	
+	/**
 	 * 
 	 * @return	The current tenant.
 	 */
