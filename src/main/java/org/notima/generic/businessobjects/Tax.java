@@ -9,6 +9,10 @@ public class Tax {
 	private String key;
 	private double rate;
 	
+	private AccountElement	defaultRevenueAccount;
+	private AccountElement	taxDebtAccount;
+	private AccountElement	taxReceivableAccount;
+	
 	private LocalDate	validFrom;
 	private LocalDate	vaildUntil;
 	
@@ -97,5 +101,31 @@ public class Tax {
 	public void setRate(double rate) {
 		this.rate = rate;
 	}
+
+	public AccountElement getDefaultRevenueAccount() {
+		return defaultRevenueAccount;
+	}
+
+	public void setDefaultRevenueAccount(AccountElement defaultRevenueAccount) {
+		this.defaultRevenueAccount = defaultRevenueAccount;
+	}
+
+	public AccountElement getTaxDebtAccount() {
+		return taxDebtAccount;
+	}
+
+	public void setTaxDebtAccount(AccountElement taxDebtAccount) {
+		this.taxDebtAccount = taxDebtAccount;
+	}
+
+	public AccountElement getTaxReceivableAccount() {
+		return taxReceivableAccount;
+	}
+
+	public void setTaxReceivableAccount(AccountElement taxReceivableAccount) {
+		this.taxReceivableAccount = taxReceivableAccount;
+	}
+	
+	
 	
 }
