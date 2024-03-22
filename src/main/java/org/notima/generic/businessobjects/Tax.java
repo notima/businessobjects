@@ -22,6 +22,19 @@ public class Tax {
 
 	private boolean		reverseCharge;
 	
+	public Tax() {}
+	
+	public Tax(String key, String countryCode, double rate, String revenueVatCode, String debtVatCode, String receivableVatCode) {
+
+		this.key = key;
+		this.countryCode = countryCode;
+		this.rate = rate;
+		defaultRevenueAccount = new AccountElement().setVatCode(revenueVatCode);
+		taxDebtAccount = new AccountElement().setVatCode(debtVatCode);
+		taxReceivableAccount = new AccountElement().setVatCode(receivableVatCode);
+		
+	}
+	
 	public String getKey() {
 		return key;
 	}

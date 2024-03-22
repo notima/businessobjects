@@ -61,10 +61,10 @@ public class AccountElement {
 		return vatCode;
 	}
 
-	public void setVatCode(String vatCode) {
+	public AccountElement setVatCode(String vatCode) {
 		this.vatCode = vatCode;
+		return this;
 	}
-	
 	
 	
 }
