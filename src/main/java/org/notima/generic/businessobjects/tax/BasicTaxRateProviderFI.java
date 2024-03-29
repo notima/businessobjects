@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.notima.generic.businessobjects.Tax;
 import org.notima.generic.businessobjects.TaxSubjectIdentifier;
@@ -19,11 +21,14 @@ import org.notima.generic.ifacebusinessobjects.TaxRateProvider;
 public class BasicTaxRateProviderFI implements TaxRateProvider {
 
 	private Locale thisLocale = new Locale("","FI");
+	private Set<String> domiciles;
 	
 	protected List<Tax> taxList;
 	
 	public BasicTaxRateProviderFI() {
 		createFITaxList();
+		domiciles = new TreeSet<String>();
+		domiciles.add(this.thisLocale.getCountry());
 	}
 	
 	@Override
@@ -51,8 +56,8 @@ public class BasicTaxRateProviderFI implements TaxRateProvider {
 	}
 	
 	@Override
-	public String getTaxDomicile() {
-		return thisLocale.getCountry();
+	public Set<String> getTaxDomiciles() {
+		return domiciles;
 	}
 	
 	protected void createFITaxList() {

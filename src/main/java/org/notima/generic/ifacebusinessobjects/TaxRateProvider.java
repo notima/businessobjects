@@ -2,6 +2,7 @@ package org.notima.generic.ifacebusinessobjects;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import org.notima.generic.businessobjects.Tax;
 import org.notima.generic.businessobjects.TaxSubjectIdentifier;
@@ -26,15 +27,15 @@ public interface TaxRateProvider {
 	public String getSystemName();
 	
 	/**
-	 * The tax domicile of this tax rate provider. Can be null / undefined if the domicile is specified in the tax itself.
+	 * The tax domiciles of this tax rate provider.
 	 * 
 	 * @return
 	 */
-	public String getTaxDomicile();
+	public Set<String> getTaxDomiciles();
 	
 	/**
 	 * 
-	 * @param tsi			Tax subject identifier. This is the tenant / client of the system.
+	 * @param tsi			Tax subject identifier. This is the tenant / client of the system. Tax domicile of tsi is assumed.
 	 * @param taxDate		The date for which the taxes should be valid.
 	 * @return				A list of valid taxes that can be used for this tenant.
 	 * @throws NoSuchTenantException			If the tenant doesn't exist.
@@ -45,12 +46,12 @@ public interface TaxRateProvider {
 	/**
 	 * 
 	 * @param tsi			Tax subject identifier. This is the tenant / client of the system.
-	 * @param tradingCountry	Only return the valid tax rates for the given trading country.
+	 * @param taxDomicile	Query for specific tax domicile (if it differs from tsi).
 	 * @param taxDate		The date for which the taxes should be valid.
 	 * @return				A list of valid taxes that can be used for this tenant.
 	 * @throws NoSuchTenantException			If the tenant doesn't exist.
 	 * @throws TaxRatesNotAvailableException	If there are no tax rates available for this client / system / date.
 	 */
-	public List<Tax> getValidTaxRates(TaxSubjectIdentifier tsi, String tradingCountry, LocalDate taxDate) throws NoSuchTenantException, TaxRatesNotAvailableException;
+	public List<Tax> getValidTaxRates(TaxSubjectIdentifier tsi, String taxDomicile, LocalDate taxDate) throws NoSuchTenantException, TaxRatesNotAvailableException;
 	
 }
