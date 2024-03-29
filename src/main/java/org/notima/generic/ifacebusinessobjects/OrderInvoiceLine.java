@@ -28,6 +28,10 @@ public interface OrderInvoiceLine {
 	
 	public String getDescription();
 
+	public String getProject();
+	
+	public String getCostCenter();
+	
 	/**
 	 * Value 0 - 100
 	 * @return

@@ -33,6 +33,8 @@ public class InvoiceLine implements OrderInvoiceLine {
 	private boolean	taxIncludedInPrice;
 	private Double	priceNormal;
 	private String	accountNo;
+	private String	costCenter;
+	private String	project;
 	
 	@ManyToOne
 	private Product<?>	product;
@@ -247,6 +249,18 @@ public class InvoiceLine implements OrderInvoiceLine {
 	@Override
 	public void setPricesIncludeVAT(boolean include) {
 		taxIncludedInPrice = include;
+	}
+	public String getCostCenter() {
+		return costCenter;
+	}
+	public void setCostCenter(String costCenter) {
+		this.costCenter = costCenter;
+	}
+	public String getProject() {
+		return project;
+	}
+	public void setProject(String project) {
+		this.project = project;
 	}
 	
 }

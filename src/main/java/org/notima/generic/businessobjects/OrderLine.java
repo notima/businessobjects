@@ -27,6 +27,8 @@ public class OrderLine implements OrderInvoiceLine {
 	private String 	UOM;
 	private Double	priceNormal;
 	private boolean pricesIncludeVAT;
+	private String	project;
+	private String	costCenter;
 	
 	@ManyToOne
 	private Product<?> product;
@@ -231,8 +233,21 @@ public class OrderLine implements OrderInvoiceLine {
 	public void setLineNet(double lineNet) {
 		this.lineNet = lineNet;
 	}
-	
 
-	
+	public String getProject() {
+		return project;
+	}
+
+	public void setProject(String project) {
+		this.project = project;
+	}
+
+	public String getCostCenter() {
+		return costCenter;
+	}
+
+	public void setCostCenter(String costCenter) {
+		this.costCenter = costCenter;
+	}
 
 }

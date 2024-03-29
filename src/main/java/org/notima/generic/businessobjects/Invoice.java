@@ -84,6 +84,9 @@ public class Invoice<I> implements OrderInvoice {
 	
 	private String comment;
 	
+	private String	project;
+	private String	costCenter;
+	
 	private Map<String,BankAccountDetail>	bankAccountDetails = new TreeMap<String, BankAccountDetail>();
 	
 	private String	ocr;
@@ -602,6 +605,22 @@ public class Invoice<I> implements OrderInvoice {
 			return new TaxSubjectIdentifier(sender);
 		}
 		return null;
+	}
+	
+	public String getProject() {
+		return project;
+	}
+
+	public void setProject(String project) {
+		this.project = project;
+	}
+
+	public String getCostCenter() {
+		return costCenter;
+	}
+
+	public void setCostCenter(String costCenter) {
+		this.costCenter = costCenter;
 	}
 
 	@Override

@@ -102,4 +102,8 @@ public interface OrderInvoice {
 	public String getStatus();
 	
 	public void setStatus(String status);
+	
+	public String getProject();
+	
+	public String getCostCenter();
 }

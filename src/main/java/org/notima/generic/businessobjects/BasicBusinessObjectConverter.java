@@ -35,6 +35,8 @@ public class BasicBusinessObjectConverter<O,I> implements BusinessObjectConverte
 		dst.setOrderKey(src.getOrderKey()!=null ? src.getOrderKey() : src.getDocumentKey());
 		dst.setShipLocation(src.getShipLocation());
 		dst.setVatTotal(src.getVatTotal());
+		dst.setProject(src.getProject());
+		dst.setCostCenter(src.getCostCenter());
 
 		// Copy lines
 		List<OrderLine> olines = new ArrayList<OrderLine>();
@@ -70,6 +72,8 @@ public class BasicBusinessObjectConverter<O,I> implements BusinessObjectConverte
 		dst.setPaymentRule(src.getPaymentRule());
 		dst.setPaymentTermKey(src.getPaymentTermKey());
 		dst.setPoDocumentNo(src.getYourOrderNumber());
+		dst.setProject(src.getProject());
+		dst.setCostCenter(src.getCostCenter());
 		
 		// Copy lines
 		List<InvoiceLine> ilines = new ArrayList<InvoiceLine>();
@@ -104,6 +108,8 @@ public class BasicBusinessObjectConverter<O,I> implements BusinessObjectConverte
 		dst.setTaxKey(src.getTaxKey());
 		dst.setTaxIncludedInPrice(src.isPricesIncludeVAT());
 		dst.setUOM(src.getUOM());
+		dst.setProject(src.getProject());
+		dst.setCostCenter(src.getCostCenter());
 
 		dst.calculateLineTotalIncTax(2);
 		
@@ -136,6 +142,8 @@ public class BasicBusinessObjectConverter<O,I> implements BusinessObjectConverte
 		dst.setOrderKey(src.getOrderKey()!=null ? src.getOrderKey() : src.getDocumentKey());
 		dst.setShipLocation(src.getShipLocation());
 		dst.setVatTotal(src.getVatTotal());
+		dst.setProject(src.getProject());
+		dst.setCostCenter(src.getCostCenter());
 
 		// Copy lines
 		List<OrderLine> olines = new ArrayList<OrderLine>();
@@ -173,6 +181,8 @@ public class BasicBusinessObjectConverter<O,I> implements BusinessObjectConverte
 		dst.setTaxAmount(src.getTaxAmount());
 		dst.setLineNet(src.getLineNet());
 		dst.setPricesIncludeVAT(src.isPricesIncludeVAT());
+		dst.setCostCenter(src.getCostCenter());
+		dst.setProject(src.getProject());
 
 		dst.calculateLineTotalIncTax(2);
 		
@@ -206,6 +216,8 @@ public class BasicBusinessObjectConverter<O,I> implements BusinessObjectConverte
 		dst.setTaxAmount(src.getTaxAmount());
 		dst.setLineNet(src.getLineNet());
 		dst.setPricesIncludeVAT(src.isPricesIncludeVAT());
+		dst.setProject(src.getProject());
+		dst.setCostCenter(src.getCostCenter());
 
 		dst.calculateLineTotalIncTax(2);
 		

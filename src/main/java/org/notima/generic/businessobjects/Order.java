@@ -74,6 +74,9 @@ public class Order<O> implements OrderInvoice {
 	private OrderStatus	status;
 	private String statusComment;
 	
+	private String	project;
+	private String	costCenter;
+	
 	private transient O nativeOrder;
 	
 	private transient OrderInvoiceLineValidator	lineValidator;
@@ -771,6 +774,21 @@ public class Order<O> implements OrderInvoice {
 		return null;
 	}
 
+	public String getProject() {
+		return project;
+	}
+
+	public void setProject(String project) {
+		this.project = project;
+	}
+
+	public String getCostCenter() {
+		return costCenter;
+	}
+
+	public void setCostCenter(String costCenter) {
+		this.costCenter = costCenter;
+	}
 
 	@Override
 	public String getDeliveryCountry() {
