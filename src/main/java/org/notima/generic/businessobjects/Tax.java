@@ -13,6 +13,9 @@ public class Tax {
 	private AccountElement	taxDebtAccount;
 	private AccountElement	taxReceivableAccount;
 	
+	private boolean		appliesToServices = true;
+	private boolean		appliesToGoods = true;
+	
 	private LocalDate	validFrom;
 	private LocalDate	vaildUntil;
 	
@@ -29,9 +32,9 @@ public class Tax {
 		this.key = key;
 		this.countryCode = countryCode;
 		this.rate = rate;
-		defaultRevenueAccount = new AccountElement().setVatCode(revenueVatCode);
-		taxDebtAccount = new AccountElement().setVatCode(debtVatCode);
-		taxReceivableAccount = new AccountElement().setVatCode(receivableVatCode);
+		defaultRevenueAccount = new AccountElement().setTaxKey(revenueVatCode);
+		taxDebtAccount = new AccountElement().setTaxKey(debtVatCode);
+		taxReceivableAccount = new AccountElement().setTaxKey(receivableVatCode);
 		
 	}
 	
@@ -39,6 +42,10 @@ public class Tax {
 		return key;
 	}
 	
+	/**
+	 * This is the rate expressed in percent. That means that the value of 100.0 is 100 percent.
+	 * @return
+	 */
 	public double getRate() {
 		return rate;
 	}
@@ -111,10 +118,21 @@ public class Tax {
 		this.key = key;
 	}
 
+	/**
+	 * Sets the rate. 100.0 means 100 %.
+	 * 
+	 * @param rate
+	 */
 	public void setRate(double rate) {
 		this.rate = rate;
 	}
 
+	/**
+	 * This is the account element where revenue where this tax applies is normally
+	 * accounted.
+	 * 
+	 * @return
+	 */
 	public AccountElement getDefaultRevenueAccount() {
 		return defaultRevenueAccount;
 	}
@@ -123,6 +141,11 @@ public class Tax {
 		this.defaultRevenueAccount = defaultRevenueAccount;
 	}
 
+	/**
+	 * This is the account element where tax payables for this tax normally is accounted.
+	 * 
+	 * @return
+	 */
 	public AccountElement getTaxDebtAccount() {
 		return taxDebtAccount;
 	}
@@ -131,6 +154,11 @@ public class Tax {
 		this.taxDebtAccount = taxDebtAccount;
 	}
 
+	/**
+	 * This is the account element where tax to be refunded for this tax is normally accounted.
+	 * 
+	 * @return
+	 */
 	public AccountElement getTaxReceivableAccount() {
 		return taxReceivableAccount;
 	}
@@ -138,7 +166,31 @@ public class Tax {
 	public void setTaxReceivableAccount(AccountElement taxReceivableAccount) {
 		this.taxReceivableAccount = taxReceivableAccount;
 	}
-	
-	
+
+	/**
+	 * True if this tax is applicable to services rendered.
+	 * 
+	 * @return
+	 */
+	public boolean isAppliesToServices() {
+		return appliesToServices;
+	}
+
+	public void setAppliesToServices(boolean appliesToServices) {
+		this.appliesToServices = appliesToServices;
+	}
+
+	/**
+	 * This is this tax is applicable to goods sold / bought
+	 * 
+	 * @return
+	 */
+	public boolean isAppliesToGoods() {
+		return appliesToGoods;
+	}
+
+	public void setAppliesToGoods(boolean appliesToGoods) {
+		this.appliesToGoods = appliesToGoods;
+	}
 	
 }

@@ -16,7 +16,7 @@ public class AccountElement {
 	
 	private String	name;
 	
-	private String	vatCode;
+	private String	taxKey;
 	
 	public AccountElement() {}
 	
@@ -30,6 +30,12 @@ public class AccountElement {
 	public void setAccountNo(String accountNo) {
 		this.accountNo = accountNo;
 	}
+	
+	/**
+	 * 
+	 * @return	The account class.
+	 * @see AccountClass
+	 */
 	public String getAccountClass() {
 		return accountClass;
 	}
@@ -57,12 +63,17 @@ public class AccountElement {
 		this.name = name;
 	}
 
-	public String getVatCode() {
-		return vatCode;
+	/**
+	 * 
+	 * @return	A tax key if set. 
+	 * @see Tax
+	 */
+	public String getTaxKey() {
+		return taxKey;
 	}
 
-	public AccountElement setVatCode(String vatCode) {
-		this.vatCode = vatCode;
+	public AccountElement setTaxKey(String taxKey) {
+		this.taxKey = taxKey;
 		return this;
 	}
 	
