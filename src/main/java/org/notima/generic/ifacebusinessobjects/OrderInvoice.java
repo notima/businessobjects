@@ -37,6 +37,13 @@ public interface OrderInvoice {
 	 */
 	public TaxSubjectIdentifier getDocumentOwner();
 	
+	/**
+	 * Return the delivery country from a tax perspective
+	 * 
+	 * @return
+	 */
+	public String getDeliveryCountry();
+	
 	public java.util.Date getDocumentDate();
 	
 	public java.util.Date getDueDate();

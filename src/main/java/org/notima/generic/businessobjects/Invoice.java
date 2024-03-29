@@ -603,6 +603,27 @@ public class Invoice<I> implements OrderInvoice {
 		}
 		return null;
 	}
+
+	@Override
+	public String getDeliveryCountry() {
+		if (shipLocation!=null && shipLocation.getCountryCode()!=null) {
+			return shipLocation.getCountryCode();
+		}
+		
+		if (bpartner!=null) {
+			if (bpartner.getAddressShipping()!=null && bpartner.getAddressShipping().getCountryCode()!=null) {
+				return bpartner.getAddressShipping().getCountryCode();
+			}
+			if (bpartner.getAddressOfficial()!=null && bpartner.getAddressOfficial().getCountryCode()!=null) {
+				return bpartner.getAddressOfficial().getCountryCode();
+			}
+			if (bpartner.getCountryCode()!=null) {
+				return bpartner.getCountryCode();
+			}
+		}
+		
+		return null;
+	}
 	
 	
 }
