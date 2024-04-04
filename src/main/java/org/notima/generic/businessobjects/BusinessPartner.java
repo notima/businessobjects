@@ -39,7 +39,8 @@ public class BusinessPartner<B> {
 	private Boolean		isVendor;
 	private String	countryCode;
 	private Boolean	active;	
-	
+	private String	comments;
+
 	private transient B nativeBusinessPartner;
 	
 	public int getbPartnerId() {
@@ -313,6 +314,14 @@ public class BusinessPartner<B> {
 	@XmlTransient
 	public boolean isActive() {
 		return (active==null || active.booleanValue());
+	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
 	}
 	
 }
