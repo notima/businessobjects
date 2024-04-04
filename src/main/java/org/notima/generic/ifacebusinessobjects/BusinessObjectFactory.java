@@ -115,7 +115,7 @@ public interface BusinessObjectFactory<C,I,O,P,B,T> {
 	 * @return				A business partner
 	 * @throws Exception	If something goes wrong.
 	 */
-	public BusinessPartner<B> lookupBusinessPartner(String key) throws Exception;
+	public BusinessPartner<?> lookupBusinessPartner(String key) throws Exception;
 	
 	/**
 	 * Lookup all business partners
@@ -123,7 +123,7 @@ public interface BusinessObjectFactory<C,I,O,P,B,T> {
 	 * @return		A list of all business partners
 	 * @throws Exception
 	 */
-	public List<BusinessPartner<B>> lookupAllBusinessPartners() throws Exception;	
+	public List<BusinessPartner<?>> lookupAllBusinessPartners() throws Exception;	
 
 	/**
 	 * Lookup all business partners that are considered customers and active.
@@ -142,7 +142,7 @@ public interface BusinessObjectFactory<C,I,O,P,B,T> {
 	 * @return				A list of business partners
 	 * @throws Exception
 	 */
-	public List<BusinessPartner<B>> lookupBusinessPartners(int maxCount, boolean customers, boolean suppliers) throws Exception;
+	public List<BusinessPartner<?>> lookupBusinessPartners(int maxCount, boolean customers, boolean suppliers) throws Exception;
 	
 	/**
 	 * Returns information about this legal entity. This means not the customers or 

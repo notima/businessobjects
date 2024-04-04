@@ -210,12 +210,13 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B,T> implements Busines
 		}
 		
 	}
-	
+
 	@Override
 	public List<BusinessPartner<B>> lookupAllActiveCustomers() throws Exception {
-		return lookupAllBusinessPartners();
+		// TODO Auto-generated method stub
+		return null;
 	}
-
+	
 	@Override
 	public List<AccountingVoucher> writeVouchers(List<AccountingVoucher> vouchers) throws Exception {
 		// TODO Auto-generated method stub
