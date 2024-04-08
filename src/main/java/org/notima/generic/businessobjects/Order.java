@@ -77,6 +77,8 @@ public class Order<O> implements OrderInvoice {
 	private String	project;
 	private String	costCenter;
 	
+	private String	taxDomicile;
+	
 	private transient O nativeOrder;
 	
 	private transient OrderInvoiceLineValidator	lineValidator;
@@ -788,6 +790,14 @@ public class Order<O> implements OrderInvoice {
 
 	public void setCostCenter(String costCenter) {
 		this.costCenter = costCenter;
+	}
+	
+	public String getTaxDomicile() {
+		return taxDomicile;
+	}
+
+	public void setTaxDomicile(String taxDomicile) {
+		this.taxDomicile = taxDomicile;
 	}
 
 	@Override

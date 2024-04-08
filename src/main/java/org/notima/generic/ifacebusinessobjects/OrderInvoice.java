@@ -44,6 +44,12 @@ public interface OrderInvoice {
 	 */
 	public String getDeliveryCountry();
 	
+	/**
+	 * Return the tax/vat domicile of this order / invoiec
+	 * @return
+	 */
+	public String getTaxDomicile();
+	
 	public java.util.Date getDocumentDate();
 	
 	public java.util.Date getDueDate();
