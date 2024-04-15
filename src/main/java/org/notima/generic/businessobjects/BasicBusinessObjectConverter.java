@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
-import org.notima.generic.businessobjects.TaxSummary;
 
 import org.notima.generic.ifacebusinessobjects.BusinessObjectConverter;
 

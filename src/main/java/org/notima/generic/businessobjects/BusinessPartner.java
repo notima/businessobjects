@@ -15,9 +15,10 @@ import org.notima.util.TaxIdFormatter;
 import org.notima.util.TaxIdStructure;
 import org.notima.util.UnknownTaxIdFormatException;
 
+@SuppressWarnings("rawtypes")
 @Entity
 @XmlRootElement(name = "BusinessPartner")
-public class BusinessPartner<B> {
+public class BusinessPartner<B> implements Comparable {
 
 	@Id
 	@GeneratedValue
@@ -322,6 +323,28 @@ public class BusinessPartner<B> {
 
 	public void setComments(String comments) {
 		this.comments = comments;
+	}
+
+	@Override
+	public int compareTo(Object arg0) {
+		if (!(arg0 instanceof BusinessPartner)) {
+			return -1;
+		}
+		BusinessPartner<?> other = (BusinessPartner<?>)arg0;
+		if (other.hasIdentityNo() && this.hasIdentityNo()) {
+			return this.getIdentityNo().compareTo(other.getIdentityNo());
+		}
+		if (other.hasTaxId() && this.hasTaxId()) {
+			return this.getTaxId().compareTo(this.getTaxId());
+		}
+		if (!other.hasTaxId() && !other.hasIdentityNo() && !this.hasTaxId() && !this.hasIdentityNo()) {
+			// Compare name
+			if (this.getName()!=null) {
+				return this.getName().compareTo(this.getName());
+			}
+		}
+		
+		return -1;
 	}
 	
 }

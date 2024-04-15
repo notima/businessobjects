@@ -15,4 +15,29 @@ public class BPartnerTestFactory {
 		
 	}
 	
+	public static BusinessPartner<?> buildTestBusinessPartnerNameAndIdentityNo() {
+		
+		BusinessPartner<?> bp = new BusinessPartner<Object>(); 
+
+		bp.setName("Test Testsson 10");
+		bp.setIdentityNo("10");
+		
+		return bp;
+		
+	}
+	
+	public static BusinessPartner<?> buildTestBusinessPartnerSweden() {
+		
+		BusinessPartner<?> bp = new BusinessPartner<Object>(); 
+
+		bp.setName("Sven Svensson");
+		bp.setIdentityNo("101");
+		bp.setCountryCode("SE");
+		
+		return bp;
+		
+	}
+	
+	
+	
 }
