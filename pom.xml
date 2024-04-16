@@ -101,6 +101,7 @@
 										org.notima.generic.businessobjects,
 										org.notima.generic.businessobjects.util,
 										org.notima.generic.businessobjects.tax,
+										org.notima.generic.businessobjects.tools,
 										org.notima.generic.businessobjects.exception,
 										org.notima.generic.ifacebusinessobjects,
 										io.github.threetenjaxb.core
