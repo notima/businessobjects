@@ -335,12 +335,12 @@ public class BusinessPartner<B> implements Comparable {
 			return this.getIdentityNo().compareTo(other.getIdentityNo());
 		}
 		if (other.hasTaxId() && this.hasTaxId()) {
-			return this.getTaxId().compareTo(this.getTaxId());
+			return this.getTaxId().compareTo(other.getTaxId());
 		}
 		if (!other.hasTaxId() && !other.hasIdentityNo() && !this.hasTaxId() && !this.hasIdentityNo()) {
 			// Compare name
 			if (this.getName()!=null) {
-				return this.getName().compareTo(this.getName());
+				return this.getName().compareTo(other.getName());
 			}
 		}
 		
