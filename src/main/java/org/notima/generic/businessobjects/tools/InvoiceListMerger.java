@@ -44,6 +44,9 @@ public class InvoiceListMerger {
 		
 		list.setInvoiceList(newList);
 		
+		// Update the invoice map from the new list.
+		createBpInvoiceMap();
+		
 	}
 	
 	private Invoice<?> mergeIntoOneBasedOnBp(BusinessPartner<?> bp) {
