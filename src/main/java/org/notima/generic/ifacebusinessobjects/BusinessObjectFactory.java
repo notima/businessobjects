@@ -3,6 +3,8 @@ package org.notima.generic.ifacebusinessobjects;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 
 import org.notima.generic.businessobjects.AccountingVoucher;
@@ -27,6 +29,27 @@ public interface BusinessObjectFactory<C,I,O,P,B,T> {
 	 * @return	The system name of this adapter.
 	 */
 	public String getSystemName();
+
+	/**
+	 * 
+	 * @return 	 True if the factory is in debug mode.
+	 */
+	public boolean isDebug();
+
+	/**
+	 * Sets the directory to where debug information is to be written. What kind of information
+	 * is determined by the factory.
+	 * 
+	 * @param directory
+	 */
+	public void setDebugToDirectory(File directory) throws IOException;
+	
+	/**
+	 * Toggle the factory to debug mode.
+	 * 
+	 * @param debugOn
+	 */
+	public void setDebug(boolean debugOn);
 	
 	/**
 	 * List tenants for this business object factory.

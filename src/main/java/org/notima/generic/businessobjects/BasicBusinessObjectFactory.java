@@ -1,6 +1,11 @@
 package org.notima.generic.businessobjects;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -47,6 +52,10 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B,T> implements Busines
 	protected BusinessPartner<T> currentTenant = null;
 	
 	protected boolean enrichDataByDefault = false;
+	
+	protected boolean	debugOn = false;
+	
+	protected File		debugDirectory;
 	
 	@Override
 	public List<Invoice<I>> lookupInvoiceWithReference(TransactionReference reference) throws Exception {
@@ -254,5 +263,75 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B,T> implements Busines
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	/**
+	 * 
+	 * @return 	 True if the factory is in debug mode.
+	 */
+	public boolean isDebug() {
+		return debugOn;
+	}
+
+	/**
+	 * Sets the directory to where debug information is to be written. What kind of information
+	 * is determined by the factory.
+	 * 
+	 * @param directory
+	 * @throws IOException 
+	 */
+	public void setDebugToDirectory(File directory) throws IOException {
+		debugDirectory = directory;
+		if (debugDirectory!=null) {
+			createDebugDirectoryIfNotExists();
+		}
+	}
+
+	private void createDebugDirectoryIfNotExists() throws IOException {
+		if (!debugDirectory.exists()) {
+			Files.createDirectories(Paths.get(debugDirectory.getAbsolutePath()));
+		}
+		
+	}
+	
+	public void writeToDebugFile(String fileName, CharSequence content) throws IOException {
+		
+        // Combine the directory path and filename
+        Path filePath = Paths.get(debugDirectory.getAbsolutePath(), fileName);
+
+        // Write content to file
+        if (Files.exists(filePath)) {
+        	Files.write(filePath, content.toString().getBytes(), StandardOpenOption.APPEND);
+        } else {
+        	Files.write(filePath, content.toString().getBytes());
+        }
+		
+	}
+	
+	
+	/**
+	 * Toggle the factory to debug mode.
+	 * 
+	 * @param debugOn
+	 */
+	public void setDebug(boolean debugOn) {
+		this.debugOn = debugOn;
+		checkDebugDirectory();
+	}
+	
+	private void checkDebugDirectory() {
+		
+		if (debugOn && debugDirectory==null) {
+			// Set a default debug directory
+			Path directory = Paths.get(System.getProperty("user.home"), "debug_dir" + this.getSystemName());
+			try {
+				setDebugToDirectory(directory.toFile());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
 	
 }
