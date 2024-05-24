@@ -68,6 +68,24 @@ public class PaymentBatch {
 		return payments.get(0).getPaymentDate();
 	}
 	
+	public void addPayoutLine(PayoutLine pol) {
+		if (payoutLines==null) {
+			payoutLines = new ArrayList<PayoutLine>();
+		}
+		payoutLines.add(pol);
+	}
+
+	public List<PayoutLine> getPayoutLines() {
+		return payoutLines;
+	}
+	
+	/**
+	 * Creates payout lines based on the payments in the batch (unless payout lines are already added).
+	 * 
+	 * @return
+	 * @throws DateMismatchException
+	 * @throws CurrencyMismatchException
+	 */
 	public List<PayoutLine> retrievePayoutLines() throws DateMismatchException, CurrencyMismatchException {
 		
 		List<PayoutLine> result = new ArrayList<PayoutLine>();
@@ -85,8 +103,6 @@ public class PaymentBatch {
 		}
 		
 		payoutLines = result;
-		
-		
 		
 		return payoutLines;
 	}
