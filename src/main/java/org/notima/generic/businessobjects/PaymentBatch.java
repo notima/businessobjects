@@ -22,6 +22,7 @@ public class PaymentBatch {
 	private Payment.PaymentType		paymentType;				
 	private String					source;
 	private List<PayoutLine>		payoutLines;
+	private List<PayoutFee>			payoutFees;
 	private String					voucherSeries;
 	
 	private String generalLedgerUnknownTrxAccount;
@@ -68,15 +69,17 @@ public class PaymentBatch {
 		return payments.get(0).getPaymentDate();
 	}
 	
-	public void addPayoutLine(PayoutLine pol) {
-		if (payoutLines==null) {
-			payoutLines = new ArrayList<PayoutLine>();
+	/**
+	 * Add payout fee to this payment batch.
+	 * 
+	 * @param fee
+	 */
+	public void addPayoutFee(PayoutFee fee) {
+		if (fee==null) return;
+		if (payoutFees==null) {
+			payoutFees = new ArrayList<PayoutFee>();
 		}
-		payoutLines.add(pol);
-	}
-
-	public List<PayoutLine> getPayoutLines() {
-		return payoutLines;
+		payoutFees.add(fee);
 	}
 	
 	/**
@@ -91,6 +94,7 @@ public class PaymentBatch {
 		List<PayoutLine> result = new ArrayList<PayoutLine>();
 		PayoutLine pl = new PayoutLine();
 		pl.setDescription(source);
+		pl.setPayoutFees(payoutFees);
 		result.add(pl);
 		
 		// Make sure we have payments to process
