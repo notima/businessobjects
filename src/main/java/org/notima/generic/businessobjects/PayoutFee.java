@@ -7,11 +7,11 @@ package org.notima.generic.businessobjects;
 public class PayoutFee {
 
 	private	String	currency;
-	private String	feeAmount;
-	private String	vatAmount;
+	private Double	feeAmount = new Double(0);
+	private Double	vatAmount = new Double(0);
 	private String	taxKey;
 	private String	account;
-	private Double	amount;
+	private Double	amount = new Double(0);
 	private String	description;
 	
 	public String getCurrency() {
@@ -20,16 +20,16 @@ public class PayoutFee {
 	public void setCurrency(String currency) {
 		this.currency = currency;
 	}
-	public String getFeeAmount() {
+	public Double getFeeAmount() {
 		return feeAmount;
 	}
-	public void setFeeAmount(String feeAmount) {
+	public void setFeeAmount(Double feeAmount) {
 		this.feeAmount = feeAmount;
 	}
-	public String getVatAmount() {
+	public Double getVatAmount() {
 		return vatAmount;
 	}
-	public void setVatAmount(String vatAmount) {
+	public void setVatAmount(Double vatAmount) {
 		this.vatAmount = vatAmount;
 	}
 	public String getTaxKey() {
@@ -44,6 +44,20 @@ public class PayoutFee {
 	public void setAccount(String account) {
 		this.account = account;
 	}
+
+	/**
+	 * 
+	 * @return	Fee and VAT total
+	 */
+	public Double getFeeAndVatTotal() {
+		return vatAmount + feeAmount;
+	}
+	
+	/**
+	 * This is the amount that the fee is based on (if any).
+	 * 
+	 * @return
+	 */
 	public Double getAmount() {
 		return amount;
 	}

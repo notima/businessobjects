@@ -54,13 +54,13 @@ public class AccountingVoucher {
 		
 		AccountingVoucherLine vl;
 		
-		if (pl.getFeeAmount()!=0) {
-			vl = new AccountingVoucherLine(BigDecimal.valueOf(pl.getFeeAmount()), AccountingType.OTHER_EXPENSES_SALES);
+		if (pl.getTotalFeeAmount()!=0) {
+			vl = new AccountingVoucherLine(BigDecimal.valueOf(pl.getTotalFeeAmount()), AccountingType.OTHER_EXPENSES_SALES);
 			voucher.addVoucherLine(vl);
 		}
 
-		if (pl.getTaxAmount()!=0) {
-			vl = new AccountingVoucherLine(BigDecimal.valueOf(pl.getTaxAmount()), AccountingType.CLAIM_VAT);
+		if (pl.getTotalFeeTaxAmount()!=0) {
+			vl = new AccountingVoucherLine(BigDecimal.valueOf(pl.getTotalFeeTaxAmount()), AccountingType.CLAIM_VAT);
 			voucher.addVoucherLine(vl);
 		}
 		

@@ -23,9 +23,9 @@ public class PayoutLine {
 	private int		trxCount = 0;
 	private Double	paidByCustomer = new Double(0);
 	// Summarized fee amount of the payment specific fees in this payout
-	private Double	feeAmount = new Double(0);
+	private Double	totalFeeAmount = new Double(0);
 	// Summarized tax amount of the payment specific fees in this payout.
-	private Double	taxAmount = new Double(0);
+	private Double	totalFeeTaxAmount = new Double(0);
 	private String	taxKey;
 	private Double	taxRate;
 	private Double	paidOut = new Double(0);
@@ -65,7 +65,7 @@ public class PayoutLine {
 		// TODO: Include a VAT amount detector
 		
 		paidByCustomer += originalAmt;
-		feeAmount += fee;
+		totalFeeAmount += fee;
 		paidOut += paid;
 		
 		trxCount ++;
@@ -148,23 +148,23 @@ public class PayoutLine {
 	 * Summarized fee amount of all the payments contained in this payout.
 	 * @return
 	 */
-	public Double getFeeAmount() {
-		return feeAmount;
+	public Double getTotalFeeAmount() {
+		return totalFeeAmount;
 	}
-	public void setFeeAmount(Double feeAmount) {
-		this.feeAmount = feeAmount;
+	public void setTotalFeeAmount(Double feeAmount) {
+		this.totalFeeAmount = feeAmount;
 	}
 	
 	/**
 	 * Summarized tax amount of all the payments contained in this payout.
 	 * @return
 	 */
-	public Double getTaxAmount() {
-		return taxAmount;
+	public Double getTotalFeeTaxAmount() {
+		return totalFeeTaxAmount;
 	}
 	
-	public void setTaxAmount(Double taxAmount) {
-		this.taxAmount = taxAmount;
+	public void setTotalFeeTaxAmount(Double taxAmount) {
+		this.totalFeeTaxAmount = taxAmount;
 	}
 	public String getTaxKey() {
 		return taxKey;
@@ -251,6 +251,38 @@ public class PayoutLine {
 		this.payoutFees = payoutFees;
 	}
 
+	/**
+	 * Adds payout fees to fee total.
+	 * Handy to call if the fees are not specified in the voucher.
+	 */
+	public void addPayoutFeesToFeeTotal() {
+
+		if (payoutFees!=null) {
+			for (PayoutFee fee : payoutFees) {
+				addPayoutFeeToTotal(fee);
+				deductPaidOutWithPayoutFee(fee);
+			}
+		}
+		
+	}
+
+	private void addPayoutFeeToTotal(PayoutFee fee) {
+		if (fee!=null) {
+			if (fee.getFeeAmount()!=null) {
+				totalFeeAmount += fee.getFeeAmount();
+			}
+			if (fee.getVatAmount()!=null) {
+				totalFeeTaxAmount += fee.getVatAmount();
+			}
+		}
+	}
+	
+	private void deductPaidOutWithPayoutFee(PayoutFee fee) {
+		if (fee!=null) {
+			paidOut -= fee.getFeeAndVatTotal();
+		}
+	}
+	
 	public double getCurrencyRateToAccountingCurrency() {
 		return currencyRateToAccountingCurrency;
 	}
@@ -258,7 +290,5 @@ public class PayoutLine {
 	public void setCurrencyRateToAccountingCurrency(double currencyRateToAccountingCurrency) {
 		this.currencyRateToAccountingCurrency = currencyRateToAccountingCurrency;
 	}
-	
-	
 	
 }
