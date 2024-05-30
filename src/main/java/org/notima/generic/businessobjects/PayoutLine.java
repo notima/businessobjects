@@ -31,6 +31,8 @@ public class PayoutLine {
 	private Double	paidOut = new Double(0);
 	private Double	openingBalance = new Double(0);
 	private Double	endingBalance = new Double(0);
+	// Summarized deposit adjustment. +value means the deposit is added to. -value means the deposit is withdrawn.
+	private Double	totalDepositAdjustment = new Double(0);
 
 	private String	taxAcctNo;
 	private String	feeAcctNo;
@@ -41,6 +43,7 @@ public class PayoutLine {
 	private double	currencyRateToAccountingCurrency;
 	
 	private boolean	includedInOtherPayout = false;
+	private boolean	allowPaymentDateAfterPayoutDate = false;
 	
 	private String	description;
 
@@ -82,8 +85,10 @@ public class PayoutLine {
 				acctDate = LocalDateUtils.asLocalDate(payment.getPaymentDate());
 			} else {
 				// Compare
-				if (! paymentDate.isEqual(acctDate)) {
-					throw new DateMismatchException(acctDate, paymentDate);
+				if (!allowPaymentDateAfterPayoutDate) {
+					if (!paymentDate.isEqual(acctDate)) {
+						throw new DateMismatchException(acctDate, paymentDate);
+					}
 				}
 			}
 		}
@@ -143,7 +148,20 @@ public class PayoutLine {
 	public void setPaidByCustomer(Double paidByCustomer) {
 		this.paidByCustomer = paidByCustomer;
 	}
-	
+
+	/**
+	 * Deposit adjustment. A positive value means that payout is decreased and deposit increased.
+	 * 
+	 * @return
+	 */
+	public Double getTotalDepositAdjustment() {
+		return totalDepositAdjustment;
+	}
+
+	public void setTotalDepositAdjustment(Double totalDepositAdjustment) {
+		this.totalDepositAdjustment = totalDepositAdjustment;
+	}
+
 	/**
 	 * Summarized fee amount of all the payments contained in this payout.
 	 * @return
@@ -277,6 +295,14 @@ public class PayoutLine {
 		}
 	}
 	
+	public boolean isAllowPaymentDateAfterPayoutDate() {
+		return allowPaymentDateAfterPayoutDate;
+	}
+
+	public void setAllowPaymentDateAfterPayoutDate(boolean allowPaymentDateAfterPayoutDate) {
+		this.allowPaymentDateAfterPayoutDate = allowPaymentDateAfterPayoutDate;
+	}
+
 	private void deductPaidOutWithPayoutFee(PayoutFee fee) {
 		if (fee!=null) {
 			paidOut -= fee.getFeeAndVatTotal();

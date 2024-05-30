@@ -13,6 +13,7 @@ public class PayoutFee {
 	private String	account;
 	private Double	amount = new Double(0);
 	private String	description;
+	private boolean	depositAdjustment = false;
 	
 	public String getCurrency() {
 		return currency;
@@ -55,6 +56,7 @@ public class PayoutFee {
 	
 	/**
 	 * This is the amount that the fee is based on (if any).
+	 * Is this is a deposit / balance adjustment, this is the amount.
 	 * 
 	 * @return
 	 */
@@ -70,5 +72,17 @@ public class PayoutFee {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	/*
+	 * True if this is a deposit adjustment.
+	 */
+	public boolean isDepositAdjustment() {
+		return depositAdjustment;
+	}
+	public void setDepositAdjustment(boolean depositAdjustment) {
+		this.depositAdjustment = depositAdjustment;
+	}
+	
+	
 	
 }

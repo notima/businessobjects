@@ -9,6 +9,10 @@ public interface PaymentReportRow {
 	
 	public boolean isPayout();
 	
+	public boolean isDepositAdjustment();
+	
+	public String getCurrency();
+	
 	public boolean 	hasPaymentReference();
 	
 	public String	getPaymentReference();

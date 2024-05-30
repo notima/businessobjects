@@ -64,6 +64,11 @@ public class AccountingVoucher {
 			voucher.addVoucherLine(vl);
 		}
 		
+		if (pl.getTotalDepositAdjustment()!=0) {
+			vl = new AccountingVoucherLine(BigDecimal.valueOf(pl.getTotalDepositAdjustment()), AccountingType.ASSET_DEPOSIT);
+			voucher.addVoucherLine(vl);
+		}
+		
 		if (pl.getPaidOut()!=0) {
 			vl = new AccountingVoucherLine(BigDecimal.valueOf(pl.getPaidOut()), AccountingType.LIQUID_ASSET_CASH);
 			voucher.addVoucherLine(vl);
