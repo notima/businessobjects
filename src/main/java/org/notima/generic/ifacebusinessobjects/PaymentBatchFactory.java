@@ -4,6 +4,11 @@ import java.util.List;
 
 import org.notima.generic.businessobjects.PaymentBatch;
 
+/**
+ * This interface defines a class that creates payment batches using the specified source
+ * for a specified system.
+ * 
+ */
 public interface PaymentBatchFactory {
 
 	/**
