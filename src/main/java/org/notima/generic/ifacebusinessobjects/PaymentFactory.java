@@ -1,5 +1,7 @@
 package org.notima.generic.ifacebusinessobjects;
 
+import java.util.List;
+
 import org.notima.generic.businessobjects.PaymentBatch;
 
 /**
@@ -14,9 +16,9 @@ public interface PaymentFactory {
 	 * Reads payments from a source. The source format is determined by the implementation.
 	 * 
 	 * @param 		source			 
-	 * @return		A payment batch
+	 * @return		A list of payment batches
 	 */
-	public PaymentBatch readPaymentBatchFromSource(String source) throws Exception;
+	public List<PaymentBatch> readPaymentBatchesFromSource(String source) throws Exception;
 	
 	public String getSystemName();
 	

@@ -27,7 +27,7 @@ public class PaymentBatchChannelOptions {
 	}
 	
 	public boolean hasSourceProperties() {
-		return destinationProperties!=null && !destinationProperties.isEmpty();
+		return sourceProperties!=null && !sourceProperties.isEmpty();
 	}
 	
 	public String getSourceDirectory() {
