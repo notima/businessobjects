@@ -119,9 +119,33 @@ public class TaxSubjectIdentifier implements Comparable<TaxSubjectIdentifier> {
 		this.legalName = legalName;
 	}
 
+	public boolean hasName() {
+		return legalName!=null && legalName.trim().length()>0;
+	}
+	
 	public boolean isEqual(TaxSubjectIdentifier o) {
 		if (o==null) return false;
 		return o.compareTo(this) == 0;
+	}
+	
+	public String toString() {
+		StringBuffer buf = new StringBuffer();
+		if (hasTaxId()) {
+			buf.append(getTaxId());
+		}
+		if (hasCountryCode()) {
+			if (buf.length()>0) {
+				buf.append(" ");
+			}
+			buf.append(getCountryCode());
+		}
+		if (hasName()) {
+			if (buf.length()>0) {
+				buf.append(" ");
+			}
+			buf.append(getLegalName());
+		}
+		return buf.toString();
 	}
 	
 	@Override
