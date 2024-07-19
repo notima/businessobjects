@@ -12,6 +12,8 @@ public class PaymentBatchProcessOptions {
 	private boolean accountFeesOnly;
 	// Account fees on each payment if possible. If false (default), fees are lumped together
 	private boolean feesPerPayment = false;
+	// Account non matched payments on pre payment account
+	private boolean nonMatchedAsPrepayments = false;
 	// Only payout should be accounted (nothing else)
 	private boolean	accountPayoutOnly;
 	// The file should be kept after processing (not moved)
@@ -99,7 +101,12 @@ public class PaymentBatchProcessOptions {
 		this.feesPerPayment = feesPerPayment;
 	}
 	
-	
+	public boolean isNonMatchedAsPrepayments() {
+		return nonMatchedAsPrepayments;
+	}
+	public void setNonMatchedAsPrepayments(boolean nonMatchedAsPrepayments) {
+		this.nonMatchedAsPrepayments = nonMatchedAsPrepayments;
+	}
 	
 	
 }
