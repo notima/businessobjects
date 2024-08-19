@@ -402,6 +402,13 @@ public class AccountingVoucher {
 		}
 		
 		AccountingVoucherLine vl = new AccountingVoucherLine();
+		if (amount.signum()==-1) {
+			// Swap debet and credit
+			String tmp = new String(debetAcct);
+			debetAcct = creditAcct;
+			creditAcct = tmp;
+			amount = amount.negate();
+		}
 		vl.setDebitAmount(amount);
 		vl.setAcctNo(debetAcct);
 		lines.add(vl);
