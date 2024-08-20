@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.notima.generic.businessobjects.util.Translator;
+import org.notima.generic.ifacebusinessobjects.LanguageTranslator;
 
 public class TestTranslator {
 
@@ -20,7 +21,9 @@ public class TestTranslator {
 	@Test
 	public void testTranslator() {
 		
-		String translated = Translator.getTranslation(TEST_WORD, "sv");
+		LanguageTranslator tr = new Translator();
+		
+		String translated = tr.getTranslation(TEST_WORD, "sv");
 		System.out.println(translated);
 		
 		System.out.println(Translator.capitalizeFirstLetter(translated));

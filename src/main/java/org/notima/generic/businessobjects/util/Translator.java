@@ -6,13 +6,15 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 
+import org.notima.generic.ifacebusinessobjects.LanguageTranslator;
+
 /**
  * Class used to translate different business object's terms and other labels / etc.
  * 
  * @author Daniel Tamm
  *
  */
-public class Translator {
+public class Translator implements LanguageTranslator {
 	
 	public static final String BO_TRANSLATIONS_LABEL = "BOTranslations";
 	
@@ -56,7 +58,7 @@ public class Translator {
 	 * @param lang		The language to translate to
 	 * @return			A translation. If no translation is available the label itself is returned.
 	 */
-	public static String getTranslation(String label, String lang) {
+	public String getTranslation(String label, String lang) {
 		
 		// Locate the bundle
 		ResourceBundle b = bundles.get(lang);
@@ -93,6 +95,11 @@ public class Translator {
 		StringBuffer sb = new StringBuffer(text);
 		sb.replace(0, 1, text.substring(0, 1).toUpperCase());
 		return sb.toString();
+	}
+
+	@Override
+	public String getTranslationAndCapitalizeFirstLetter(String label, String lang) {
+		return capitalizeFirstLetter(getTranslation(label, lang));
 	}
 	
 	
