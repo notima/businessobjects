@@ -85,6 +85,33 @@ public class Translator implements LanguageTranslator {
 	}
 
 	/**
+	 * Returns true if there's a translation of the given label (key).
+	 * 
+	 * @param label		The label to translate
+	 * @param lang		The language to translate to
+	 * @return			True if a translation exists
+	 */
+	@Override
+	public boolean hasTranslation(String label, String lang) {
+		
+		// Locate the bundle
+		ResourceBundle b = bundles.get(lang);
+		if (b==null) {
+			return false;
+		} else {
+			String translation = null;
+			try {
+				translation = b.getString(label);
+				return translation != null && translation.trim().length()>0;
+			} catch (MissingResourceException me) {
+				return false;
+			}
+		}
+		
+	}
+	
+	
+	/**
 	 * Capitalizes first letter of a text.
 	 * 
 	 * @param text		The text.
@@ -101,7 +128,5 @@ public class Translator implements LanguageTranslator {
 	public String getTranslationAndCapitalizeFirstLetter(String label, String lang) {
 		return capitalizeFirstLetter(getTranslation(label, lang));
 	}
-	
-	
 	
 }

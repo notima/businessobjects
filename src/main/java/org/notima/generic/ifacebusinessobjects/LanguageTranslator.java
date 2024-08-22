@@ -10,6 +10,15 @@ public interface LanguageTranslator {
 	 * @return			A translation. If no translation is available the label itself is returned.
 	 */
 	String getTranslation(String label, String lang);
+	
+	/**
+	 * Returns true if there exists a translation for this label (key).
+	 * 
+	 * @param label
+	 * @param lang
+	 * @return
+	 */
+	boolean hasTranslation(String label, String lang);
 
 	/**
 	 * Returns a translation of the given label (key) and capitalizes the first letter.

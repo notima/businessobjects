@@ -1,5 +1,7 @@
 package org.notima.generic.businessobjects.test;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +25,8 @@ public class TestTranslator {
 		
 		LanguageTranslator tr = new Translator();
 		
-		String translated = tr.getTranslation(TEST_WORD, "sv");
+		String translated = tr.getTranslation(TEST_WORD, "sve");
+		assertEquals("Testar översätta kontoplan", translated, "kontoplan");
 		System.out.println(translated);
 		
 		System.out.println(Translator.capitalizeFirstLetter(translated));
