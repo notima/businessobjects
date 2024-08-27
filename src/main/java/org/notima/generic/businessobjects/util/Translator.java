@@ -128,5 +128,13 @@ public class Translator implements LanguageTranslator {
 	public String getTranslationAndCapitalizeFirstLetter(String label, String lang) {
 		return capitalizeFirstLetter(getTranslation(label, lang));
 	}
+
+	@Override
+	public String getTranslationAFL(String label, String lang) {
+		return getTranslationAndCapitalizeFirstLetter(label, lang);
+	}
+	
+	
+	
 	
 }
