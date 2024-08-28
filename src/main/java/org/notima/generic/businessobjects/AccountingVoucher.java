@@ -494,8 +494,7 @@ public class AccountingVoucher {
 	 */
 	private BigDecimal roundToPrecision(BigDecimal bd) {
 		if (precision!=null) {
-			BigInteger bi = bd.movePointRight(precision).toBigInteger();
-			bd = new BigDecimal(bi).movePointLeft(precision);
+			bd = bd.setScale(2, BigDecimal.ROUND_HALF_UP);
 		}
 		return bd;
 	}
