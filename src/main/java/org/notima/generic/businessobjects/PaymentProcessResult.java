@@ -12,6 +12,8 @@ public class PaymentProcessResult {
 
 	private ResultCode	resultCode = ResultCode.NOT_PROCESSED;
 	
+	private Payment<?>		resultingPayment;
+	
 	private StringBuffer	textResult;
 
 	private Exception		exception;
@@ -51,5 +53,15 @@ public class PaymentProcessResult {
 	public void setException(Exception exception) {
 		this.exception = exception;
 	}
+
+	public Payment<?> getResultingPayment() {
+		return resultingPayment;
+	}
+
+	public void setResultingPayment(Payment<?> resultingPayment) {
+		this.resultingPayment = resultingPayment;
+	}
+	
+	
 	
 }
