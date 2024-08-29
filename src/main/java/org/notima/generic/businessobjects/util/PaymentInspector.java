@@ -29,6 +29,10 @@ public class PaymentInspector {
 				buf.append("ClientOrder# " + payment.getClientOrderNo() + " ");
 			}
 			
+			if (payment.hasDestinationSystemReference()) {
+				buf.append("Ref: " + payment.getDestinationSystemReference() + " ");
+			}
+			
 		}
 		
 		return buf.toString().trim();
