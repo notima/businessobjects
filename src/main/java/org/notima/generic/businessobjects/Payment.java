@@ -80,24 +80,44 @@ public class Payment<P> {
 	public void setCurrency(String currency) {
 		this.currency = currency;
 	}
+	
+	public boolean hasOrderNo() {
+		return orderNo!=null && orderNo.trim().length()>0;
+	}
+	
 	public String getOrderNo() {
 		return orderNo;
 	}
 	public void setOrderNo(String orderNo) {
 		this.orderNo = orderNo;
 	}
+	
+	public boolean hasClientOrderNo() {
+		return clientOrderNo!=null && clientOrderNo.trim().length()>0;
+	}
+	
 	public String getClientOrderNo() {
 		return clientOrderNo;
 	}
 	public void setClientOrderNo(String clientOrderNo) {
 		this.clientOrderNo = clientOrderNo;
 	}
+	
+	public boolean hasInvoiceNo() {
+		return invoiceNo!=null && invoiceNo.trim().length()>0;
+	}
+	
 	public String getInvoiceNo() {
 		return invoiceNo;
 	}
 	public void setInvoiceNo(String invoiceNo) {
 		this.invoiceNo = invoiceNo;
 	}
+	
+	public boolean hasMatchedInvoiceNo() {
+		return matchedInvoiceNo!=null && matchedInvoiceNo.trim().length()>0;
+	}
+	
 	/**
 	 * The matched invoice number must be an existing invoice number is a real system.
 	 * 
@@ -153,6 +173,11 @@ public class Payment<P> {
 	public void setAccountNo(String accountNo) {
 		this.accountNo = accountNo;
 	}
+	
+	public boolean hasComment() {
+		return comment!=null && comment.trim().length()>0;
+	}
+	
 	public String getComment() {
 		return comment;
 	}
@@ -214,11 +239,16 @@ public class Payment<P> {
 	public void setLocation(Location location) {
 		this.location = location;
 	}
+	
 	public PaymentWriteOffs getPaymentWriteOffs() {
 		return paymentWriteOffs;
 	}
 	public void setPaymentWriteOffs(PaymentWriteOffs paymentWriteOffs) {
 		this.paymentWriteOffs = paymentWriteOffs;
+	}
+
+	public boolean hasTransactionReference() {
+		return transactionReference!=null;
 	}
 	
 	public TransactionReference getTransactionReference() {
@@ -232,6 +262,10 @@ public class Payment<P> {
 	}
 	public void setNativePayment(P nativePayment) {
 		this.nativePayment = nativePayment;
+	}
+	
+	public boolean hasDestinationSystemReference() {
+		return destinationSystemReference!=null && destinationSystemReference.trim().length()>0;
 	}
 	
 	public String getDestinationSystemReference() {

@@ -2,7 +2,6 @@ package org.notima.generic.businessobjects;
 
 import java.beans.Transient;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -10,6 +9,9 @@ import java.util.List;
 import java.util.Set;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import org.notima.generic.businessobjects.util.PaymentInspector;
+import org.notima.util.LocalDateUtils;
 
 import io.github.threetenjaxb.core.LocalDateTimeXmlAdapter;
 import io.github.threetenjaxb.core.LocalDateXmlAdapter;
@@ -40,6 +42,37 @@ public class AccountingVoucher {
 	
 	private List<AccountingVoucherLine> lines;
 
+	public static AccountingVoucher buildVoucherFromPayment(Payment<?> pmt, boolean ignoreWriteOffs) {
+		
+		AccountingVoucher voucher = new AccountingVoucher();
+		voucher.setAcctDate(LocalDateUtils.asLocalDate(pmt.getPaymentDate()));
+		PaymentInspector pi = new PaymentInspector(pmt);
+		voucher.setDescription(pi.getDetailedShortDescription());
+		
+		AccountingVoucherLine vl;
+		if (pmt.isCustomerPayment()) {
+			vl = new AccountingVoucherLine(BigDecimal.valueOf(pmt.getOriginalAmount()).negate(), AccountingType.LIQUID_ASSET_AR);
+			voucher.addVoucherLine(vl);
+			
+			vl = new AccountingVoucherLine(BigDecimal.valueOf(ignoreWriteOffs ? pmt.getOriginalAmount() : pmt.getAmount()), AccountingType.LIQUID_ASSET_CASH);
+			voucher.addVoucherLine(vl);
+			
+			if (pmt.hasPaymentWriteOffs() && !ignoreWriteOffs) {
+				PaymentWriteOffs pwo = pmt.getPaymentWriteOffs();
+				for (PaymentWriteOff p : pwo.getPaymentWriteOff()) {
+					vl = new AccountingVoucherLine(BigDecimal.valueOf(p.getAmount()), AccountingType.OTHER_EXPENSES_SALES);
+					voucher.addVoucherLine(vl);
+				}
+			}
+
+			voucher.balanceWithLine(AccountingType.ROUNDING);
+			
+		}
+		
+		return voucher;
+		
+	}
+	
 	/**
 	 * Creates an accounting voucher from a payout line
 	 * 
