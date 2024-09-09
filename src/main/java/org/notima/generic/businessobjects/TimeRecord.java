@@ -21,6 +21,10 @@ public class TimeRecord {
 	private double	hours;
 	private String 	externalReference;
 	private String	comment;
+	
+	private BusinessPartner<?> customer;
+	private Person	actor;
+	
 	public String getRecordId() {
 		return recordId;
 	}
@@ -74,6 +78,19 @@ public class TimeRecord {
 	}
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+	
+	public BusinessPartner<?> getCustomer() {
+		return customer;
+	}
+	public void setCustomer(BusinessPartner<?> customer) {
+		this.customer = customer;
+	}
+	public Person getActor() {
+		return actor;
+	}
+	public void setActor(Person actor) {
+		this.actor = actor;
 	}
 	
 	
