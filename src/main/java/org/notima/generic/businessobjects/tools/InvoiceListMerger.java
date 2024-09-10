@@ -42,6 +42,9 @@ public class InvoiceListMerger {
 			newList.add(mergedInvoice);
 		}
 		
+		bpInvoiceMap.clear();
+		
+     	// Update the invoice list with the new merged invoices.
 		list.setInvoiceList(newList);
 		
 		// Update the invoice map from the new list.
@@ -66,7 +69,7 @@ public class InvoiceListMerger {
 			}
 			
 		}
-
+		
 		return result;
 		
 	}

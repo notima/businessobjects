@@ -236,8 +236,7 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B,T> implements Busines
 	}
 	
 	@Override
-	public InvoiceOperationResult writeInvoices(List<Invoice<?>> canonicalInvoices, Date invoiceDate, Date dueDate,
-			boolean createBp, int createLimit, boolean updateExisting) throws Exception {
+	public InvoiceOperationResult writeInvoices(List<Invoice<?>> canonicalInvoices, InvoiceWriterOptions opts) throws Exception {
 
 		InvoiceList listToWrite = new InvoiceList();
 		listToWrite.setInvoiceList(canonicalInvoices);

@@ -10,6 +10,8 @@ public class InvoiceWriterOptions {
 	private boolean		mergeOnBusinessPartner;
 	private boolean		mapOnTaxId;
 	private boolean		mapOnAddressFirst;
+	private boolean		updateExisting = true;
+	private boolean		createBusinessPartner;
 	
 	public LocalDate getInvoiceDate() {
 		return invoiceDate;
@@ -47,7 +49,17 @@ public class InvoiceWriterOptions {
 	public void setMapOnAddressFirst(boolean mapOnAddressFirst) {
 		this.mapOnAddressFirst = mapOnAddressFirst;
 	}
-	
-	
+	public boolean isUpdateExisting() {
+		return updateExisting;
+	}
+	public void setUpdateExisting(boolean updateExisting) {
+		this.updateExisting = updateExisting;
+	}
+	public boolean isCreateBusinessPartner() {
+		return createBusinessPartner;
+	}
+	public void setCreateBusinessPartner(boolean createBusinessPartner) {
+		this.createBusinessPartner = createBusinessPartner;
+	}
 	
 }

@@ -13,6 +13,7 @@ import org.notima.generic.businessobjects.BusinessPartnerList;
 import org.notima.generic.businessobjects.DunningRun;
 import org.notima.generic.businessobjects.Invoice;
 import org.notima.generic.businessobjects.InvoiceOperationResult;
+import org.notima.generic.businessobjects.InvoiceWriterOptions;
 import org.notima.generic.businessobjects.Order;
 import org.notima.generic.businessobjects.PaymentTerm;
 import org.notima.generic.businessobjects.PriceList;
@@ -296,21 +297,13 @@ public interface BusinessObjectFactory<C,I,O,P,B,T> {
 	/**
 	 * Write invoices to underlaying system.
 	 * 
-	 * @param canonicalInvoices			The invoiecs to be written.
-	 * @param invoiceDate				The invoice date for the invoices.
-	 * @param dueDate					The due date for the invoices.
-	 * @param createBp					If business partner should be created (if not existing).
-	 * @param createLimit				Max number of invoices to create (handy for testing).
-	 * @param updateExisting			If existing invoice(s) should be updated.
-	 * @return							
+	 * @param canonicalInvoices			The invoices to be written.
+	 * @param opts						What options to use when writing the invoices
+	 * @return							The result of the operation		
 	 * @throws Exception
 	 */
 	public InvoiceOperationResult writeInvoices(List<Invoice<?>> canonicalInvoices, 
-			java.util.Date invoiceDate,
-			java.util.Date dueDate,
-			boolean createBp, 
-			int createLimit,
-			boolean updateExisting) throws Exception;
+			InvoiceWriterOptions opts) throws Exception;
 	
 	/**
 	 * Attach file to voucher in underlaying system.
