@@ -7,6 +7,7 @@ public class Message {
     private String body;
     private String subject;
     private String contentType = "text/plain;charset=utf-8";
+    private Person sender;
     private Person recipient;
     private File recipientPublicKey;
     private boolean encrypted;
@@ -36,8 +37,16 @@ public class Message {
     public void setContentType(String contentType) {
         this.contentType = contentType;
     }
+    
+    public Person getSender() {
+		return sender;
+	}
 
-    public Person getRecipient() {
+	public void setSender(Person sender) {
+		this.sender = sender;
+	}
+
+	public Person getRecipient() {
         return recipient;
     }
 
