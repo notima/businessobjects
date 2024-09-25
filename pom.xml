@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.notima.generic</groupId>
 	<artifactId>businessobjects</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>bundle</packaging>
 	<name>Notima Generic Business Objects</name>
 
@@ -19,7 +19,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<notima-util.version>0.0.6-SNAPSHOT</notima-util.version>
+		<notima-util.version>0.0.6</notima-util.version>
 	</properties>
 
 	<dependencies>
@@ -172,7 +172,7 @@
 					<execution>
 						<id>sign-artifacts</id>
 						<!-- verify if it should be signed, deploy when snapshot -->
-						<phase>deploy</phase>
+						<phase>verify</phase>
 						<goals>
 							<goal>sign</goal>
 						</goals>
