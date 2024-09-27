@@ -10,13 +10,13 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.Vector;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
 
 import org.notima.generic.ifacebusinessobjects.FactoringReservation;
 import org.notima.generic.ifacebusinessobjects.OrderInvoice;
@@ -633,7 +633,7 @@ public class Order<O> implements OrderInvoice {
 			}
 			taxKey = il.getTaxKey();
 			if (taxKey==null) {
-				taxKey = new Double(il.getTaxPercent()).toString();
+				taxKey = Double.valueOf(il.getTaxPercent()).toString();
 			}
 
 			ts = result.get(taxKey);

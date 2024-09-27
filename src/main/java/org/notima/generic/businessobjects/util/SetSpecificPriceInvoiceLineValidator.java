@@ -11,7 +11,7 @@ public class SetSpecificPriceInvoiceLineValidator implements OrderInvoiceLineVal
 	private double taxPercent;
 	private boolean priceIncludesTax;
 	private OrderInvoiceLine il;
-	private OrderInvoice oi;
+	protected OrderInvoice oi;
 
 	/**
 	 * Updates prices

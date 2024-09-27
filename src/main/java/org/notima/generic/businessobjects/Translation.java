@@ -2,8 +2,6 @@ package org.notima.generic.businessobjects;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-
 /**
  * Class used to pass translations
  * 

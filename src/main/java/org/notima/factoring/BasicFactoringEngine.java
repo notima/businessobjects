@@ -5,8 +5,8 @@ import java.util.Hashtable;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.Marshaller;
 
 import org.notima.generic.businessobjects.*;
 import org.notima.generic.ifacebusinessobjects.BusinessObjectFactory;

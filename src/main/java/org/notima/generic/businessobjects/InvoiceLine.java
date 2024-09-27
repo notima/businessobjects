@@ -1,11 +1,10 @@
-	package org.notima.generic.businessobjects;
+package org.notima.generic.businessobjects;
 
-
+import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 
 import org.notima.generic.ifacebusinessobjects.OrderInvoiceLine;
 
@@ -174,17 +173,10 @@ public class InvoiceLine implements OrderInvoiceLine {
 	 * @param roundingDecimals
 	 * @return
 	 */
-	/*public static double round(double value, int roundingDecimals) {
-		// Round to rounding decimals
-		double power = Math.pow(10.0, (double)roundingDecimals);
-		double rounded = (double)(Math.round(value * power)) / power;
-		return rounded;
-	}*/
-	
 	public static double round(double value, int roundingDecimals) {
-		DecimalFormat df = new DecimalFormat("#." + new String(new char[roundingDecimals]).replace("\0", "#"));
-		df.setRoundingMode(RoundingMode.HALF_DOWN);
-		return Double.parseDouble(df.format(value).replace(',', '.'));
+		BigDecimal bd = BigDecimal.valueOf(value);
+        bd = bd.setScale(roundingDecimals, RoundingMode.HALF_DOWN);
+        return bd.doubleValue();
 	}
 	
 	public boolean isTaxIncludedInPrice() {

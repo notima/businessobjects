@@ -2,19 +2,15 @@ package org.notima.generic.businessobjects;
 
 import java.beans.Transient;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
 import org.notima.generic.businessobjects.util.PaymentInspector;
 import org.notima.util.LocalDateUtils;
-
-import io.github.threetenjaxb.core.LocalDateTimeXmlAdapter;
-import io.github.threetenjaxb.core.LocalDateXmlAdapter;
 
 /**
  * A general accounting voucher.
@@ -113,7 +109,6 @@ public class AccountingVoucher {
 		
 	}
 	
-	@XmlJavaTypeAdapter(LocalDateXmlAdapter.class)	
 	public LocalDate getAcctDate() {
 		return acctDate;
 	}
@@ -122,7 +117,6 @@ public class AccountingVoucher {
 		this.acctDate = acctDate;
 	}
 
-	@XmlJavaTypeAdapter(LocalDateTimeXmlAdapter.class)	
 	public LocalDateTime getRegDate() {
 		return regDate;
 	}
@@ -527,7 +521,7 @@ public class AccountingVoucher {
 	 */
 	private BigDecimal roundToPrecision(BigDecimal bd) {
 		if (precision!=null) {
-			bd = bd.setScale(2, BigDecimal.ROUND_HALF_UP);
+			bd = bd.setScale(2, RoundingMode.HALF_UP);
 		}
 		return bd;
 	}

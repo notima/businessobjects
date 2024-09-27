@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.notima.generic</groupId>
 	<artifactId>businessobjects</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 	<name>Notima Generic Business Objects</name>
 
@@ -19,21 +19,30 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<notima-util.version>0.0.6</notima-util.version>
+		<karaf.version>4.4.6</karaf.version>
+		<notima-util.version>0.0.7</notima-util.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
-			<groupId>javax.persistence</groupId>
-			<artifactId>javax.persistence-api</artifactId>
-			<version>2.2</version>
+			<groupId>jakarta.persistence</groupId>
+			<artifactId>jakarta.persistence-api</artifactId>
+			<version>3.2.0</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>jakarta.xml.bind</groupId>
+		    <artifactId>jakarta.xml.bind-api</artifactId>
+		    <version>4.0.2</version>
 		</dependency>
 
+		<!-- JAXB implementation -->
+
 		<dependency>
-			<groupId>io.github.threeten-jaxb</groupId>
-			<artifactId>threeten-jaxb-core</artifactId>
-			<version>1.2</version>
-		</dependency>
+		        <groupId>org.glassfish.jaxb</groupId>
+		        <artifactId>jaxb-runtime</artifactId>
+		        <version>4.0.2</version>
+	    </dependency>
 
 		<dependency>
 			<groupId>org.notima</groupId>
@@ -42,12 +51,19 @@
 		</dependency>
 
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.13.1</version>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>5.10.1</version>
 			<scope>test</scope>
 		</dependency>
-
+		
+		<dependency>
+			<groupId>org.junit.vintage</groupId>
+			<artifactId>junit-vintage-engine</artifactId>
+			<version>5.10.1</version>
+			<scope>test</scope>
+		</dependency>
+		
 	</dependencies>
 	
 	<build>
@@ -72,7 +88,7 @@
                 <plugin>
                     <groupId>org.apache.karaf.tooling</groupId>
                     <artifactId>karaf-maven-plugin</artifactId>
-                    <version>4.2.0</version>
+                    <version>${karaf.version}</version>
                     <extensions>true</extensions>
                 </plugin>
             </plugins>
@@ -83,17 +99,17 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.0.2</version>
+				<version>3.10.1</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>21</source>
+					<target>21</target>
 				</configuration>
 			</plugin>
 
 			<plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
-				<version>4.2.0</version>
+				<version>5.1.8</version>
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
@@ -103,20 +119,14 @@
 										org.notima.generic.businessobjects.tax,
 										org.notima.generic.businessobjects.tools,
 										org.notima.generic.businessobjects.exception,
-										org.notima.generic.ifacebusinessobjects,
-										io.github.threetenjaxb.core
+										org.notima.generic.ifacebusinessobjects
 						</Export-Package>
 						<Import-Package>
-							javax.xml.bind;version="[2.2,3)",
-							javax.xml.bind.annotation;version="[2.2,3)",
-							javax.xml.bind.annotation.adapters;version="[2.2,3)",
-							!org.notima.generic.businessobjects*,
-							!org.glassfish.hk2.osgiresourcelocator,
-							!com.sun.activation.registries,
+							jakarta.xml.bind;version="[3.0,4.1)",
+							jakarta.xml.bind.annotation;version="[3.0,4.1)",
+							jakarta.xml.bind.annotation.adapters;version="[3.0,4.1)",
 							*
 						</Import-Package>
-						<Embed-Dependency>*;scope=compile|runtime;artifactId=!jakarta.xml.bind-api|slf4j-api|slf4j-log4j12|log4j|javax.persistence-api|bankgiro-api</Embed-Dependency>
-						<Embed-Transitive>true</Embed-Transitive>						
 					</instructions>
 				</configuration>
 			</plugin>
@@ -124,7 +134,7 @@
 			<plugin>
 				<groupId>org.sonatype.plugins</groupId>
 				<artifactId>nexus-staging-maven-plugin</artifactId>
-				<version>1.6.7</version>
+				<version>1.6.13</version>
 				<extensions>true</extensions>
 				<configuration>
 					<serverId>ossrh</serverId>
@@ -139,7 +149,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>2.2.1</version>
+				<version>3.2.1</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -153,7 +163,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9.1</version>
+				<version>3.5.0</version>
 				<executions>
 					<execution>
 						<id>attach-javadocs</id>
@@ -167,7 +177,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-gpg-plugin</artifactId>
-				<version>1.5</version>
+				<version>3.0.1</version>
 				<executions>
 					<execution>
 						<id>sign-artifacts</id>
@@ -193,7 +203,7 @@
 
 	<url>https://github.com/notima/businessobjects</url>
 	<organization>
-		<name>Notima System Integration AB</name>
+		<name>Ekonomibolaget Notima AB</name>
 		<url>https://github.com/notima</url>
 	</organization>
 	<scm>
@@ -210,7 +220,7 @@
 		<developer>
 			<name>Daniel Tamm</name>
 			<email>daniel@notima.se</email>
-			<organization>Notima System Integration AB</organization>
+			<organization>Ekonomibolaget Notima AB</organization>
 			<organizationUrl>https://github.com/notima</organizationUrl>
 		</developer>
 	</developers>

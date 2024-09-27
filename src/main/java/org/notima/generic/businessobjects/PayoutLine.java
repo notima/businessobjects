@@ -21,18 +21,18 @@ public class PayoutLine {
 	private LocalDate	acctDate;
 	
 	private int		trxCount = 0;
-	private Double	paidByCustomer = new Double(0);
+	private Double	paidByCustomer = Double.valueOf(0);
 	// Summarized fee amount of the payment specific fees in this payout
-	private Double	totalFeeAmount = new Double(0);
+	private Double	totalFeeAmount = Double.valueOf(0);
 	// Summarized tax amount of the payment specific fees in this payout.
-	private Double	totalFeeTaxAmount = new Double(0);
+	private Double	totalFeeTaxAmount = Double.valueOf(0);
 	private String	taxKey;
 	private Double	taxRate;
-	private Double	paidOut = new Double(0);
-	private Double	openingBalance = new Double(0);
-	private Double	endingBalance = new Double(0);
+	private Double	paidOut = Double.valueOf(0);
+	private Double	openingBalance = Double.valueOf(0);
+	private Double	endingBalance = Double.valueOf(0);
 	// Summarized deposit adjustment. +value means the deposit is added to. -value means the deposit is withdrawn.
-	private Double	totalDepositAdjustment = new Double(0);
+	private Double	totalDepositAdjustment = Double.valueOf(0);
 
 	private String	taxAcctNo;
 	private String	feeAcctNo;

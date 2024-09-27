@@ -7,11 +7,11 @@ package org.notima.generic.businessobjects;
 public class PayoutFee {
 
 	private	String	currency;
-	private Double	feeAmount = new Double(0);
-	private Double	vatAmount = new Double(0);
+	private Double	feeAmount = Double.valueOf(0);
+	private Double	vatAmount = Double.valueOf(0);
 	private String	taxKey;
 	private String	account;
-	private Double	amount = new Double(0);
+	private Double	amount = Double.valueOf(0);
 	private String	description;
 	private boolean	depositAdjustment = false;
 	

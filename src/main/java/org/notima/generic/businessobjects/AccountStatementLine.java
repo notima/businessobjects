@@ -2,10 +2,6 @@ package org.notima.generic.businessobjects;
 
 import java.time.LocalDate;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import io.github.threetenjaxb.core.LocalDateXmlAdapter;
-
 /**
  * Represents an account statement line
  * 
@@ -32,7 +28,6 @@ public class AccountStatementLine {
 		this.lineNumber = lineNumber;
 	}
 	
-	@XmlJavaTypeAdapter(LocalDateXmlAdapter.class)
 	public LocalDate getAccountDate() {
 		return accountDate;
 	}

@@ -2,7 +2,7 @@ package org.notima.generic.businessobjects;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 /**
  * A custom object. The purpose is to be able to use it if no other existing fits.

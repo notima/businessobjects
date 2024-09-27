@@ -20,7 +20,7 @@ public class Translator implements LanguageTranslator {
 	
 	public static Locale[] supportedLocales = {
 			Locale.ENGLISH,
-			new Locale("sv")
+			Locale.forLanguageTag("sv")
 	};
 
 	private static Map<String, ResourceBundle> bundles;

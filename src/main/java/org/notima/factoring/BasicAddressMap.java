@@ -2,9 +2,6 @@ package org.notima.factoring;
 
 import java.util.Map;
 
-import org.notima.factoring.AbstractAddress;
-
-
 public class BasicAddressMap extends AbstractAddress {
 
 	private Map<String,String>	m_adrMap; 

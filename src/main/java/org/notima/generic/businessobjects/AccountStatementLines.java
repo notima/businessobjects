@@ -4,11 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import io.github.threetenjaxb.core.LocalDateXmlAdapter;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 /**
  * A collection of account statement lines
@@ -36,7 +33,6 @@ public class AccountStatementLines {
 		return startDate;
 	}
 
-	@XmlJavaTypeAdapter(LocalDateXmlAdapter.class)
 	public void setStartDate(java.time.LocalDate startDate) {
 		this.startDate = startDate;
 	}
@@ -45,7 +41,6 @@ public class AccountStatementLines {
 		return endDate;
 	}
 
-	@XmlJavaTypeAdapter(LocalDateXmlAdapter.class)
 	public void setEndDate(java.time.LocalDate endDate) {
 		this.endDate = endDate;
 	}

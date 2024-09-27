@@ -1,8 +1,8 @@
 package org.notima.generic.businessobjects;
 
-import java.beans.Transient;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.persistence.Transient;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "payment")
 public class Payment<P> {
@@ -63,8 +63,8 @@ public class Payment<P> {
 	}
 	
 	public void addToAmountAndOriginalAmount(double add) {
-		if (amount==null) amount = new Double(0);
-		if (originalAmount==null) originalAmount = new Double(0);
+		if (amount==null) amount = Double.valueOf(0);
+		if (originalAmount==null) originalAmount = Double.valueOf(0);
 		amount += add;
 		originalAmount += add;
 	}
@@ -282,7 +282,7 @@ public class Payment<P> {
 	}
 	public void calculateAmountDeductingWriteOffsFromOriginalAmount() {
 		if (originalAmount==null) {
-			originalAmount = new Double(amount);
+			originalAmount = Double.valueOf(amount);
 		}
 		if (paymentWriteOffs!=null && paymentWriteOffs.getPaymentWriteOff()!=null) {
 			for (PaymentWriteOff pwo : paymentWriteOffs.getPaymentWriteOff()) {

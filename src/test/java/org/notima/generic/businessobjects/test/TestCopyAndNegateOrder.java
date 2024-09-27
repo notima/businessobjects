@@ -1,9 +1,8 @@
 package org.notima.generic.businessobjects.test;
 
-import java.io.File;
 import java.io.PrintWriter;
 
-import javax.xml.bind.JAXB;
+import jakarta.xml.bind.JAXB;
 
 import org.junit.After;
 import org.junit.Before;

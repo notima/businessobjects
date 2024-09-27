@@ -13,13 +13,13 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
 
-import javax.xml.bind.JAXB;
+import jakarta.xml.bind.JAXB;
 
 import org.notima.generic.businessobjects.exception.NoSuchTenantException;
 import org.notima.generic.ifacebusinessobjects.BusinessObjectFactory;
 
 /*
- *    Copyright 2020 Notima System Integration AB
+ *    Copyright 2020,2024 Ekonomibolaget Notima AB
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

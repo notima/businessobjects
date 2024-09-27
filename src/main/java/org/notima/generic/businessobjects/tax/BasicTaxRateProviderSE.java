@@ -20,7 +20,7 @@ import org.notima.generic.ifacebusinessobjects.TaxRateProvider;
  */
 public class BasicTaxRateProviderSE implements TaxRateProvider {
 
-	private Locale thisLocale = new Locale("","SE");
+	private Locale thisLocale = Locale.forLanguageTag("sv-SE");
 	private Set<String> domiciles;
 	
 	protected List<Tax> taxList;

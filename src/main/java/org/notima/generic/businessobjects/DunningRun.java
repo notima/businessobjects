@@ -3,7 +3,7 @@ package org.notima.generic.businessobjects;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "DunningRun")
 public class DunningRun <B,I> {

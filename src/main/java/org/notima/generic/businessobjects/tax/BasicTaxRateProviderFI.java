@@ -20,7 +20,7 @@ import org.notima.generic.ifacebusinessobjects.TaxRateProvider;
  */
 public class BasicTaxRateProviderFI implements TaxRateProvider {
 
-	private Locale thisLocale = new Locale("","FI");
+	private Locale thisLocale = Locale.forLanguageTag("fi-FI");
 	private Set<String> domiciles;
 	
 	protected List<Tax> taxList;

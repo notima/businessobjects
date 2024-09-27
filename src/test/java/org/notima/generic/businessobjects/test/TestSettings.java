@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
 
-import javax.xml.bind.JAXB;
+import jakarta.xml.bind.JAXB;
 
 import org.notima.generic.businessobjects.BusinessPartner;
 import org.notima.generic.businessobjects.Order;
