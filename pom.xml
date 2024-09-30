@@ -33,7 +33,7 @@
 		<dependency>
 		    <groupId>jakarta.xml.bind</groupId>
 		    <artifactId>jakarta.xml.bind-api</artifactId>
-		    <version>4.0.2</version>
+		    <version>3.0.1</version>
 		</dependency>
 
 		<!-- JAXB implementation -->
@@ -122,9 +122,9 @@
 										org.notima.generic.ifacebusinessobjects
 						</Export-Package>
 						<Import-Package>
-							jakarta.xml.bind;version="[3.0,4.1)",
-							jakarta.xml.bind.annotation;version="[3.0,4.1)",
-							jakarta.xml.bind.annotation.adapters;version="[3.0,4.1)",
+							jakarta.xml.bind,
+							jakarta.xml.bind.annotation,
+							jakarta.xml.bind.annotation.adapters,
 							*
 						</Import-Package>
 					</instructions>
