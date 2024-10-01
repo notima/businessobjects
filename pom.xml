@@ -41,7 +41,7 @@
 		<dependency>
 		        <groupId>org.glassfish.jaxb</groupId>
 		        <artifactId>jaxb-runtime</artifactId>
-		        <version>4.0.2</version>
+		        <version>3.0.1</version>
 	    </dependency>
 
 		<dependency>
@@ -122,9 +122,6 @@
 										org.notima.generic.ifacebusinessobjects
 						</Export-Package>
 						<Import-Package>
-							jakarta.xml.bind,
-							jakarta.xml.bind.annotation,
-							jakarta.xml.bind.annotation.adapters,
 							*
 						</Import-Package>
 					</instructions>
