@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
 
-import jakarta.xml.bind.JAXB;
+import javax.xml.bind.JAXB;
 
 import org.notima.generic.businessobjects.exception.NoSuchTenantException;
 import org.notima.generic.ifacebusinessobjects.BusinessObjectFactory;

@@ -3,8 +3,8 @@ package org.notima.generic.businessobjects;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 import org.notima.generic.ifacebusinessobjects.OrderInvoiceLine;
 
