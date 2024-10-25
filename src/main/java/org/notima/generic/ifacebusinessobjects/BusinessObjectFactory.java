@@ -12,8 +12,8 @@ import org.notima.generic.businessobjects.BusinessPartner;
 import org.notima.generic.businessobjects.BusinessPartnerList;
 import org.notima.generic.businessobjects.DunningRun;
 import org.notima.generic.businessobjects.Invoice;
-import org.notima.generic.businessobjects.InvoiceOperationResult;
-import org.notima.generic.businessobjects.InvoiceWriterOptions;
+import org.notima.generic.businessobjects.OrderInvoiceOperationResult;
+import org.notima.generic.businessobjects.OrderInvoiceWriterOptions;
 import org.notima.generic.businessobjects.Order;
 import org.notima.generic.businessobjects.PaymentTerm;
 import org.notima.generic.businessobjects.PriceList;
@@ -287,7 +287,7 @@ public interface BusinessObjectFactory<C,I,O,P,B,T> {
 	 * @return							
 	 * @throws Exception
 	 */
-	public InvoiceOperationResult readInvoices(
+	public OrderInvoiceOperationResult readInvoices(
 			java.util.Date fromDate,
 			java.util.Date untilDate,
 			int readLimit
@@ -302,8 +302,8 @@ public interface BusinessObjectFactory<C,I,O,P,B,T> {
 	 * @return							The result of the operation		
 	 * @throws Exception
 	 */
-	public InvoiceOperationResult writeInvoices(List<Invoice<?>> canonicalInvoices, 
-			InvoiceWriterOptions opts) throws Exception;
+	public OrderInvoiceOperationResult writeInvoices(List<Invoice<?>> canonicalInvoices, 
+			OrderInvoiceWriterOptions opts) throws Exception;
 	
 	/**
 	 * Attach file to voucher in underlaying system.
