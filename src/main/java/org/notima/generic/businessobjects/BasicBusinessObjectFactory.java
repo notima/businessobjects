@@ -19,7 +19,7 @@ import org.notima.generic.businessobjects.exception.NoSuchTenantException;
 import org.notima.generic.ifacebusinessobjects.BusinessObjectFactory;
 
 /*
- *    Copyright 2020,2024 Ekonomibolaget Notima AB
+ *    Copyright 2020,2024 Ekonomibolaget Notima AB 
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -236,7 +236,7 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B,T> implements Busines
 	}
 	
 	@Override
-	public InvoiceOperationResult writeInvoices(List<Invoice<?>> canonicalInvoices, InvoiceWriterOptions opts) throws Exception {
+	public OrderInvoiceOperationResult writeInvoices(List<Invoice<?>> canonicalInvoices, OrderInvoiceWriterOptions opts) throws Exception {
 
 		InvoiceList listToWrite = new InvoiceList();
 		listToWrite.setInvoiceList(canonicalInvoices);
@@ -244,14 +244,14 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B,T> implements Busines
 		String fileName = System.getProperty("user.home") + File.separator + "invoicelist.xml";
 		
 		JAXB.marshal(listToWrite, new File(fileName));
-		InvoiceOperationResult result = new InvoiceOperationResult();
+		OrderInvoiceOperationResult result = new OrderInvoiceOperationResult();
 		result.setAffectedInvoices(listToWrite);
 		
 		return result;
 	}
 	
 	@Override
-	public InvoiceOperationResult readInvoices(Date fromDate, Date untilDate, int readLimit) throws Exception {
+	public OrderInvoiceOperationResult readInvoices(Date fromDate, Date untilDate, int readLimit) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

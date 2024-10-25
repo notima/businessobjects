@@ -2,9 +2,10 @@ package org.notima.generic.businessobjects;
 
 import java.time.LocalDate;
 
-public class InvoiceWriterOptions {
+public class OrderInvoiceWriterOptions {
 
 	private LocalDate	invoiceDate;
+	private LocalDate	orderDate;
 	private LocalDate	dueDate;
 	private int			createLimit;
 	private boolean		mergeOnBusinessPartner;
@@ -18,6 +19,12 @@ public class InvoiceWriterOptions {
 	}
 	public void setInvoiceDate(LocalDate invoiceDate) {
 		this.invoiceDate = invoiceDate;
+	}
+	public LocalDate getOrderDate() {
+		return orderDate;
+	}
+	public void setOrderDate(LocalDate orderDate) {
+		this.orderDate = orderDate;
 	}
 	public LocalDate getDueDate() {
 		return dueDate;

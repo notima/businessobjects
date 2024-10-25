@@ -6,7 +6,7 @@ package org.notima.generic.businessobjects;
  * @author Daniel Tamm
  *
  */
-public class InvoiceOperationResult {
+public class OrderInvoiceOperationResult {
 
 	private boolean successful;
 
@@ -14,6 +14,7 @@ public class InvoiceOperationResult {
 	private int		createCount = 0;
 	
 	private InvoiceList		affectedInvoices;
+	private InvoiceList		affectedOrders;
 	
 	public boolean isSuccessful() {
 		return successful;
@@ -54,6 +55,15 @@ public class InvoiceOperationResult {
 	public void setAffectedInvoices(InvoiceList affectedInvoices) {
 		this.affectedInvoices = affectedInvoices;
 	}
+
+	public InvoiceList getAffectedOrders() {
+		return affectedOrders;
+	}
+
+	public void setAffectedOrders(InvoiceList affectedOrders) {
+		this.affectedOrders = affectedOrders;
+	}
+	
 	
 	
 }
