@@ -1,5 +1,7 @@
 package org.notima.generic.businessobjects;
 
+import java.time.LocalDate;
+
 import org.notima.generic.ifacebusinessobjects.PaymentBatchChannel;
 
 public class BasicPaymentBatchChannel implements PaymentBatchChannel {
@@ -10,6 +12,7 @@ public class BasicPaymentBatchChannel implements PaymentBatchChannel {
 	private String	sourceSystem;
 	private String	channelDescription;
 	private PaymentBatchChannelOptions options;
+	private PaymentBatchChannelStatus status;
 	
 	@Override
 	public String getChannelId() {
@@ -94,6 +97,24 @@ public class BasicPaymentBatchChannel implements PaymentBatchChannel {
 	public void parseSourceOptions(String options) {
 		initOptions();
 		this.options.setSourceDirectory(options);
+	}
+
+	@Override
+	public PaymentBatchChannelStatus getStatus() {
+		return status;
+	}
+
+	@Override
+	public void setStatus(PaymentBatchChannelStatus status) {
+		this.status = status;
+	}
+
+	@Override
+	public void setReconciledUntil(LocalDate ld) {
+		if (status==null) {
+			status = new PaymentBatchChannelStatus();
+		}
+		status.setReconciledUntil(ld);
 	}
 
 	

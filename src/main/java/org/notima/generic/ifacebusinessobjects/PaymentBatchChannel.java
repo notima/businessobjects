@@ -1,6 +1,9 @@
 package org.notima.generic.ifacebusinessobjects;
 
+import java.time.LocalDate;
+
 import org.notima.generic.businessobjects.PaymentBatchChannelOptions;
+import org.notima.generic.businessobjects.PaymentBatchChannelStatus;
 import org.notima.generic.businessobjects.TaxSubjectIdentifier;
 
 /**
@@ -38,5 +41,11 @@ public interface PaymentBatchChannel {
 	public void parseDestinationOptions(String options);
 	
 	public void parseSourceOptions(String options);
+	
+	public PaymentBatchChannelStatus getStatus();
+	
+	public void setStatus(PaymentBatchChannelStatus status);
+	
+	public void setReconciledUntil(LocalDate ld);
 	
 }

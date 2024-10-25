@@ -4,7 +4,8 @@ import java.util.Properties;
 
 public class PaymentBatchChannelOptions {
 
-	public static final String DIRECTORY = "directory"; 
+	public static final String DIRECTORY = "directory";
+	public static final String FILE_FILTER = "file-filter";
 	
 	private Properties 	destinationProperties;
 	private Properties	sourceProperties;
@@ -35,9 +36,19 @@ public class PaymentBatchChannelOptions {
 		
 		return sourceProperties.getProperty(DIRECTORY);
 	}
-
+	
 	public void setSourceDirectory(String directory) {
 		setSourceProperty(DIRECTORY, directory);
+	}
+	
+	public String getSourceFileFilter() {
+		if (!hasSourceProperties()) return null;
+		
+		return sourceProperties.getProperty(FILE_FILTER);
+	}
+	
+	public void setSourceFileFilter(String filter) {
+		setSourceProperty(FILE_FILTER, filter);
 	}
 	
 	public void setSourceProperty(String key, String value) {

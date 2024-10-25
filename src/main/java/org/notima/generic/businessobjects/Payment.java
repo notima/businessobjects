@@ -1,8 +1,8 @@
 package org.notima.generic.businessobjects;
 
 
-import jakarta.persistence.Transient;
-import jakarta.xml.bind.annotation.XmlRootElement;
+import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "payment")
 public class Payment<P> {
