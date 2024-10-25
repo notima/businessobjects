@@ -79,6 +79,8 @@ public class Order<O> implements OrderInvoice {
 	
 	private String	taxDomicile;
 	
+	private boolean showPricesIncludingVAT = false;
+	
 	private transient O nativeOrder;
 	
 	private transient OrderInvoiceLineValidator	lineValidator;
@@ -820,5 +822,15 @@ public class Order<O> implements OrderInvoice {
 		
 		return null;
 	}
+
+
+	public boolean isShowPricesIncludingVAT() {
+		return showPricesIncludingVAT;
+	}
+
+	public void setShowPricesIncludingVAT(boolean showPricesIncludingVAT) {
+		this.showPricesIncludingVAT = showPricesIncludingVAT;
+	}
+	
 	
 }
