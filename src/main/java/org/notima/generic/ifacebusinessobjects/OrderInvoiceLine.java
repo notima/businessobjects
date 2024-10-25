@@ -12,6 +12,8 @@ public interface OrderInvoiceLine {
 	
 	public double getQtyEntered();
 	
+	public String getAccountNo();
+	
 	/**
 	 * Actual price per unit.
 	 * @return
