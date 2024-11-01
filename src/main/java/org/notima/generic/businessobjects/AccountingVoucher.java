@@ -450,6 +450,15 @@ public class AccountingVoucher {
 		return lines;
 	}
 
+	/**
+	 * True if there are accounting lines on this voucher.
+	 * 
+	 * @return
+	 */
+	public boolean hasLines() {
+		return lines!=null && lines.size()>0;
+	}
+	
 	public void setLines(List<AccountingVoucherLine> lines) {
 		this.lines = lines;
 	}
