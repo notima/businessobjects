@@ -1,11 +1,15 @@
 package org.notima.generic.businessobjects;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
 public class PriceListLine {
 
+	@Id
+	private Long   lineId;
+	
 	@ManyToOne
 	private Product<?> product;
 	private String pricelistReference;

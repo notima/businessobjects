@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -72,13 +73,12 @@ public class Invoice<I> implements OrderInvoice {
 	private int	   roundingDecimals = 2;
 	private int	   nextLineNo = 10;
 	private int	   lineNoIncrement = 10;
-	@ManyToOne
+	@Transient
 	private FactoringReservation factoringReservation;
 	private String	warehouseId;
 	private String	pricelistId;
 	@ManyToOne
 	private Person  ourReference;
-	@OneToMany
 	private List<KeyValue> attributes = new ArrayList<KeyValue>();
 	private String status;
 	
