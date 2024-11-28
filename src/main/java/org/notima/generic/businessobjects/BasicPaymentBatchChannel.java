@@ -125,6 +125,10 @@ public class BasicPaymentBatchChannel implements PaymentBatchChannel {
 		return unprocessedEntries;
 	}
 
+	@Override
+	public void setUnprocessedEntries(List<String> entries) {
+		unprocessedEntries = entries;
+	}
 	
 	
 }

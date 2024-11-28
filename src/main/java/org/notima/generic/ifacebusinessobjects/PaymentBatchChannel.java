@@ -40,6 +40,8 @@ public interface PaymentBatchChannel {
 	 * @return
 	 */
 	public List<String> getUnprocessedEntries();
+
+	public void setUnprocessedEntries(List<String> entries);
 	
 	public PaymentBatchChannelOptions getOptions();
 	
@@ -54,5 +56,6 @@ public interface PaymentBatchChannel {
 	public void setStatus(PaymentBatchChannelStatus status);
 	
 	public void setReconciledUntil(LocalDate ld);
+
 	
 }

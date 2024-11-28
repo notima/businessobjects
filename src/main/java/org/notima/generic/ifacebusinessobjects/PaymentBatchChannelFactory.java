@@ -7,6 +7,10 @@ import org.notima.generic.businessobjects.TaxSubjectIdentifier;
 
 public interface PaymentBatchChannelFactory {
 
+	public void populateUnprocessedEntries(boolean flag);
+	
+	public boolean isPopulateUnprocessedEntries();
+	
 	public List<PaymentBatchChannel> listChannelsForTenant(TaxSubjectIdentifier tenant);
 	
 	public List<PaymentBatchChannel> listChannelsWithSourceSystem(String systemName);
