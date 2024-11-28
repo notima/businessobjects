@@ -56,6 +56,8 @@ public interface PaymentBatchChannel {
 	public void setStatus(PaymentBatchChannelStatus status);
 	
 	public void setReconciledUntil(LocalDate ld);
+	
+	public void setLastProcessedBatch(String batchname);
 
 	
 }

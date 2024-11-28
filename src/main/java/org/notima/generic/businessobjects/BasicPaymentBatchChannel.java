@@ -120,6 +120,13 @@ public class BasicPaymentBatchChannel implements PaymentBatchChannel {
 		status.setReconciledUntil(ld);
 	}
 
+	public void setLastProcessedBatch(String batch) {
+		if (status==null) {
+			status = new PaymentBatchChannelStatus();
+		}
+		status.setLastProcessedBatch(batch);
+	}
+	
 	@Override
 	public List<String> getUnprocessedEntries() {
 		return unprocessedEntries;
