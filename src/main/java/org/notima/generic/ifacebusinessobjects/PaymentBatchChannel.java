@@ -1,6 +1,7 @@
 package org.notima.generic.ifacebusinessobjects;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.notima.generic.businessobjects.PaymentBatchChannelOptions;
 import org.notima.generic.businessobjects.PaymentBatchChannelStatus;
@@ -33,6 +34,12 @@ public interface PaymentBatchChannel {
 	public String getSourceSystem();
 
 	public void setSourceSystem(String ssystem);
+	
+	/**
+	 * A list of unprocessed entries
+	 * @return
+	 */
+	public List<String> getUnprocessedEntries();
 	
 	public PaymentBatchChannelOptions getOptions();
 	
