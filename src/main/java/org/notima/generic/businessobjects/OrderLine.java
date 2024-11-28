@@ -3,6 +3,8 @@ package org.notima.generic.businessobjects;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import org.notima.generic.ifacebusinessobjects.OrderInvoiceLine;
@@ -10,6 +12,10 @@ import org.notima.generic.ifacebusinessobjects.OrderInvoiceLine;
 @Entity
 public class OrderLine implements OrderInvoiceLine {
 
+	@Id
+	@GeneratedValue
+	private Long	lineId;
+	
 	private String 	groupKey;
 	private String	key;
 	private String 	name;

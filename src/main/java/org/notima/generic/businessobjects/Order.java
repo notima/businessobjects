@@ -67,10 +67,8 @@ public class Order<O> implements OrderInvoice {
 	private String	deliveryRule;
 	private String	deliveryViaRule;
 	private String	shipper;
-	@OneToMany
 	private List<KeyValue> attributes = new ArrayList<KeyValue>();
-	@ManyToOne
-	private FactoringReservation factoringReservation;	
+	private transient FactoringReservation factoringReservation;	
 	private OrderStatus	status;
 	private String statusComment;
 	
