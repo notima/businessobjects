@@ -1,5 +1,6 @@
 package org.notima.generic.businessobjects;
 
+import java.io.File;
 import java.util.Properties;
 
 public class PaymentBatchChannelOptions {
@@ -9,6 +10,17 @@ public class PaymentBatchChannelOptions {
 	
 	private Properties 	destinationProperties;
 	private Properties	sourceProperties;
+	
+	protected TaxSubjectIdentifier 		taxIdentifier;
+	protected String					directory;
+	protected transient File			directoryFile;
+	protected String					defaultCurrency;
+	protected String					generalLedgerBankAccount;
+	protected String					generalLedgerInTransitAccount;
+	protected String					generalLedgerReconciliationAccount;
+	protected String					generalLedgerFeeAccount;
+	protected String					generalLedgerUnknownTrxAccount;
+	protected String					voucherSeries;
 	
 	public Properties getDestinationProperties() {
 		return destinationProperties;
@@ -58,5 +70,68 @@ public class PaymentBatchChannelOptions {
 		}
 		sourceProperties.setProperty(key, value);
 	}
+	
+	public TaxSubjectIdentifier getTaxIdentifier() {
+		return taxIdentifier;
+	}
+	public void setTaxIdentifier(TaxSubjectIdentifier taxIdentifier) {
+		this.taxIdentifier = taxIdentifier;
+	}
+	public String getDirectory() {
+		return directory;
+	}
+	public void setDirectory(String directory) {
+		this.directory = directory;
+	}
+	public File getDirectoryFile() {
+		return directoryFile;
+	}
+	public void setDirectoryFile(File directoryFile) {
+		this.directoryFile = directoryFile;
+	}
+	public String getDefaultCurrency() {
+		return defaultCurrency;
+	}
+	public void setDefaultCurrency(String defaultCurrency) {
+		this.defaultCurrency = defaultCurrency;
+	}
+	public String getGeneralLedgerBankAccount() {
+		return generalLedgerBankAccount;
+	}
+	public void setGeneralLedgerBankAccount(String generalLedgerBankAccount) {
+		this.generalLedgerBankAccount = generalLedgerBankAccount;
+	}
+	public String getGeneralLedgerInTransitAccount() {
+		return generalLedgerInTransitAccount;
+	}
+	public void setGeneralLedgerInTransitAccount(String generalLedgerInTransitAccount) {
+		this.generalLedgerInTransitAccount = generalLedgerInTransitAccount;
+	}
+	public String getGeneralLedgerReconciliationAccount() {
+		return generalLedgerReconciliationAccount;
+	}
+	public void setGeneralLedgerReconciliationAccount(String generalLedgerReconciliationAccount) {
+		this.generalLedgerReconciliationAccount = generalLedgerReconciliationAccount;
+	}
+	public String getGeneralLedgerFeeAccount() {
+		return generalLedgerFeeAccount;
+	}
+	public void setGeneralLedgerFeeAccount(String generalLedgerFeeAccount) {
+		this.generalLedgerFeeAccount = generalLedgerFeeAccount;
+	}
+	public String getGeneralLedgerUnknownTrxAccount() {
+		return generalLedgerUnknownTrxAccount;
+	}
+	public void setGeneralLedgerUnknownTrxAccount(String generalLedgerUnknownTrxAccount) {
+		this.generalLedgerUnknownTrxAccount = generalLedgerUnknownTrxAccount;
+	}
+	public String getVoucherSeries() {
+		return voucherSeries;
+	}
+	public void setVoucherSeries(String voucherSeries) {
+		this.voucherSeries = voucherSeries;
+	}
+	
+	
 	
 }

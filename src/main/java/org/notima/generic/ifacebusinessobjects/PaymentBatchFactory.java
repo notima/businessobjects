@@ -3,6 +3,7 @@ package org.notima.generic.ifacebusinessobjects;
 import java.util.List;
 
 import org.notima.generic.businessobjects.PaymentBatch;
+import org.notima.generic.businessobjects.PaymentBatchChannelOptions;
 
 /**
  * This interface defines a class that creates payment batches using the specified source
@@ -32,6 +33,14 @@ public interface PaymentBatchFactory {
 	 * @return	A list of payment batches (if any).
 	 */
 	public List<PaymentBatch> readPaymentBatches();
+	
+	/**
+	 * Return channel options that are common for all payment batches / channels of this
+	 * payment batch factory. 
+	 * 
+	 * @return	The options.
+	 */
+	public PaymentBatchChannelOptions	getChannelOptions();
 	
 	/**
 	 * Writes a payment batch to the destination.
