@@ -11,6 +11,7 @@ public class AccountingVoucherLine {
 	private BigDecimal	debitAmount = BigDecimal.ZERO;
 	private String	acctType;
 	private String	taxKey;
+	private String	taxDomicile;
 	private String			costCenter;
 	private String			projectCode;
 	private Boolean	isService;
@@ -104,6 +105,13 @@ public class AccountingVoucherLine {
 	public void setTaxKey(String taxKey) {
 		this.taxKey = taxKey;
 	}
+	public String getTaxDomicile() {
+		return taxDomicile;
+	}
+	public void setTaxDomicile(String taxDomicile) {
+		this.taxDomicile = taxDomicile;
+	}
+
 	public Boolean getIsService() {
 		return isService;
 	}
