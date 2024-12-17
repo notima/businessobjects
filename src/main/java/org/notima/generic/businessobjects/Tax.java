@@ -27,6 +27,10 @@ public class Tax {
 	
 	public Tax() {}
 	
+	public Tax(String key) {
+		this.key = key;
+	}
+	
 	public Tax(String key, String countryCode, double rate, String revenueVatCode, String debtVatCode, String receivableVatCode) {
 
 		this.key = key;
