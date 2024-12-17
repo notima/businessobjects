@@ -10,10 +10,13 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import org.notima.generic.ifacebusinessobjects.BusinessObjectConverter;
+import org.notima.generic.ifacebusinessobjects.TaxRateProvider;
 
 public class BasicBusinessObjectConverter<O,I> implements BusinessObjectConverter<O,I> {
 	
 	public static int DEFAULT_ROUNDING_DECIMALS = 2;
+	
+	protected TaxRateProvider	taxRateProvider;
 	
 	/**
 	 * Creates a deep copy of the order
@@ -424,7 +427,17 @@ public class BasicBusinessObjectConverter<O,I> implements BusinessObjectConverte
 	public String nativeInvoiceToString(I src) throws Exception {
 		return src.toString();
 	}
+
+	public TaxRateProvider getTaxRateProvider() {
+		return taxRateProvider;
+	}
+
+	public void setTaxRateProvider(TaxRateProvider taxRateProvider) {
+		this.taxRateProvider = taxRateProvider;
+	}
 	
-	
+	public boolean hasTaxRateProvider() {
+		return taxRateProvider!=null;
+	}
 
 }
