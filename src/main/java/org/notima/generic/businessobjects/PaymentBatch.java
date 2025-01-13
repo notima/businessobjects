@@ -69,6 +69,16 @@ public class PaymentBatch {
 		return payments.get(0).getPaymentDate();
 	}
 	
+	public Date getLastPaymentDate() {
+		if (!hasPayments()) return null;
+		return payments.get(payments.size()-1).getPaymentDate();
+	}
+	
+	public boolean isDateRange() {
+		if (getFirstPaymentDate()==null) return false;
+		return (getFirstPaymentDate().before(getLastPaymentDate()));
+	}
+	
 	/**
 	 * Add payout fee to this payment batch.
 	 * 
