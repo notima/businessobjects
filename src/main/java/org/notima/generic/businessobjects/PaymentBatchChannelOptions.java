@@ -21,6 +21,8 @@ public class PaymentBatchChannelOptions {
 	protected String					generalLedgerFeeAccount;
 	protected String					generalLedgerUnknownTrxAccount;
 	protected String					voucherSeries;
+	protected String					sourceReference;
+	protected String					destinationReference;
 	
 	public Properties getDestinationProperties() {
 		return destinationProperties;
@@ -132,6 +134,34 @@ public class PaymentBatchChannelOptions {
 		this.voucherSeries = voucherSeries;
 	}
 	
+	/** 
+	 * The name of the source's reference fields. If more than one field, this is a comma separated list.
+	 * @return
+	 */
+	public String getSourceReference() {
+		return sourceReference;
+	}
+	public void setSourceReference(String sourceReference) {
+		this.sourceReference = sourceReference;
+	}
 	
+	public boolean hasSourceReference() {
+		return sourceReference!=null && sourceReference.trim().length()>0;
+	}
+	
+	/**
+	 * The name of the destination's reference fields. If more than one field, this is a comma separated list.
+	 * @return
+	 */
+	public String getDestinationReference() {
+		return destinationReference;
+	}
+	public void setDestinationReference(String destinationReference) {
+		this.destinationReference = destinationReference;
+	}
+
+	public boolean hasDestinationReference() {
+		return destinationReference!=null && destinationReference.trim().length()>0;
+	}
 	
 }
