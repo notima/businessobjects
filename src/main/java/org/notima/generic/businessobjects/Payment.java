@@ -1,6 +1,8 @@
 package org.notima.generic.businessobjects;
 
 
+import java.util.regex.Pattern;
+
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -32,6 +34,7 @@ public class Payment<P> {
 	private Location	location;
 	private String	destinationSystemReference;
 	private String	destinationSystemReferenceField;
+	private String 	destinationSystemReferenceRegex;
 	private TransactionReference	transactionReference;
 	private transient P nativePayment;
 	
@@ -270,6 +273,7 @@ public class Payment<P> {
 	
 	public String getDestinationSystemReference() {
 		return destinationSystemReference;
+		
 	}
 	public void setDestinationSystemReference(String destinationSystemReference) {
 		this.destinationSystemReference = destinationSystemReference;
@@ -279,6 +283,18 @@ public class Payment<P> {
 	}
 	public void setDestinationSystemReferenceField(String destinationSystemReferenceField) {
 		this.destinationSystemReferenceField = destinationSystemReferenceField;
+	}
+	
+	public boolean hasDestinationSystemReferenceRegex() {
+		return destinationSystemReferenceRegex!=null && destinationSystemReferenceRegex.trim().length()>0;
+	}
+	
+	public String getDestinationSystemReferenceRegex() {
+		return destinationSystemReferenceRegex;
+	}
+	
+	public void setDestinationSystemReferenceRegex(String destinationSystemReferenceRegex) {
+		this.destinationSystemReferenceRegex = destinationSystemReferenceRegex;
 	}
 	public void calculateAmountDeductingWriteOffsFromOriginalAmount() {
 		if (originalAmount==null) {
