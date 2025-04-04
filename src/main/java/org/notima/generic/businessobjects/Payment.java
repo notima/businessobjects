@@ -1,8 +1,6 @@
 package org.notima.generic.businessobjects;
 
 
-import java.util.regex.Pattern;
-
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -21,6 +19,7 @@ public class Payment<P> {
 	private String	clientOrderNo;
 	private String	invoiceNo;
 	private String	matchedInvoiceNo;
+	private Double	matchedInvoiceOpenAmount;
 	private boolean	customerPayment;
 	private Double	amount;
 	private Double  originalAmount;
@@ -121,6 +120,12 @@ public class Payment<P> {
 		return matchedInvoiceNo!=null && matchedInvoiceNo.trim().length()>0;
 	}
 	
+	public Double getMatchedInvoiceOpenAmount() {
+		return matchedInvoiceOpenAmount!=null ? matchedInvoiceOpenAmount : Double.valueOf(0);
+	}
+	public void setMatchedInvoiceOpenAmount(Double matchedInvoiceOpenAmount) {
+		this.matchedInvoiceOpenAmount = matchedInvoiceOpenAmount;
+	}
 	/**
 	 * The matched invoice number must be an existing invoice number is a real system.
 	 * 
