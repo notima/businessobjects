@@ -13,10 +13,11 @@ public interface PaymentBatchProcessor {
 	 * destination system invoice if a match is found.
 	 * 
 	 * @param 	report		The report to be processed / matched.
+	 * @param processOptions  Options to consider.
 	 * @return	The updated payment report.
 	 * @throws Exception	If something goes wrong.
 	 */
-	public PaymentBatch lookupInvoiceReferences(PaymentBatch report) throws Exception;	
+	public PaymentBatch lookupInvoiceReferences(PaymentBatch report, PaymentBatchProcessOptions processOptions) throws Exception;	
 	
 	/**
 	 * Processes a payment batch
