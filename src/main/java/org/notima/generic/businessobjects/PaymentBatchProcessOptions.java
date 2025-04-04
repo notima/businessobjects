@@ -1,5 +1,8 @@
 package org.notima.generic.businessobjects;
 
+import java.util.Map;
+import java.util.TreeMap;
+
 public class PaymentBatchProcessOptions {
 
 	// Property to say that only this account / payment type should be processed
@@ -22,6 +25,9 @@ public class PaymentBatchProcessOptions {
 	private String	outputFilePrefix;
 	// Property for debugging org no (output is to this organisation)
 	private TaxSubjectIdentifier	debugOrgNo;
+	// Manual reference map that should override any other mappings.
+	private Map<String,String>		manualReferenceMap;
+	
 	private boolean dryRun;
 	
 	// Don't complete payments (only draft) if the system allows that
@@ -107,6 +113,77 @@ public class PaymentBatchProcessOptions {
 	public void setNonMatchedAsPrepayments(boolean nonMatchedAsPrepayments) {
 		this.nonMatchedAsPrepayments = nonMatchedAsPrepayments;
 	}
+	
+	public boolean hasManualReferenceMap() {
+		return manualReferenceMap!=null && !manualReferenceMap.isEmpty();
+	}
+
+	/**
+	 * Returns a reference if there's one.
+	 * 
+	 * @param sourceRef
+	 * @return	Destination reference (if existing). Otherwise null.
+	 */
+	public String getManualReferenceFor(String sourceRef) {
+		if (sourceRef==null) return null;
+		if (!hasManualReferenceMap()) return null;
+		return manualReferenceMap.get(sourceRef);
+	}
+	
+	/**
+	 * The reference map is a comma separated list of tuples (where = is the mapper)
+	 * 
+	 * For instance 1234=445,1232=432 etc
+	 * 
+	 * @param list
+	 */
+	public void addManualReferenceMapFromCommaList(String csvlist) {
+		
+		String[] items = csvlist.split(",");
+		
+		for (String item : items) {
+			addManualReferenceFromTupleString(item);
+		}
+		
+	}
+	
+	private void addManualReferenceFromTupleString(String tuple) {
+		
+		if (tuple==null) return;
+		int pos = tuple.indexOf("=");
+		
+		String left = tuple.substring(0, pos);
+		String right = tuple.substring(pos+1);
+		
+		if (left.trim().length()>0) {
+			left = left.trim();
+		} else 
+			return; // Cant add without key
+		
+		if (right.trim().length()>0) {
+			addManualReference(left, right);
+		}
+		
+	}
+	
+	/**
+	 * Adds a manual reference to the options.
+	 * 
+	 * @param key
+	 * @param value
+	 */
+	public void addManualReference(String key, String value) {
+
+		if (key!=null && key.trim().length()>0 && value!=null && value.trim().length()>0) {
+			if (manualReferenceMap==null) {
+				manualReferenceMap = new TreeMap<String,String>();
+			}
+			manualReferenceMap.put(key, value);
+			
+		}
+		
+	}
+	
 	
 	
 }
