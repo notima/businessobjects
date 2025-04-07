@@ -139,7 +139,7 @@ public class PaymentBatchProcessOptions {
 	 */
 	public void addManualReferenceMapFromCommaList(String csvlist) {
 		
-		if (csvlist==null || csvlist.trim().length()>0) return;
+		if (csvlist==null || csvlist.trim().length()==0) return;
 		
 		String[] items = csvlist.split(",");
 		
