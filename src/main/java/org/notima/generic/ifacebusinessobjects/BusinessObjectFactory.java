@@ -257,6 +257,15 @@ public interface BusinessObjectFactory<C,I,O,P,B,T> {
 	public Map<Object, Invoice<I>> lookupUnpostedSalesInvoices() throws Exception;
 	
 	/**
+	 * Looks up unposted sales invoices in this implementation (subset is normally faster)
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public Map<Object, Invoice<?>> lookupUnpostedSalesInvoicesSubset() throws Exception;
+	
+	
+	/**
 	 * Looks up an arbitrary map. What maps that are available depends on 
 	 * the implementation.
 	 * @param listName

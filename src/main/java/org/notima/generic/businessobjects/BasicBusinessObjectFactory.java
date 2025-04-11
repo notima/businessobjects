@@ -318,6 +318,17 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B,T> implements Busines
 	
 	
 	/**
+	 * Looks up unposted sales invoices in this implementation, subset is normally faster.
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public Map<Object, Invoice<?>> lookupUnpostedSalesInvoicesSubset() throws Exception {
+		return null;
+	};
+	
+	
+	/**
 	 * Toggle the factory to debug mode.
 	 * 
 	 * @param debugOn
