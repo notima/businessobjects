@@ -249,6 +249,14 @@ public interface BusinessObjectFactory<C,I,O,P,B,T> {
 	public List<ProductCategory> lookupProductCategory(String key) throws Exception; 
 
 	/**
+	 * Looks up unposted sales invoices in this implementation
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public Map<Object, Invoice<I>> lookupUnpostedSalesInvoices() throws Exception;
+	
+	/**
 	 * Looks up an arbitrary map. What maps that are available depends on 
 	 * the implementation.
 	 * @param listName
