@@ -12,6 +12,7 @@ public class OrderInvoiceWriterOptions {
 	private boolean		mapOnTaxId;
 	private boolean		mapOnAddressFirst;
 	private boolean		updateExisting = true;
+	private boolean		appendToExisting;
 	private boolean		createBusinessPartner;
 	
 	public LocalDate getInvoiceDate() {
@@ -56,12 +57,32 @@ public class OrderInvoiceWriterOptions {
 	public void setMapOnAddressFirst(boolean mapOnAddressFirst) {
 		this.mapOnAddressFirst = mapOnAddressFirst;
 	}
+	
+	/**
+	 * Update existing compares the reference on the invoice and updates an invoice with the same reference.
+	 * 
+	 * @return
+	 */
 	public boolean isUpdateExisting() {
 		return updateExisting;
 	}
 	public void setUpdateExisting(boolean updateExisting) {
 		this.updateExisting = updateExisting;
 	}
+	
+	/**
+	 * Append to existing looks for an invoice with or without a reference and appends the invoice lines
+	 * to the existing invoice for the same customer if one exists.
+	 * 
+	 * @return
+	 */
+	public boolean isAppendToExisting() {
+		return appendToExisting;
+	}
+	public void setAppendToExisting(boolean appendToExisting) {
+		this.appendToExisting = appendToExisting;
+	}
+	
 	public boolean isCreateBusinessPartner() {
 		return createBusinessPartner;
 	}
