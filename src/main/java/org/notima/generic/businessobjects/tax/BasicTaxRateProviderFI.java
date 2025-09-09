@@ -71,7 +71,7 @@ public class BasicTaxRateProviderFI implements TaxRateProvider {
 	}
 	
 	private void addNormalTax() {
-		Tax tax = new Tax("MP1", thisLocale.getCountry(), 24, "MP1","U1","I");
+		Tax tax = new Tax("MP1", thisLocale.getCountry(), 25.5, "MP1","U1","I");
 		taxList.add(tax);
 	}
 
