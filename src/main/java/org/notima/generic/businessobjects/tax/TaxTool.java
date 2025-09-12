@@ -10,12 +10,13 @@ public class TaxTool {
 	/**
 	 * Get first match on rate.
 	 * 
-	 * @param percent
-	 * @param taxes
+	 * @param percent					The rate to match.
+	 * @param allowedDeviation 			If the rate can be this higher or lower than the percent argument.
+	 * @param taxes						The taxes to check.
 	 * @return
 	 * @throws NoMatchingTaxException
 	 */
-	public static Tax getFirstMatchOnRate(double percent, List<Tax> taxes) throws NoMatchingTaxException {
+	public static Tax getFirstMatchOnRate(double percent, double allowedDeviation, List<Tax> taxes) throws NoMatchingTaxException {
 		
 		if (taxes==null) throw new NoMatchingTaxException(percent);
 
@@ -26,6 +27,17 @@ public class TaxTool {
 				result = t;
 				break;
 			}
+			if (allowedDeviation!=0.0) {
+				if (percent <= t.getRate() + allowedDeviation && 
+					 percent >= t.getRate() - allowedDeviation) {
+					result = t;
+					break;
+				}
+			}
+		}
+		
+		if (result==null) {
+			throw new NoMatchingTaxException(percent);
 		}
 		
 		return result;
