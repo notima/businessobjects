@@ -19,6 +19,10 @@ public interface PaymentBatchChannelFactory {
 
 	public PaymentBatchChannel findChannelWithId(String id);
 	
+	public PaymentBatchChannel findChannelByDescription(String desc);	
+	
+	public List<PaymentBatchChannel> findChannelsBySource(String source);
+	
 	public PaymentBatchChannel persistChannel(PaymentBatchChannel pbc) throws IOException;
 	
 	public String getSystemName();
