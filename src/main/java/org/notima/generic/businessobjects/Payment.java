@@ -1,6 +1,9 @@
 package org.notima.generic.businessobjects;
 
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -34,6 +37,7 @@ public class Payment<P> {
 	private String	destinationSystemReference;
 	private String	destinationSystemReferenceField;
 	private String 	destinationSystemReferenceRegex;
+	private String	preMatchDestinationSystemReferenceRegex;
 	private TransactionReference	transactionReference;
 	private transient P nativePayment;
 	
@@ -277,9 +281,24 @@ public class Payment<P> {
 	}
 	
 	public String getDestinationSystemReference() {
+		if (hasPreMatchDestinationSystemReferenceRegex() && destinationSystemReference!=null) {
+			Pattern re = Pattern.compile(preMatchDestinationSystemReferenceRegex);
+			Matcher m = re.matcher(destinationSystemReference);
+			if (m.matches()) {
+				if (m.groupCount()>=1) {
+					return m.group(1);
+				} else {
+					return m.group();
+				}
+			} 
+		}
 		return destinationSystemReference;
-		
 	}
+	
+	public String getDestinationSystemReferenceRaw() {
+		return destinationSystemReference;
+	}
+	
 	public void setDestinationSystemReference(String destinationSystemReference) {
 		this.destinationSystemReference = destinationSystemReference;
 	}
@@ -296,6 +315,17 @@ public class Payment<P> {
 	
 	public String getDestinationSystemReferenceRegex() {
 		return destinationSystemReferenceRegex;
+	}
+	
+	public String getPreMatchDestinationSystemReferenceRegex() {
+		return preMatchDestinationSystemReferenceRegex;
+	}
+	public void setPreMatchDestinationSystemReferenceRegex(String preMatchDestinationSystemReferenceRegex) {
+		this.preMatchDestinationSystemReferenceRegex = preMatchDestinationSystemReferenceRegex;
+	}
+	
+	private boolean hasPreMatchDestinationSystemReferenceRegex() {
+		return preMatchDestinationSystemReferenceRegex!=null && preMatchDestinationSystemReferenceRegex.trim().length()>0;
 	}
 	
 	public void setDestinationSystemReferenceRegex(String destinationSystemReferenceRegex) {
