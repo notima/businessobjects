@@ -13,6 +13,7 @@ import org.notima.generic.businessobjects.BusinessPartnerList;
 import org.notima.generic.businessobjects.DunningRun;
 import org.notima.generic.businessobjects.Invoice;
 import org.notima.generic.businessobjects.OrderInvoiceOperationResult;
+import org.notima.generic.businessobjects.OrderInvoiceReaderOptions;
 import org.notima.generic.businessobjects.OrderInvoiceWriterOptions;
 import org.notima.generic.businessobjects.Order;
 import org.notima.generic.businessobjects.PaymentTerm;
@@ -298,16 +299,12 @@ public interface BusinessObjectFactory<C,I,O,P,B,T> {
 	/**
 	 * Reads invoices from underlaying system.
 	 * 
-	 * @param fromDate					Invoice date from this date.
-	 * @param untilDate					Invoice date until this date.
-	 * @param readLimit					Max number of invoices to read (handy for testing).
+	 * @param opts						Filter criterias etc.
 	 * @return							
 	 * @throws Exception
 	 */
 	public OrderInvoiceOperationResult readInvoices(
-			java.util.Date fromDate,
-			java.util.Date untilDate,
-			int readLimit
+			OrderInvoiceReaderOptions opts
 			) throws Exception;
 
 	

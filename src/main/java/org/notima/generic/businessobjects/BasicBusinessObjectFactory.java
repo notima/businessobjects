@@ -251,7 +251,7 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B,T> implements Busines
 	}
 	
 	@Override
-	public OrderInvoiceOperationResult readInvoices(Date fromDate, Date untilDate, int readLimit) throws Exception {
+	public OrderInvoiceOperationResult readInvoices(OrderInvoiceReaderOptions opts) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
