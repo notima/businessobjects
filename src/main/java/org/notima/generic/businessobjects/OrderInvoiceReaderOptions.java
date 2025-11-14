@@ -10,6 +10,7 @@ public class OrderInvoiceReaderOptions {
 	private LocalDate	fromDate;
 	private LocalDate	untilDate;
 	private boolean		unpostedOnly;
+	private int			readLimit;
 	
 	private TaxSubjectIdentifier	bpartner;
 	
@@ -52,5 +53,12 @@ public class OrderInvoiceReaderOptions {
 	public void setVendorOnly(boolean vendorOnly) {
 		this.vendorOnly = vendorOnly;
 	}
+	public int getReadLimit() {
+		return readLimit;
+	}
+	public void setReadLimit(int readLimit) {
+		this.readLimit = readLimit;
+	}
+	
 	
 }
