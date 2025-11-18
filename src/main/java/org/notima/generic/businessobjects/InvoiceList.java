@@ -11,6 +11,11 @@ public class InvoiceList {
 
 	private List<Invoice<?>> invoiceList = new ArrayList<Invoice<?>>();
 
+	/**
+	 * Creditor is the sender/owner of this invoice list. 
+	 */
+	private BusinessPartner<?> creditor;
+	
 	@XmlElement(name = "invoice")
 	public List<Invoice<?>> getInvoiceList() {
 		return invoiceList;
@@ -20,5 +25,15 @@ public class InvoiceList {
 	public void setInvoiceList(List<Invoice<?>> invoiceList) {
 		this.invoiceList = invoiceList;
 	}
+
+	public BusinessPartner<?> getCreditor() {
+		return creditor;
+	}
+
+
+	public void setCreditor(BusinessPartner<?> creditor) {
+		this.creditor = creditor;
+	}
+	
 	
 }

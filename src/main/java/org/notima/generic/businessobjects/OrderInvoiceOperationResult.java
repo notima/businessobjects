@@ -17,7 +17,7 @@ public class OrderInvoiceOperationResult {
 	private int		createCount = 0;
 	
 	private InvoiceList		affectedInvoices;
-	private InvoiceList		affectedOrders;
+	private OrderList		affectedOrders;
 	
 	public boolean isSuccessful() {
 		return successful;
@@ -72,14 +72,37 @@ public class OrderInvoiceOperationResult {
 		affectedInvoices.getInvoiceList().add(inv);
 	}
 	
-	public InvoiceList getAffectedOrders() {
+	public OrderList getAffectedOrders() {
 		return affectedOrders;
 	}
 
-	public void setAffectedOrders(InvoiceList affectedOrders) {
+	public void setAffectedOrders(OrderList affectedOrders) {
 		this.affectedOrders = affectedOrders;
 	}
 	
-	
+	/**
+	 * Removes any references to native formats.
+	 */
+	public void canonize() {
+		
+		if (affectedInvoices!=null) {
+			List<Invoice<?>> invoiceList = affectedInvoices.getInvoiceList();
+			if (invoiceList!=null) {
+				for (Invoice<?> ii : invoiceList) {
+					ii.setNativeInvoice(null);
+				}
+			}
+		}
+		
+		if (affectedOrders!=null) {
+			List<Order<?>> orderList = affectedOrders.getOrderList();
+			if (orderList!=null) {
+				for (Order<?> oo : orderList) {
+					oo.setNativeOrder(null);
+				}
+			}
+		}
+		
+	}
 	
 }
