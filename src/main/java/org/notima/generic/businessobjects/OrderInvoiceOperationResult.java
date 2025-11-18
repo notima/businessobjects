@@ -1,5 +1,8 @@
 package org.notima.generic.businessobjects;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Holder class for reporting an invoice operation.
  * 
@@ -56,6 +59,19 @@ public class OrderInvoiceOperationResult {
 		this.affectedInvoices = affectedInvoices;
 	}
 
+	private void initAffectedInvoices() {
+		affectedInvoices = new InvoiceList();
+		List<Invoice<?>> invoiceList = new ArrayList<Invoice<?>>();
+		affectedInvoices.setInvoiceList(invoiceList);
+	}
+	
+	public void addAffectedInvoice(Invoice<?> inv) {
+		if (affectedInvoices==null) {
+			initAffectedInvoices();
+		}
+		affectedInvoices.getInvoiceList().add(inv);
+	}
+	
 	public InvoiceList getAffectedOrders() {
 		return affectedOrders;
 	}
