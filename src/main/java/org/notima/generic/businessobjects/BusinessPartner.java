@@ -41,6 +41,12 @@ public class BusinessPartner<B> implements Comparable {
 	private String	countryCode;
 	private Boolean	active;	
 	private String	comments;
+	
+	private String	remitToAccount;
+	private String	remitToAccountType;
+	
+	private String	remitToIBAN;
+	private String	remitToBIC;
 
 	private transient B nativeBusinessPartner;
 	
@@ -323,6 +329,38 @@ public class BusinessPartner<B> implements Comparable {
 
 	public void setComments(String comments) {
 		this.comments = comments;
+	}
+	
+	public String getRemitToAccount() {
+		return remitToAccount;
+	}
+
+	public void setRemitToAccount(String remitToAccount) {
+		this.remitToAccount = remitToAccount;
+	}
+
+	public String getRemitToAccountType() {
+		return remitToAccountType;
+	}
+
+	public void setRemitToAccountType(String remitToAccountType) {
+		this.remitToAccountType = remitToAccountType;
+	}
+
+	public String getRemitToIBAN() {
+		return remitToIBAN;
+	}
+
+	public void setRemitToIBAN(String remitToIBAN) {
+		this.remitToIBAN = remitToIBAN;
+	}
+
+	public String getRemitToBIC() {
+		return remitToBIC;
+	}
+
+	public void setRemitToBIC(String remitToBIC) {
+		this.remitToBIC = remitToBIC;
 	}
 
 	@Override
