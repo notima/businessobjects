@@ -1,6 +1,7 @@
 package org.notima.generic.businessobjects;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Message {
@@ -78,10 +79,17 @@ public class Message {
         this.signed = signed;
     }
 
+    public void addAttachment(File file) {
+    	if (attachemnts==null) {
+    		attachemnts = new ArrayList<File>();
+    	}
+    	attachemnts.add(file);
+    }
+    
     public List<File> getAttachemnts() {
         return attachemnts;
     }
-
+    
     public void setAttachemnts(List<File> attachemnts) {
         this.attachemnts = attachemnts;
     }
