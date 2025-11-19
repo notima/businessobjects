@@ -11,6 +11,8 @@ public class OrderList {
 
 	private List<Order<?>> orderList = new ArrayList<Order<?>>();
 
+	private BusinessPartner<?> creditor;
+	
 	@XmlElement(name = "order")
 	public List<Order<?>> getOrderList() {
 		return orderList;
@@ -20,5 +22,17 @@ public class OrderList {
 	public void setOrderList(List<Order<?>> orderList) {
 		this.orderList = orderList;
 	}
+
+
+	public BusinessPartner<?> getCreditor() {
+		return creditor;
+	}
+
+
+	public void setCreditor(BusinessPartner<?> creditor) {
+		this.creditor = creditor;
+	}
+	
+	
 	
 }

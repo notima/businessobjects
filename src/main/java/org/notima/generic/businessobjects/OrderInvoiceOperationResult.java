@@ -52,6 +52,8 @@ public class OrderInvoiceOperationResult {
 	}
 
 	public InvoiceList getAffectedInvoices() {
+		if (affectedInvoices==null)
+			initAffectedInvoices();
 		return affectedInvoices;
 	}
 
@@ -92,6 +94,9 @@ public class OrderInvoiceOperationResult {
 					ii.setNativeInvoice(null);
 				}
 			}
+			if (affectedInvoices.getCreditor()!=null) {
+				affectedInvoices.getCreditor().setNativeBusinessPartner(null);
+			}
 		}
 		
 		if (affectedOrders!=null) {
@@ -100,6 +105,9 @@ public class OrderInvoiceOperationResult {
 				for (Order<?> oo : orderList) {
 					oo.setNativeOrder(null);
 				}
+			}
+			if (affectedOrders.getCreditor()!=null) {
+				affectedOrders.getCreditor().setNativeBusinessPartner(null);
 			}
 		}
 		
