@@ -632,6 +632,42 @@ public class Invoice<I> implements OrderInvoice {
 		this.taxDomicile = taxDomicile;
 	}
 
+	/**
+	 * Gets email if any to send the invoice to
+	 * 
+	 * @return
+	 */
+	@XmlTransient
+	public String getBillEmail() {
+		String email = null;
+		if (billLocation!=null) email = billLocation.getEmail();
+		if (email==null) {
+			Location tmpLocation = null;
+			if (billBpartner!=null) {
+				tmpLocation = billBpartner.getAddressOfficial();
+				if (tmpLocation==null) {
+					tmpLocation = billBpartner.getAddressShipping();
+				}
+			}
+			if (tmpLocation==null) {
+				tmpLocation = bpartner.getAddressOfficial();
+				if (tmpLocation==null) {
+					tmpLocation = bpartner.getAddressShipping();
+				}
+			}
+			if (tmpLocation!=null) {
+				email = tmpLocation.getEmail();
+			}
+			
+			if (email==null) {
+				if (billPerson!=null) {
+					email = billPerson.getEmail();
+				}
+			}
+		}
+		return email;
+	}
+	
 	@Override
 	public String getDeliveryCountry() {
 		if (shipLocation!=null && shipLocation.getCountryCode()!=null) {
