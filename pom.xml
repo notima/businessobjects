@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.notima.generic</groupId>
 	<artifactId>businessobjects</artifactId>
-	<version>1.1.1-SNAPSHOT</version>
+	<version>1.1.1</version>
 	<packaging>bundle</packaging>
 	<name>Notima Generic Business Objects</name>
 
@@ -20,7 +20,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<karaf.version>4.4.6</karaf.version>
-		<notima-util.version>1.0.2-SNAPSHOT</notima-util.version>
+		<notima-util.version>1.0.2</notima-util.version>
 	</properties>
 
 	<dependencies>
@@ -129,20 +129,15 @@
 				</configuration>
 			</plugin>
 
-			<plugin>
-				<groupId>org.sonatype.plugins</groupId>
-				<artifactId>nexus-staging-maven-plugin</artifactId>
-				<version>1.6.13</version>
-				<extensions>true</extensions>
-				<configuration>
-					<serverId>ossrh</serverId>
-					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-					<autoReleaseAfterClose>true</autoReleaseAfterClose>
-					<stagingProgressTimeoutMinutes>25</stagingProgressTimeoutMinutes>
-					<keepStagingRepositoryOnCloseRuleFailure>true</keepStagingRepositoryOnCloseRuleFailure>
-					<keepStagingRepositoryOnFailure>true</keepStagingRepositoryOnFailure>
-				</configuration>
-			</plugin>
+		    <plugin>
+	          <groupId>org.sonatype.central</groupId>
+	          <artifactId>central-publishing-maven-plugin</artifactId>
+	          <version>0.9.0</version>
+	          <extensions>true</extensions>
+	          <configuration>
+	            <publishingServerId>central</publishingServerId>
+	          </configuration>
+	        </plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
