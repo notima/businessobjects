@@ -10,6 +10,7 @@ public class OrderInvoiceReaderOptions {
 	private LocalDate	fromDate;
 	private LocalDate	untilDate;
 	private boolean		unpostedOnly;
+	private boolean		openOnly;
 	private int			readLimit;
 	
 	private TaxSubjectIdentifier	bpartner;
@@ -28,6 +29,12 @@ public class OrderInvoiceReaderOptions {
 	}
 	public void setUntilDate(LocalDate untilDate) {
 		this.untilDate = untilDate;
+	}
+	public boolean isOpenOnly() {
+		return openOnly;
+	}
+	public void setOpenOnly(boolean openOnly) {
+		this.openOnly = openOnly;
 	}
 	public boolean isUnpostedOnly() {
 		return unpostedOnly;

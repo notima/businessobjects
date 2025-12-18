@@ -219,6 +219,8 @@ public interface BusinessObjectFactory<C,I,O,P,B,T> {
 	public O persistNativeOrder(O order) throws Exception;
 	
 	public Invoice<I> lookupInvoice(String key) throws Exception;
+	
+	public Invoice<I> lookupVendorInvoice(String key) throws Exception;
 
 	/**
 	 * Looks up invoices with a given reference
@@ -228,6 +230,16 @@ public interface BusinessObjectFactory<C,I,O,P,B,T> {
 	 * @see #flushInvoiceCache()
 	 */
 	public List<Invoice<I>> lookupInvoiceWithReference(TransactionReference reference) throws Exception;
+	
+	/**
+	 * Looks up invoices with a given reference
+	 * 
+	 * @param reference			A transaction reference
+	 * @return	A list of invoices matchning the reference.
+	 * @see #flushInvoiceCache()
+	 */
+	public List<Invoice<I>> lookupVendorInvoiceWithReference(TransactionReference reference) throws Exception;
+	
 
 	/**
 	 * Some systems can't lookup quickly on all fields. To flush the cache that might be present, call this
@@ -270,10 +282,11 @@ public interface BusinessObjectFactory<C,I,O,P,B,T> {
 	 * Looks up an arbitrary map. What maps that are available depends on 
 	 * the implementation.
 	 * @param listName
+	 * @param if this applies to customer (or vendor)
 	 * @return	A map.
 	 * @throws Exception
 	 */
-	public Map<Object, Object> lookupList(String listName) throws Exception;
+	public Map<Object, Object> lookupList(String listName, boolean customer) throws Exception;
 	
 	public Product<P> lookupRoundingProduct() throws Exception;
 	
@@ -309,6 +322,18 @@ public interface BusinessObjectFactory<C,I,O,P,B,T> {
 
 	
 	/**
+	 * Reads vendor invoices from underlaying system.
+	 * 
+	 * @param opts						Filter criterias etc.
+	 * @return							
+	 * @throws Exception
+	 */
+	public OrderInvoiceOperationResult readVendorInvoices(
+			OrderInvoiceReaderOptions opts
+			) throws Exception;
+
+	
+	/**
 	 * Write invoices to underlaying system.
 	 * 
 	 * @param canonicalInvoices			The invoices to be written.
@@ -318,6 +343,18 @@ public interface BusinessObjectFactory<C,I,O,P,B,T> {
 	 */
 	public OrderInvoiceOperationResult writeInvoices(List<Invoice<?>> canonicalInvoices, 
 			OrderInvoiceWriterOptions opts) throws Exception;
+
+	/**
+	 * Write vendor invoices to underlaying system.
+	 * 
+	 * @param canonicalInvoices			The invoices to be written.
+	 * @param opts						What options to use when writing the invoices
+	 * @return							The result of the operation		
+	 * @throws Exception
+	 */
+	public OrderInvoiceOperationResult writeVendorInvoices(List<Invoice<?>> canonicalInvoices, 
+			OrderInvoiceWriterOptions opts) throws Exception;
+	
 	
 	/**
 	 * Attach file to voucher in underlaying system.

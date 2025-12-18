@@ -88,6 +88,10 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B,T> implements Busines
 		this.enrichDataByDefault = enrichDataByDefault;
 	}
 
+	@Override
+	public Map<Object, Object> lookupList(String listName, boolean customer) throws Exception {
+		return lookupList(listName, true);
+	}
 
 	/**
 	 * Adds a tenant to given business object factory.
@@ -251,6 +255,35 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B,T> implements Busines
 	
 	@Override
 	public OrderInvoiceOperationResult readInvoices(OrderInvoiceReaderOptions opts) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+
+	@Override
+	public Invoice<I> lookupVendorInvoice(String key) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<Invoice<I>> lookupVendorInvoiceWithReference(TransactionReference reference) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public OrderInvoiceOperationResult readVendorInvoices(OrderInvoiceReaderOptions opts) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public OrderInvoiceOperationResult writeVendorInvoices(List<Invoice<?>> canonicalInvoices,
+			OrderInvoiceWriterOptions opts) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
