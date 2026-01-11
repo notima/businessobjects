@@ -55,7 +55,7 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B,T> implements Busines
 	protected boolean	debugOn = false;
 	
 	protected File		debugDirectory;
-	
+
 	@Override
 	public List<Invoice<I>> lookupInvoiceWithReference(TransactionReference reference) throws Exception {
 
@@ -68,7 +68,16 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B,T> implements Busines
 		
 	}
 	
-	
+	@Override
+	public Map<String, String> getRequiredSettings() {
+		return settingsMap;
+	}
+
+	@Override
+	public String getSettingInfo(String settingsKey) {
+		return null;
+	}
+
 	/**
 	 * Some systems can't lookup quickly on all fields. To flush the cache that might be present, call this
 	 * method.

@@ -31,7 +31,7 @@ public interface BusinessObjectFactory<C,I,O,P,B,T> {
 	 * @return	The system name of this adapter.
 	 */
 	public String getSystemName();
-
+	
 	/**
 	 * 
 	 * @return 	 True if the factory is in debug mode.
@@ -109,6 +109,19 @@ public interface BusinessObjectFactory<C,I,O,P,B,T> {
 	 * @return	The current tenant.
 	 */
 	public BusinessPartner<T> getCurrentTenant();
+
+	/**
+	 * Gets required settings for this business object factory
+	 */
+	public Map<String, String> getRequiredSettings();
+	
+	/**
+	 * Get info about a specific setting
+	 * 
+	 * @param settingsKey
+	 * @return
+	 */
+	public String getSettingInfo(String settingsKey);
 	
 	/**
 	 * Returns given setting.
