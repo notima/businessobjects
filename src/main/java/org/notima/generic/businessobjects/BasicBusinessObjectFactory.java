@@ -18,7 +18,7 @@ import org.notima.generic.businessobjects.exception.NoSuchTenantException;
 import org.notima.generic.ifacebusinessobjects.BusinessObjectFactory;
 
 /*
- *    Copyright 2020,2024 Ekonomibolaget Notima AB 
+ *    Copyright 2020,2026 Ekonomibolaget Notima AB 
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -55,6 +55,8 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B,T> implements Busines
 	protected boolean	debugOn = false;
 	
 	protected File		debugDirectory;
+	
+	protected AdapterInfo	adapterInfo = new AdapterInfo();
 
 	@Override
 	public List<Invoice<I>> lookupInvoiceWithReference(TransactionReference reference) throws Exception {
@@ -69,13 +71,9 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B,T> implements Busines
 	}
 	
 	@Override
-	public Map<String, String> getRequiredSettings() {
-		return settingsMap;
-	}
-
-	@Override
-	public String getSettingInfo(String settingsKey) {
-		return null;
+	public AdapterInfo getAdapterInfo() {
+		adapterInfo.setSystemName(this.getSystemName());
+		return adapterInfo;
 	}
 
 	/**

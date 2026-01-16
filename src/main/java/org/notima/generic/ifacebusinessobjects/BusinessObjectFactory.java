@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.Date;
 
 import org.notima.generic.businessobjects.AccountingVoucher;
+import org.notima.generic.businessobjects.AdapterInfo;
 import org.notima.generic.businessobjects.BusinessPartner;
 import org.notima.generic.businessobjects.BusinessPartnerList;
 import org.notima.generic.businessobjects.DunningRun;
@@ -111,40 +112,11 @@ public interface BusinessObjectFactory<C,I,O,P,B,T> {
 	public BusinessPartner<T> getCurrentTenant();
 
 	/**
-	 * Gets required settings for this business object factory
-	 */
-	public Map<String, String> getRequiredSettings();
-	
-	/**
-	 * Get info about a specific setting
+	 * Return specific information about this adapter.
 	 * 
-	 * @param settingsKey
 	 * @return
 	 */
-	public String getSettingInfo(String settingsKey);
-	
-	/**
-	 * Returns given setting.
-	 * 
-	 * @param settingKey	The key of the setting.
-	 * @return				Null if the settings doesn't exist. Otherwise a non-null value.
-	 */
-	public String getSetting(String settingKey);	
-	
-	/**
-	 * Writes a given setting.
-	 * 
-	 * @param settingKey	The setting key
-	 * @param value			If null and the setting exist, it's remove.
-	 */
-	public void setSetting(String settingKey, String value);
-	
-	/**
-	 * Appends settings from a settings map
-	 * 
-	 * @param	settings	An existing settings map. This is copied to the internal settings map.
-	 */
-	public void appendSettings(Map<String, String> settings);
+	public AdapterInfo getAdapterInfo();
 	
 	/**
 	 * Lookup business partner (vendor / customer) using supplied key
