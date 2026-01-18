@@ -35,5 +35,8 @@ public class InvoiceList {
 		this.creditor = creditor;
 	}
 	
+	public void addInvoice(Invoice<?> invoice) {
+		invoiceList.add(invoice);
+	}
 	
 }

@@ -11,6 +11,7 @@ public class OrderInvoiceReaderOptions {
 	private LocalDate	untilDate;
 	private boolean		unpostedOnly;
 	private boolean		openOnly;
+	private boolean		showCancelled;
 	private int			readLimit;
 	
 	private TaxSubjectIdentifier	bpartner;
@@ -65,6 +66,12 @@ public class OrderInvoiceReaderOptions {
 	}
 	public void setReadLimit(int readLimit) {
 		this.readLimit = readLimit;
+	}
+	public boolean isShowCancelled() {
+		return showCancelled;
+	}
+	public void setShowCancelled(boolean showCancelled) {
+		this.showCancelled = showCancelled;
 	}
 	
 	
