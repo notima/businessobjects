@@ -119,6 +119,13 @@ public interface BusinessObjectFactory<C,I,O,P,B,T> {
 	public AdapterInfo getAdapterInfo();
 	
 	/**
+	 * Runtime settings for this adapter
+	 */
+	public void setSetting(String key, String value);	
+	
+	public String getSetting(String key);
+	
+	/**
 	 * Lookup business partner (vendor / customer) using supplied key
 	 * 
 	 * @param key			The business partner key used in the system
