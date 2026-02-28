@@ -14,6 +14,7 @@ public class AdapterInfo {
 	private String 	systemName;
 	private String	systemUrl;
 	private String	displayName;
+	private String	systemUrlDescription;
 	
 	private boolean	online;
 	private boolean local;
@@ -35,6 +36,14 @@ public class AdapterInfo {
 
 	public void setSystemUrl(String systemUrl) {
 		this.systemUrl = systemUrl;
+	}
+	
+	public String getSystemUrlDescription() {
+		return systemUrlDescription;
+	}
+
+	public void setSystemUrlDescription(String systemUrlDescription) {
+		this.systemUrlDescription = systemUrlDescription;
 	}
 
 	public String getDisplayName() {
@@ -61,6 +70,10 @@ public class AdapterInfo {
 		this.local = local;
 	}
 
+	public void addRequiredSetting(String settingsKey) {
+		requiredSettings.add(settingsKey);
+	}
+	
 	/**
 	 * Gets required settings for this business object factory
 	 */
@@ -101,5 +114,44 @@ public class AdapterInfo {
 		}
 	}
 	
+	@Override
+	public String toString() {
+	    StringBuilder sb = new StringBuilder();
+
+	    sb.append("AdapterInfo {\n");
+
+	    sb.append("  System      : ")
+	      .append(displayName != null ? displayName : systemName)
+	      .append("\n");
+
+	    if (systemName != null && !systemName.equals(displayName)) {
+	        sb.append("  System Name : ").append(systemName).append("\n");
+	    }
+
+	    if (systemUrl != null) {
+	        sb.append("  URL         : ").append(systemUrl).append("\n");
+	        if (systemUrlDescription != null) {
+	            sb.append("  URL Info    : ").append(systemUrlDescription).append("\n");
+	        }
+	    }
+
+	    sb.append("  Status      : ")
+	      .append(online ? "Online" : "Offline")
+	      .append(local ? " (Local)" : " (Remote)")
+	      .append("\n");
+
+	    sb.append("  Settings    : ")
+	      .append(settingsMap.isEmpty() ? "None" : settingsMap.keySet())
+	      .append("\n");
+
+	    sb.append("  Required    : ")
+	      .append(requiredSettings.isEmpty() ? "None" : requiredSettings)
+	      .append("\n");
+
+	    sb.append("}");
+
+	    return sb.toString();
+	}
+
 	
 }

@@ -365,6 +365,15 @@ public interface BusinessObjectFactory<C,I,O,P,B,T> {
 	public Object persist(Object o) throws Exception;
 	
 	/**
+	 * Connects the business object adapter according to current configuration (ie adapter info).
+	 * This should also initialize the adapter if needed.
+	 * 
+	 * @return	True if connection succeeded.
+	 * @throws Exception
+	 */
+	public boolean connect() throws Exception;
+	
+	/**
 	 * Check is the factory is connected / online / available 
 	 * @return
 	 */

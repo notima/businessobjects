@@ -56,7 +56,7 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B,T> implements Busines
 	
 	protected File		debugDirectory;
 	
-	protected AdapterInfo	adapterInfo = new AdapterInfo();
+	protected final AdapterInfo	adapterInfo = new AdapterInfo();
 
 	@Override
 	public List<Invoice<I>> lookupInvoiceWithReference(TransactionReference reference) throws Exception {
@@ -74,6 +74,13 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B,T> implements Busines
 	public AdapterInfo getAdapterInfo() {
 		adapterInfo.setSystemName(this.getSystemName());
 		return adapterInfo;
+	}
+
+	
+	
+	@Override
+	public boolean connect() throws Exception {
+		return false;
 	}
 
 	/**
