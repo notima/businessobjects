@@ -58,6 +58,11 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B,T> implements Busines
 	
 	protected final AdapterInfo	adapterInfo = new AdapterInfo();
 
+	protected String	defaultImportFile;
+	
+	protected String	defaultExportFile;
+	
+	
 	@Override
 	public List<Invoice<I>> lookupInvoiceWithReference(TransactionReference reference) throws Exception {
 
@@ -397,6 +402,26 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B,T> implements Busines
 			}
 		}
 		
+	}
+
+	@Override
+	public String getDefaultExportFile() {
+		return defaultExportFile;
+	}
+
+	@Override
+	public void setDefaultExportFile(String filePath) {
+		defaultExportFile = filePath;
+	}
+
+	@Override
+	public String getDefaultImportFile() {
+		return defaultImportFile;
+	}
+
+	@Override
+	public void setDefaultImportFile(String filePath) {
+		defaultImportFile = filePath;
 	}
 	
 	

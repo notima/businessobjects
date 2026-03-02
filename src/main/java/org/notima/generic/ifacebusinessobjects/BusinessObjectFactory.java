@@ -33,6 +33,14 @@ public interface BusinessObjectFactory<C,I,O,P,B,T> {
 	 */
 	public String getSystemName();
 	
+	public String getDefaultExportFile();
+	
+	public void setDefaultExportFile(String filePath);
+	
+	public String getDefaultImportFile();
+	
+	public void setDefaultImportFile(String filePath);
+	
 	/**
 	 * 
 	 * @return 	 True if the factory is in debug mode.
