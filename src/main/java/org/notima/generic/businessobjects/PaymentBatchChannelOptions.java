@@ -22,7 +22,9 @@ public class PaymentBatchChannelOptions {
 	protected String					generalLedgerUnknownTrxAccount;
 	protected String					voucherSeries;
 	protected String					sourceReference;
+	protected String					sourceReferenceRegex;
 	protected String					destinationReference;
+	protected String					destinationReferenceRegex;
 	
 	public Properties getDestinationProperties() {
 		return destinationProperties;
@@ -148,7 +150,23 @@ public class PaymentBatchChannelOptions {
 	public boolean hasSourceReference() {
 		return sourceReference!=null && sourceReference.trim().length()>0;
 	}
-	
+
+	/**
+	 * Regex applied to the source reference (the payment provider's own reference, e.g. merchant/order
+	 * reference) before matching against the destination system.
+	 * @return
+	 */
+	public String getSourceReferenceRegex() {
+		return sourceReferenceRegex;
+	}
+	public void setSourceReferenceRegex(String sourceReferenceRegex) {
+		this.sourceReferenceRegex = sourceReferenceRegex;
+	}
+
+	public boolean hasSourceReferenceRegex() {
+		return sourceReferenceRegex!=null && sourceReferenceRegex.trim().length()>0;
+	}
+
 	/**
 	 * The name of the destination's reference fields. If more than one field, this is a comma separated list.
 	 * @return
@@ -163,5 +181,20 @@ public class PaymentBatchChannelOptions {
 	public boolean hasDestinationReference() {
 		return destinationReference!=null && destinationReference.trim().length()>0;
 	}
-	
+
+	/**
+	 * Regex applied to the destination reference field when matching against the destination system.
+	 * @return
+	 */
+	public String getDestinationReferenceRegex() {
+		return destinationReferenceRegex;
+	}
+	public void setDestinationReferenceRegex(String destinationReferenceRegex) {
+		this.destinationReferenceRegex = destinationReferenceRegex;
+	}
+
+	public boolean hasDestinationReferenceRegex() {
+		return destinationReferenceRegex!=null && destinationReferenceRegex.trim().length()>0;
+	}
+
 }
