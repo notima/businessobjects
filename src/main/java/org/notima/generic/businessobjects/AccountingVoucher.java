@@ -20,6 +20,13 @@ import org.notima.util.LocalDateUtils;
  */
 public class AccountingVoucher {
 
+	/**
+	 * Stable identifier for this voucher, independent of {@link #voucherNo}/{@link #voucherSeries}
+	 * (which may be blank or change while a voucher is being created). Not set by default;
+	 * use {@link #getOrCreateId()} where a stable key is needed, e.g. to group {@link #attachments}.
+	 */
+	private String			id;
+
 	private LocalDate		acctDate;
 	private LocalDateTime	regDate;
 	private	String			description;
@@ -33,9 +40,11 @@ public class AccountingVoucher {
 	private String			comments;
 	private String			sourceCurrency;
 	private String			accountingCurrency;
-	
+
+	private List<Attachment> attachments;
+
 	private Integer			precision = 2;
-	
+
 	private List<AccountingVoucherLine> lines;
 
 	public static AccountingVoucher buildVoucherFromPayment(Payment<?> pmt, boolean ignoreWriteOffs) {
@@ -109,6 +118,33 @@ public class AccountingVoucher {
 		
 	}
 	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	/**
+	 * Returns this voucher's stable id, generating (and setting) a random one on first call
+	 * if it does not have one yet.
+	 */
+	public String getOrCreateId() {
+		if (id == null) {
+			id = java.util.UUID.randomUUID().toString();
+		}
+		return id;
+	}
+
+	public List<Attachment> getAttachments() {
+		return attachments;
+	}
+
+	public void setAttachments(List<Attachment> attachments) {
+		this.attachments = attachments;
+	}
+
 	public LocalDate getAcctDate() {
 		return acctDate;
 	}
