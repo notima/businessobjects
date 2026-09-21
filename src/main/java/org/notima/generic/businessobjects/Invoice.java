@@ -92,7 +92,15 @@ public class Invoice<I> implements OrderInvoice {
 	
 	private String	ocr;
 	private boolean showPricesIncludingVAT = false;
-	
+
+	/**
+	 * {@code true} for a sales (customer/AR) invoice, {@code false} for a purchase
+	 * (vendor/AP) invoice &mdash; mirrors iDempiere's {@code IsSOTrx}. Lets AP and AR
+	 * invoices share a single register/list while still being distinguishable, since
+	 * a {@link BusinessPartner} can be both a customer and a vendor at once.
+	 */
+	private boolean salesTransaction;
+
 	private transient I nativeInvoice;
 	
 	private transient OrderInvoiceLineValidator	lineValidator;
@@ -117,6 +125,14 @@ public class Invoice<I> implements OrderInvoice {
 
 	public void setShowPricesIncludingVAT(boolean showPricesIncludingVAT) {
 		this.showPricesIncludingVAT = showPricesIncludingVAT;
+	}
+
+	public boolean isSalesTransaction() {
+		return salesTransaction;
+	}
+
+	public void setSalesTransaction(boolean salesTransaction) {
+		this.salesTransaction = salesTransaction;
 	}
 
 	public double getLineNet() {
