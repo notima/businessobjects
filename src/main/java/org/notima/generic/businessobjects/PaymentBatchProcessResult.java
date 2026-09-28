@@ -1,5 +1,8 @@
 package org.notima.generic.businessobjects;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PaymentBatchProcessResult {
 
 	public enum ResultCode {
@@ -23,12 +26,16 @@ public class PaymentBatchProcessResult {
 	
 	private StringBuffer	textResult;
 	
+	private List<PaymentProcessResult>	paymentResults = new ArrayList<PaymentProcessResult>();
+	private List<AccountingVoucher>		vouchers = new ArrayList<AccountingVoucher>();
+	
 	public boolean isProcessedWithoutErrors() {
 		return processedWithoutErrors;
 	}
 
 	public void addPaymentProcessResult(PaymentProcessResult prp) {
 		if (prp==null) return;
+		paymentResults.add(prp);
 		if (prp.getResultCode().equals(PaymentProcessResult.ResultCode.OK)) {
 			matchedPaymentsCount++;
 		}
@@ -122,6 +129,31 @@ public class PaymentBatchProcessResult {
 			textResult.append("\n");
 		}
 		textResult.append(msg);
+	}
+
+	/**
+	 * @return	The results of the processed payments.
+	 */
+	public List<PaymentProcessResult> getPaymentResults() {
+		return paymentResults;
+	}
+	
+	/**
+	 * Adds a voucher created in the destination system (or, in a dry run, a voucher 
+	 * that would have been created).
+	 * 
+	 * @param voucher	The voucher.
+	 */
+	public void addVoucher(AccountingVoucher voucher) {
+		if (voucher==null) return;
+		vouchers.add(voucher);
+	}
+	
+	/**
+	 * @return	Vouchers created (or that would have been created in a dry run).
+	 */
+	public List<AccountingVoucher> getVouchers() {
+		return vouchers;
 	}
 	
 }

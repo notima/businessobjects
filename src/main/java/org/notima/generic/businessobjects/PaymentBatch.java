@@ -112,10 +112,16 @@ public class PaymentBatch {
 			for (Payment<?> p : payments) {
 				
 				pl.addPayment(p);
-				
+
 			}
 		}
-		
+
+		// Add currency to the description since a source can be split into one batch per currency.
+		String currency = pl.getCurrency()!=null ? pl.getCurrency() : (bankAccount!=null ? bankAccount.getCurrency() : null);
+		if (currency!=null && currency.trim().length()>0) {
+			pl.setDescription((source!=null ? source + " " : "") + "(" + currency.trim().toUpperCase() + ")");
+		}
+
 		payoutLines = result;
 		
 		return payoutLines;

@@ -7,6 +7,7 @@ public class PaymentBatchChannelStatus {
 
 	private LocalDate		reconciledUntil;
 	private LocalDateTime	lastRun;
+	private boolean			active = true;
 	
 	private String			lastProcessedBatch;
 
@@ -44,6 +45,16 @@ public class PaymentBatchChannelStatus {
 	public void setMaxUnresolvedTrx(int maxUnresolvedTrx) {
 		this.maxUnresolvedTrx = maxUnresolvedTrx;
 	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+	
+	
 	
 	
 }

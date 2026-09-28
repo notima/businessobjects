@@ -19,7 +19,21 @@ public interface PaymentBatchChannelFactory {
 
 	public PaymentBatchChannel findChannelWithId(String id);
 	
-	public PaymentBatchChannel findChannelByDescription(String desc);	
+	public PaymentBatchChannel findChannelByDescription(String desc);
+
+	/**
+	 * Looks up a channel using its ID and, if not found, its description.
+	 *
+	 * @param idOrDesc		The channel ID or description.
+	 * @return	The channel or null if not found.
+	 */
+	public default PaymentBatchChannel findChannelWithIdOrDescription(String idOrDesc) {
+		PaymentBatchChannel channel = findChannelWithId(idOrDesc);
+		if (channel==null) {
+			channel = findChannelByDescription(idOrDesc);
+		}
+		return channel;
+	}
 	
 	public List<PaymentBatchChannel> findChannelsBySource(String source);
 	

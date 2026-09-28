@@ -99,36 +99,154 @@ public class PaymentBatchChannelOptions {
 	public void setDefaultCurrency(String defaultCurrency) {
 		this.defaultCurrency = defaultCurrency;
 	}
+	/**
+	 * @return	The generalLedgerBankAccount for the default currency.
+	 */
 	public String getGeneralLedgerBankAccount() {
+		return getGeneralLedgerBankAccount(null);
+	}
+	/**
+	 * @param currency	The currency. If null, the default currency is assumed.
+	 * @return	The generalLedgerBankAccount for given currency, or null if not defined at all.
+	 * @throws UnknownCurrencyAccountException	If defined per currency, but not for given currency.
+	 */
+	public String getGeneralLedgerBankAccount(String currency) {
+		return resolve("generalLedgerBankAccount", generalLedgerBankAccount, currency);
+	}
+	/**
+	 * @return	The raw definition, ie "1991,{1992:EUR}".
+	 */
+	public String getGeneralLedgerBankAccountDefinition() {
 		return generalLedgerBankAccount;
 	}
+	/**
+	 * @param generalLedgerBankAccount	An account (used for all currencies) or an account definition, ie "1991,{1992:EUR}"
+	 * @throws IllegalArgumentException	If the definition is malformed.
+	 */
 	public void setGeneralLedgerBankAccount(String generalLedgerBankAccount) {
+		CurrencyAccountMap.parse(generalLedgerBankAccount);
 		this.generalLedgerBankAccount = generalLedgerBankAccount;
 	}
+	/**
+	 * @return	The generalLedgerInTransitAccount for the default currency.
+	 */
 	public String getGeneralLedgerInTransitAccount() {
+		return getGeneralLedgerInTransitAccount(null);
+	}
+	/**
+	 * @param currency	The currency. If null, the default currency is assumed.
+	 * @return	The generalLedgerInTransitAccount for given currency, or null if not defined at all.
+	 * @throws UnknownCurrencyAccountException	If defined per currency, but not for given currency.
+	 */
+	public String getGeneralLedgerInTransitAccount(String currency) {
+		return resolve("generalLedgerInTransitAccount", generalLedgerInTransitAccount, currency);
+	}
+	/**
+	 * @return	The raw definition, ie "1991,{1992:EUR}".
+	 */
+	public String getGeneralLedgerInTransitAccountDefinition() {
 		return generalLedgerInTransitAccount;
 	}
+	/**
+	 * @param generalLedgerInTransitAccount	An account (used for all currencies) or an account definition, ie "1991,{1992:EUR}"
+	 * @throws IllegalArgumentException	If the definition is malformed.
+	 */
 	public void setGeneralLedgerInTransitAccount(String generalLedgerInTransitAccount) {
+		CurrencyAccountMap.parse(generalLedgerInTransitAccount);
 		this.generalLedgerInTransitAccount = generalLedgerInTransitAccount;
 	}
+	/**
+	 * @return	The generalLedgerReconciliationAccount for the default currency.
+	 */
 	public String getGeneralLedgerReconciliationAccount() {
+		return getGeneralLedgerReconciliationAccount(null);
+	}
+	/**
+	 * @param currency	The currency. If null, the default currency is assumed.
+	 * @return	The generalLedgerReconciliationAccount for given currency, or null if not defined at all.
+	 * @throws UnknownCurrencyAccountException	If defined per currency, but not for given currency.
+	 */
+	public String getGeneralLedgerReconciliationAccount(String currency) {
+		return resolve("generalLedgerReconciliationAccount", generalLedgerReconciliationAccount, currency);
+	}
+	/**
+	 * @return	The raw definition, ie "1991,{1992:EUR}".
+	 */
+	public String getGeneralLedgerReconciliationAccountDefinition() {
 		return generalLedgerReconciliationAccount;
 	}
+	/**
+	 * @param generalLedgerReconciliationAccount	An account (used for all currencies) or an account definition, ie "1991,{1992:EUR}"
+	 * @throws IllegalArgumentException	If the definition is malformed.
+	 */
 	public void setGeneralLedgerReconciliationAccount(String generalLedgerReconciliationAccount) {
+		CurrencyAccountMap.parse(generalLedgerReconciliationAccount);
 		this.generalLedgerReconciliationAccount = generalLedgerReconciliationAccount;
 	}
+	/**
+	 * @return	The generalLedgerFeeAccount for the default currency.
+	 */
 	public String getGeneralLedgerFeeAccount() {
+		return getGeneralLedgerFeeAccount(null);
+	}
+	/**
+	 * @param currency	The currency. If null, the default currency is assumed.
+	 * @return	The generalLedgerFeeAccount for given currency, or null if not defined at all.
+	 * @throws UnknownCurrencyAccountException	If defined per currency, but not for given currency.
+	 */
+	public String getGeneralLedgerFeeAccount(String currency) {
+		return resolve("generalLedgerFeeAccount", generalLedgerFeeAccount, currency);
+	}
+	/**
+	 * @return	The raw definition, ie "1991,{1992:EUR}".
+	 */
+	public String getGeneralLedgerFeeAccountDefinition() {
 		return generalLedgerFeeAccount;
 	}
+	/**
+	 * @param generalLedgerFeeAccount	An account (used for all currencies) or an account definition, ie "1991,{1992:EUR}"
+	 * @throws IllegalArgumentException	If the definition is malformed.
+	 */
 	public void setGeneralLedgerFeeAccount(String generalLedgerFeeAccount) {
+		CurrencyAccountMap.parse(generalLedgerFeeAccount);
 		this.generalLedgerFeeAccount = generalLedgerFeeAccount;
 	}
+	/**
+	 * @return	The generalLedgerUnknownTrxAccount for the default currency.
+	 */
 	public String getGeneralLedgerUnknownTrxAccount() {
+		return getGeneralLedgerUnknownTrxAccount(null);
+	}
+	/**
+	 * @param currency	The currency. If null, the default currency is assumed.
+	 * @return	The generalLedgerUnknownTrxAccount for given currency, or null if not defined at all.
+	 * @throws UnknownCurrencyAccountException	If defined per currency, but not for given currency.
+	 */
+	public String getGeneralLedgerUnknownTrxAccount(String currency) {
+		return resolve("generalLedgerUnknownTrxAccount", generalLedgerUnknownTrxAccount, currency);
+	}
+	/**
+	 * @return	The raw definition, ie "1991,{1992:EUR}".
+	 */
+	public String getGeneralLedgerUnknownTrxAccountDefinition() {
 		return generalLedgerUnknownTrxAccount;
 	}
+	/**
+	 * @param generalLedgerUnknownTrxAccount	An account (used for all currencies) or an account definition, ie "1991,{1992:EUR}"
+	 * @throws IllegalArgumentException	If the definition is malformed.
+	 */
 	public void setGeneralLedgerUnknownTrxAccount(String generalLedgerUnknownTrxAccount) {
+		CurrencyAccountMap.parse(generalLedgerUnknownTrxAccount);
 		this.generalLedgerUnknownTrxAccount = generalLedgerUnknownTrxAccount;
 	}
+	private String resolve(String optionName, String definition, String currency) {
+		try {
+			return CurrencyAccountMap.parse(definition).getAccount(currency, defaultCurrency);
+		} catch (UnknownCurrencyAccountException e) {
+			throw new UnknownCurrencyAccountException(optionName, e.getCurrency());
+		}
+	}
+	
 	public String getVoucherSeries() {
 		return voucherSeries;
 	}
