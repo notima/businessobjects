@@ -1,5 +1,6 @@
 package org.notima.generic.businessobjects;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,6 +27,10 @@ public class PaymentBatch {
 	private String					voucherSeries;
 	
 	private String generalLedgerUnknownTrxAccount;
+	
+	// The period the source report covers, if known. A report can cover a period without payments.
+	private LocalDate	periodFrom;
+	private LocalDate	periodTo;
 	
 	/**
 	 * The Batch Owner is the tax subject that this file belongs to.
@@ -158,7 +163,25 @@ public class PaymentBatch {
 	public void setVoucherSeries(String voucherSeries) {
 		this.voucherSeries = voucherSeries;
 	}
+
+	/**
+	 * @return	The first date of the period the source report covers. Null if unknown.
+	 */
+	public LocalDate getPeriodFrom() {
+		return periodFrom;
+	}
+	public void setPeriodFrom(LocalDate periodFrom) {
+		this.periodFrom = periodFrom;
+	}
 	
-	
+	/**
+	 * @return	The last date of the period the source report covers. Null if unknown.
+	 */
+	public LocalDate getPeriodTo() {
+		return periodTo;
+	}
+	public void setPeriodTo(LocalDate periodTo) {
+		this.periodTo = periodTo;
+	}
 	
 }
