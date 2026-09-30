@@ -42,6 +42,22 @@ public interface PaymentBatchChannel {
 	public List<String> getUnprocessedEntries();
 
 	public void setUnprocessedEntries(List<String> entries);
+
+	/**
+	 * @return	The first payment date in the unprocessed entries. Null if there are none or they
+	 * 			haven't been read.
+	 */
+	public LocalDate getUnprocessedFromDate();
+	
+	public void setUnprocessedFromDate(LocalDate date);
+	
+	/**
+	 * @return	The last payment date in the unprocessed entries. Null if there are none or they
+	 * 			haven't been read.
+	 */
+	public LocalDate getUnprocessedUntilDate();
+	
+	public void setUnprocessedUntilDate(LocalDate date);
 	
 	public PaymentBatchChannelOptions getOptions();
 	

@@ -15,7 +15,10 @@ public class BasicPaymentBatchChannel implements PaymentBatchChannel {
 	private String	channelDescription;
 	private PaymentBatchChannelOptions options;
 	private PaymentBatchChannelStatus status;
-	private List<String>	unprocessedEntries = new ArrayList<String>();
+	// Read from the source directory on demand, never persisted.
+	private transient List<String>	unprocessedEntries = new ArrayList<String>();
+	private transient LocalDate		unprocessedFromDate;
+	private transient LocalDate		unprocessedUntilDate;
 	
 	@Override
 	public String getChannelId() {
@@ -135,6 +138,26 @@ public class BasicPaymentBatchChannel implements PaymentBatchChannel {
 	@Override
 	public void setUnprocessedEntries(List<String> entries) {
 		unprocessedEntries = entries;
+	}
+
+	@Override
+	public LocalDate getUnprocessedFromDate() {
+		return unprocessedFromDate;
+	}
+
+	@Override
+	public void setUnprocessedFromDate(LocalDate date) {
+		unprocessedFromDate = date;
+	}
+
+	@Override
+	public LocalDate getUnprocessedUntilDate() {
+		return unprocessedUntilDate;
+	}
+
+	@Override
+	public void setUnprocessedUntilDate(LocalDate date) {
+		unprocessedUntilDate = date;
 	}
 	
 	
