@@ -11,6 +11,8 @@ public class PaymentBatchChannelStatus {
 	
 	private String			lastProcessedBatch;
 
+	/** @deprecated Not used. See {@link PaymentBatchChannelThresholds}. */
+	@Deprecated
 	private int				maxUnresolvedTrx;
 
 	
@@ -38,10 +40,14 @@ public class PaymentBatchChannelStatus {
 		this.lastProcessedBatch = lastProcessedBatch;
 	}
 
+	/** @deprecated Not used. See {@link PaymentBatchChannelThresholds}. */
+	@Deprecated
 	public int getMaxUnresolvedTrx() {
 		return maxUnresolvedTrx;
 	}
 
+	/** @deprecated Not used. See {@link PaymentBatchChannelThresholds}. */
+	@Deprecated
 	public void setMaxUnresolvedTrx(int maxUnresolvedTrx) {
 		this.maxUnresolvedTrx = maxUnresolvedTrx;
 	}

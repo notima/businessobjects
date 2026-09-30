@@ -25,6 +25,7 @@ public class PaymentBatchChannelOptions {
 	protected String					sourceReferenceRegex;
 	protected String					destinationReference;
 	protected String					destinationReferenceRegex;
+	protected PaymentBatchChannelThresholds	thresholds;
 	
 	public Properties getDestinationProperties() {
 		return destinationProperties;
@@ -313,6 +314,20 @@ public class PaymentBatchChannelOptions {
 
 	public boolean hasDestinationReferenceRegex() {
 		return destinationReferenceRegex!=null && destinationReferenceRegex.trim().length()>0;
+	}
+
+	/**
+	 * @return	Limits for when a report file may be processed. Can be null (no limits).
+	 */
+	public PaymentBatchChannelThresholds getThresholds() {
+		return thresholds;
+	}
+	public void setThresholds(PaymentBatchChannelThresholds thresholds) {
+		this.thresholds = thresholds;
+	}
+
+	public boolean hasThresholds() {
+		return thresholds!=null && thresholds.hasLimits();
 	}
 
 }

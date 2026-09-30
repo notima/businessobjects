@@ -135,6 +135,15 @@ public class CurrencyAccountMap {
 	}
 
 	/**
+	 * @param currency	The currency (case insensitive).
+	 * @return	The account explicitly defined for the currency, or null if there is none.
+	 */
+	public String getCurrencyAccount(String currency) {
+		String c = normalize(currency);
+		return c!=null ? currencyAccounts.get(c) : null;
+	}
+
+	/**
 	 * @return	The currencies that have an explicit account.
 	 */
 	public Set<String> getCurrencies() {
