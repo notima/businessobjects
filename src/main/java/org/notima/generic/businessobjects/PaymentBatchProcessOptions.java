@@ -135,7 +135,7 @@ public class PaymentBatchProcessOptions {
 	 * 
 	 * For instance 1234=445,1232=432 etc
 	 * 
-	 * @param list
+	 * @param csvlist	Comma separated list of tuples.
 	 */
 	public void addManualReferenceMapFromCommaList(String csvlist) {
 		

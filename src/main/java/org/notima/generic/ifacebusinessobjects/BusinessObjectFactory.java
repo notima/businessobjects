@@ -282,7 +282,7 @@ public interface BusinessObjectFactory<C,I,O,P,B,T> {
 	 * Looks up an arbitrary map. What maps that are available depends on 
 	 * the implementation.
 	 * @param listName
-	 * @param if this applies to customer (or vendor)
+	 * @param customer	True if this applies to customer (false for vendor)
 	 * @return	A map.
 	 * @throws Exception
 	 */
