@@ -41,6 +41,17 @@ public class BusinessPartner<B> implements Comparable {
 	private String	countryCode;
 	private Boolean	active;	
 	private String	comments;
+	/** Default currency for this business partner, e.g. "SEK". */
+	private String	currency;
+	/** Default payment term, as a key in the source system, e.g. "30". */
+	private String	paymentTermKey;
+	/** VAT treatment code of the source system, e.g. Fortnox "SEVAT", "EUREVERSEDVAT" or "EXPORT". */
+	private String	vatType;
+	/** GS1 Global Location Number. */
+	private String	gln;
+	/** Peppol participant id used for e-invoicing, e.g. "0007:5560000001". */
+	private String	peppolId;
+	private String	website;
 	
 	private String	remitToAccount;
 	private String	remitToAccountType;
@@ -329,6 +340,54 @@ public class BusinessPartner<B> implements Comparable {
 
 	public void setComments(String comments) {
 		this.comments = comments;
+	}
+
+	public String getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
+
+	public String getPaymentTermKey() {
+		return paymentTermKey;
+	}
+
+	public void setPaymentTermKey(String paymentTermKey) {
+		this.paymentTermKey = paymentTermKey;
+	}
+
+	public String getVatType() {
+		return vatType;
+	}
+
+	public void setVatType(String vatType) {
+		this.vatType = vatType;
+	}
+
+	public String getGln() {
+		return gln;
+	}
+
+	public void setGln(String gln) {
+		this.gln = gln;
+	}
+
+	public String getPeppolId() {
+		return peppolId;
+	}
+
+	public void setPeppolId(String peppolId) {
+		this.peppolId = peppolId;
+	}
+
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
 	}
 	
 	public String getRemitToAccount() {
