@@ -46,4 +46,14 @@ public interface InvoiceFormatter {
 	 */
 	public String[] getFormats();
 
+	/**
+	 * Built-in templates of this formatter, e.g. different layouts of the payment slip.
+	 * Any of them can be passed as {@link #TEMPLATE_FILE} instead of a file path.
+	 *
+	 * @return		Names of the built-in templates; empty if the formatter has none.
+	 */
+	public default String[] getTemplates() {
+		return new String[0];
+	}
+
 }
