@@ -23,6 +23,12 @@ public interface InvoiceFormatter {
 	public static final String OUTPUT_FILENAME = "OutputFilename";
 
 	/**
+	 * Property for a template file (e.g. a report design) to format the invoice with,
+	 * instead of the formatter's default. Ignored by formatters that don't use templates.
+	 */
+	public static final String TEMPLATE_FILE = "TemplateFile";
+
+	/**
 	 * Formats an invoice
 	 *
 	 * @param invoice			The invoice to be formatted.
