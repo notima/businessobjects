@@ -26,6 +26,8 @@ public class DunningEntry<B,I> {
 	private double totalClaims;
 	private double totalInterest;
 	private double totalLegalCost;
+	/** Reminder fee added to each reminder; {@code null} if not specified (the template's default applies). */
+	private Double reminderFee;
 	private double grandTotal;
 	
 	private java.util.Date letterDate;
@@ -181,6 +183,18 @@ public class DunningEntry<B,I> {
 	}
 	public void setTotalLegalCost(double totalLegalCost) {
 		this.totalLegalCost = totalLegalCost;
+	}
+	/**
+	 * The reminder fee ("påminnelseavgift") added to the amount to pay on each reminder.
+	 * 
+	 * @return the fee, or {@code null} if not specified, in which case the reminder
+	 * 		   template's default fee applies.
+	 */
+	public Double getReminderFee() {
+		return reminderFee;
+	}
+	public void setReminderFee(Double reminderFee) {
+		this.reminderFee = reminderFee;
 	}
 	public double getGrandTotal() {
 		return grandTotal;
