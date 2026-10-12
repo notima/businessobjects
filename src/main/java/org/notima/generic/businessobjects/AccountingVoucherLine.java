@@ -1,6 +1,7 @@
 package org.notima.generic.businessobjects;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 public class AccountingVoucherLine {
 
@@ -15,7 +16,25 @@ public class AccountingVoucherLine {
 	private String			costCenter;
 	private String			projectCode;
 	private Boolean	isService;
+	/**
+	 * True when the line has been struck from the voucher after it was registered
+	 * (SIE #BTRANS). A struck line stays on the voucher for the audit trail but does
+	 * not count in any amount or balance.
+	 */
 	private Boolean deleted = Boolean.FALSE;
+	/** Who struck the line. */
+	private String deletedBy;
+	/** When the line was struck. */
+	private LocalDateTime deletedDate;
+	/**
+	 * True when the line was added to the voucher after it was registered, as a
+	 * correction (SIE #RTRANS).
+	 */
+	private Boolean addedLater;
+	/** Who added the line, when {@link #addedLater}. */
+	private String addedBy;
+	/** When the line was added, when {@link #addedLater}. */
+	private LocalDateTime addedDate;
 	
 	public AccountingVoucherLine() {}
 	
@@ -141,6 +160,46 @@ public class AccountingVoucherLine {
 
 	public void setDeleted(Boolean deleted) {
 		this.deleted = deleted;
+	}
+
+	public String getDeletedBy() {
+		return deletedBy;
+	}
+
+	public void setDeletedBy(String deletedBy) {
+		this.deletedBy = deletedBy;
+	}
+
+	public LocalDateTime getDeletedDate() {
+		return deletedDate;
+	}
+
+	public void setDeletedDate(LocalDateTime deletedDate) {
+		this.deletedDate = deletedDate;
+	}
+
+	public Boolean getAddedLater() {
+		return addedLater;
+	}
+
+	public void setAddedLater(Boolean addedLater) {
+		this.addedLater = addedLater;
+	}
+
+	public String getAddedBy() {
+		return addedBy;
+	}
+
+	public void setAddedBy(String addedBy) {
+		this.addedBy = addedBy;
+	}
+
+	public LocalDateTime getAddedDate() {
+		return addedDate;
+	}
+
+	public void setAddedDate(LocalDateTime addedDate) {
+		this.addedDate = addedDate;
 	}
 	
 	

@@ -383,6 +383,7 @@ public class AccountingVoucher {
 			return totalCredit;
 
 		for (AccountingVoucherLine l : lines) {
+			if (Boolean.TRUE.equals(l.isDeleted())) continue;	// struck lines don't count
 			totalCredit = totalCredit.add(l.getCreditAmount());
 		}
 
@@ -397,6 +398,7 @@ public class AccountingVoucher {
 			return totalDebet;
 		
 		for (AccountingVoucherLine l : lines) {
+			if (Boolean.TRUE.equals(l.isDeleted())) continue;	// struck lines don't count
 			totalDebet = totalDebet.add(l.getDebitAmount());
 		}
 		
