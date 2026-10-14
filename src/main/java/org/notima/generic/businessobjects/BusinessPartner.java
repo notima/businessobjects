@@ -58,6 +58,8 @@ public class BusinessPartner<B> implements Comparable {
 	
 	private String	remitToIBAN;
 	private String	remitToBIC;
+	/** Swedish F-tax: approved for F-skatt (registered for business tax). */
+	private boolean	approvedForFTax;
 
 	private transient B nativeBusinessPartner;
 	
@@ -159,13 +161,12 @@ public class BusinessPartner<B> implements Comparable {
 			return null;
 		}
 		
+		// Derived on each call rather than stored, so that hasVatNo() tells whether one was set
 		try {
-			vatNo = TaxIdFormatter.printTaxId(format, taxId, TaxIdStructure.FMT_SE14);
+			return TaxIdFormatter.printTaxId(format, taxId, TaxIdStructure.FMT_SE14);
 		} catch (UnknownTaxIdFormatException | InvalidTaxIdFormatException e) {
 			return null;
 		}
-		
-		return vatNo;
 	}
 
 	public void setVatNo(String vatNo) {
@@ -302,6 +303,14 @@ public class BusinessPartner<B> implements Comparable {
 	public boolean hasTaxId() {
 		return (taxId!=null && taxId.trim().length()>0);
 	}
+
+	/**
+	 * @return	True if a VAT number has been set, as opposed to {@link #getVatNo()}
+	 * 			which also derives one from the tax id.
+	 */
+	public boolean hasVatNo() {
+		return (vatNo!=null && vatNo.trim().length()>0);
+	}
 	
 	public boolean hasContacts() {
 		if (contacts==null) return false;
@@ -420,6 +429,17 @@ public class BusinessPartner<B> implements Comparable {
 
 	public void setRemitToBIC(String remitToBIC) {
 		this.remitToBIC = remitToBIC;
+	}
+
+	/**
+	 * @return	True if approved for Swedish F-tax (godkänd för F-skatt).
+	 */
+	public boolean isApprovedForFTax() {
+		return approvedForFTax;
+	}
+
+	public void setApprovedForFTax(boolean approvedForFTax) {
+		this.approvedForFTax = approvedForFTax;
 	}
 
 	@Override
