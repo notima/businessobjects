@@ -14,6 +14,7 @@ import org.notima.generic.businessobjects.exception.NoSuchTenantException;
 import org.notima.generic.businessobjects.exception.TaxRatesNotAvailableException;
 import org.notima.generic.businessobjects.tax.BasicTaxRateProviderFI;
 import org.notima.generic.businessobjects.tax.BasicTaxRateProviderSE;
+import org.notima.generic.businessobjects.tax.TaxTool;
 import org.notima.generic.ifacebusinessobjects.TaxRateProvider;
 
 /**
@@ -58,6 +59,25 @@ public class TestTaxRateProviders {
 			}
 		}
 
+	}
+	
+	@Test
+	public void testSwedishZeroRatedSales() throws Exception {
+		List<Tax> taxes = new BasicTaxRateProviderSE().getValidTaxRates(tsi, taxDate);
+		String[] keys = new String[taxes.size()];
+		for (int i = 0; i < keys.length; i++) keys[i] = taxes.get(i).getKey();
+		assertArrayEquals(new String[] {"MP1", "MP2", "MP3", "MF", "REVD", "VTEU", "FTEU", "E", "ES"}, keys);
+
+		Tax euServices = taxes.get(6);
+		assertEquals(0.0, euServices.getRate(), 0.0);
+		assertTrue(euServices.isReverseCharge());
+		assertEquals("EU", euServices.getOtherCountryGroup());
+		assertTrue(euServices.isAppliesToServices());
+		assertFalse(euServices.isAppliesToGoods());
+		assertFalse(taxes.get(7).isReverseCharge());
+
+		// A lookup on rate alone still gives MF for 0 %
+		assertEquals("MF", TaxTool.getFirstMatchOnRate(0, 0, taxes).getKey());
 	}
 	
 	private void testProvider() throws NoSuchTenantException, TaxRatesNotAvailableException {

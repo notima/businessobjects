@@ -15,11 +15,37 @@ import org.notima.generic.businessobjects.util.CoreConstants;
 import org.notima.generic.ifacebusinessobjects.TaxRateProvider;
 
 /**
- * A simple tax rate provider for domestic sales in Sweden.
+ * A simple tax rate provider for sales from Sweden.
+ * 
+ * <p>Domestic rates 25 % (MP1), 12 % (MP2), 6 % (MP3) and 0 % (MF), followed by the
+ * zero-rated sales that are reported separately in the VAT return:</p>
+ * <ul>
+ *   <li>{@value #KEY_SE_REVERSE_CHARGE}: domestic sales where the buyer is liable for the VAT
+ *       (omv&auml;nd skattskyldighet, e.g. construction services)</li>
+ *   <li>{@value #KEY_EU_GOODS}: sales of goods to a VAT-registered buyer in another EU country</li>
+ *   <li>{@value #KEY_EU_SERVICES}: sales of services to a VAT-registered buyer in another EU country</li>
+ *   <li>{@value #KEY_EXPORT_GOODS}: export of goods outside the EU</li>
+ *   <li>{@value #KEY_EXPORT_SERVICES}: sales of services outside the EU</li>
+ * </ul>
+ * <p>The 0 % rates come after MF, so a lookup on rate alone
+ * ({@link TaxTool#getFirstMatchOnRate}) still finds MF.</p>
  * 
  */
 public class BasicTaxRateProviderSE implements TaxRateProvider {
 
+	/** Domestic sales, reverse charge (omvänd skattskyldighet). */
+	public static final String KEY_SE_REVERSE_CHARGE = "REVD";
+	/** Sales of goods to another EU country. */
+	public static final String KEY_EU_GOODS = "VTEU";
+	/** Sales of services to another EU country. */
+	public static final String KEY_EU_SERVICES = "FTEU";
+	/** Export of goods outside the EU. */
+	public static final String KEY_EXPORT_GOODS = "E";
+	/** Sales of services outside the EU. */
+	public static final String KEY_EXPORT_SERVICES = "ES";
+
+	private static final String EU = "EU";
+	
 	private Locale thisLocale = Locale.forLanguageTag("sv-SE");
 	private Set<String> domiciles;
 	
@@ -67,6 +93,11 @@ public class BasicTaxRateProviderSE implements TaxRateProvider {
 		addMediumTax();
 		addLowTax();
 		addZeroTax();
+		addZeroRatedTax(KEY_SE_REVERSE_CHARGE, true, null, true, true);
+		addZeroRatedTax(KEY_EU_GOODS, true, EU, true, false);
+		addZeroRatedTax(KEY_EU_SERVICES, true, EU, false, true);
+		addZeroRatedTax(KEY_EXPORT_GOODS, false, null, true, false);
+		addZeroRatedTax(KEY_EXPORT_SERVICES, false, null, false, true);
 		
 	}
 	
@@ -90,5 +121,22 @@ public class BasicTaxRateProviderSE implements TaxRateProvider {
 		taxList.add(tax);
 	}
 
+	/**
+	 * Adds a 0 % rate that is reported as its own kind of sales.
+	 * 
+	 * @param key					Tax key, also used as the revenue VAT code.
+	 * @param reverseCharge			True if the buyer accounts for the VAT.
+	 * @param otherCountryGroup		Country group of the buyer, e.g. EU, or null.
+	 * @param goods					True if it applies to goods.
+	 * @param services				True if it applies to services.
+	 */
+	private void addZeroRatedTax(String key, boolean reverseCharge, String otherCountryGroup, boolean goods, boolean services) {
+		Tax tax = new Tax(key, thisLocale.getCountry(), 0, key, null, null);
+		tax.setReverseCharge(reverseCharge);
+		tax.setOtherCountryGroup(otherCountryGroup);
+		tax.setAppliesToGoods(goods);
+		tax.setAppliesToServices(services);
+		taxList.add(tax);
+	}
 
 }
