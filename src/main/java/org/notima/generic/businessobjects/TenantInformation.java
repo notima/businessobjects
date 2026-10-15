@@ -1,5 +1,7 @@
 package org.notima.generic.businessobjects;
 
+import java.util.Date;
+
 /**
  * Persistent information about a specific tenant, keyed by TaxSubjectIdentifier.
  */
@@ -14,6 +16,9 @@ public class TenantInformation {
 	private String remitToAccountType;
 	private String remitToIBAN;
 	private String remitToBIC;
+
+	/** When reminders were last sent (print-dunning-run with --internal-comment). */
+	private Date lastDunningDate;
 
 	public TaxSubjectIdentifier getTenant() {
 		return tenant;
@@ -92,6 +97,17 @@ public class TenantInformation {
 
 	public void setRemitToBIC(String remitToBIC) {
 		this.remitToBIC = remitToBIC;
+	}
+
+	/**
+	 * @return	When reminders were last sent, or null if never recorded.
+	 */
+	public Date getLastDunningDate() {
+		return lastDunningDate;
+	}
+
+	public void setLastDunningDate(Date lastDunningDate) {
+		this.lastDunningDate = lastDunningDate;
 	}
 
 	/**
