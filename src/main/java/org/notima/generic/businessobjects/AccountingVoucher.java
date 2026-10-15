@@ -47,6 +47,12 @@ public class AccountingVoucher {
 
 	private List<AccountingVoucherLine> lines;
 
+	/**
+	 * Changes made to the header (date, description, ...) after the voucher was registered,
+	 * oldest first. Entries are only ever appended.
+	 */
+	private List<AccountingVoucherChange> changes;
+
 	public static AccountingVoucher buildVoucherFromPayment(Payment<?> pmt, boolean ignoreWriteOffs) {
 		
 		AccountingVoucher voucher = new AccountingVoucher();
@@ -143,6 +149,22 @@ public class AccountingVoucher {
 
 	public void setAttachments(List<Attachment> attachments) {
 		this.attachments = attachments;
+	}
+
+	public List<AccountingVoucherChange> getChanges() {
+		return changes;
+	}
+
+	public void setChanges(List<AccountingVoucherChange> changes) {
+		this.changes = changes;
+	}
+
+	/**
+	 * Appends {@code change} to the header change log.
+	 */
+	public void addChange(AccountingVoucherChange change) {
+		if (changes == null) changes = new ArrayList<>();
+		changes.add(change);
 	}
 
 	public LocalDate getAcctDate() {
