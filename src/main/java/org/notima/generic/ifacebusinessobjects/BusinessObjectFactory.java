@@ -365,6 +365,17 @@ public interface BusinessObjectFactory<C,I,O,P,B,T> {
 	public String attachFileToVoucher(AccountingVoucher voucher, String fileName) throws Exception;
 	
 	/**
+	 * Appends an internal comment (not visible to the customer) to a sales invoice in the underlying system.
+	 * If the invoice already has an internal comment, the new comment is added on a new line.
+	 * 
+	 * @param 	invoiceKey	The invoice to append the comment to.
+	 * @param 	comment		The comment to append.
+	 * @return	The complete internal comment after appending, or null if the invoice wasn't found.
+	 * @throws	UnsupportedOperationException	If the adapter doesn't support internal comments.
+	 */
+	public String appendInvoiceInternalComment(String invoiceKey, String comment) throws Exception;
+	
+	/**
 	 * Persists a business object
 	 * 
 	 * @param o

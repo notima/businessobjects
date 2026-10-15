@@ -313,6 +313,11 @@ public abstract class BasicBusinessObjectFactory<C,I,O,P,B,T> implements Busines
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public String appendInvoiceInternalComment(String invoiceKey, String comment) throws Exception {
+		throw new UnsupportedOperationException(getSystemName() + " doesn't support internal comments on invoices");
+	}
 	
 	/**
 	 * 
