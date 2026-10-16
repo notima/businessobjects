@@ -29,6 +29,13 @@ public interface InvoiceFormatter {
 	public static final String TEMPLATE_FILE = "TemplateFile";
 
 	/**
+	 * Property for the language the invoice is written in, as a locale string such as
+	 * {@code "sv_SE"} or {@code "en_US"} (the format of {@code BusinessPartner#getLanguage()}).
+	 * Formatters without translations ignore it.
+	 */
+	public static final String LANGUAGE = "Language";
+
+	/**
 	 * Formats an invoice
 	 *
 	 * @param invoice			The invoice to be formatted.
