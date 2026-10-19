@@ -3,6 +3,11 @@ package org.notima.generic.businessobjects;
 import java.time.LocalDate;
 import java.util.Set;
 
+import org.notima.util.InvalidTaxIdFormatException;
+import org.notima.util.TaxIdFormatter;
+import org.notima.util.TaxIdStructure;
+import org.notima.util.UnknownTaxIdFormatException;
+
 /**
  * Use this class to unambigously identify a tax subject. 
  * Normally a country code and that's countries tax identifier is what is needed.
@@ -36,33 +41,25 @@ public class TaxSubjectIdentifier implements Comparable<TaxSubjectIdentifier> {
 	 * {@code YYYYMMDDNNNN} that authorities such as Skatteverket require.
 	 * <p>
 	 * The two-digit year is ambiguous between two centuries; this picks whichever
-	 * keeps the birth date on or before {@code referenceDate} and no more than 100
-	 * years before it, i.e. it assumes a person is rarely older than 100 years (and
-	 * never assumes a birth date in the future). A value already in 12-digit form
-	 * is returned unchanged (digits only, any hyphen/plus stripped).
+	 * makes the person 0 to 99 years old in the year of {@code referenceDate}, or
+	 * 100 and older if written with a {@code +} ({@code YYMMDD+NNNN}). A value already
+	 * in 12-digit form is returned as digits only. An organisationsnummer is returned
+	 * with the {@code 16} prefix.
+	 * <p>
+	 * Uses {@link TaxIdFormatter}, which also prints tax ids in the other formats.
 	 *
-	 * @throws IllegalArgumentException if, once non-digit characters are stripped,
-	 *         {@code taxId} is neither 10 nor 12 digits
+	 * @throws IllegalArgumentException if {@code taxId} isn't a Swedish tax id in a
+	 *         recognised format
 	 */
 	public static String toTwelveDigitSwedishPersonalNumber(String taxId, LocalDate referenceDate) {
 		if (taxId == null) {
 			throw new IllegalArgumentException("taxId is null");
 		}
-		String digits = taxId.replaceAll("[^0-9]", "");
-		if (digits.length() == 12) {
-			return digits;
+		try {
+			return TaxIdFormatter.printTaxId(null, taxId, TaxIdStructure.FMT_SE12, referenceDate);
+		} catch (UnknownTaxIdFormatException | InvalidTaxIdFormatException e) {
+			throw new IllegalArgumentException("Not a 10- or 12-digit Swedish personal number: " + taxId, e);
 		}
-		if (digits.length() != 10) {
-			throw new IllegalArgumentException("Not a 10- or 12-digit Swedish personal number: " + taxId);
-		}
-		int twoDigitYear = Integer.parseInt(digits.substring(0, 2));
-		int referenceYear = referenceDate.getYear();
-		int currentCentury = (referenceYear / 100) * 100;
-		int fullYear = currentCentury + twoDigitYear;
-		if (fullYear > referenceYear) {
-			fullYear -= 100;
-		}
-		return String.format("%04d", fullYear) + digits.substring(2);
 	}
 
 	/**
