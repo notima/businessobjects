@@ -1,6 +1,10 @@
 package org.notima.generic.businessobjects;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Persistent information about a specific tenant, keyed by TaxSubjectIdentifier.
@@ -19,6 +23,9 @@ public class TenantInformation {
 
 	/** When reminders were last sent (print-dunning-run with --internal-comment). */
 	private Date lastDunningDate;
+
+	/** The tenant's suspense accounts per type, ie UNIDENTIFIED: 1799, 2999. */
+	private Map<SuspenseAccountType, List<String>> suspenseAccounts;
 
 	public TaxSubjectIdentifier getTenant() {
 		return tenant;
@@ -129,6 +136,50 @@ public class TenantInformation {
 		bp.setRemitToAccountType(remitToAccountType);
 		bp.setRemitToIBAN(remitToIBAN);
 		bp.setRemitToBIC(remitToBIC);
+	}
+
+	/**
+	 * @return	The tenant's suspense accounts per type: accounts where amounts are booked
+	 * 			temporarily and that should normally be zero. Can be null.
+	 */
+	public Map<SuspenseAccountType, List<String>> getSuspenseAccounts() {
+		return suspenseAccounts;
+	}
+
+	public void setSuspenseAccounts(Map<SuspenseAccountType, List<String>> suspenseAccounts) {
+		this.suspenseAccounts = suspenseAccounts;
+	}
+
+	/** @return	The suspense accounts of {@code type}; empty if none. */
+	public List<String> getSuspenseAccounts(SuspenseAccountType type) {
+		List<String> accounts = suspenseAccounts != null ? suspenseAccounts.get(type) : null;
+		return accounts != null ? accounts : new ArrayList<String>();
+	}
+
+	/**
+	 * Sets the suspense accounts of {@code type}.
+	 *
+	 * @param accounts	The account numbers; null or empty to remove the type.
+	 */
+	public void setSuspenseAccounts(SuspenseAccountType type, List<String> accounts) {
+		if (accounts == null || accounts.isEmpty()) {
+			if (suspenseAccounts != null) {
+				suspenseAccounts.remove(type);
+				if (suspenseAccounts.isEmpty()) suspenseAccounts = null;
+			}
+			return;
+		}
+		if (suspenseAccounts == null) suspenseAccounts = new EnumMap<SuspenseAccountType, List<String>>(SuspenseAccountType.class);
+		suspenseAccounts.put(type, new ArrayList<String>(accounts));
+	}
+
+	/** @return	True if the tenant has any suspense accounts. */
+	public boolean hasSuspenseAccounts() {
+		if (suspenseAccounts == null) return false;
+		for (List<String> accounts : suspenseAccounts.values()) {
+			if (accounts != null && !accounts.isEmpty()) return true;
+		}
+		return false;
 	}
 
 }
