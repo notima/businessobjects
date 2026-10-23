@@ -1,6 +1,9 @@
 package org.notima.generic.ifacebusinessobjects;
 
 import java.io.File;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 
 import org.notima.generic.businessobjects.AccountingFileData;
 
@@ -48,5 +51,26 @@ public interface AccountingFileImporter {
 	 * @throws Exception	If the file can't be read or parsed.
 	 */
 	AccountingFileData importFile(File file) throws Exception;
+
+	/**
+	 * Parses accounting data read from a stream, ie a file received from an accounting system.
+	 * By default the stream is written to a temporary file that is passed to
+	 * {@link #importFile(File)}.
+	 *
+	 * @param in		The data; not closed.
+	 * @param fileName	A name for the data, ie its file name; its extension is kept for the temporary file.
+	 * @return			The accounting data.
+	 * @throws Exception	If the data can't be read or parsed.
+	 */
+	default AccountingFileData importStream(InputStream in, String fileName) throws Exception {
+		String ext = fileName != null && fileName.lastIndexOf('.') >= 0 ? fileName.substring(fileName.lastIndexOf('.')) : ".tmp";
+		File tmp = File.createTempFile("accounting-import-", ext);
+		try {
+			Files.copy(in, tmp.toPath(), StandardCopyOption.REPLACE_EXISTING);
+			return importFile(tmp);
+		} finally {
+			Files.deleteIfExists(tmp.toPath());
+		}
+	}
 
 }

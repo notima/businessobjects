@@ -7,8 +7,12 @@ import java.util.TreeSet;
  * Constants to define account classes
  * 
  * @author Daniel Tamm
- *
+ * @deprecated	Use {@link AccountCategory}, which the country rules
+ * 				({@link org.notima.generic.businessobjects.accounting.rule.CountryRuleSet})
+ * 				set on the accounts. {@link AccountCategory#parse(String)} maps these
+ * 				constants to it.
  */
+@Deprecated
 public class AccountClass {
 
 	public static final String REVENUE = "revenue";

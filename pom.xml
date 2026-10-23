@@ -120,6 +120,9 @@
 										org.notima.generic.businessobjects.tax,
 										org.notima.generic.businessobjects.tools,
 										org.notima.generic.businessobjects.exception,
+										org.notima.generic.businessobjects.accounting,
+										org.notima.generic.businessobjects.accounting.rule,
+										org.notima.generic.businessobjects.accounting.rule.se,
 										org.notima.generic.ifacebusinessobjects
 						</Export-Package>
 						<Import-Package>
