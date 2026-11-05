@@ -27,6 +27,9 @@ public class TenantInformation {
 	/** The tenant's suspense accounts per type, ie UNIDENTIFIED: 1799, 2999. */
 	private Map<SuspenseAccountType, List<String>> suspenseAccounts;
 
+	/** Overrides of the contact and payment details on collection notices. */
+	private CollectionNoticeInfo collectionNoticeInfo;
+
 	public TaxSubjectIdentifier getTenant() {
 		return tenant;
 	}
@@ -180,6 +183,28 @@ public class TenantInformation {
 			if (accounts != null && !accounts.isEmpty()) return true;
 		}
 		return false;
+	}
+
+	/**
+	 * @return	Overrides of the contact and payment details on collection notices (inkassokrav).
+	 * 			Can be null.
+	 */
+	public CollectionNoticeInfo getCollectionNoticeInfo() {
+		return collectionNoticeInfo;
+	}
+
+	public void setCollectionNoticeInfo(CollectionNoticeInfo collectionNoticeInfo) {
+		this.collectionNoticeInfo = collectionNoticeInfo;
+	}
+
+	/**
+	 * @return	The collection notice info, created if there is none.
+	 */
+	public CollectionNoticeInfo getOrCreateCollectionNoticeInfo() {
+		if (collectionNoticeInfo == null) {
+			collectionNoticeInfo = new CollectionNoticeInfo();
+		}
+		return collectionNoticeInfo;
 	}
 
 }
