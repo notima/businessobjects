@@ -1,5 +1,6 @@
 package org.notima.generic.businessobjects.accounting.rule;
 
+import org.notima.generic.businessobjects.accounting.statement.StatementMapping;
 import java.util.List;
 
 import org.notima.generic.businessobjects.AccountCategory;
@@ -65,4 +66,12 @@ public interface CountryRuleSet {
 	default boolean isSummaryFirst() {
 		return true;
 	}
+	/**
+	 * @return	How the country's chart of accounts is placed on the lines of the annual report's
+	 * 			statements, or null if the country has no mapping.
+	 */
+	default StatementMapping getStatementMapping() {
+		return null;
+	}
+
 }

@@ -123,6 +123,7 @@
 										org.notima.generic.businessobjects.accounting,
 										org.notima.generic.businessobjects.accounting.rule,
 										org.notima.generic.businessobjects.accounting.rule.se,
+										org.notima.generic.businessobjects.accounting.statement,
 										org.notima.generic.businessobjects.ownership,
 										org.notima.generic.ifacebusinessobjects
 						</Export-Package>

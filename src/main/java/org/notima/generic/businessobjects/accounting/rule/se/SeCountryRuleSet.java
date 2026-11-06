@@ -5,6 +5,7 @@ import java.util.List;
 import org.notima.generic.businessobjects.AccountCategory;
 import org.notima.generic.businessobjects.AccountElement;
 import org.notima.generic.businessobjects.AccountElement.AccountElementType;
+import org.notima.generic.businessobjects.accounting.statement.StatementMapping;
 import org.notima.generic.businessobjects.accounting.rule.CountryRuleSet;
 
 /**
@@ -44,6 +45,12 @@ public class SeCountryRuleSet implements CountryRuleSet {
 	@Override
 	public String getCountryCode() {
 		return "SE";
+	}
+
+	/** @return	The BAS mapping to the K2 statements, see {@link SeK2Statements}. */
+	@Override
+	public StatementMapping getStatementMapping() {
+		return SeK2Statements.basMapping();
 	}
 
 	@Override
