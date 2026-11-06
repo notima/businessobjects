@@ -88,7 +88,7 @@ public final class AnnualStatementCalculator {
 				if (t.getType() == StatementTemplate.Type.INCOME_STATEMENT) {
 					adjustResult(t, exact.get(col), lines, unit, col, warnings);
 				} else if (t.getCreditSideId() != null) {
-					adjustBalance(t, lines, col, warnings);
+					adjustBalance(t, exact.get(col), lines, col, warnings);
 				}
 			}
 			Map<String, Double> values = new HashMap<String, Double>(lines);
@@ -377,8 +377,13 @@ public final class AnnualStatementCalculator {
 		warnings.add(new StatementWarning(StatementWarning.Code.ROUNDING_ADJUSTED, col, null, largest.getId(), diff));
 	}
 
-	private static void adjustBalance(StatementTemplate t, Map<String, Double> lines, int col,
+	/**
+	 * Adjusts the last liability so that the rounded sides are equal, but only if the exact sides
+	 * are: a real difference ({@link StatementWarning.Code#BALANCE_MISMATCH}) must stay visible.
+	 */
+	private static void adjustBalance(StatementTemplate t, Map<String, Double> exact, Map<String, Double> lines, int col,
 			List<StatementWarning> warnings) {
+		if (Math.abs(value(exact, t.getDebitSideId()) - value(exact, t.getCreditSideId())) >= CENT) return;
 		Map<String, Double> values = new HashMap<String, Double>(lines);
 		evaluate(t, t.getNodes(), lines, values, false);
 		double diff = value(values, t.getDebitSideId()) - value(values, t.getCreditSideId());
@@ -415,13 +420,16 @@ public final class AnnualStatementCalculator {
 	private static boolean flatten(StatementTemplate t, List<StatementNode> nodes, int depth, List<Map<String, Double>> exact,
 			List<Map<String, Double>> rounded, Column[] columns, List<StatementRow> rows) {
 		boolean any = false;
-		for (StatementNode n : nodes) {
+		// A result is only shown if something is shown since the previous result, or if it's the last
+		boolean sinceResult = false;
+		for (int i = 0; i < nodes.size(); i++) {
+			StatementNode n = nodes.get(i);
 			switch (n.getKind()) {
 				case SECTION: {
 					int headingIndex = rows.size();
 					rows.add(null);
 					boolean visible = flatten(t, n.getChildren(), depth + 1, exact, rounded, columns, rows);
-					boolean shown = visible || depth == 0;
+					boolean shown = visible || n.isAlwaysShown();
 					rows.set(headingIndex, new StatementRow(n, StatementRow.Kind.HEADING, depth,
 							new double[2], new long[2], null, shown));
 					if (n.getSumLabel() != null) {
@@ -429,6 +437,7 @@ public final class AnnualStatementCalculator {
 								amounts(exact, n.getId()), longs(rounded, n.getId()), null, shown));
 					}
 					any |= visible;
+					sinceResult |= shown;
 					break;
 				}
 				case LINE: {
@@ -439,11 +448,13 @@ public final class AnnualStatementCalculator {
 					rows.add(new StatementRow(n, StatementRow.Kind.LINE, depth, amounts(exact, n.getId()), r,
 							accounts, visible));
 					any |= visible;
+					sinceResult |= visible;
 					break;
 				}
 				case RESULT:
 					rows.add(new StatementRow(n, StatementRow.Kind.RESULT, depth, amounts(exact, n.getId()),
-							longs(rounded, n.getId()), null, true));
+							longs(rounded, n.getId()), null, sinceResult || i == nodes.size() - 1));
+					sinceResult = false;
 					break;
 			}
 		}

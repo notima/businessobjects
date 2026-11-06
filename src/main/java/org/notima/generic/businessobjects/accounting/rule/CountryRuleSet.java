@@ -1,6 +1,8 @@
 package org.notima.generic.businessobjects.accounting.rule;
 
 import org.notima.generic.businessobjects.accounting.statement.StatementMapping;
+import org.notima.generic.businessobjects.accounting.statement.StatementTemplate;
+import java.util.Collections;
 import java.util.List;
 
 import org.notima.generic.businessobjects.AccountCategory;
@@ -66,12 +68,34 @@ public interface CountryRuleSet {
 	default boolean isSummaryFirst() {
 		return true;
 	}
+
 	/**
 	 * @return	How the country's chart of accounts is placed on the lines of the annual report's
 	 * 			statements, or null if the country has no mapping.
 	 */
 	default StatementMapping getStatementMapping() {
 		return null;
+	}
+
+	/**
+	 * @param orgNo	The company's organisation number, which may decide its company form; null
+	 * 				for the most common form.
+	 * @return	How the country's chart of accounts is placed on the lines of the company's
+	 * 			statements, or null if the country has no mapping.
+	 */
+	default StatementMapping getStatementMapping(String orgNo) {
+		return getStatementMapping();
+	}
+
+	/**
+	 * @param orgNo	The company's organisation number, which may decide its company form; null
+	 * 				for the most common form.
+	 * @return	The statements of the company's annual report (e.g. income statement and balance
+	 * 			sheet), whose lines {@link #getStatementMapping(String)} places the accounts on;
+	 * 			empty if the country has none.
+	 */
+	default List<StatementTemplate> getStatementTemplates(String orgNo) {
+		return Collections.emptyList();
 	}
 
 }

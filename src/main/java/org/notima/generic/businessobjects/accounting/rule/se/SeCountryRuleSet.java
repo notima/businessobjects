@@ -6,6 +6,7 @@ import org.notima.generic.businessobjects.AccountCategory;
 import org.notima.generic.businessobjects.AccountElement;
 import org.notima.generic.businessobjects.AccountElement.AccountElementType;
 import org.notima.generic.businessobjects.accounting.statement.StatementMapping;
+import org.notima.generic.businessobjects.accounting.statement.StatementTemplate;
 import org.notima.generic.businessobjects.accounting.rule.CountryRuleSet;
 
 /**
@@ -51,6 +52,18 @@ public class SeCountryRuleSet implements CountryRuleSet {
 	@Override
 	public StatementMapping getStatementMapping() {
 		return SeK2Statements.basMapping();
+	}
+
+	/** @return	The BAS mapping to the K2 statements of the company's form, see {@link SeK2Statements.CompanyForm#of(String)}. */
+	@Override
+	public StatementMapping getStatementMapping(String orgNo) {
+		return SeK2Statements.basMapping(SeK2Statements.CompanyForm.of(orgNo));
+	}
+
+	/** @return	The K2 income statement and balance sheet of the company's form. */
+	@Override
+	public List<StatementTemplate> getStatementTemplates(String orgNo) {
+		return SeK2Statements.templates(SeK2Statements.CompanyForm.of(orgNo));
 	}
 
 	@Override

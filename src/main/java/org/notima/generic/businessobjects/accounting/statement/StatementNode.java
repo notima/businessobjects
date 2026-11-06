@@ -31,6 +31,7 @@ public final class StatementNode {
 	private String sumLabel;
 	private Boolean creditNormal;
 	private boolean receivesUnclosedResult;
+	private boolean alwaysShown;
 	private final List<StatementNode> children;
 
 	private StatementNode(Kind kind, String id, String label, List<StatementNode> children) {
@@ -74,6 +75,16 @@ public final class StatementNode {
 	public StatementNode receivesUnclosedResult() {
 		this.receivesUnclosedResult = true;
 		return this;
+	}
+
+	/** Shows a section even when none of its lines has an amount. */
+	public StatementNode alwaysShown() {
+		this.alwaysShown = true;
+		return this;
+	}
+
+	public boolean isAlwaysShown() {
+		return alwaysShown;
 	}
 
 	public Kind getKind() {

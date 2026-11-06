@@ -185,6 +185,11 @@ class TestAnnualStatementCalculator {
 		}
 		assertTrue(unmapped, s.getWarnings().toString());
 		assertTrue(balance, s.getWarnings().toString());
+		for (StatementWarning w : s.getWarnings()) {
+			assertTrue(w.getCode() != StatementWarning.Code.ROUNDING_ADJUSTED || w.getLineId().equals(SeK2Statements.NETTOOMSATTNING),
+					"a real difference isn't hidden as rounding: " + w);
+		}
+		assertEquals(-50L, rounded(s, SeK2Statements.TILLGANGAR) - rounded(s, SeK2Statements.EGET_KAPITAL_OCH_SKULDER), "50 kr went to the unmapped account");
 	}
 
 	@Test
@@ -228,6 +233,12 @@ class TestAnnualStatementCalculator {
 		assertFalse(s.getRow(SeK2Statements.IMMATERIELLA).isVisible());
 		assertTrue(s.getRow(SeK2Statements.KORTFRISTIGA_FORDRINGAR).isVisible());
 		assertTrue(s.getRow(SeK2Statements.TILLGANGAR).isVisible());
+		assertFalse(s.getRow(SeK2Statements.BOKSLUTSDISPOSITIONER).isVisible(), "no appropriations in either year");
+		assertTrue(s.getRow(SeK2Statements.RORELSEINTAKTER).isVisible());
+		assertFalse(s.getRow(SeK2Statements.RESULTAT_FORE_SKATT).isVisible(), "the same as the result after financial items");
+		assertTrue(s.getRow(SeK2Statements.RORELSERESULTAT).isVisible());
+		assertFalse(s.getRow(SeK2Statements.RESULTAT_EFTER_FINANSIELLA).isVisible(), "no financial items either");
+		assertTrue(s.getRow(SeK2Statements.ARETS_RESULTAT).isVisible(), "the last result is always shown");
 		for (StatementRow r : s.getVisibleRows(SeK2Statements.BR)) {
 			assertNotNull(r.getLabel());
 		}
@@ -240,6 +251,46 @@ class TestAnnualStatementCalculator {
 		assertEquals(AmountUnit.KR, AmountUnit.suggest(2282307));
 		assertEquals(AmountUnit.TKR, AmountUnit.suggest(120000000));
 		assertEquals(AmountUnit.MKR, AmountUnit.suggest(8000000000.0));
+	}
+
+	@Test
+	void companyFormFollowsTheOrganisationNumber() {
+		assertEquals(SeK2Statements.CompanyForm.AKTIEBOLAG, SeK2Statements.CompanyForm.of("556745-6941"));
+		assertEquals(SeK2Statements.CompanyForm.EKONOMISK_FORENING, SeK2Statements.CompanyForm.of("769612-3456"));
+		assertEquals(SeK2Statements.CompanyForm.EKONOMISK_FORENING, SeK2Statements.CompanyForm.of("16769612-3456"));
+		assertEquals(SeK2Statements.CompanyForm.AKTIEBOLAG, SeK2Statements.CompanyForm.of(null));
+	}
+
+	/** A bostadsrättsförening: insatser and fond för yttre underhåll (4.16), no Fri överkursfond. */
+	@Test
+	void ekonomiskForeningHasItsOwnEquity() {
+		AccountingPeriodData p = period(Arrays.asList(
+				balance("1930", 1500.0), balance("2083", -1000.0), balance("2088", -300.0), balance("2091", -200.0)));
+		SeK2Statements.CompanyForm form = SeK2Statements.CompanyForm.EKONOMISK_FORENING;
+		AnnualStatement s = AnnualStatementCalculator.calculate(SeK2Statements.templates(form),
+				SeK2Statements.basMapping(form), p, null, AmountUnit.KR);
+		assertEquals(1000L, rounded(s, SeK2Statements.MEDLEMSINSATSER));
+		assertEquals(300L, rounded(s, SeK2Statements.FOND_YTTRE_UNDERHALL));
+		assertEquals(1300L, rounded(s, SeK2Statements.BUNDET_EGET_KAPITAL));
+		assertNull(s.getRow(SeK2Statements.FRI_OVERKURSFOND));
+		assertNull(s.getRow(SeK2Statements.AKTIEKAPITAL));
+		assertFalse(s.hasErrors(), s.getWarnings().toString());
+
+		// The same accounts in an aktiebolag aren't allowed
+		AnnualStatement ab = calculate(p, null);
+		assertTrue(ab.hasErrors());
+		assertNull(ab.getRow(SeK2Statements.LAMNAD_GOTTGORELSE));
+		assertNotNull(AnnualStatementCalculator.calculate(SeK2Statements.templates(form),
+				SeK2Statements.basMapping(form), p, null, AmountUnit.KR).getRow(SeK2Statements.LAMNAD_GOTTGORELSE));
+	}
+
+	/** K2 doesn't allow capitalised development (1010-1019), so it is reported. */
+	@Test
+	void capitalisedDevelopmentIsNotAllowed() {
+		AccountingPeriodData p = period(Arrays.asList(balance("1012", 500.0), balance("2081", -500.0)));
+		AnnualStatement s = calculate(p, null);
+		assertEquals(StatementWarning.Code.UNMAPPED_ACCOUNT, s.getWarnings().get(0).getCode());
+		assertEquals("1012", s.getWarnings().get(0).getAccountNo());
 	}
 
 }
