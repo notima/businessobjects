@@ -83,18 +83,15 @@ public final class LedgerCalculator {
 				}
 			}
 		} else {
-			// No vouchers: the movement of the period is the difference between ending and opening balance
+			// No vouchers: the movement of the period is the difference between ending and opening balance.
+			// Balances are debit positive for every account, as in SIE: the ending balance of a
+			// P&L account is its result of the period (#RES), so revenue is negative.
 			for (AccountElement ae : period.getChartOfAccounts()) {
 				AccountTotals t = ae.getAccountNo() != null ? summary.getAccount(ae.getAccountNo()) : null;
 				if (t == null) continue;
 				double delta = ae.getEndingBalance() - ae.getOpeningBalance();
 				if (delta == 0.0) continue;
-				if (ae.getAccountElementType() == AccountElementType.PLAcct) {
-					// P&L ending balances are taken as results: positive is credit
-					if (delta > 0) t.addCredit(delta); else t.addDebit(-delta);
-				} else {
-					if (delta > 0) t.addDebit(delta); else t.addCredit(-delta);
-				}
+				if (delta > 0) t.addDebit(delta); else t.addCredit(-delta);
 			}
 		}
 

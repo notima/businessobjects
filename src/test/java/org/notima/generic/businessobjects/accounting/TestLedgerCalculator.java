@@ -138,11 +138,14 @@ class TestLedgerCalculator {
 	void balanceOnlyPeriodUsesEndingBalances() {
 		AccountingPeriodData p = period();
 		p.getChartOfAccounts().get(0).setEndingBalance(1750.0);
-		p.getChartOfAccounts().get(3).setEndingBalance(400.0);
+		p.getChartOfAccounts().get(3).setEndingBalance(-400.0);
+		p.getChartOfAccounts().get(4).setEndingBalance(150.0);
 		LedgerSummary bs = LedgerCalculator.summarize(p, AccountElementType.BalanceAcct, null, null);
 		assertEquals(1750.0, bs.getAccount("1930").getBalanceAtTo(), 0.001);
 		LedgerSummary pl = LedgerCalculator.summarize(p, AccountElementType.PLAcct, null, null);
-		assertEquals(400.0, pl.getAccount("3010").getCredit(), 0.001, "P&L ending balance taken as credit");
+		assertEquals(400.0, pl.getAccount("3010").getCredit(), 0.001, "a negative (#RES) result of a revenue account is credit");
+		assertEquals(150.0, pl.getAccount("5010").getDebit(), 0.001, "a positive result of a cost account is debit");
+		assertEquals(250.0, pl.total().getResult(), 0.001);
 		assertEquals(Double.valueOf(1750.0), LedgerCalculator.endingBalances(p).get("1930"));
 	}
 
