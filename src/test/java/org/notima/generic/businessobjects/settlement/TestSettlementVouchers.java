@@ -12,6 +12,7 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.notima.generic.businessobjects.AccountingVoucher;
 import org.notima.generic.businessobjects.AccountingVoucherLine;
+import org.notima.generic.businessobjects.BankAccountDetail;
 import org.notima.generic.businessobjects.Invoice;
 import org.notima.generic.businessobjects.Payment;
 import org.notima.generic.businessobjects.PaymentWriteOff;
@@ -85,14 +86,67 @@ public class TestSettlementVouchers {
 		assertTrue(c.getDescription().startsWith("Credit note"));
 	}
 
+	/** Our bank account 5050-1055 on 1930, with its own fee and unallocated accounts. */
+	private static BankAccounts bankAccounts() {
+		BankAccountDetail ba = new BankAccountDetail();
+		ba.setAccountNo("5050-1055");
+		ba.setIBAN("SE45 5000 0000 0583 9825 7466");
+		ba.setGeneralLedgerBankAccount("1930");
+		ba.setGeneralLedgerFeeAccount("6064");
+		ba.setGeneralLedgerUnallocatedReceiptsAccount("2421");
+		ba.setGeneralLedgerUnallocatedPaymentsAccount("1481");
+		BankAccountDetail psp = new BankAccountDetail();
+		psp.setAccountNo("PSP-1");
+		psp.setGeneralLedgerBankAccount("1580");
+		psp.setGeneralLedgerReconciliationAccount("1581");
+		return new BankAccounts(Arrays.asList(ba, psp), BAS);
+	}
+
 	@Test
 	public void testUnallocatedPaymentWithFees() {
 		Payment<Object> p = payment("P1", true, 1250);
 		p.setAmount(1230.0);
-		p.setGlAccountNo("1580");
-		AccountingVoucher v = new PaymentVoucherBuilder(BAS).build(p);
+		p.setBankAccountNo("50501055");		// spaces and dashes don't matter
+		AccountingVoucher v = new PaymentVoucherBuilder(BAS, bankAccounts()).build(p);
 		assertBalancedAndComplete(v);
-		assertEquals(expect("1580", "1230", "6570", "20", "2420", "-1250"), net(v));
+		assertEquals(expect("1930", "1230", "6064", "20", "2421", "-1250"), net(v));
+	}
+
+	@Test
+	public void testBankAccountByIbanAndReconciliationAccount() {
+		BankAccounts banks = bankAccounts();
+		Payment<Object> p = payment("P1", true, 100);
+		p.setBankAccountNo("se4550000000058398257466");
+		assertEquals("1930", banks.cashAccount(p));
+		p.setBankAccountNo("PSP-1");
+		// A reconciliation account goes before the bank account's own
+		assertEquals("1581", banks.cashAccount(p));
+		// Nothing set on the bank account: the role's account
+		assertEquals("6570", banks.feeAccount(p));
+		assertEquals("2420", banks.unallocatedAccount(p));
+		// Unknown bank account
+		p.setBankAccountNo("9999");
+		assertNull(banks.find(p));
+		assertEquals("1930", banks.cashAccount(p));
+	}
+
+	@Test
+	public void testLaterAllocationClearsTheSameUnallocatedAccount() {
+		BankAccounts banks = bankAccounts();
+		Payment<Object> p = payment("P1", true, 1250);
+		p.setBankAccountNo("5050-1055");
+		Payment<Object> u = payment("U1", false, 1000);
+		u.setBankAccountNo("5050-1055");
+		AllocationLedger ledger = new AllocationLedger(null, Arrays.asList(p, u), null);
+
+		PaymentAllocation a = completed(PaymentAllocationLine.paymentToInvoice("P1", "1001", true, bd("1250")));
+		assertEquals(expect("2421", "1250", "1510", "-1250"), net(new AllocationVoucherBuilder(BAS, banks).build(a, ledger)));
+		// At once, the unallocated account nets out
+		assertEquals(expect("1930", "1250", "1510", "-1250"), net(new PaymentVoucherBuilder(BAS, banks).build(p, a, null)));
+
+		assertEquals(expect("1930", "-1000", "1481", "1000"), net(new PaymentVoucherBuilder(BAS, banks).build(u)));
+		PaymentAllocation va = completed(PaymentAllocationLine.paymentToInvoice("U1", "V1", false, bd("1000")));
+		assertEquals(expect("1481", "-1000", "2440", "1000"), net(new AllocationVoucherBuilder(BAS, banks).build(va, ledger)));
 	}
 
 	@Test

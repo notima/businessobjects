@@ -53,10 +53,11 @@ public class Payment<P> {
 	/** Status of the payment as a document of its own; null is taken as completed. */
 	private DocumentStatus	status;
 	/**
-	 * The ledger account the money was received to or paid from, ie 1930. Not to be confused
-	 * with {@link #getAccountNo()}, the bank account number.
+	 * Our own bank account the payment was received on or paid from, by its account number or
+	 * IBAN ({@link BankAccountDetail}), which decides the ledger accounts it's posted to. Not
+	 * to be confused with {@link #getAccountNo()}, the counterparty's account.
 	 */
-	private String	glAccountNo;
+	private String	bankAccountNo;
 
 	/** @return	The stable id, or null if it has none yet. */
 	public String getPaymentId() {
@@ -75,14 +76,14 @@ public class Payment<P> {
 	public DocumentStatus getStatus() {
 		return status;
 	}
+	public String getBankAccountNo() {
+		return bankAccountNo;
+	}
+	public void setBankAccountNo(String bankAccountNo) {
+		this.bankAccountNo = bankAccountNo;
+	}
 	public void setStatus(DocumentStatus status) {
 		this.status = status;
-	}
-	public String getGlAccountNo() {
-		return glAccountNo;
-	}
-	public void setGlAccountNo(String glAccountNo) {
-		this.glAccountNo = glAccountNo;
 	}
 
 	public String getBusinessPartnerKey() {
@@ -221,6 +222,7 @@ public class Payment<P> {
 		this.amount = amount;
 	}
 	
+	/** @return	The counterparty's account the payment came from or went to (not ours, see {@link #getBankAccountNo()}). */
 	public String getAccountNo() {
 		return accountNo;
 	}

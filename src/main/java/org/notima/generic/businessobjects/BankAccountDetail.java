@@ -26,6 +26,16 @@ public class BankAccountDetail {
 	private String	generalLedgerInTransitAccount;
 	// General ledger fee account (for banking fees etc)
 	private String	generalLedgerFeeAccount;
+	/**
+	 * General ledger account for payments received on this bank account that aren't allocated
+	 * to an invoice yet, ie 2420 (iDempiere's unallocated cash account).
+	 */
+	private String	generalLedgerUnallocatedReceiptsAccount;
+	/**
+	 * General ledger account for payments made from this bank account that aren't allocated to
+	 * an invoice yet, ie 1480 (iDempiere's payment selection account).
+	 */
+	private String	generalLedgerUnallocatedPaymentsAccount;
 
 	public String getAccountNo() {
 		return accountNo;
@@ -108,6 +118,31 @@ public class BankAccountDetail {
 
 	public void setGeneralLedgerBankAccount(String generalLedgerBankAccount) {
 		this.generalLedgerBankAccount = generalLedgerBankAccount;
+	}
+
+	public String getGeneralLedgerUnallocatedReceiptsAccount() {
+		return generalLedgerUnallocatedReceiptsAccount;
+	}
+
+	public void setGeneralLedgerUnallocatedReceiptsAccount(String generalLedgerUnallocatedReceiptsAccount) {
+		this.generalLedgerUnallocatedReceiptsAccount = generalLedgerUnallocatedReceiptsAccount;
+	}
+
+	public String getGeneralLedgerUnallocatedPaymentsAccount() {
+		return generalLedgerUnallocatedPaymentsAccount;
+	}
+
+	public void setGeneralLedgerUnallocatedPaymentsAccount(String generalLedgerUnallocatedPaymentsAccount) {
+		this.generalLedgerUnallocatedPaymentsAccount = generalLedgerUnallocatedPaymentsAccount;
+	}
+
+	/**
+	 * @param customer	True for a payment from a customer, false for one to a vendor.
+	 * @return	The account for such payments that aren't allocated yet, or null if none is set.
+	 */
+	public String getGeneralLedgerUnallocatedAccount(boolean customer) {
+		String acct = customer ? generalLedgerUnallocatedReceiptsAccount : generalLedgerUnallocatedPaymentsAccount;
+		return acct != null && acct.trim().length() > 0 ? acct.trim() : null;
 	}
 
 	public String getGeneralLedgerFeeAccount() {
