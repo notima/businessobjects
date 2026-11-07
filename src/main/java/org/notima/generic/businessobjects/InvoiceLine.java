@@ -38,6 +38,13 @@ public class InvoiceLine implements OrderInvoiceLine {
 	private boolean	taxIncludedInPrice;
 	private Double	priceNormal;
 	private String	accountNo;
+	/**
+	 * The {@link org.notima.generic.businessobjects.tax.TaxCategory tax category} of the line,
+	 * overriding its product's; null to use the product's.
+	 */
+	private String	taxCategory;
+	/** True if the line is a service, false if goods, overriding its product's; null to use the product's. */
+	private Boolean	service;
 	private String	costCenter;
 	private String	project;
 	
@@ -223,6 +230,32 @@ public class InvoiceLine implements OrderInvoiceLine {
 		this.lineNet = lineNet;
 	}
 	
+	public String getTaxCategory() {
+		return taxCategory;
+	}
+	public void setTaxCategory(String taxCategory) {
+		this.taxCategory = taxCategory;
+	}
+	public Boolean getService() {
+		return service;
+	}
+	public void setService(Boolean service) {
+		this.service = service;
+	}
+
+	/** @return	The line's tax category, else its product's; null if neither has one. */
+	public String getEffectiveTaxCategory() {
+		if (taxCategory != null && !taxCategory.trim().isEmpty()) return taxCategory.trim();
+		String pc = product != null ? product.getTaxCategory() : null;
+		return pc != null && !pc.trim().isEmpty() ? pc.trim() : null;
+	}
+
+	/** @return	Whether the line is a service: its own setting, else its product's; null if unknown. */
+	public Boolean getEffectiveService() {
+		if (service != null) return service;
+		return product != null ? product.getService() : null;
+	}
+
 	public String getAccountNo() {
 		return accountNo;
 	}

@@ -44,6 +44,10 @@ public class Product<P> implements Serializable, IProduct {
 	protected double	height;
 	protected int	 unitsPerPack;
 	protected int	 unitsPerPallet;
+	/** The {@link org.notima.generic.businessobjects.tax.TaxCategory tax category} of the product, ie STANDARD. */
+	protected String taxCategory;
+	/** True if the product is a service, false if goods, null if unknown. Decides some VAT rules. */
+	protected Boolean service;
 	protected List<Translation> translations;
 	protected List<KeyValue>	attributes;
 	protected transient P nativeProduct;
@@ -69,6 +73,18 @@ public class Product<P> implements Serializable, IProduct {
 	}
 	public String getTaxKey() {
 		return taxKey;
+	}
+	public String getTaxCategory() {
+		return taxCategory;
+	}
+	public void setTaxCategory(String taxCategory) {
+		this.taxCategory = taxCategory;
+	}
+	public Boolean getService() {
+		return service;
+	}
+	public void setService(Boolean service) {
+		this.service = service;
 	}
 	public void setTaxKey(String taxKey) {
 		this.taxKey = taxKey;

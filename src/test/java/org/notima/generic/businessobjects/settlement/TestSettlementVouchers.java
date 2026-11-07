@@ -16,10 +16,17 @@ import org.notima.generic.businessobjects.Invoice;
 import org.notima.generic.businessobjects.Payment;
 import org.notima.generic.businessobjects.PaymentWriteOff;
 import org.notima.generic.businessobjects.accounting.rule.se.SeCountryRuleSet;
+import org.notima.generic.businessobjects.tax.RuleBasedTaxEngine;
+import org.notima.generic.businessobjects.tax.TaxEngine;
 
 public class TestSettlementVouchers {
 
 	private static final PostingAccounts BAS = new SeCountryRuleSet().getDefaultPostingAccounts();
+	private static final TaxEngine SE_TAX = new RuleBasedTaxEngine(new SeCountryRuleSet().getDefaultTaxRules());
+
+	private static InvoiceVoucherBuilder invoiceBuilder() {
+		return new InvoiceVoucherBuilder(BAS, SE_TAX, "SE");
+	}
 
 	/** Net (debit - credit) per account, as plain strings without trailing zeros. */
 	private static Map<String, String> net(AccountingVoucher v) {
@@ -48,7 +55,7 @@ public class TestSettlementVouchers {
 	@Test
 	public void testCustomerInvoiceWithTwoRates() {
 		Invoice<Object> inv = invoice("1001", true, 1000, 25, 200, 12);	// 1250 + 224
-		AccountingVoucher v = new InvoiceVoucherBuilder(BAS).build(inv);
+		AccountingVoucher v = invoiceBuilder().build(inv);
 		assertBalancedAndComplete(v);
 		assertEquals(expect("1510", "1474", "3001", "-1000", "3002", "-200", "2611", "-250", "2621", "-24"), net(v));
 		assertEquals(DATE, v.getAcctDate());
@@ -60,7 +67,7 @@ public class TestSettlementVouchers {
 		Invoice<Object> inv = invoice("1001", true, 99.6, 25);	// 124.50
 		inv.getLines().get(0).setAccountNo("3051");
 		inv.setGrandTotal(125);									// rounded to whole kronor
-		AccountingVoucher v = new InvoiceVoucherBuilder(BAS).build(inv);
+		AccountingVoucher v = invoiceBuilder().build(inv);
 		assertBalancedAndComplete(v);
 		assertEquals(expect("1510", "125", "3051", "-99.6", "2611", "-24.9", "3740", "-0.5"), net(v));
 	}
@@ -68,12 +75,12 @@ public class TestSettlementVouchers {
 	@Test
 	public void testVendorInvoiceAndCreditNote() {
 		Invoice<Object> inv = invoice("V1", false, 800, 25);
-		AccountingVoucher v = new InvoiceVoucherBuilder(BAS).build(inv);
+		AccountingVoucher v = invoiceBuilder().build(inv);
 		assertBalancedAndComplete(v);
 		assertEquals(expect("2440", "-1000", "4010", "800", "2641", "200"), net(v));
 
 		Invoice<Object> credit = invoice("1002", true, -200, 25);
-		AccountingVoucher c = new InvoiceVoucherBuilder(BAS).build(credit);
+		AccountingVoucher c = invoiceBuilder().build(credit);
 		assertEquals(expect("1510", "-250", "3001", "200", "2611", "50"), net(c));
 		assertTrue(c.getDescription().startsWith("Credit note"));
 	}
@@ -172,9 +179,21 @@ public class TestSettlementVouchers {
 	@Test
 	public void testMissingAccountsAreReported() {
 		Invoice<Object> inv = invoice("1001", true, 1000, 25);
-		AccountingVoucher v = new InvoiceVoucherBuilder(new PostingAccounts()).build(inv);
+		InvoiceVoucherBuilder b = new InvoiceVoucherBuilder(new PostingAccounts(), SE_TAX, "SE");
+		AccountingVoucher v = b.build(inv);
 		assertEquals(0, v.getBalance().signum());
-		assertEquals(Arrays.asList("liquid-asset-ar", "revenue", "liability-vat"), PostingAccounts.missingAccounts(v));
+		assertTrue(b.getProblems().isEmpty());
+		// The revenue and VAT accounts come from the tax rule; only receivables is missing
+		assertEquals(Arrays.asList("liquid-asset-ar"), PostingAccounts.missingAccounts(v));
+	}
+
+	@Test
+	public void testLineWithoutTaxRuleIsReported() {
+		Invoice<Object> inv = invoice("1001", true, 1000, 25);
+		InvoiceVoucherBuilder b = new InvoiceVoucherBuilder(BAS, new RuleBasedTaxEngine(null), "SE");
+		AccountingVoucher v = b.build(inv);
+		assertEquals(1, b.getProblems().size());
+		assertTrue(PostingAccounts.missingAccounts(v).contains("liability-vat"));
 	}
 
 }

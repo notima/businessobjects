@@ -1,8 +1,10 @@
 package org.notima.generic.businessobjects.accounting.rule;
 
 import org.notima.generic.businessobjects.settlement.PostingAccounts;
+import org.notima.generic.businessobjects.tax.TaxRule;
 import org.notima.generic.businessobjects.accounting.statement.StatementMapping;
 import org.notima.generic.businessobjects.accounting.statement.StatementTemplate;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -105,6 +107,15 @@ public interface CountryRuleSet {
 	 */
 	default PostingAccounts getDefaultPostingAccounts() {
 		return new PostingAccounts();
+	}
+
+	/**
+	 * @return	The country's usual tax rules, for the
+	 * 			{@link org.notima.generic.businessobjects.tax.TaxEngine tax engine}; empty if the
+	 * 			country has none. A new list each time, so the caller can change it.
+	 */
+	default List<TaxRule> getDefaultTaxRules() {
+		return new ArrayList<TaxRule>();
 	}
 
 }

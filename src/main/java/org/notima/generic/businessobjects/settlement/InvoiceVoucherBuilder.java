@@ -1,9 +1,10 @@
 package org.notima.generic.businessobjects.settlement;
 
 import java.math.BigDecimal;
-import java.util.LinkedHashMap;
+import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import org.notima.generic.businessobjects.AccountingType;
 import org.notima.generic.businessobjects.AccountingVoucher;
@@ -11,6 +12,11 @@ import org.notima.generic.businessobjects.AccountingVoucherLine;
 import org.notima.generic.businessobjects.BusinessPartner;
 import org.notima.generic.businessobjects.Invoice;
 import org.notima.generic.businessobjects.InvoiceLine;
+import org.notima.generic.businessobjects.tax.TaxContext;
+import org.notima.generic.businessobjects.tax.TaxDetermination;
+import org.notima.generic.businessobjects.tax.TaxEngine;
+import org.notima.generic.businessobjects.tax.TaxLine;
+import org.notima.generic.businessobjects.tax.TaxRule;
 import org.notima.util.LocalDateUtils;
 
 /**
@@ -18,34 +24,51 @@ import org.notima.util.LocalDateUtils;
  * is posted when it's issued or received; its payment later only settles the receivable or
  * payable).
  *
- * <p>A customer invoice debits accounts receivable with its grand total and credits
- * revenue per line and output VAT per VAT rate. A vendor invoice credits accounts payable
- * and debits the cost per line and input VAT per rate. A credit note, with negative
- * amounts, gives the opposite. Whatever doesn't balance, ie öresavrundning, goes to
- * {@link AccountingType#ROUNDING}.</p>
+ * <p>A customer invoice debits accounts receivable with its grand total; a vendor invoice
+ * credits accounts payable. For every line the {@link TaxEngine} chooses the
+ * {@link TaxRule tax rule} (from the line's tax category and goods/services, its product's,
+ * and the counterparty), which gives the VAT postings and their accounts, also for reverse
+ * charge. The line's own amount goes to its own {@link InvoiceLine#getAccountNo() account}, else
+ * the rule's revenue or expense account, else the default revenue or purchase account. A
+ * credit note, with negative amounts, gives the opposite. Whatever doesn't balance, ie
+ * öresavrundning, goes to {@link AccountingType#ROUNDING}.</p>
  *
- * <p>A line's own {@link InvoiceLine#getAccountNo() account} is used if it has one, else the
- * revenue or purchase account for its VAT rate. Its cost center and project, or else the
- * invoice's, are set on its line. The line amounts ({@link InvoiceLine#getLineNet()},
- * {@link InvoiceLine#getTaxAmount()}) are used as they are, so they should be calculated
- * ({@link Invoice#calculateGrandTotal()}); an invoice without lines is posted from its net
- * and VAT totals.</p>
+ * <p>The line amounts ({@link InvoiceLine#getLineNet()}, {@link InvoiceLine#getTaxAmount()})
+ * are used as they are, so they should be calculated ({@link Invoice#calculateGrandTotal()});
+ * an invoice without lines is posted from its net and VAT totals. Lines for which no rule
+ * could be chosen are listed by {@link #getProblems()}; their VAT is left without account.</p>
  *
  * <p>Amounts are in the invoice's currency, which is set as the voucher's
  * {@link AccountingVoucher#getSourceCurrency() source currency}; converting to the
- * accounting currency is up to the caller. Reverse charge VAT isn't handled yet.</p>
+ * accounting currency is up to the caller.</p>
  */
 public class InvoiceVoucherBuilder {
 
 	private final PostingAccounts accounts;
+	private final TaxEngine engine;
+	private final String companyCountry;
+	private final List<String> problems = new ArrayList<String>();
 
-	public InvoiceVoucherBuilder(PostingAccounts accounts) {
+	/**
+	 * @param accounts			Accounts per role (receivables, payables, rounding, defaults).
+	 * @param engine			Chooses the tax rule of each line.
+	 * @param companyCountry	The company's country, to tell domestic trade from foreign.
+	 */
+	public InvoiceVoucherBuilder(PostingAccounts accounts, TaxEngine engine, String companyCountry) {
 		this.accounts = accounts != null ? accounts : new PostingAccounts();
+		this.engine = engine;
+		this.companyCountry = companyCountry;
+	}
+
+	/** @return	What went wrong in the last {@link #build(Invoice)}, in English; empty if nothing. */
+	public List<String> getProblems() {
+		return Collections.unmodifiableList(problems);
 	}
 
 	public AccountingVoucher build(Invoice<?> inv) {
+		problems.clear();
 		boolean sales = inv.isSalesTransaction();
-		// Customer invoices credit revenue and VAT, vendor invoices debit cost and VAT
+		// Customer invoices credit revenue, vendor invoices debit cost
 		BigDecimal sign = sales ? BigDecimal.ONE.negate() : BigDecimal.ONE;
 
 		AccountingVoucher v = new AccountingVoucher();
@@ -62,42 +85,65 @@ public class InvoiceVoucherBuilder {
 			VoucherLines.add(v, grandTotal.negate(), AccountingType.LIABILITY_VENDOR, accounts.get(AccountingType.LIABILITY_VENDOR));
 		}
 
-		String lineRole = sales ? AccountingType.REVENUE : AccountingType.COGS;
-		String vatRole = sales ? AccountingType.LIABILITY_VAT : AccountingType.CLAIM_VAT;
 		List<InvoiceLine> lines = inv.getLines();
 		if (lines != null && !lines.isEmpty()) {
-			// VAT per rate, keeping the tax key of the rate's first line
-			Map<String, BigDecimal> vatByRate = new LinkedHashMap<String, BigDecimal>();
-			Map<String, InvoiceLine> firstOfRate = new LinkedHashMap<String, InvoiceLine>();
+			int lineNo = 0;
 			for (InvoiceLine il : lines) {
-				String acct = VoucherLines.blankToNull(il.getAccountNo());
-				if (acct == null) {
-					acct = sales ? accounts.getRevenueAccount(il.getTaxPercent()) : accounts.getPurchaseAccount(il.getTaxPercent());
-				}
-				AccountingVoucherLine vl = VoucherLines.add(v, BigDecimal.valueOf(il.getLineNet()).multiply(sign), lineRole, acct);
-				if (vl != null) {
-					vl.setTaxKey(il.getTaxKey());
-					vl.setCostCenter(firstNonBlank(il.getCostCenter(), inv.getCostCenter()));
-					vl.setProjectCode(firstNonBlank(il.getProject(), inv.getProject()));
-				}
-				String rate = PostingAccounts.rateKey(il.getTaxPercent());
-				vatByRate.merge(rate, BigDecimal.valueOf(il.getTaxAmount()), BigDecimal::add);
-				firstOfRate.putIfAbsent(rate, il);
-			}
-			for (Map.Entry<String, BigDecimal> e : vatByRate.entrySet()) {
-				InvoiceLine il = firstOfRate.get(e.getKey());
-				String acct = sales ? accounts.getOutputVatAccount(il.getTaxPercent()) : accounts.getInputVatAccount(il.getTaxPercent());
-				AccountingVoucherLine vl = VoucherLines.add(v, e.getValue().multiply(sign), vatRole, acct);
-				if (vl != null) vl.setTaxKey(il.getTaxKey());
+				lineNo++;
+				TaxContext ctx = TaxContext.of(inv, il, companyCountry);
+				addLine(v, ctx, "Line " + lineNo, BigDecimal.valueOf(il.getLineNet()), BigDecimal.valueOf(il.getTaxAmount()),
+						il.getAccountNo(), firstNonBlank(il.getCostCenter(), inv.getCostCenter()),
+						firstNonBlank(il.getProject(), inv.getProject()), sign, sales);
 			}
 		} else {
-			VoucherLines.add(v, BigDecimal.valueOf(inv.getNetTotal()).multiply(sign), lineRole, accounts.get(lineRole));
-			VoucherLines.add(v, BigDecimal.valueOf(inv.getVatTotal()).multiply(sign), vatRole, accounts.get(vatRole));
+			BigDecimal net = BigDecimal.valueOf(inv.getNetTotal());
+			BigDecimal vat = BigDecimal.valueOf(inv.getVatTotal());
+			Double rate = net.signum() != 0
+					? vat.multiply(BigDecimal.valueOf(100)).divide(net, 0, RoundingMode.HALF_UP).doubleValue() : 0.0;
+			TaxContext ctx = TaxContext.of(inv, null, companyCountry).rate(rate);
+			addLine(v, ctx, "The invoice", net, vat, null, inv.getCostCenter(), inv.getProject(), sign, sales);
 		}
 
+		VoucherLines.merge(v);
 		AccountingVoucherLine rounding = v.balanceWithLine(AccountingType.ROUNDING);
 		if (rounding != null) rounding.setAcctNo(accounts.get(AccountingType.ROUNDING));
 		return v;
+	}
+
+	/** Adds the amount of one line and its VAT, as the tax rule chosen for {@code ctx} says. */
+	private void addLine(AccountingVoucher v, TaxContext ctx, String what, BigDecimal net, BigDecimal vat,
+			String lineAcct, String costCenter, String project, BigDecimal sign, boolean sales) {
+		TaxRule rule = null;
+		if (engine == null) {
+			problems.add(what + ": there's no tax engine to choose its tax rule");
+		} else {
+			TaxDetermination det = engine.determine(ctx);
+			if (det.isDetermined()) rule = det.getRule();
+			else problems.add(what + ": " + det.getProblem());
+		}
+
+		String role = sales ? AccountingType.REVENUE : AccountingType.COGS;
+		String acct = VoucherLines.blankToNull(lineAcct);
+		if (acct == null && rule != null) acct = VoucherLines.blankToNull(sales ? rule.getRevenueAccount() : rule.getExpenseAccount());
+		if (acct == null) acct = accounts.get(role);
+		String taxKey = rule != null ? rule.getKey() : ctx.getTaxKey();
+		dimensions(VoucherLines.add(v, net.multiply(sign), role, acct), taxKey, costCenter, project);
+
+		if (rule != null) {
+			for (TaxLine tl : engine.taxLines(rule, net, rule.isReverseCharge() ? null : vat, sales)) {
+				dimensions(VoucherLines.add(v, tl.getAmount(), tl.getRole(), tl.getAcctNo()), rule.getKey(), null, null);
+			}
+		} else {
+			// No rule: the VAT is posted without account, so the voucher can't be saved as it is
+			VoucherLines.add(v, vat.multiply(sign), sales ? AccountingType.LIABILITY_VAT : AccountingType.CLAIM_VAT, null);
+		}
+	}
+
+	private static void dimensions(AccountingVoucherLine l, String taxKey, String costCenter, String project) {
+		if (l == null) return;
+		l.setTaxKey(taxKey);
+		l.setCostCenter(costCenter);
+		l.setProjectCode(project);
 	}
 
 	/** "Invoice 1001 Acme AB", "Vendor invoice 55 Supplier AB", "Credit note ...". */
