@@ -24,5 +24,21 @@ public class AccountingType {
 	public static final String	INTEREST_INCOME = "interest-income";
 	public static final String	INTEREST_EXPENSE = "interest-expense";
 	public static final String	ROUNDING = "rounding";
-	
+
+	// Settlement of payments against invoices (see the settlement package)
+
+	/** Payments received from customers that aren't allocated to an invoice yet (in Sweden ie 2420). */
+	public static final String	LIABILITY_CUSTOMER_PREPAYMENT = "liability-customer-prepayment";
+	/** Payments made to vendors that aren't allocated to an invoice yet (in Sweden ie 1480). */
+	public static final String	ASSET_VENDOR_PREPAYMENT = "asset-vendor-prepayment";
+	/** Customer invoice amounts written off as lost (in Sweden ie 6351). */
+	public static final String	WRITE_OFF_CUSTOMER = "write-off-customer";
+	/** Vendor invoice amounts written off, ie small differences not paid (in Sweden ie 3740). */
+	public static final String	WRITE_OFF_VENDOR = "write-off-vendor";
+	/** Discounts granted to customers when they pay (in Sweden ie 3731). */
+	public static final String	DISCOUNT_GRANTED = "discount-granted";
+	/** Discounts received from vendors when paying (in Sweden ie 4731). */
+	public static final String	DISCOUNT_RECEIVED = "discount-received";
+
+
 }

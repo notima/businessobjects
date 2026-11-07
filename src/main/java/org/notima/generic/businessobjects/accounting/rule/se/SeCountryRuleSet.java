@@ -2,11 +2,13 @@ package org.notima.generic.businessobjects.accounting.rule.se;
 
 import java.util.List;
 
+import org.notima.generic.businessobjects.AccountingType;
 import org.notima.generic.businessobjects.AccountCategory;
 import org.notima.generic.businessobjects.AccountElement;
 import org.notima.generic.businessobjects.AccountElement.AccountElementType;
 import org.notima.generic.businessobjects.accounting.statement.StatementMapping;
 import org.notima.generic.businessobjects.accounting.statement.StatementTemplate;
+import org.notima.generic.businessobjects.settlement.PostingAccounts;
 import org.notima.generic.businessobjects.accounting.rule.CountryRuleSet;
 
 /**
@@ -69,6 +71,37 @@ public class SeCountryRuleSet implements CountryRuleSet {
 	@Override
 	public boolean isSummaryFirst() {
 		return false;
+	}
+
+	/**
+	 * The accounts of the BAS chart of accounts for posting invoices, payments and
+	 * allocations.
+	 */
+	@Override
+	public PostingAccounts getDefaultPostingAccounts() {
+		return new PostingAccounts()
+				.set(AccountingType.LIQUID_ASSET_AR, "1510")
+				.set(AccountingType.LIABILITY_VENDOR, "2440")
+				.set(AccountingType.LIQUID_ASSET_CASH, "1930")
+				.set(AccountingType.LIABILITY_CUSTOMER_PREPAYMENT, "2420")
+				.set(AccountingType.ASSET_VENDOR_PREPAYMENT, "1480")
+				.set(AccountingType.REVENUE, "3001")
+				.set(AccountingType.COGS, "4010")
+				.set(AccountingType.LIABILITY_VAT, "2611")
+				.set(AccountingType.CLAIM_VAT, "2641")
+				.set(AccountingType.ROUNDING, "3740")
+				.set(AccountingType.OTHER_EXPENSES_SALES, "6570")
+				.set(AccountingType.WRITE_OFF_CUSTOMER, "6351")
+				.set(AccountingType.WRITE_OFF_VENDOR, "3740")
+				.set(AccountingType.DISCOUNT_GRANTED, "3731")
+				.set(AccountingType.DISCOUNT_RECEIVED, "4731")
+				.setRevenueAccount(25, "3001")
+				.setRevenueAccount(12, "3002")
+				.setRevenueAccount(6, "3003")
+				.setRevenueAccount(0, "3004")
+				.setOutputVatAccount(25, "2611")
+				.setOutputVatAccount(12, "2621")
+				.setOutputVatAccount(6, "2631");
 	}
 
 	@Override

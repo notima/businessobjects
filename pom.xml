@@ -125,6 +125,7 @@
 										org.notima.generic.businessobjects.accounting.rule.se,
 										org.notima.generic.businessobjects.accounting.statement,
 										org.notima.generic.businessobjects.ownership,
+										org.notima.generic.businessobjects.settlement,
 										org.notima.generic.ifacebusinessobjects
 						</Export-Package>
 						<Import-Package>

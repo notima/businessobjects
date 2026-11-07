@@ -1,5 +1,6 @@
 package org.notima.generic.businessobjects.accounting.rule;
 
+import org.notima.generic.businessobjects.settlement.PostingAccounts;
 import org.notima.generic.businessobjects.accounting.statement.StatementMapping;
 import org.notima.generic.businessobjects.accounting.statement.StatementTemplate;
 import java.util.Collections;
@@ -96,6 +97,14 @@ public interface CountryRuleSet {
 	 */
 	default List<StatementTemplate> getStatementTemplates(String orgNo) {
 		return Collections.emptyList();
+	}
+
+	/**
+	 * @return	The country's usual accounts for posting invoices, payments and allocations,
+	 * 			ie from its standard chart of accounts; empty if the country has none.
+	 */
+	default PostingAccounts getDefaultPostingAccounts() {
+		return new PostingAccounts();
 	}
 
 }

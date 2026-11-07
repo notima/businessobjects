@@ -7,6 +7,8 @@ import java.util.regex.Pattern;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.notima.generic.businessobjects.settlement.DocumentStatus;
+
 @XmlRootElement(name = "payment")
 public class Payment<P> {
 
@@ -42,7 +44,47 @@ public class Payment<P> {
 	private transient P nativePayment;
 	
 	private PaymentWriteOffs paymentWriteOffs;
-	
+
+	/**
+	 * Stable id of this payment, referred to by
+	 * {@link org.notima.generic.businessobjects.settlement.PaymentAllocationLine#getPaymentId()}.
+	 */
+	private String	paymentId;
+	/** Status of the payment as a document of its own; null is taken as completed. */
+	private DocumentStatus	status;
+	/**
+	 * The ledger account the money was received to or paid from, ie 1930. Not to be confused
+	 * with {@link #getAccountNo()}, the bank account number.
+	 */
+	private String	glAccountNo;
+
+	/** @return	The stable id, or null if it has none yet. */
+	public String getPaymentId() {
+		return paymentId;
+	}
+	public void setPaymentId(String paymentId) {
+		this.paymentId = paymentId;
+	}
+	/** @return	The stable id, generating (and setting) a random one on first call if it has none yet. */
+	public String getOrCreatePaymentId() {
+		if (paymentId == null) {
+			paymentId = java.util.UUID.randomUUID().toString();
+		}
+		return paymentId;
+	}
+	public DocumentStatus getStatus() {
+		return status;
+	}
+	public void setStatus(DocumentStatus status) {
+		this.status = status;
+	}
+	public String getGlAccountNo() {
+		return glAccountNo;
+	}
+	public void setGlAccountNo(String glAccountNo) {
+		this.glAccountNo = glAccountNo;
+	}
+
 	public String getBusinessPartnerKey() {
 		return businessPartnerKey;
 	}
