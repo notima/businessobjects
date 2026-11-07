@@ -58,6 +58,8 @@ public class Payment<P> {
 	 * to be confused with {@link #getAccountNo()}, the counterparty's account.
 	 */
 	private String	bankAccountNo;
+	/** The id of the voucher posting this payment, if it's posted. */
+	private String	voucherId;
 
 	/** @return	The stable id, or null if it has none yet. */
 	public String getPaymentId() {
@@ -75,6 +77,12 @@ public class Payment<P> {
 	}
 	public DocumentStatus getStatus() {
 		return status;
+	}
+	public String getVoucherId() {
+		return voucherId;
+	}
+	public void setVoucherId(String voucherId) {
+		this.voucherId = voucherId;
 	}
 	public String getBankAccountNo() {
 		return bankAccountNo;
