@@ -26,7 +26,9 @@ import org.notima.generic.businessobjects.settlement.PaymentMatch.Confidence;
  *       {@link Payment#getInvoiceNo() invoice number},
  *       {@link Payment#getDestinationSystemReference() destination system reference} (also
  *       what {@link Payment#getDestinationSystemReferenceRegex() its regex} finds in it,
- *       group 1 if it has one) and its transaction reference's invoice number.</li>
+ *       group 1 if it has one) and its transaction reference's invoice number, and each of
+ *       their parts (of at least three characters) separated by spaces, commas, semicolons or
+ *       colons, so "107193 5000.00" or "107208," find invoice 107193 or 107208.</li>
  *   <li>{@link Confidence#MEDIUM MEDIUM}: the payer is the invoice's business partner (by
  *       {@link Payment#getBusinessPartnerKey() key}, partner number or tax id) and the amount
  *       is the invoice's open amount.</li>
@@ -102,6 +104,13 @@ public class BasicPaymentMatcher implements PaymentMatcher {
 		}
 		TransactionReference tr = p.getTransactionReference();
 		if (tr != null) addRef(refs, tr.getInvoiceNo());
+		// Each part of a reference that has several, ie "107193 5000.00"; short parts would
+		// match short invoice numbers by chance
+		for (String ref : new java.util.ArrayList<String>(refs)) {
+			for (String part : ref.split("[\\s,;:]+")) {
+				if (part.length() >= 3) addRef(refs, part);
+			}
+		}
 		return refs;
 	}
 

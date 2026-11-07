@@ -46,6 +46,21 @@ public class TestBasicPaymentMatcher {
 	}
 
 	@Test
+	public void testPartsOfAReference() {
+		Invoice<Object> inv = invoice("107193", true, 4000, 25);	// 5000
+		Invoice<Object> other = invoice("107208", true, 2720, 25);	// 3400
+		Payment<Object> p = payment("P1", true, 5000);
+		p.setDestinationSystemReference("107193 5000.00");
+		List<PaymentMatch> m = matcher.match(p, ledger(Arrays.asList(other, inv), p));
+		assertSame(inv, m.get(0).getInvoice());
+		assertEquals(Confidence.HIGH, m.get(0).getConfidence());
+
+		Payment<Object> q = payment("P2", true, 3400);
+		q.setDestinationSystemReference("107208,");
+		assertSame(other, matcher.match(q, ledger(Arrays.asList(other, inv), q)).get(0).getInvoice());
+	}
+
+	@Test
 	public void testPartnerAndAmount() {
 		Invoice<Object> inv = invoice("1001", true, 1000, 25);
 		Invoice<Object> otherPartner = invoice("1002", true, 1000, 25);
